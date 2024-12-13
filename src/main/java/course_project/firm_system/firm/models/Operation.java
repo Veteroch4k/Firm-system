@@ -1,6 +1,7 @@
 package course_project.firm_system.firm.models;
 
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,8 +15,8 @@ public class Operation {
 
   private int duration; // Исчисляется днями
 
-  private Object matrrials;
+  private List<Object> materials;
 
-  private Object Tools;
+  private List<Object>  Tools;
 
 }
