@@ -1,10 +1,9 @@
 package course_project.firm_system.firm.services;
 
-import course_project.firm_system.firm.models.Operation;
+import course_project.firm_system.firm.models.operations.Operation;
 import course_project.firm_system.firm.models.Product;
 import course_project.firm_system.firm.models.consumables.Tool;
 import java.util.List;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository

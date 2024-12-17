@@ -1,22 +1,27 @@
-package course_project.firm_system.firm.models.consumables;
+package course_project.firm_system.firm.models.operations;
 
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import course_project.firm_system.firm.models.Factory;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Material {
+public class Operation {
 
   private int id;
 
   private String name;
 
-  private int quantity; // Количество материала на складе
+  private String description;
+
+  private int duration; // Исчисляется часами
+
+  private Factory factory_id;
 
 }
