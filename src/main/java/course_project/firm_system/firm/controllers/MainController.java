@@ -21,7 +21,6 @@ public class MainController {
   @GetMapping("/")
   public ModelAndView index(ModelAndView modelAndView) throws IOException {
     modelAndView.addObject("title", "Главная страница");
-    List<Material> list = requestDAO.getMaterials();
     modelAndView.setViewName("index");
 
     return modelAndView;
