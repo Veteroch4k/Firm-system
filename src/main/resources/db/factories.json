@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "Каркасный цех",
+    "operations": [1, 2]
+  },
+  {
+    "id": 2,
+    "name": "Цех интерьера/салона",
+    "operations": [3, 4]
+  },
+  {
+    "id": 3,
+    "name": "Parts Shop",
+    "operations": [5, 6]
+  }
+]

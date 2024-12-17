@@ -19,6 +19,6 @@ public class Factory {
 
   private String name;
 
-  private List<Operation> operations;
+  private List<Integer> operations; // id соответствующих операций
 
 }

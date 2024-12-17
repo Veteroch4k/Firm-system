@@ -1,10 +1,12 @@
 package course_project.firm_system.firm.services;
 
+import course_project.firm_system.firm.models.consumables.Material;
 import course_project.firm_system.firm.models.operations.Operation;
 import course_project.firm_system.firm.models.Product;
 import course_project.firm_system.firm.models.consumables.Tool;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +15,8 @@ public interface RequestRepository  {
 
   List<Operation> getFactoryOperations(int factory_id) throws IOException;
 
-  Set<Integer> getOperationMaterials(int operation_id) throws IOException;
+  Map<Material,Integer> getOperationMaterials(int operation_id) throws IOException;
+  Map<Tool,Integer> getOperationTools(int operation_id) throws IOException;
 
   List<Tool> getUsedTools();
 

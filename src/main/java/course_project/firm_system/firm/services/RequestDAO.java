@@ -10,8 +10,9 @@ import course_project.firm_system.firm.models.operations.Operation;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -53,18 +54,52 @@ public class RequestDAO implements RequestRepository {
     return new ArrayList<>();
   }
 
+  public List<Tool> getTools() throws IOException {
+
+    if (toolFilePath.exists()) {
+      return objectMapper.readValue(toolFilePath, new TypeReference<>(){});
+    }
+
+    return new ArrayList<>();
+  }
+
   @Override
   public List<Operation> getFactoryOperations(int factory_id) throws IOException {
-    List<Factory> factoryList = getFactories();
-    return factoryList.get(factory_id).getOperations();
+    Factory factory = getFactories().get(factory_id);
+    List<Operation> operations = getOperations();
+    List<Integer> involvedOp = factory.getOperations();
+    return operations.stream()
+        .filter(op -> involvedOp.contains(op.getId()))
+        .toList();
   }
 
   // Goida
   @Override
-  public Set<Integer> getOperationMaterials(int operation_id) throws IOException {
-    List<Operation> allMaterials = getOperations();
-    return null;
+  public Map<Material, Integer> getOperationMaterials(int operation_id) throws IOException {
+    Operation operation = getOperations().get(operation_id);
+    Map<Integer, Integer> involvedMaterials = operation.getMaterials();
 
+    Map<Material, Integer> materialList = new HashMap<>();
+
+    for(Integer key : involvedMaterials.keySet()) {
+      materialList.put(getMaterials().get(key), involvedMaterials.get(key));
+    }
+
+    return materialList;
+  }
+
+  @Override
+  public Map<Tool, Integer> getOperationTools(int operation_id) throws IOException {
+    Operation operation = getOperations().get(operation_id);
+    Map<Integer, Integer> involvedTools = operation.getTools();
+
+    Map<Tool, Integer> toolList = new HashMap<>();
+
+    for(Integer key : involvedTools.keySet()) {
+      toolList.put(getTools().get(key), involvedTools.get(key));
+    }
+
+    return toolList;
   }
 
   @Override

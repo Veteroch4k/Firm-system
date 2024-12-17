@@ -18,7 +18,7 @@ public class MainController {
   @Autowired
   private RequestDAO requestDAO;
 
-  @GetMapping("")
+  @GetMapping("/")
   public ModelAndView index(ModelAndView modelAndView) throws IOException {
     modelAndView.addObject("title", "Главная страница");
     List<Material> list = requestDAO.getMaterials();
@@ -28,3 +28,5 @@ public class MainController {
   }
 
 }
+
+
