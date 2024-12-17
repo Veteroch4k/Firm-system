@@ -17,6 +17,4 @@ public class Material {
 
   private String name;
 
-  private int quantity; // Количество материала на складе
-
 }

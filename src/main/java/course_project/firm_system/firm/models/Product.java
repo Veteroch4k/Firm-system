@@ -4,18 +4,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Product {
-
-  @JsonCreator
-  public Product(
-      @JsonProperty("id") int id,
-      @JsonProperty("description") String description,
-      @JsonProperty("drawing_id") int drawing_id) {
-
-  }
 
   private int id;
 

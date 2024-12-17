@@ -32,3 +32,4 @@ CarParts
       - длительность: 5ч
       - материалы: Steel (1), Cast iron (7)
       - инструменты: milling machine
+
