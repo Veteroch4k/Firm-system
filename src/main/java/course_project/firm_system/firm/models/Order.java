@@ -15,7 +15,7 @@ public class Order {
 
   private Date order_date;
 
-  private int order_duration;
+  private Date finish_date;
 
   private int product_quantity;
 

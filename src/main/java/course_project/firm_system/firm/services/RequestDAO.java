@@ -5,8 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import course_project.firm_system.firm.models.Factory;
 import course_project.firm_system.firm.models.Product;
 import course_project.firm_system.firm.models.consumables.Material;
+import course_project.firm_system.firm.models.Operation;
 import course_project.firm_system.firm.models.consumables.Tool;
-import course_project.firm_system.firm.models.operations.Operation;
+import course_project.firm_system.firm.models.consumables.ToolType;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class RequestDAO implements RequestRepository {
   private final File factoryFilePath = new File("src/main/resources/db/factory.json");
   private final File operationFilePath = new File( "src/main/resources/db/operations.json");
   private final File materialFilePath = new File("src/main/resources/db/materials.json");
+  private final File toolTypesFilePath = new File("src/main/resources/db/toolTypes.json");
   private final File toolFilePath = new File("src/main/resources/db/tools.json");
   private final File productsFilePath = new File( "src/main/resources/db/warehouse.json");
 
@@ -54,8 +56,16 @@ public class RequestDAO implements RequestRepository {
     return new ArrayList<>();
   }
 
-  public List<Tool> getTools() throws IOException {
+  public List<ToolType> getToolsTypes() throws IOException {
 
+    if (toolTypesFilePath.exists()) {
+      return objectMapper.readValue(toolTypesFilePath, new TypeReference<>(){});
+    }
+
+    return new ArrayList<>();
+  }
+
+  public List<Tool> getAllTools() throws IOException {
     if (toolFilePath.exists()) {
       return objectMapper.readValue(toolFilePath, new TypeReference<>(){});
     }
@@ -89,14 +99,14 @@ public class RequestDAO implements RequestRepository {
   }
 
   @Override
-  public Map<Tool, Integer> getOperationTools(int operation_id) throws IOException {
+  public Map<ToolType, Integer> getOperationTools(int operation_id) throws IOException {
     Operation operation = getOperations().get(operation_id);
     Map<Integer, Integer> involvedTools = operation.getTools();
 
-    Map<Tool, Integer> toolList = new HashMap<>();
+    Map<ToolType, Integer> toolList = new HashMap<>();
 
     for(Integer key : involvedTools.keySet()) {
-      toolList.put(getTools().get(key), involvedTools.get(key));
+      toolList.put(getToolsTypes().get(key), involvedTools.get(key));
     }
 
     return toolList;
@@ -118,7 +128,7 @@ public class RequestDAO implements RequestRepository {
   }
 
   @Override
-  public List<Tool> getUsedTools() {
+  public List<ToolType> getUsedTools() {
     return List.of();
   }
 

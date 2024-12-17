@@ -1,10 +1,9 @@
-package course_project.firm_system.firm.models;
-
+package course_project.firm_system.firm.models.consumables.reports;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,16 +12,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Factory {
+public class MaterialsAccounting {
 
   private int id;
 
-  private String name;
+  private int material_id;
 
-  private List<Integer> operations; // id соответствующих операций
+  private int quantity;
 
-  private Map<Integer, Integer> usedMaterials;
+  private int product_id;
 
-  private Map<Integer, Integer> usedtools;
+  private int employer_id;
 
+  private Date date;
+
+  private int order_id;
 }

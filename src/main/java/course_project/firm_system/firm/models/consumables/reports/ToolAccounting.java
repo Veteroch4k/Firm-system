@@ -1,31 +1,24 @@
-package course_project.firm_system.firm.models.operations;
-
+package course_project.firm_system.firm.models.consumables.reports;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import java.util.Map;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Operation {
+public class ToolAccounting {
 
   private int id;
 
-  private String name;
-
-  private String description;
-
-  private int duration; // Исчисляется часами
+  private List<Integer> tools_id;
 
   private int factory_id;
 
-  private Map<Integer, Integer> materials;
-
-  private Map<Integer, Integer> tools;
+  private int order_id;
 
 }
