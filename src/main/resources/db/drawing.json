@@ -1,8 +1,13 @@
 [
   {
+    "id" : 0,
+    "operation_id" : 0,
+    "factory_id" : 0
+  },
+  {
     "id" : 1,
     "operation_id" : 1,
-    "factory_id" : 1
+    "factory_id" : 0
   },
   {
     "id" : 2,
@@ -12,7 +17,7 @@
   {
     "id" : 3,
     "operation_id" : 3,
-    "factory_id" : 2
+    "factory_id" : 1
   },
   {
     "id" : 4,
@@ -22,11 +27,6 @@
   {
     "id" : 5,
     "operation_id" : 5,
-    "factory_id" : 3
-  },
-  {
-    "id" : 6,
-    "operation_id" : 6,
-    "factory_id" : 3
+    "factory_id" : 2
   }
 ]

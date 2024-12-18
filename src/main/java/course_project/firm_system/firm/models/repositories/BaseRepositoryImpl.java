@@ -25,7 +25,7 @@ public class BaseRepositoryImpl implements BaseRepository{
   private final File materialFilePath = new File("src/main/resources/db/materials.json");
   private final File toolTypesFilePath = new File("src/main/resources/db/toolTypes.json");
   private final File toolFilePath = new File("src/main/resources/db/tools.json");
-  private final File productsFilePath = new File( "src/main/resources/db/warehouse.json");
+  private final File productsFilePath = new File( "src/main/resources/db/products.json");
 
 
   public BaseRepositoryImpl(ObjectMapper objectMapper) {
@@ -90,7 +90,7 @@ public class BaseRepositoryImpl implements BaseRepository{
 
   @Override
   public List<Product> getAllProducts() throws IOException {
-    return List.of(objectMapper.readValue(productsFilePath, new TypeReference<>(){}));
+    return objectMapper.readValue(productsFilePath, new TypeReference<>(){});
   }
 
 

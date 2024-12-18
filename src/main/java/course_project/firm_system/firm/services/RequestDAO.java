@@ -1,11 +1,14 @@
 package course_project.firm_system.firm.services;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import course_project.firm_system.firm.models.Factory;
 import course_project.firm_system.firm.models.consumables.Material;
 import course_project.firm_system.firm.models.Operation;
+import course_project.firm_system.firm.models.consumables.Tool;
 import course_project.firm_system.firm.models.consumables.ToolType;
 import course_project.firm_system.firm.models.repositories.BaseRepository;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,4 +58,24 @@ public class RequestDAO implements Requests {
 
     return toolList;
   }
+
+  @Override
+  public Map<Tool,ToolType> getToolsWithTypes() throws IOException {
+    List<ToolType> toolTypes = repository.getAllToolsTypes();
+    List<Tool> tools = repository.getAllTools();
+
+
+    Map<Tool, ToolType> toolsTips = new HashMap<>();
+
+    for(Tool tool : tools) {
+      toolsTips.put(tool, toolTypes.get(tool.getToolType_id()));
+    }
+
+    return toolsTips;
+
+  }
+
+
 }
+
+

@@ -1,47 +1,47 @@
 [
   {
-    "id": 1,
+    "id": 0,
     "description": "каркас для седана",
-    "drawing_id": 101
+    "drawing_id": 0
+  },
+  {
+    "id": 1,
+    "description": "каркас для пикапа",
+    "drawing_id": 0
   },
   {
     "id": 2,
-    "description": "каркас для пикапа",
-    "drawing_id": 102
+    "description": "каркас для кабриолета",
+    "drawing_id": 0
   },
   {
     "id": 3,
-    "description": "каркас для кабриолета",
-    "drawing_id": 103
+    "description": "сиденья",
+    "drawing_id": 1
   },
   {
     "id": 4,
-    "description": "сиденья",
-    "drawing_id": 201
+    "description": "руль",
+    "drawing_id": 1
   },
   {
     "id": 5,
-    "description": "руль",
-    "drawing_id": 202
+    "description": "приборная панель",
+    "drawing_id": 1
   },
   {
     "id": 6,
-    "description": "приборная панель",
-    "drawing_id": 203
+    "description": "двигатель",
+    "drawing_id": 2
   },
   {
     "id": 7,
-    "description": "двигатель",
-    "drawing_id": 301
+    "description": "трансмиссия",
+    "drawing_id": 2
   },
   {
     "id": 8,
-    "description": "трансмиссия",
-    "drawing_id": 302
-  },
-  {
-    "id": 9,
     "description": "электрооборудование",
-    "drawing_id": 303
+    "drawing_id": 2
   }
 ]

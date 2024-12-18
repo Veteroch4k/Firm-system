@@ -1,9 +1,7 @@
 1 - Steel - сталь
 2 - Welding wire - сварочная проволока
-3 - Paint - краска
-4 - Leather - кожа
-5 - Plastic - пластмассы
-6 - Textile - текстиль
-7 - Cast iron - чугун
-8 - Electric cable - электрический кабель
+3 - Leather - кожа
+4 - Plastic - пластмассы
+5 - Textile - текстиль
+6 - Cast iron - чугун
 

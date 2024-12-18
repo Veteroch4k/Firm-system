@@ -5,21 +5,12 @@ Frame
     - материалы: Steel(1) , Welding wire(2)
     - инструменты: welding machine, hammer, spanner, clamp
 
-  - покраска ( покраска каркаса в нужный цвет )
-      - длительность: 6ч
-      - материалы: Paint(3)
-      - инструменты: spray, clamp
 Interior
 
-  - обивка салона ( обивка салона кожей или текстилем )
+  - изготовление элементов салона
       - длительность: 20ч
       - материалы: Leather (4) / Textile (6), Plastic (5)
-      - инструменты: industrial sewing machine, hammer, screwdriver, clamp
-
-  - установка торпедо ( установка приборной панели )
-      - длительность: 6ч
-      - материалы: Plastic (5), Electric cable (8)
-      - инструменты: screwdriver, spanner, clamp
+      - инструменты: industrial sewing machine, hammer, screwdriver, clamp, Thermoforming press
 
 CarParts
 
@@ -27,9 +18,4 @@ CarParts
       - длительность: 4ч
       - материалы: Steel (1), Cast iron (7)
       - инструменты: lathe, hammer
-
-  - фрезерование (  Обработка деталей путем снятия материала фрезами )
-      - длительность: 5ч
-      - материалы: Steel (1), Cast iron (7)
-      - инструменты: milling machine
 
