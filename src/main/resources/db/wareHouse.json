@@ -28,10 +28,5 @@
     "id" : 5,
     "material_id" : 5,
     "quantity" : 100
-  },
-  {
-    "id" : 6,
-    "material_id" : 6,
-    "quantity" : 100
   }
 ]

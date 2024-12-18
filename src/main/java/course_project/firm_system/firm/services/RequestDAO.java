@@ -1,14 +1,12 @@
 package course_project.firm_system.firm.services;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import course_project.firm_system.firm.models.Factory;
 import course_project.firm_system.firm.models.consumables.Material;
-import course_project.firm_system.firm.models.Operation;
+import course_project.firm_system.firm.models.operations.Operation;
 import course_project.firm_system.firm.models.consumables.Tool;
 import course_project.firm_system.firm.models.consumables.ToolType;
-import course_project.firm_system.firm.models.repositories.BaseRepository;
+import course_project.firm_system.firm.repositories.BaseRepository;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

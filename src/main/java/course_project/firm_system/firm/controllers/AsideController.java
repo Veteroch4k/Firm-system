@@ -1,9 +1,12 @@
 package course_project.firm_system.firm.controllers;
 
-import course_project.firm_system.firm.models.consumables.Tool;
-import course_project.firm_system.firm.models.repositories.BaseRepository;
+import course_project.firm_system.firm.models.consumables.Material;
+import course_project.firm_system.firm.repositories.BaseRepository;
 import course_project.firm_system.firm.services.Requests;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,6 +56,24 @@ public class AsideController {
     modelAndView.addObject("title", "Инструменты");
 
     modelAndView.addObject("toolsTypes", requests.getToolsWithTypes());
+    modelAndView.setViewName("aside/tools");
+
+    return modelAndView;
+
+  }
+
+  @GetMapping("/operations")
+  public ModelAndView operations(ModelAndView modelAndView) throws IOException {
+
+    modelAndView.addObject("title", "Операции");
+
+    List<Map<Material, Integer>> list = new ArrayList<>();
+
+    for(int i = 0; i < baseRepository.getAllOperations().size(); i++) {
+      list.add(requests.getOperationMaterials(i));
+    }
+
+    modelAndView.addObject("ops", list);
     modelAndView.setViewName("aside/tools");
 
     return modelAndView;

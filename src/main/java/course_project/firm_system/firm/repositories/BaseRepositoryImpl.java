@@ -1,9 +1,9 @@
-package course_project.firm_system.firm.models.repositories;
+package course_project.firm_system.firm.repositories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import course_project.firm_system.firm.models.Factory;
-import course_project.firm_system.firm.models.Operation;
+import course_project.firm_system.firm.models.operations.Operation;
 import course_project.firm_system.firm.models.Product;
 import course_project.firm_system.firm.models.consumables.Material;
 import course_project.firm_system.firm.models.consumables.Tool;
