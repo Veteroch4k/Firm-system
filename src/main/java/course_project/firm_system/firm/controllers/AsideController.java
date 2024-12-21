@@ -67,11 +67,6 @@ public class AsideController {
 
     modelAndView.addObject("title", "Операции");
 
-    List<Map<Material, Integer>> list = new ArrayList<>();
-
-    for(int i = 0; i < baseRepository.getAllOperations().size(); i++) {
-      list.add(requests.getOperationMaterials(i));
-    }
 
     modelAndView.addObject("ops", list);
     modelAndView.setViewName("aside/tools");

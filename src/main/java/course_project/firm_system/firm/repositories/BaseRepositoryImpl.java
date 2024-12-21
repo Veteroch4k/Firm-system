@@ -2,7 +2,11 @@ package course_project.firm_system.firm.repositories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import course_project.firm_system.firm.models.Factory;
+import course_project.firm_system.firm.models.factories.Factory;
+import course_project.firm_system.firm.models.factories.FactoryMaterials;
+import course_project.firm_system.firm.models.factories.FactoryTools;
+import course_project.firm_system.firm.models.operations.OpMaterials;
+import course_project.firm_system.firm.models.operations.OpTools;
 import course_project.firm_system.firm.models.operations.Operation;
 import course_project.firm_system.firm.models.Product;
 import course_project.firm_system.firm.models.consumables.Material;
@@ -20,11 +24,19 @@ public class BaseRepositoryImpl implements BaseRepository{
   private final ObjectMapper objectMapper;
 
 
-  private final File factoryFilePath = new File("src/main/resources/db/factory.json");
-  private final File operationFilePath = new File( "src/main/resources/db/operations.json");
+  private final File factoryFilePath = new File("src/main/resources/db/factory/factories.json");
+  private final File factoryToolsFilePath = new File("src/main/resources/db/factory/fctrMaterials.json");
+  private final File factoryMaterialsFilePath = new File("src/main/resources/db/factory/fctrTools.json");
+
+  private final File operationFilePath = new File( "src/main/resources/db/op/operations.json");
+  private final File opMaterialsFilePath = new File( "src/main/resources/db/op/opMaterials.json");
+  private final File opToolsFilePath = new File( "src/main/resources/db/op/opTools.json");
+
   private final File materialFilePath = new File("src/main/resources/db/materials.json");
+
   private final File toolTypesFilePath = new File("src/main/resources/db/toolTypes.json");
   private final File toolFilePath = new File("src/main/resources/db/tools.json");
+
   private final File productsFilePath = new File( "src/main/resources/db/products.json");
 
 
@@ -89,10 +101,49 @@ public class BaseRepositoryImpl implements BaseRepository{
   }
 
   @Override
+  public void saveTool(Tool tool) throws IOException {
+
+  }
+
+  @Override
   public List<Product> getAllProducts() throws IOException {
     return objectMapper.readValue(productsFilePath, new TypeReference<>(){});
   }
 
+  @Override
+  public List<OpMaterials> getOpMaterials() throws IOException {
+
+    if (opMaterialsFilePath.exists()) {
+      return objectMapper.readValue(opMaterialsFilePath, new TypeReference<>(){});
+    }
+
+    return new ArrayList<>();
+  }
+
+  @Override
+  public List<OpTools> getOpTools() throws IOException {
+    if (opToolsFilePath.exists()) {
+      return objectMapper.readValue(opToolsFilePath, new TypeReference<>(){});
+    }
+
+    return new ArrayList<>();
+  }
+
+  @Override
+  public List<FactoryMaterials> getFactoryMaterials() throws IOException {
+    if (factoryMaterialsFilePath.exists()) {
+      return objectMapper.readValue(factoryMaterialsFilePath, new TypeReference<>(){});
+    }
+
+    return new ArrayList<>();  }
+
+  @Override
+  public List<FactoryTools> getFactoryTools() throws IOException {
+    if (factoryToolsFilePath.exists()) {
+      return objectMapper.readValue(factoryToolsFilePath, new TypeReference<>(){});
+    }
+
+    return new ArrayList<>();  }
 
 
 }

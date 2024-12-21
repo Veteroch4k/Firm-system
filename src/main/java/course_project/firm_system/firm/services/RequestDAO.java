@@ -1,15 +1,18 @@
 package course_project.firm_system.firm.services;
 
-import course_project.firm_system.firm.models.Factory;
+import course_project.firm_system.firm.models.factories.Factory;
 import course_project.firm_system.firm.models.consumables.Material;
+import course_project.firm_system.firm.models.operations.OpMaterials;
 import course_project.firm_system.firm.models.operations.Operation;
 import course_project.firm_system.firm.models.consumables.Tool;
 import course_project.firm_system.firm.models.consumables.ToolType;
 import course_project.firm_system.firm.repositories.BaseRepository;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,28 +22,41 @@ public class RequestDAO implements Requests {
   @Autowired
   private BaseRepository repository;
 
+  // Один-ко-многим
   @Override
   public List<Operation> getFactoryOperations(int factory_id) throws IOException {
-    Factory factory = repository.getAllFactories().get(factory_id);
+    Optional<Factory> factory = repository.getAllFactories().stream().filter(x->x.getId() == factory_id).findFirst();
     List<Operation> operations = repository.getAllOperations();
-    List<Integer> involvedOp = factory.getOperations();
+    List<Integer> involvedOp = factory.get().getOperations();
     return operations.stream()
         .filter(op -> involvedOp.contains(op.getId()))
         .toList();
   }
 
+  // Многие-ко-многим
   @Override
   public Map<Material, Integer> getOperationMaterials(int operation_id) throws IOException {
-    Operation operation = repository.getAllOperations().get(operation_id);
-    Map<Integer, Integer> involvedMaterials = operation.getMaterials();
 
-    Map<Material, Integer> materialList = new HashMap<>();
+    List<Material> materials = repository.getAllMaterials();
+    List<OpMaterials> opMaterials = repository.getOpMaterials();
 
-    for(Integer key : involvedMaterials.keySet()) {
-      materialList.put(repository.getAllMaterials().get(key), involvedMaterials.get(key));
+    Map<Material, Integer> op = new HashMap<>();
+
+    //2. Создаем Map для быстрого доступа
+    Map<Integer, Material> materialMap = new HashMap<>();
+    for(Material material : materials){
+      materialMap.put(material.getId(), material);
     }
 
-    return materialList;
+    // 3. Обрабатываем связи
+    for(OpMaterials mtrls : opMaterials) {
+      if(mtrls.getOperation_id() == operation_id) {
+        op.put(materialMap.get(mtrls.getMaterial_id()), mtrls.getQuantity());
+      }
+
+    }
+
+    return op;
   }
 
   @Override
