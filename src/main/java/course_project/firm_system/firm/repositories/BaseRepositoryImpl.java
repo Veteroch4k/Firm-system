@@ -2,6 +2,7 @@ package course_project.firm_system.firm.repositories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import course_project.firm_system.firm.models.Drawing;
 import course_project.firm_system.firm.models.factories.Factory;
 import course_project.firm_system.firm.models.factories.FactoryMaterials;
 import course_project.firm_system.firm.models.factories.FactoryTools;
@@ -38,6 +39,8 @@ public class BaseRepositoryImpl implements BaseRepository{
   private final File toolFilePath = new File("src/main/resources/db/tools.json");
 
   private final File productsFilePath = new File( "src/main/resources/db/products.json");
+
+  private final File drawingsFilePath = new File( "src/main/resources/db/drawings.json");
 
 
   public BaseRepositoryImpl(ObjectMapper objectMapper) {
@@ -96,12 +99,25 @@ public class BaseRepositoryImpl implements BaseRepository{
   }
 
   @Override
-  public void saveOperation(Operation operation) {
+  public void saveOperation(Operation operation) throws IOException {
+
+    List<Operation> operations = getAllOperations();
+
+    operations.add(operation);
+
+    objectMapper.writerWithDefaultPrettyPrinter().writeValue(operationFilePath, operations);
 
   }
 
   @Override
   public void saveTool(Tool tool) throws IOException {
+
+    List<Tool> tools = getAllTools();
+
+    tools.add(tool);
+
+    objectMapper.writerWithDefaultPrettyPrinter().writeValue(toolFilePath, tools);
+
 
   }
 
@@ -143,7 +159,16 @@ public class BaseRepositoryImpl implements BaseRepository{
       return objectMapper.readValue(factoryToolsFilePath, new TypeReference<>(){});
     }
 
-    return new ArrayList<>();  }
+    return new ArrayList<>();
+  }
 
+  @Override
+  public List<Drawing> getAllDrawings() throws IOException {
+    if (drawingsFilePath.exists()) {
+      return objectMapper.readValue(drawingsFilePath, new TypeReference<>(){});
+    }
+
+    return new ArrayList<>();
+  }
 
 }

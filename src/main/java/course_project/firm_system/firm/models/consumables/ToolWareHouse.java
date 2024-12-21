@@ -4,6 +4,5 @@ import java.util.List;
 
 public class ToolWareHouse {
 
-  private List<Tool> tools;
 
 }

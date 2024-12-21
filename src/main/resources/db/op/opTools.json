@@ -1,68 +1,68 @@
 [
   {
     "operation_id" : 0,
-    "tool_id" : 0,
+    "toolType_id" : 0,
     "quantity" : 1
 
   },
   {
     "operation_id" : 0,
-    "tool_id" : 4,
+    "toolType" : 4,
     "quantity" : 4
 
   },
   {
     "operation_id" : 0,
-    "tool_id" : 6,
+    "toolType_id" : 6,
     "quantity" : 4
 
   },
   {
     "operation_id" : 0,
-    "tool_id" : 7,
+    "toolType_id" : 7,
     "quantity" : 4
 
   },
 
   {
     "operation_id" : 1,
-    "tool_id" : 1,
+    "toolType_id" : 1,
     "quantity" : 5
 
   },
   {
     "operation_id" : 1,
-    "tool_id" : 2,
+    "toolType_id" : 2,
     "quantity" : 5
 
   },
   {
     "operation_id" : 1,
-    "tool_id" : 5,
+    "toolType_id" : 5,
     "quantity" : 8
 
   },
   {
     "operation_id" : 1,
-    "tool_id" : 6,
+    "toolType_id" : 6,
     "quantity" : 7
 
   },
   {
     "operation_id" : 1,
-    "tool_id" : 7,
+    "toolType_id" : 7,
     "quantity" : 7
 
   },
   {
     "operation_id" : 2,
-    "tool_id" : 3,
+    "toolType_id" : 3,
     "quantity" : 1
 
   },
   {
     "operation_id" : 2,
-    "tool_id" : 6,
+    "toolType_id" : 6,
     "quantity" : 1
 
   }

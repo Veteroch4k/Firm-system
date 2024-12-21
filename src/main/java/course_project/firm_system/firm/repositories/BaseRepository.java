@@ -1,5 +1,6 @@
 package course_project.firm_system.firm.repositories;
 
+import course_project.firm_system.firm.models.Drawing;
 import course_project.firm_system.firm.models.factories.Factory;
 import course_project.firm_system.firm.models.factories.FactoryMaterials;
 import course_project.firm_system.firm.models.factories.FactoryTools;
@@ -40,6 +41,8 @@ public interface BaseRepository {
 
   List<FactoryMaterials> getFactoryMaterials() throws IOException;
   List<FactoryTools> getFactoryTools() throws IOException;
+
+  List<Drawing> getAllDrawings() throws IOException;
 
 }
 

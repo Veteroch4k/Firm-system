@@ -13,7 +13,7 @@ public class OpTools {
 
   private int operation_id;
 
-  private int tool_id;
+  private int toolType_id;
 
   private int quantity;
 

@@ -2,16 +2,16 @@
   {
     "id": 0,
     "name": "Каркасный цех",
-    "operations": [0, 1]
+    "operation_id": 0
   },
   {
     "id": 1,
     "name": "Цех интерьера/салона",
-    "operations": [2, 3]
+    "operation_id": 1
   },
   {
     "id": 2,
     "name": "Parts Shop",
-    "operations": [4, 5]
+    "operation_id": 2
   }
 ]
