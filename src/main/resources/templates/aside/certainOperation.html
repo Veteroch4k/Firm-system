@@ -113,7 +113,7 @@
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Операции</h1>
+        <h1 class="h2" th:text="${op}"></h1>
       </div>
 
       <!-- Таблица -->             <!-- th th:each="header : ${data.headers}" scope="col" th:text="${header}"></th> -->
@@ -122,22 +122,14 @@
         <table class="table table-striped table-sm">
           <thead>
           <tr >
-            <th scope="col">id</th>
-            <th scope="col">Название</th>
-            <th scope="col">Описание</th>
-            <th scope="col">Длительность, ч.</th>
-            <th scope="col">id_Цеха</th>
+            <th scope="col">Название Материала</th>
+            <th scope="col">Количество</th>
           </tr>
           </thead>
           <tbody>
-          <tr th:each="operation : ${ops}">
-            <td th:text="${operation.getId()}"></td>
-            <td>
-              <a th:href="@{/content/operation/{id}?abc=3(id=${operation.getId()})}" th:text="${operation.getName()}"></a>
-            </td>
-            <td th:text="${operation.getDescription()}"></td>
-            <td th:text="${operation.getDuration()}"></td>
-            <td th:text="${operation.getFactory_id()}"></td>
+          <tr th:each="material : ${materials}">
+            <td th:text="${material.key.getName()}"></td>
+            <td th:text="${material.value}"></td>
           </tr>
           </tbody>
         </table>

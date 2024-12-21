@@ -123,14 +123,19 @@
         <table class="table table-striped table-sm">
           <thead>
           <tr >
+            <th scope="col">Id</th>
             <th scope="col">Название</th>
             <th scope="col">Операции</th>
           </tr>
           </thead>
           <tbody>
-          <tr th:each="factory : ${factories}">
-            <td th:text="${factory.getId()}"></td>
-            <td th:text="${factory.getName()}"></td>
+          <tr th:each="instance : ${factories}">
+            <td th:text="${instance.key.getId()}"></td>
+            <td th:text="${instance.key.getName()}"></td>
+            <td>
+              <a th:href="@{/content/operation/{id}(id=${instance.key.getId()})}" th:text="${instance.value.getName()}"></a>
+            </td>
+
           </tr>
           </tbody>
         </table>

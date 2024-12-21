@@ -1,15 +1,17 @@
 package course_project.firm_system.firm.controllers;
 
 import course_project.firm_system.firm.models.consumables.Material;
+import course_project.firm_system.firm.models.factories.Factory;
+import course_project.firm_system.firm.models.operations.Operation;
 import course_project.firm_system.firm.repositories.BaseRepository;
 import course_project.firm_system.firm.services.Requests;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -42,7 +44,12 @@ public class AsideController {
 
     modelAndView.addObject("title", "Цеха");
 
-    modelAndView.addObject("factories", baseRepository.getAllFactories());
+    Map<Factory, Operation> factr = new HashMap<>();
+    for(Factory factory : baseRepository.getAllFactories()) {
+      factr.put(factory, requests.getFactoryOperation(factory.getId()));
+    }
+
+    modelAndView.addObject("factories", factr);
 
     modelAndView.setViewName("aside/factories");
 
@@ -67,13 +74,40 @@ public class AsideController {
 
     modelAndView.addObject("title", "Операции");
 
-
-    modelAndView.addObject("ops", list);
-    modelAndView.setViewName("aside/tools");
+    modelAndView.addObject("ops", baseRepository.getAllOperations());
+    modelAndView.setViewName("aside/operations");
 
     return modelAndView;
 
   }
 
+  @GetMapping("/operation/{id}")
+  public ModelAndView operations(@PathVariable int id, ModelAndView modelAndView) throws IOException {
+
+    modelAndView.addObject("title", "Операции");
+    modelAndView.addObject("op", baseRepository.getAllOperations().stream().filter(x->x.getId()==id).findFirst().get().getName());
+
+    Map<Material, Integer> res = requests.getOperationMaterials(id);
+
+    modelAndView.addObject("materials", res);
+    modelAndView.setViewName("aside/certainOperation");
+
+    return modelAndView;
+
+  }
+
+  /*
+    modelAndView.addObject("title", "Операции");
+    List<Map<Material,Integer>> op = new ArrayList<>();
+    for(int i = 0; i < baseRepository.getAllOperations().size(); i ++) {
+       op.add(requests.getOperationMaterials(i));
+    }
+
+    modelAndView.addObject("ops", op);
+    modelAndView.setViewName("aside/tools");
+
+    return modelAndView;
+
+   */
 
 }
