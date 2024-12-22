@@ -13,20 +13,5 @@
     "id" : 2,
     "operation_id" : 2,
     "factory_id" : 1
-  },
-  {
-    "id" : 3,
-    "operation_id" : 3,
-    "factory_id" : 1
-  },
-  {
-    "id" : 4,
-    "operation_id" : 4,
-    "factory_id" : 2
-  },
-  {
-    "id" : 5,
-    "operation_id" : 5,
-    "factory_id" : 2
   }
 ]

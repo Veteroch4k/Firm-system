@@ -133,7 +133,7 @@
           <tr th:each="operation : ${ops}">
             <td th:text="${operation.getId()}"></td>
             <td>
-              <a th:href="@{/content/operation/{id}?abc=3(id=${operation.getId()})}" th:text="${operation.getName()}"></a>
+              <a th:href="@{/content/operation/{id}(id=${operation.getId()})}" th:text="${operation.getName()}"></a>
             </td>
             <td th:text="${operation.getDescription()}"></td>
             <td th:text="${operation.getDuration()}"></td>

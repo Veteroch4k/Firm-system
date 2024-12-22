@@ -1,6 +1,7 @@
 package course_project.firm_system.firm.controllers;
 
 import course_project.firm_system.firm.models.consumables.Material;
+import course_project.firm_system.firm.models.consumables.ToolType;
 import course_project.firm_system.firm.models.factories.Factory;
 import course_project.firm_system.firm.models.operations.Operation;
 import course_project.firm_system.firm.repositories.BaseRepository;
@@ -34,6 +35,26 @@ public class AsideController {
     modelAndView.addObject("products", baseRepository.getAllProducts());
 
     modelAndView.setViewName("aside/products");
+
+    return modelAndView;
+
+  }
+
+  @GetMapping("/drawing/{id}")
+  public ModelAndView drawing(@PathVariable int id, ModelAndView modelAndView) throws IOException {
+
+    modelAndView.addObject("title", "Чертежи");
+    modelAndView.addObject("draw_id", id);
+
+    Operation op = baseRepository.getCertaionOp(
+        baseRepository.getAllDrawings().stream().filter(x-> x.getId() == id).findFirst().get().getOperation_id());
+
+    Map<ToolType, Integer> res = requests.getOperationTools(op.getId());
+
+    modelAndView.addObject("draws", res);
+
+
+    modelAndView.setViewName("aside/certainDrawing");
 
     return modelAndView;
 
@@ -82,10 +103,10 @@ public class AsideController {
   }
 
   @GetMapping("/operation/{id}")
-  public ModelAndView operations(@PathVariable int id, ModelAndView modelAndView) throws IOException {
+  public ModelAndView operation(@PathVariable int id, ModelAndView modelAndView) throws IOException {
 
     modelAndView.addObject("title", "Операции");
-    modelAndView.addObject("op", baseRepository.getAllOperations().stream().filter(x->x.getId()==id).findFirst().get().getName());
+    modelAndView.addObject("op", baseRepository.getCertaionOp(id).getName());
 
     Map<Material, Integer> res = requests.getOperationMaterials(id);
 
@@ -95,6 +116,8 @@ public class AsideController {
     return modelAndView;
 
   }
+
+
 
   /*
     modelAndView.addObject("title", "Операции");

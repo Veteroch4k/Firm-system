@@ -31,8 +31,7 @@ public class RequestDAO implements Requests {
     Optional<Factory> factory = repository.getAllFactories().stream().filter(x->x.getId() == factory_id).findFirst();
     List<Operation> operations = repository.getAllOperations();
     int involvedOp = factory.get().getOperation_id();
-    return operations.stream()
-        .filter(op -> involvedOp == (op.getId())).findFirst().get();
+    return repository.getCertaionOp(involvedOp);
   }
 
   @Override
@@ -69,20 +68,19 @@ public class RequestDAO implements Requests {
     Map<Material, Integer> missingMaterials = new HashMap<>();
 
     for(Material material : factoryMaterials.keySet()) {
-      if(factoryMaterials.get(material) < requiredMaterials.get(material)) {
-        missingMaterials.put(material, requiredMaterials.get(material) - factoryMaterials.get(material));
+      if(factoryMaterials.get(material) < requiredMaterials.get(material)*2) { // Домножаю на два, т.к. даю материалы с излишком, на 2 продукта
+        missingMaterials.put(material, requiredMaterials.get(material)*2 - factoryMaterials.get(material));
       }
     }
     return missingMaterials;
 
   }
 
+
   @Override
   public Map<Material, Integer> getFactoryTools(int factory_id) throws IOException {
     return Map.of();
   }
-
-
 
   // Многие-ко-многим
   @Override
@@ -113,14 +111,14 @@ public class RequestDAO implements Requests {
   // Многие-ко-многим
   @Override
   public Map<ToolType, Integer> getOperationTools(int operation_id) throws IOException {
-    List<ToolType> materials = repository.getAllToolsTypes();
+    List<ToolType> toolTypes = repository.getAllToolsTypes();
     List<OpTools> opTools = repository.getOpTools();
 
     Map<ToolType, Integer> op = new HashMap<>();
 
     //2. Создаем Map для быстрого доступа
     Map<Integer, ToolType> toolMap = new HashMap<>();
-    for(ToolType tool : materials){
+    for(ToolType tool : toolTypes){
       toolMap.put(tool.getId(), tool);
     }
 
@@ -169,8 +167,6 @@ public class RequestDAO implements Requests {
     return res;
 
   }
-
-
 }
 
 

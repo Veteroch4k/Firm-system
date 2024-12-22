@@ -56,12 +56,26 @@ public class BaseRepositoryImpl implements BaseRepository{
   }
 
   @Override
+  public List<FactoryMaterials> getFactoryMaterials() throws IOException {
+    if (factoryMaterialsFilePath.exists()) {
+      return objectMapper.readValue(factoryMaterialsFilePath, new TypeReference<>(){});
+    }
+
+    return new ArrayList<>();
+  }
+
+  @Override
   public List<Operation> getAllOperations() throws IOException {
     if (operationFilePath.exists()) {
       return objectMapper.readValue(operationFilePath, new TypeReference<>(){});
 
     }
     return new ArrayList<>();
+  }
+  @Override
+  public Operation getCertaionOp(int id) throws IOException {
+
+    return getAllOperations().stream().filter(x-> x.getId() == id).findFirst().get();
   }
 
   @Override
@@ -144,14 +158,6 @@ public class BaseRepositoryImpl implements BaseRepository{
 
     return new ArrayList<>();
   }
-
-  @Override
-  public List<FactoryMaterials> getFactoryMaterials() throws IOException {
-    if (factoryMaterialsFilePath.exists()) {
-      return objectMapper.readValue(factoryMaterialsFilePath, new TypeReference<>(){});
-    }
-
-    return new ArrayList<>();  }
 
   @Override
   public List<FactoryTools> getFactoryTools() throws IOException {

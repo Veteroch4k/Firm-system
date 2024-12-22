@@ -19,28 +19,25 @@ import org.springframework.stereotype.Repository;
 public interface BaseRepository {
 
   List<Factory> getAllFactories() throws IOException;
+  List<FactoryMaterials> getFactoryMaterials() throws IOException;
+  List<FactoryTools> getFactoryTools() throws IOException;
+
 
   List<Operation> getAllOperations() throws IOException;
+  void saveOperation(Operation operation) throws IOException;
+  List<OpMaterials> getOpMaterials() throws IOException;
+  List<OpTools> getOpTools() throws IOException;
+  Operation getCertaionOp(int id) throws IOException;
+
 
   List<Material> getAllMaterials() throws IOException;
 
   List<ToolType> getAllToolsTypes() throws IOException;
-
   List<Tool> getAllTools() throws IOException;
-
   List<ToolType> getUsedTools();
-
-  void saveOperation(Operation operation) throws IOException;
-
   void saveTool(Tool tool) throws IOException;
 
   List<Product> getAllProducts() throws IOException;
-
-  List<OpMaterials> getOpMaterials() throws IOException;
-  List<OpTools> getOpTools() throws IOException;
-
-  List<FactoryMaterials> getFactoryMaterials() throws IOException;
-  List<FactoryTools> getFactoryTools() throws IOException;
 
   List<Drawing> getAllDrawings() throws IOException;
 

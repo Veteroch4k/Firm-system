@@ -128,26 +128,70 @@
       <!-- Таблица -->
       <div class="table-responsive small">
         <table class="table table-striped table-sm">
+
           <thead>
           <tr >
-            <th scope="col">#</th>
-            <th scope="col">Header</th>
-            <th scope="col">Header</th>
-            <th scope="col">Header</th>
-            <th scope="col">Header</th>
+            <th scope="col">Название продукта</th>
+            <th scope="col">Количество</th>
           </tr>
           </thead>
-          <tbody>
+
+          <tbody id="tableBody">
+          <!-- Строка для ввода данных -->
+          <tr>
+            <td>
+              <select class="form-control productSelect">
+                <option th:each="product : ${products}" th:value="${product.getId()}" th:text="${product.getDescription()}"></option>
+              </select>
+            </td>
+            <td><input type="number" min="1" class="form-control quantityInput" value="1"/></td>
+          </tr>
+
           </tbody>
+
         </table>
+        <button class="btn btn-success" type="submit" id="sendData">Создать наряд</button>
+
       </div>
-
       <!-- Таблица -->
-
 
     </main>
   </div>
 </div>
+
+<script>
+  document.getElementById('sendData').addEventListener('click', function() {
+    const row = document.querySelector('#tableBody tr');
+    const select = row.querySelector('.productSelect');
+    const quantity = row.querySelector('.quantityInput');
+    const orderDate = new Date(new Date().toISOString().slice(0, 10));
+    const finishDate = new Date(new Date().toISOString().slice(0, 10));
+
+    const data = {
+        product_id: select.value,
+        product_quantity: quantity.value,
+        order_date: orderDate,
+        finish_date: finishDate,
+    };
+
+    fetch('/create-order', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Данные успешно отправлены!');
+           location.reload();
+        } else {
+            alert('Ошибка отправки данных.');
+        }
+    })
+    .catch(error => console.error('Ошибка:', error));
+  });
+</script>
 
 
 <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
