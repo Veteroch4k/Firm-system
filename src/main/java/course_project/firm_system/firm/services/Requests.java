@@ -2,6 +2,7 @@ package course_project.firm_system.firm.services;
 
 import course_project.firm_system.firm.models.Product;
 import course_project.firm_system.firm.models.consumables.Material;
+import course_project.firm_system.firm.models.consumables.reports.Employer;
 import course_project.firm_system.firm.models.consumables.reports.MaterialsAccounting;
 import course_project.firm_system.firm.models.operations.Operation;
 import course_project.firm_system.firm.models.consumables.Tool;
@@ -20,6 +21,8 @@ public interface Requests {
   Map<Tool,ToolType> getToolsWithTypes() throws IOException;
 
   Map<Product, Map<ToolType, Integer>> getProductsWithTools() throws IOException;
+
+  Employer getRandomEmployer() throws IOException;
 
   Operation getFactoryOperation(int factory_id) throws IOException;
   Map<Material, Integer> getFactoryMaterials(int factory_id) throws IOException;

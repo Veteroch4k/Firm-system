@@ -35,7 +35,7 @@ public class Warehouse {
       mat.setMaterial_id(material.getId());
       mat.setQuantity(order.getProduct_quantity());
       mat.setProduct_id(order.getProduct_id());
-      mat.setEmployer_id(0); // Random getEmployer()
+      mat.setEmployer_id(requests.getRandomEmployer().getId()); // Случайный работник
       mat.setDate(order.getOrder_date());
       mat.setOrder_id(order.getId());
 

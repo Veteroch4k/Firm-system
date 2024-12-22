@@ -1,6 +1,7 @@
 package course_project.firm_system.firm.repositories;
 
 import course_project.firm_system.firm.models.Drawing;
+import course_project.firm_system.firm.models.consumables.reports.Employer;
 import course_project.firm_system.firm.models.consumables.reports.MaterialsAccounting;
 import course_project.firm_system.firm.models.factories.Factory;
 import course_project.firm_system.firm.models.factories.FactoryMaterials;
@@ -14,6 +15,7 @@ import course_project.firm_system.firm.models.consumables.Tool;
 import course_project.firm_system.firm.models.consumables.ToolType;
 import java.io.IOException;
 import java.util.List;
+import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties.Io;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -32,6 +34,7 @@ public interface BaseRepository {
 
 
   List<MaterialsAccounting> getMaterialAccountings() throws IOException;
+  List<Employer> getAllEmployers() throws IOException;
 
 
   List<Material> getAllMaterials() throws IOException;

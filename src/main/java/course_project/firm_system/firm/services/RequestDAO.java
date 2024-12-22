@@ -2,6 +2,7 @@ package course_project.firm_system.firm.services;
 
 import course_project.firm_system.firm.models.Drawing;
 import course_project.firm_system.firm.models.Product;
+import course_project.firm_system.firm.models.consumables.reports.Employer;
 import course_project.firm_system.firm.models.factories.Factory;
 import course_project.firm_system.firm.models.consumables.Material;
 import course_project.firm_system.firm.models.factories.FactoryMaterials;
@@ -16,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -165,6 +167,16 @@ public class RequestDAO implements Requests {
     }
 
     return res;
+
+  }
+
+  @Override
+  public Employer getRandomEmployer() throws IOException {
+    Random r = new Random();
+
+    List<Employer> employers = repository.getAllEmployers();
+
+    return employers.get(r.nextInt(employers.size()));
 
   }
 }

@@ -3,6 +3,7 @@ package course_project.firm_system.firm.repositories;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import course_project.firm_system.firm.models.Drawing;
+import course_project.firm_system.firm.models.consumables.reports.Employer;
 import course_project.firm_system.firm.models.consumables.reports.MaterialsAccounting;
 import course_project.firm_system.firm.models.factories.Factory;
 import course_project.firm_system.firm.models.factories.FactoryMaterials;
@@ -44,6 +45,7 @@ public class BaseRepositoryImpl implements BaseRepository{
   private static final File drawingsFilePath = new File( "src/main/resources/db/drawings.json");
 
   private static final File accountingsFilePath = new File( "src/main/resources/db/reports/materialAccountings.json");
+  private static final File employersFilePath = new File( "src/main/resources/db/reports/employers.json");
 
 
   public BaseRepositoryImpl(ObjectMapper objectMapper) {
@@ -88,7 +90,17 @@ public class BaseRepositoryImpl implements BaseRepository{
       return objectMapper.readValue(accountingsFilePath, new TypeReference<>(){});
     }
 
-    return new ArrayList<>();  }
+    return new ArrayList<>();
+  }
+
+  @Override
+  public List<Employer> getAllEmployers() throws IOException {
+    if (employersFilePath.exists()) {
+      return objectMapper.readValue(employersFilePath, new TypeReference<>(){});
+    }
+
+    return new ArrayList<>();
+  }
 
   @Override
   public List<Material> getAllMaterials() throws IOException {
