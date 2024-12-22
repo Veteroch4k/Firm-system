@@ -3,6 +3,7 @@ package course_project.firm_system.firm.repositories;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import course_project.firm_system.firm.models.Drawing;
+import course_project.firm_system.firm.models.consumables.reports.MaterialsAccounting;
 import course_project.firm_system.firm.models.factories.Factory;
 import course_project.firm_system.firm.models.factories.FactoryMaterials;
 import course_project.firm_system.firm.models.factories.FactoryTools;
@@ -25,22 +26,24 @@ public class BaseRepositoryImpl implements BaseRepository{
   private final ObjectMapper objectMapper;
 
 
-  private final File factoryFilePath = new File("src/main/resources/db/factory/factories.json");
-  private final File factoryToolsFilePath = new File("src/main/resources/db/factory/fctrMaterials.json");
-  private final File factoryMaterialsFilePath = new File("src/main/resources/db/factory/fctrTools.json");
+  private static final File factoryFilePath = new File("src/main/resources/db/factory/factories.json");
+  private static final File factoryToolsFilePath = new File("src/main/resources/db/factory/fctrMaterials.json");
+  private static final File factoryMaterialsFilePath = new File("src/main/resources/db/factory/fctrTools.json");
 
-  private final File operationFilePath = new File( "src/main/resources/db/op/operations.json");
-  private final File opMaterialsFilePath = new File( "src/main/resources/db/op/opMaterials.json");
-  private final File opToolsFilePath = new File( "src/main/resources/db/op/opTools.json");
+  private static final File operationFilePath = new File( "src/main/resources/db/op/operations.json");
+  private static final File opMaterialsFilePath = new File( "src/main/resources/db/op/opMaterials.json");
+  private static final File opToolsFilePath = new File( "src/main/resources/db/op/opTools.json");
 
-  private final File materialFilePath = new File("src/main/resources/db/materials.json");
+  private static final File materialFilePath = new File("src/main/resources/db/materials.json");
 
-  private final File toolTypesFilePath = new File("src/main/resources/db/toolTypes.json");
-  private final File toolFilePath = new File("src/main/resources/db/tools.json");
+  private static final File toolTypesFilePath = new File("src/main/resources/db/toolTypes.json");
+  private static final File toolFilePath = new File("src/main/resources/db/tools.json");
 
-  private final File productsFilePath = new File( "src/main/resources/db/products.json");
+  private static final File productsFilePath = new File( "src/main/resources/db/products.json");
 
-  private final File drawingsFilePath = new File( "src/main/resources/db/drawings.json");
+  private static final File drawingsFilePath = new File( "src/main/resources/db/drawings.json");
+
+  private static final File accountingsFilePath = new File( "src/main/resources/db/reports/materialAccountings.json");
 
 
   public BaseRepositoryImpl(ObjectMapper objectMapper) {
@@ -73,10 +76,19 @@ public class BaseRepositoryImpl implements BaseRepository{
     return new ArrayList<>();
   }
   @Override
-  public Operation getCertaionOp(int id) throws IOException {
+  public Operation getCertainOp(int id) throws IOException {
 
     return getAllOperations().stream().filter(x-> x.getId() == id).findFirst().get();
   }
+
+  @Override
+  public List<MaterialsAccounting> getMaterialAccountings() throws IOException {
+
+    if (accountingsFilePath.exists()) {
+      return objectMapper.readValue(accountingsFilePath, new TypeReference<>(){});
+    }
+
+    return new ArrayList<>();  }
 
   @Override
   public List<Material> getAllMaterials() throws IOException {

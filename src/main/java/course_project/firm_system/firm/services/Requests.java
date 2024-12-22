@@ -21,8 +21,6 @@ public interface Requests {
 
   Map<Product, Map<ToolType, Integer>> getProductsWithTools() throws IOException;
 
-  List<MaterialsAccounting> getMaterialAccountings() throws IOException;
-
   Operation getFactoryOperation(int factory_id) throws IOException;
   Map<Material, Integer> getFactoryMaterials(int factory_id) throws IOException;
   Map<Material, Integer> getFactoryTools(int factory_id) throws IOException;

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class ToolType {
+public class ToolType implements Comparable<ToolType> {
 
   private int id;
 
@@ -18,4 +18,8 @@ public class ToolType {
 
   private String description;
 
+  @Override
+  public int compareTo(ToolType o) {
+    return Integer.compare(this.getId(), o.getId());
+  }
 }

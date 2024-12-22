@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Drawing {
+public class Drawing implements Comparable<Drawing>{
 
   private int id;
 
@@ -19,4 +19,8 @@ public class Drawing {
 
   private int factory_id; // Цех, где может выполниться данный чертёж
 
+  @Override
+  public int compareTo(Drawing o) {
+    return Integer.compare(this.getId(), o.getId());
+  }
 }

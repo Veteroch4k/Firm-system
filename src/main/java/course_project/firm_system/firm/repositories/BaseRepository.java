@@ -1,6 +1,7 @@
 package course_project.firm_system.firm.repositories;
 
 import course_project.firm_system.firm.models.Drawing;
+import course_project.firm_system.firm.models.consumables.reports.MaterialsAccounting;
 import course_project.firm_system.firm.models.factories.Factory;
 import course_project.firm_system.firm.models.factories.FactoryMaterials;
 import course_project.firm_system.firm.models.factories.FactoryTools;
@@ -27,7 +28,10 @@ public interface BaseRepository {
   void saveOperation(Operation operation) throws IOException;
   List<OpMaterials> getOpMaterials() throws IOException;
   List<OpTools> getOpTools() throws IOException;
-  Operation getCertaionOp(int id) throws IOException;
+  Operation getCertainOp(int id) throws IOException;
+
+
+  List<MaterialsAccounting> getMaterialAccountings() throws IOException;
 
 
   List<Material> getAllMaterials() throws IOException;

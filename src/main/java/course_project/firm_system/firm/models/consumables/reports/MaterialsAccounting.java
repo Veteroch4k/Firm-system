@@ -2,6 +2,7 @@ package course_project.firm_system.firm.models.consumables.reports;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -24,7 +25,7 @@ public class MaterialsAccounting implements Comparable<MaterialsAccounting> {
 
   private int employer_id;
 
-  private Date date;
+  private LocalDate date;
 
   private int order_id;
 

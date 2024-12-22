@@ -46,7 +46,7 @@ public class AsideController {
     modelAndView.addObject("title", "Чертежи");
     modelAndView.addObject("draw_id", id);
 
-    Operation op = baseRepository.getCertaionOp(
+    Operation op = baseRepository.getCertainOp(
         baseRepository.getAllDrawings().stream().filter(x-> x.getId() == id).findFirst().get().getOperation_id());
 
     Map<ToolType, Integer> res = requests.getOperationTools(op.getId());
@@ -106,7 +106,7 @@ public class AsideController {
   public ModelAndView operation(@PathVariable int id, ModelAndView modelAndView) throws IOException {
 
     modelAndView.addObject("title", "Операции");
-    modelAndView.addObject("op", baseRepository.getCertaionOp(id).getName());
+    modelAndView.addObject("op", baseRepository.getCertainOp(id).getName());
 
     Map<Material, Integer> res = requests.getOperationMaterials(id);
 

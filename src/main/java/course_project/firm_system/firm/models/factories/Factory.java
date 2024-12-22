@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Factory {
+public class Factory implements Comparable<Factory>{
 
   private int id;
 
@@ -21,4 +21,8 @@ public class Factory {
   private int operation_id;
 
 
+  @Override
+  public int compareTo(Factory o) {
+    return Integer.compare(this.getId(), o.getId());
+  }
 }

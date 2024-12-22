@@ -10,10 +10,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Tool {
+public class Tool implements Comparable<Tool> {
 
   int id;
 
   int toolType_id;
 
+  @Override
+  public int compareTo(Tool o) {
+    return Integer.compare(this.getId(), o.getId());
+  }
 }

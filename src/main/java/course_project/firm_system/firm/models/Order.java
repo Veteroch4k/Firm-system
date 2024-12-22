@@ -11,7 +11,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Order {
+public class Order implements Comparable<Order>{
+
+  private int id;
 
   private int product_id;
 
@@ -22,4 +24,8 @@ public class Order {
   private LocalDate finish_date;
 
 
+  @Override
+  public int compareTo(Order o) {
+    return Integer.compare(this.getId(), o.getId());
+  }
 }

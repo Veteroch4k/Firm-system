@@ -31,7 +31,7 @@ public class RequestDAO implements Requests {
     Optional<Factory> factory = repository.getAllFactories().stream().filter(x->x.getId() == factory_id).findFirst();
     List<Operation> operations = repository.getAllOperations();
     int involvedOp = factory.get().getOperation_id();
-    return repository.getCertaionOp(involvedOp);
+    return repository.getCertainOp(involvedOp);
   }
 
   @Override

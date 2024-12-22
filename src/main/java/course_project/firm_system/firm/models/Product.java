@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Product {
+public class Product implements Comparable<Product>{
 
   private int id;
 
@@ -20,4 +20,8 @@ public class Product {
 
   private int drawing_id; // id Чертежа, соответствующего данному продукту
 
+  @Override
+  public int compareTo(Product o) {
+    return Integer.compare(this.getId(), o.getId());
+  }
 }
