@@ -4,7 +4,6 @@ import course_project.firm_system.firm.models.Drawing;
 import course_project.firm_system.firm.models.Order;
 import course_project.firm_system.firm.models.Product;
 import course_project.firm_system.firm.models.consumables.reports.Employer;
-import course_project.firm_system.firm.models.consumables.reports.MaterialsAccounting;
 import course_project.firm_system.firm.models.factories.Factory;
 import course_project.firm_system.firm.models.consumables.Material;
 import course_project.firm_system.firm.models.factories.FactoryMaterials;
@@ -22,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
