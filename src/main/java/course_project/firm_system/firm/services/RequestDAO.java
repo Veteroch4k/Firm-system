@@ -7,6 +7,7 @@ import course_project.firm_system.firm.models.consumables.reports.Employer;
 import course_project.firm_system.firm.models.factories.Factory;
 import course_project.firm_system.firm.models.consumables.Material;
 import course_project.firm_system.firm.models.factories.FactoryMaterials;
+import course_project.firm_system.firm.models.factories.FactoryTools;
 import course_project.firm_system.firm.models.operations.OpMaterials;
 import course_project.firm_system.firm.models.operations.OpTools;
 import course_project.firm_system.firm.models.operations.Operation;
@@ -15,7 +16,6 @@ import course_project.firm_system.firm.models.consumables.ToolType;
 import course_project.firm_system.firm.repositories.BaseRepository;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,6 +63,7 @@ public class RequestDAO implements Requests {
     return factory;
   }
 
+
   @Override
   public Map<Material, Integer> checkFactoryRequiredMaterials(int factory_id) throws IOException {
 
@@ -94,8 +95,54 @@ public class RequestDAO implements Requests {
 
 
   @Override
-  public Map<Material, Integer> getFactoryTools(int factory_id) throws IOException {
-    return Map.of();
+  public Map<ToolType, Integer> getFactoryTools(int factory_id) throws IOException {
+
+    List<ToolType> materials = repository.getAllToolsTypes();
+    List<FactoryTools> opTools = repository.getFactoryTools();
+
+    Map<ToolType, Integer> factory = new HashMap<>();
+
+    //2. Создаем Map для быстрого доступа
+    Map<Integer, ToolType> materialMap = new HashMap<>();
+    for(ToolType toolType : materials){
+      materialMap.put(toolType.getId(), toolType);
+    }
+
+    // 3. Обрабатываем связи
+    for(FactoryTools factoryTools : opTools) {
+      if(factoryTools.getFactory_id() == factory_id) {
+        factory.put(materialMap.get(factoryTools.getToolType_id()), factoryTools.getQuantity());
+      }
+
+    }
+
+    return factory;
+  }
+
+  @Override
+  public Map<ToolType, Integer> checkFactoryRequiredTools(int factory_id) throws IOException {
+    Map<ToolType, Integer> factoryTools = getFactoryTools(factory_id);
+
+    Map<ToolType, Integer> requiredMaterials = getOperationTools(getFactoryOperation(factory_id).getId());
+
+    Map<ToolType, Integer> missingToolTypes = new HashMap<>();
+
+    for(ToolType toolType : factoryTools.keySet()) {
+      if(factoryTools.get(toolType) < requiredMaterials.get(toolType)) {
+        missingToolTypes.put(toolType, requiredMaterials.get(toolType)- factoryTools.get(toolType));
+      }
+    }
+
+    // Обновление таблицы материалов фабрики
+    List<FactoryTools> factoryTools1 = repository.getFactoryTools().stream().filter(x->x.getFactory_id()==factory_id).toList();
+    for(ToolType toolType : requiredMaterials.keySet()) {
+      factoryTools1.stream().filter(x->x.getToolType_id()==toolType.getId()).findFirst().get()
+          .setQuantity(requiredMaterials.get(toolType));
+    }
+    repository.saveFactoryTools(factoryTools1);
+
+
+    return missingToolTypes;
   }
 
   // Многие-ко-многим

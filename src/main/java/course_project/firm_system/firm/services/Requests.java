@@ -44,10 +44,11 @@ public interface Requests {
   Map<Material, Integer> getFactoryMaterials(int factory_id) throws IOException;
 
   // Получение инструментов, хранящихся в цеху
-  Map<Material, Integer> getFactoryTools(int factory_id) throws IOException;
+  Map<ToolType, Integer> getFactoryTools(int factory_id) throws IOException;
 
   // Получение материалов, необходимых цеху для выполнения операции (создания 1 продукта)
   Map<Material, Integer> checkFactoryRequiredMaterials(int factory_id) throws IOException; // возвращает, сколько недостает материалов
 
+  Map<ToolType, Integer> checkFactoryRequiredTools(int factory_id) throws IOException;
 
 }

@@ -51,6 +51,7 @@ public interface BaseRepository {
   List<Tool> getAllTools() throws IOException;
   List<ToolType> getUsedTools();
   void saveTool(Tool tool) throws IOException;
+  void saveFactoryTools(List<FactoryTools> list) throws IOException;
 
   List<Product> getAllProducts() throws IOException;
 

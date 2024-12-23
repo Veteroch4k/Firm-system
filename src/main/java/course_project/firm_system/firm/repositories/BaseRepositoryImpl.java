@@ -46,6 +46,7 @@ public class BaseRepositoryImpl implements BaseRepository{
   private static final File drawingsFilePath = new File( "src/main/resources/db/drawings.json");
 
   private static final File materialAccountingsFilePath = new File( "src/main/resources/db/reports/materialAccountings.json");
+  private static final File toolAccountingsFilePath = new File( "src/main/resources/db/reports/toolAccountings.json");
   private static final File employersFilePath = new File( "src/main/resources/db/reports/employers.json");
   private static final File ordersFilePath = new File( "src/main/resources/db/reports/orders.json");
 
@@ -79,6 +80,17 @@ public class BaseRepositoryImpl implements BaseRepository{
     }
     return new ArrayList<>();
   }
+
+
+  @Override
+  public List<FactoryTools> getFactoryTools() throws IOException {
+    if (factoryToolsFilePath.exists()) {
+      return objectMapper.readValue(factoryToolsFilePath, new TypeReference<>(){});
+    }
+
+    return new ArrayList<>();
+  }
+
   @Override
   public Operation getCertainOp(int id) throws IOException {
 
@@ -106,7 +118,6 @@ public class BaseRepositoryImpl implements BaseRepository{
 
   @Override
   public void saveMaterialAccounting(List<MaterialsAccounting> list) throws IOException {
-
 
     objectMapper.writerWithDefaultPrettyPrinter().writeValue(materialAccountingsFilePath, list);
 
@@ -200,6 +211,11 @@ public class BaseRepositoryImpl implements BaseRepository{
   }
 
   @Override
+  public void saveFactoryTools(List<FactoryTools> list) throws IOException {
+    objectMapper.writerWithDefaultPrettyPrinter().writeValue(factoryToolsFilePath, list);
+  }
+
+  @Override
   public List<Product> getAllProducts() throws IOException {
     return objectMapper.readValue(productsFilePath, new TypeReference<>(){});
   }
@@ -223,14 +239,6 @@ public class BaseRepositoryImpl implements BaseRepository{
     return new ArrayList<>();
   }
 
-  @Override
-  public List<FactoryTools> getFactoryTools() throws IOException {
-    if (factoryToolsFilePath.exists()) {
-      return objectMapper.readValue(factoryToolsFilePath, new TypeReference<>(){});
-    }
-
-    return new ArrayList<>();
-  }
 
   @Override
   public List<Drawing> getAllDrawings() throws IOException {

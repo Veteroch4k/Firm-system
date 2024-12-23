@@ -12,7 +12,7 @@ public class FactoryTools {
 
   private int factory_id;
 
-  private int tool_id;
+  private int toolType_id;
 
   private int quantity;
 
