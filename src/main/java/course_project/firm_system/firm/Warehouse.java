@@ -3,6 +3,7 @@ package course_project.firm_system.firm;
 import course_project.firm_system.firm.models.Order;
 import course_project.firm_system.firm.models.consumables.Material;
 import course_project.firm_system.firm.models.consumables.reports.MaterialsAccounting;
+import course_project.firm_system.firm.models.factories.FactoryMaterials;
 import course_project.firm_system.firm.models.operations.Operation;
 import course_project.firm_system.firm.repositories.BaseRepository;
 import course_project.firm_system.firm.services.Requests;
@@ -33,7 +34,7 @@ public class Warehouse {
       MaterialsAccounting mat = new MaterialsAccounting();
       mat.setId(Collections.max(accounting).getId() + 1);
       mat.setMaterial_id(material.getId());
-      mat.setQuantity(order.getProduct_quantity());
+      mat.setQuantity(neededMaterials.get(material));
       mat.setProduct_id(order.getProduct_id());
       mat.setEmployer_id(requests.getRandomEmployer().getId()); // Случайный работник
       mat.setDate(order.getOrder_date());
@@ -42,7 +43,6 @@ public class Warehouse {
       accounting.add(mat);
     }
 
-
+    repository.saveMaterialAccounting(accounting);
   }
-
 }

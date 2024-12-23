@@ -15,6 +15,7 @@ import course_project.firm_system.firm.models.consumables.Tool;
 import course_project.firm_system.firm.models.consumables.ToolType;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties.Io;
 import org.springframework.stereotype.Repository;
 
@@ -35,7 +36,8 @@ public interface BaseRepository {
 
   List<MaterialsAccounting> getMaterialAccountings() throws IOException;
   List<Employer> getAllEmployers() throws IOException;
-
+  void saveMaterialAccounting(List<MaterialsAccounting> list) throws IOException;
+  void saveFactoryMaterials(List<FactoryMaterials> list) throws IOException;
 
   List<Material> getAllMaterials() throws IOException;
 

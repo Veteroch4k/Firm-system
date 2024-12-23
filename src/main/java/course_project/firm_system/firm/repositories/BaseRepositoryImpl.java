@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -44,7 +45,7 @@ public class BaseRepositoryImpl implements BaseRepository{
 
   private static final File drawingsFilePath = new File( "src/main/resources/db/drawings.json");
 
-  private static final File accountingsFilePath = new File( "src/main/resources/db/reports/materialAccountings.json");
+  private static final File materialAccountingsFilePath = new File( "src/main/resources/db/reports/materialAccountings.json");
   private static final File employersFilePath = new File( "src/main/resources/db/reports/employers.json");
 
 
@@ -86,8 +87,8 @@ public class BaseRepositoryImpl implements BaseRepository{
   @Override
   public List<MaterialsAccounting> getMaterialAccountings() throws IOException {
 
-    if (accountingsFilePath.exists()) {
-      return objectMapper.readValue(accountingsFilePath, new TypeReference<>(){});
+    if (materialAccountingsFilePath.exists()) {
+      return objectMapper.readValue(materialAccountingsFilePath, new TypeReference<>(){});
     }
 
     return new ArrayList<>();
@@ -100,6 +101,19 @@ public class BaseRepositoryImpl implements BaseRepository{
     }
 
     return new ArrayList<>();
+  }
+
+  @Override
+  public void saveMaterialAccounting(List<MaterialsAccounting> list) throws IOException {
+
+
+    objectMapper.writerWithDefaultPrettyPrinter().writeValue(materialAccountingsFilePath, list);
+
+  }
+
+  @Override
+  public void saveFactoryMaterials(List<FactoryMaterials> list) throws IOException {
+    objectMapper.writerWithDefaultPrettyPrinter().writeValue(factoryMaterialsFilePath, list);
   }
 
   @Override

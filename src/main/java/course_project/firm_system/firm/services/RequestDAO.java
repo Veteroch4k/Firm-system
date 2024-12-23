@@ -3,6 +3,7 @@ package course_project.firm_system.firm.services;
 import course_project.firm_system.firm.models.Drawing;
 import course_project.firm_system.firm.models.Product;
 import course_project.firm_system.firm.models.consumables.reports.Employer;
+import course_project.firm_system.firm.models.consumables.reports.MaterialsAccounting;
 import course_project.firm_system.firm.models.factories.Factory;
 import course_project.firm_system.firm.models.consumables.Material;
 import course_project.firm_system.firm.models.factories.FactoryMaterials;
@@ -13,11 +14,13 @@ import course_project.firm_system.firm.models.consumables.Tool;
 import course_project.firm_system.firm.models.consumables.ToolType;
 import course_project.firm_system.firm.repositories.BaseRepository;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -74,7 +77,18 @@ public class RequestDAO implements Requests {
         missingMaterials.put(material, requiredMaterials.get(material)*2 - factoryMaterials.get(material));
       }
     }
+
+    // Обновление таблицы материалов фабрики
+    List<FactoryMaterials> factoryMaterials1 = repository.getFactoryMaterials().stream().filter(x->x.getFactory_id()==factory_id).toList();
+    for(Material material : requiredMaterials.keySet()) {
+      factoryMaterials1.stream().filter(x->x.getMaterial_id()==material.getId()).findFirst().get()
+          .setQuantity((int) Math.ceil(requiredMaterials.get(material)*0.75));
+    }
+    repository.saveFactoryMaterials(factoryMaterials1);
+
+
     return missingMaterials;
+
 
   }
 
@@ -179,6 +193,7 @@ public class RequestDAO implements Requests {
     return employers.get(r.nextInt(employers.size()));
 
   }
+
 }
 
 
