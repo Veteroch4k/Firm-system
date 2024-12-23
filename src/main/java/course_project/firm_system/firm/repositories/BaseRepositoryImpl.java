@@ -3,6 +3,7 @@ package course_project.firm_system.firm.repositories;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import course_project.firm_system.firm.models.Drawing;
+import course_project.firm_system.firm.models.Order;
 import course_project.firm_system.firm.models.consumables.reports.Employer;
 import course_project.firm_system.firm.models.consumables.reports.MaterialsAccounting;
 import course_project.firm_system.firm.models.factories.Factory;
@@ -47,6 +48,7 @@ public class BaseRepositoryImpl implements BaseRepository{
 
   private static final File materialAccountingsFilePath = new File( "src/main/resources/db/reports/materialAccountings.json");
   private static final File employersFilePath = new File( "src/main/resources/db/reports/employers.json");
+  private static final File ordersFilePath = new File( "src/main/resources/db/reports/orders.json");
 
 
   public BaseRepositoryImpl(ObjectMapper objectMapper) {
@@ -114,6 +116,31 @@ public class BaseRepositoryImpl implements BaseRepository{
   @Override
   public void saveFactoryMaterials(List<FactoryMaterials> list) throws IOException {
     objectMapper.writerWithDefaultPrettyPrinter().writeValue(factoryMaterialsFilePath, list);
+  }
+
+  @Override
+  public List<Order> getAllOrders() throws IOException {
+    if (ordersFilePath.exists()) {
+      return objectMapper.readValue(ordersFilePath, new TypeReference<>(){});
+    }
+
+    return new ArrayList<>();
+  }
+
+  @Override
+  public Order getOrders(int order_id) throws IOException {
+    return getAllOrders().stream().filter(x->x.getId()==order_id).findFirst().get();
+  }
+
+  @Override
+  public void saveOrder(Order order) throws IOException {
+
+    List<Order> orders = getAllOrders();
+
+    orders.add(order);
+
+    objectMapper.writerWithDefaultPrettyPrinter().writeValue(ordersFilePath, orders);
+
   }
 
   @Override

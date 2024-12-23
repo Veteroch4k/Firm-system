@@ -1,6 +1,7 @@
 package course_project.firm_system.firm.repositories;
 
 import course_project.firm_system.firm.models.Drawing;
+import course_project.firm_system.firm.models.Order;
 import course_project.firm_system.firm.models.consumables.reports.Employer;
 import course_project.firm_system.firm.models.consumables.reports.MaterialsAccounting;
 import course_project.firm_system.firm.models.factories.Factory;
@@ -38,6 +39,11 @@ public interface BaseRepository {
   List<Employer> getAllEmployers() throws IOException;
   void saveMaterialAccounting(List<MaterialsAccounting> list) throws IOException;
   void saveFactoryMaterials(List<FactoryMaterials> list) throws IOException;
+
+
+  List<Order> getAllOrders() throws IOException;
+  Order getOrders(int order_id) throws IOException;
+  void saveOrder(Order order) throws IOException;
 
   List<Material> getAllMaterials() throws IOException;
 

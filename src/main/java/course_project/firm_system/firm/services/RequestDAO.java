@@ -1,6 +1,7 @@
 package course_project.firm_system.firm.services;
 
 import course_project.firm_system.firm.models.Drawing;
+import course_project.firm_system.firm.models.Order;
 import course_project.firm_system.firm.models.Product;
 import course_project.firm_system.firm.models.consumables.reports.Employer;
 import course_project.firm_system.firm.models.consumables.reports.MaterialsAccounting;
@@ -14,6 +15,7 @@ import course_project.firm_system.firm.models.consumables.Tool;
 import course_project.firm_system.firm.models.consumables.ToolType;
 import course_project.firm_system.firm.repositories.BaseRepository;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -191,6 +193,31 @@ public class RequestDAO implements Requests {
     List<Employer> employers = repository.getAllEmployers();
 
     return employers.get(r.nextInt(employers.size()));
+
+  }
+
+  @Override
+  public List<Order> getDateOrders(LocalDate start, LocalDate end)  throws IOException {
+    List<Order> orders = repository.getAllOrders();
+
+    return orders.stream()
+        .filter(x-> ((start.isBefore(x.getOrder_date()) || start.isEqual(x.getOrder_date()))
+            && end.isBefore(x.getFinish_date()) || end.isEqual(x.getFinish_date()) ) ).toList();
+
+  }
+
+  @Override
+  public Map<Material, Integer> getOrderMaterials(Order order) throws IOException {
+    int drawing_id = repository.getAllProducts()
+        .stream().filter(x-> x.getId() == order.getProduct_id()).findFirst().get()
+        .getDrawing_id(); // Получение чертежа продукта через id продукта в наряде
+
+    Map<Material, Integer> map = getOperationMaterials(repository.getAllDrawings()
+            .stream().filter(x-> x.getId() == drawing_id).findFirst().get().getOperation_id());
+
+    map.replaceAll((m, v) -> map.get(m) * order.getProduct_quantity()); // Умножаем каждое значение на кол-во продуктов
+
+    return map;
 
   }
 
