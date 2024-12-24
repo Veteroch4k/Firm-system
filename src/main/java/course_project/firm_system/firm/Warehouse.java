@@ -21,12 +21,15 @@ public class Warehouse {
   @Autowired
   private BaseRepository repository;
 
+
   public void giveSomeMaterials(int factory_id, Order order) throws IOException {
 
+    // Получаем список материалов для выдачи цеху
     Map<Material, Integer> neededMaterials = requests.checkFactoryRequiredMaterials(factory_id);
 
     List<MaterialsAccounting> accounting = repository.getMaterialAccountings();
 
+    // Заносим выданные материалы в отчетность
     for(Material material : neededMaterials.keySet()) {
       MaterialsAccounting mat = new MaterialsAccounting();
       mat.setId(Collections.max(accounting).getId() + 1);

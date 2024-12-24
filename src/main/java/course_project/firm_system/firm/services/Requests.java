@@ -43,12 +43,15 @@ public interface Requests {
   // Получение материалов, хранящихся в цеху
   Map<Material, Integer> getFactoryMaterials(int factory_id) throws IOException;
 
-  // Получение инструментов, хранящихся в цеху
+  // Получение типов инструментов, хранящихся в цеху
   Map<ToolType, Integer> getFactoryTools(int factory_id) throws IOException;
 
   // Получение материалов, необходимых цеху для выполнения операции (создания 1 продукта)
-  Map<Material, Integer> checkFactoryRequiredMaterials(int factory_id) throws IOException; // возвращает, сколько недостает материалов
+  Map<Material, Integer> checkFactoryRequiredMaterials(int factory_id, int quantity) throws IOException; // возвращает, сколько недостает материалов
 
-  Map<ToolType, Integer> checkFactoryRequiredTools(int factory_id) throws IOException;
+  // Получение типов инструментов, необходимых цеху для выполнения операции (создания 1 продукта)
+  Map<ToolType, Integer> checkFactoryRequiredTools(int factory_id, int quantity) throws IOException;
+
+  Tool getRandomTool(int toolType_id) throws IOException;
 
 }

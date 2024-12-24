@@ -4,6 +4,7 @@ import course_project.firm_system.firm.models.Drawing;
 import course_project.firm_system.firm.models.Order;
 import course_project.firm_system.firm.models.Product;
 import course_project.firm_system.firm.models.consumables.reports.Employer;
+import course_project.firm_system.firm.models.consumables.reports.FreeTools;
 import course_project.firm_system.firm.models.factories.Factory;
 import course_project.firm_system.firm.models.consumables.Material;
 import course_project.firm_system.firm.models.factories.FactoryMaterials;
@@ -16,9 +17,11 @@ import course_project.firm_system.firm.models.consumables.ToolType;
 import course_project.firm_system.firm.repositories.BaseRepository;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,32 +67,46 @@ public class RequestDAO implements Requests {
   }
 
 
-  @Override
-  public Map<Material, Integer> checkFactoryRequiredMaterials(int factory_id) throws IOException {
 
+  // Проверка недостающих материалов и их выдача фабрике
+  @Override
+  public Map<Material, Integer> checkFactoryRequiredMaterials(int factory_id, int quantity) throws IOException {
+
+    // Получение материалов, хранящихся на складе в данный момент
     Map<Material, Integer> factoryMaterials = getFactoryMaterials(factory_id);
 
+    // Получение кол-ва материалов, необходимых для выполнения операции данной фабрикой
     Map<Material, Integer> requiredMaterials = getOperationMaterials(getFactoryOperation(factory_id).getId());
+
 
     Map<Material, Integer> missingMaterials = new HashMap<>();
 
+    // Для обновления таблицы материалов фабрики
+    List<FactoryMaterials> factoryMaterials1 = repository.getFactoryMaterials().stream().filter(x->x.getFactory_id()==factory_id).toList();
+
+
     for(Material material : factoryMaterials.keySet()) {
-      if(factoryMaterials.get(material) < requiredMaterials.get(material)*2) { // Домножаю на два, т.к. даю материалы с излишком, на 2 продукта
-        missingMaterials.put(material, requiredMaterials.get(material)*2 - factoryMaterials.get(material));
+      if(factoryMaterials.get(material) < (requiredMaterials.get(material)*quantity)*2) { // Домножаю на два, т.к. даю материалы с излишком, на 2 продукта
+        missingMaterials.put(material, (requiredMaterials.get(material)*quantity)*2 - factoryMaterials.get(material));
+        factoryMaterials1.stream()
+            .filter(x -> x.getMaterial_id() == material.getId())
+            .findFirst()
+            .ifPresent(x -> x.setQuantity((int) Math.ceil((requiredMaterials.get(material)*quantity)*0.75))); // Один из 4 товаров всегда будет бракованный -> отсюда и рассчет
+
+      }
+      else {
+        factoryMaterials1.stream()
+            .filter(x -> x.getMaterial_id() == material.getId())
+            .findFirst()
+            .ifPresent(x -> x.setQuantity(x.getQuantity() - (int) Math.ceil((requiredMaterials.get(material)*quantity)*1.25)));
+
       }
     }
 
-    // Обновление таблицы материалов фабрики
-    List<FactoryMaterials> factoryMaterials1 = repository.getFactoryMaterials().stream().filter(x->x.getFactory_id()==factory_id).toList();
-    for(Material material : requiredMaterials.keySet()) {
-      factoryMaterials1.stream().filter(x->x.getMaterial_id()==material.getId()).findFirst().get()
-          .setQuantity((int) Math.ceil(requiredMaterials.get(material)*0.75));
-    }
     repository.saveFactoryMaterials(factoryMaterials1);
 
 
     return missingMaterials;
-
 
   }
 
@@ -120,30 +137,82 @@ public class RequestDAO implements Requests {
   }
 
   @Override
-  public Map<ToolType, Integer> checkFactoryRequiredTools(int factory_id) throws IOException {
-    Map<ToolType, Integer> factoryTools = getFactoryTools(factory_id);
+  public Map<ToolType, Integer> checkFactoryRequiredTools(int factory_id, int quantity) throws IOException {
 
-    Map<ToolType, Integer> requiredMaterials = getOperationTools(getFactoryOperation(factory_id).getId());
+    Map<ToolType, Integer> factoryTools = getOperationTools(getFactoryOperation(factory_id).getId());
+
+    // Получение кол-ва материалов, необходимых для выполнения операции данной фабрикой
+    Map<ToolType, Integer> requiredTools = getOperationTools(getFactoryOperation(factory_id).getId());
+
 
     Map<ToolType, Integer> missingToolTypes = new HashMap<>();
 
+    // Для обновления таблицы материалов фабрики
+    List<FactoryTools> factoryMaterials1 = repository.getFactoryTools().stream().filter(x->x.getFactory_id()==factory_id).toList();
+
     for(ToolType toolType : factoryTools.keySet()) {
-      if(factoryTools.get(toolType) < requiredMaterials.get(toolType)) {
-        missingToolTypes.put(toolType, requiredMaterials.get(toolType)- factoryTools.get(toolType));
+      if(factoryTools.get(toolType) < requiredTools.get(toolType)*quantity*2) { // Домножаю на два, т.к. даю материалы с излишком, на 2 продукта
+        missingToolTypes.put(toolType, requiredTools.get(toolType)*quantity*2 - factoryTools.get(toolType));
+        factoryMaterials1.stream()
+            .filter(x -> x.getToolType_id() == toolType.getId())
+            .findFirst()
+            .ifPresent(x -> x.setQuantity((int) Math.ceil(requiredTools.get(toolType)*quantity*0.75))); // Один из 4 товаров всегда будет бракованный -> отсюда и рассчет
+
+      }
+      else {
+        factoryMaterials1.stream()
+            .filter(x -> x.getToolType_id() == toolType.getId())
+            .findFirst()
+            .ifPresent(x -> x.setQuantity(x.getQuantity() - (int) Math.ceil(requiredTools.get(toolType)*quantity*1.25)));
+
       }
     }
 
-    // Обновление таблицы материалов фабрики
-    List<FactoryTools> factoryTools1 = repository.getFactoryTools().stream().filter(x->x.getFactory_id()==factory_id).toList();
-    for(ToolType toolType : requiredMaterials.keySet()) {
-      factoryTools1.stream().filter(x->x.getToolType_id()==toolType.getId()).findFirst().get()
-          .setQuantity(requiredMaterials.get(toolType));
-    }
-    repository.saveFactoryTools(factoryTools1);
+    repository.saveFactoryTools(factoryMaterials1);
 
 
     return missingToolTypes;
+
   }
+
+  @Override
+  public Tool getRandomTool(int toolType_id) throws IOException {
+    List<FreeTools> freeTools = repository.getFreeTools().stream()
+        .filter(x -> x.getToolType_id() == toolType_id)
+        .toList();
+
+
+    if (freeTools.isEmpty()) {
+      // Если свободных инструментов нет, выбрасываем исключение.
+      throw new NoSuchElementException("No free tools available for tool type ID: " + toolType_id);
+
+    }
+
+    //Генерируем случайный индекс только если есть свободные инструменты
+    int index = new Random().nextInt(freeTools.size()); // Убираем 0 так как index может начинаться с 0
+
+
+    FreeTools selectedFreeTool = freeTools.get(index); // Получаем FreeTool по индексу
+
+    // Получаем Tool по id из выбранного FreeTools
+    Optional<Tool> optionalTool = repository.getAllTools().stream()
+        .filter(x -> x.getId() == selectedFreeTool.getTool_id())
+        .findFirst();
+
+
+    // Проверяем, найден ли Tool по id
+    Tool tool = optionalTool.orElseThrow(() -> new NoSuchElementException("Tool not found with ID: " + selectedFreeTool.getTool_id()));
+
+    // Удаляем выбранный freeTool из репозитория.
+    // Делаем копию, чтобы не удалять из списка, который может быть неизменяемым
+    List<FreeTools> mutableFreeTools = new ArrayList<>(repository.getFreeTools());
+    mutableFreeTools.remove(selectedFreeTool);
+    repository.saveFreeTools(mutableFreeTools);
+
+
+    return tool;
+  }
+
 
   // Многие-ко-многим
   @Override
