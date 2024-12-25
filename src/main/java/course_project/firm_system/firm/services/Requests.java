@@ -54,4 +54,10 @@ public interface Requests {
 
   Tool getRandomTool(int toolType_id) throws IOException;
 
+  Tool generateNewTool(int toolType_id) throws IOException;
+
+  void checkEnoughFreeTools(ToolType type, int quantity) throws IOException;
+
+  void generateRequiredTools(ToolType type, int quantity) throws IOException;
+
 }

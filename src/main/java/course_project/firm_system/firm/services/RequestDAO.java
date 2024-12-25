@@ -148,31 +148,46 @@ public class RequestDAO implements Requests {
     Map<ToolType, Integer> missingToolTypes = new HashMap<>();
 
     // Для обновления таблицы материалов фабрики
-    List<FactoryTools> factoryMaterials1 = repository.getFactoryTools().stream().filter(x->x.getFactory_id()==factory_id).toList();
+    List<FactoryTools> factoryTools1 = repository.getFactoryTools().stream().filter(x->x.getFactory_id()==factory_id).toList();
 
     for(ToolType toolType : factoryTools.keySet()) {
-      if(factoryTools.get(toolType) < requiredTools.get(toolType)*quantity*2) { // Домножаю на два, т.к. даю материалы с излишком, на 2 продукта
-        missingToolTypes.put(toolType, requiredTools.get(toolType)*quantity*2 - factoryTools.get(toolType));
-        factoryMaterials1.stream()
+      if(factoryTools.get(toolType) < requiredTools.get(toolType)*quantity) {
+        missingToolTypes.put(toolType, requiredTools.get(toolType)*quantity - factoryTools.get(toolType));
+        factoryTools1.stream()
             .filter(x -> x.getToolType_id() == toolType.getId())
             .findFirst()
-            .ifPresent(x -> x.setQuantity((int) Math.ceil(requiredTools.get(toolType)*quantity*0.75))); // Один из 4 товаров всегда будет бракованный -> отсюда и рассчет
+            .ifPresent(x -> x.setQuantity((int) Math.ceil(requiredTools.get(toolType)*quantity)));
+
+
 
       }
       else {
-        factoryMaterials1.stream()
+        factoryTools1.stream()
             .filter(x -> x.getToolType_id() == toolType.getId())
             .findFirst()
-            .ifPresent(x -> x.setQuantity(x.getQuantity() - (int) Math.ceil(requiredTools.get(toolType)*quantity*1.25)));
+            .ifPresent(x -> x.setQuantity(x.getQuantity() - (int) Math.ceil(requiredTools.get(toolType)*quantity)));
 
       }
     }
 
-    repository.saveFactoryTools(factoryMaterials1);
+    repository.saveFactoryTools(factoryTools1);
 
 
     return missingToolTypes;
 
+  }
+
+  // Возвращает кол-во недостающих инструментов в инструментальной
+  public void checkEnoughFreeTools(ToolType type, int quantity) throws IOException {
+    List<FreeTools> tools = repository.getFreeTools().stream()
+        .filter(x-> x.getToolType_id() == type.getId())
+        .toList();
+
+    if(tools.size() >= quantity) {
+      return;
+    }
+
+    generateRequiredTools(type, quantity);
   }
 
   @Override
@@ -181,15 +196,8 @@ public class RequestDAO implements Requests {
         .filter(x -> x.getToolType_id() == toolType_id)
         .toList();
 
-
-    if (freeTools.isEmpty()) {
-      // Если свободных инструментов нет, выбрасываем исключение.
-      throw new NoSuchElementException("No free tools available for tool type ID: " + toolType_id);
-
-    }
-
     //Генерируем случайный индекс только если есть свободные инструменты
-    int index = new Random().nextInt(freeTools.size()); // Убираем 0 так как index может начинаться с 0
+    int index = new Random().nextInt(freeTools.size());
 
 
     FreeTools selectedFreeTool = freeTools.get(index); // Получаем FreeTool по индексу
@@ -210,6 +218,35 @@ public class RequestDAO implements Requests {
     repository.saveFreeTools(mutableFreeTools);
 
 
+    return tool;
+  }
+
+  // Добавление в инструментальную новых инструментов
+  @Override
+  public void generateRequiredTools(ToolType type, int quantity) throws IOException {
+    List<FreeTools> freeTools = repository.getFreeTools();
+
+    for(int i = 0; i < quantity; i ++) {
+      Tool tool = generateNewTool(type.getId());
+      FreeTools freeTools1 = new FreeTools();
+      freeTools1.setTool_id(type.getId());
+      freeTools1.setId(freeTools.size());
+      freeTools1.setTool_id(tool.getId());
+      freeTools1.setReceiveDate(LocalDate.now());
+
+      freeTools.add(freeTools1);
+    }
+
+    repository.saveFreeTools(freeTools);
+
+  }
+
+  // Генерация нового инструмента
+  @Override
+  public Tool generateNewTool(int toolType_id) throws IOException {
+    Tool tool = new Tool();
+    tool.setToolType_id(toolType_id);
+    tool.setId(repository.getAllTools().size());
     return tool;
   }
 
