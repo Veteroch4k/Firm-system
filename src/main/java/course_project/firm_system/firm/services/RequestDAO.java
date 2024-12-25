@@ -3,8 +3,8 @@ package course_project.firm_system.firm.services;
 import course_project.firm_system.firm.models.Drawing;
 import course_project.firm_system.firm.models.Order;
 import course_project.firm_system.firm.models.Product;
-import course_project.firm_system.firm.models.consumables.reports.Employer;
-import course_project.firm_system.firm.models.consumables.reports.FreeTools;
+import course_project.firm_system.firm.models.reports.Employer;
+import course_project.firm_system.firm.models.reports.FreeTools;
 import course_project.firm_system.firm.models.factories.Factory;
 import course_project.firm_system.firm.models.consumables.Material;
 import course_project.firm_system.firm.models.factories.FactoryMaterials;
@@ -241,6 +241,57 @@ public class RequestDAO implements Requests {
 
   }
 
+  @Override
+  public List<Tool> getUsedTools() throws IOException {
+    List<FreeTools> freeTools = repository.getFreeTools();
+    List<Tool> tools = repository.getAllTools();
+
+    List<Integer> freeToolIds = freeTools.stream()
+        .map(FreeTools::getTool_id)
+        .toList();
+
+    List<Tool> usedTools = tools.stream()
+        .filter(tool -> !freeToolIds.contains(tool.getId()))
+        .toList();
+
+    return usedTools;
+
+  }
+
+  @Override
+  public LocalDate getOrderDeadLine(Order order) throws IOException {
+
+    LocalDate finish = order.getFinish_date(); // Вначале дата начала и конца совпадают
+
+    int hours = 0;
+    int drawing_id = getDrawingByProductId(order.getProduct_id()).getId();
+
+    int op_id = repository.getAllDrawings()
+        .stream().filter(x->x.getId() == drawing_id).findFirst().get().getOperation_id();
+    hours = repository.getAllOperations()
+        .stream().filter(x->x.getId() == op_id).findFirst().get().getDuration();
+
+    hours *= order.getProduct_quantity();
+
+    int days = hours % 24;
+
+    finish.plusDays(days);
+
+    return finish;
+
+  }
+
+  @Override
+  public Drawing getDrawingByProductId(int product_id) throws IOException {
+    Product product = repository.getAllProducts()
+        .stream().filter(x-> x.getId() == product_id).findFirst().get();
+
+    return repository.getAllDrawings()
+            .stream().filter(x->x.getId() == product.getDrawing_id()).findFirst().get();
+
+  }
+
+
   // Генерация нового инструмента
   @Override
   public Tool generateNewTool(int toolType_id) throws IOException {
@@ -359,9 +410,8 @@ public class RequestDAO implements Requests {
 
   @Override
   public Map<Material, Integer> getOrderMaterials(Order order) throws IOException {
-    int drawing_id = repository.getAllProducts()
-        .stream().filter(x-> x.getId() == order.getProduct_id()).findFirst().get()
-        .getDrawing_id(); // Получение чертежа продукта через id продукта в наряде
+    int drawing_id = getDrawingByProductId(order.getProduct_id()).getId();
+        ; // Получение чертежа продукта через id продукта в наряде
 
     Map<Material, Integer> map = getOperationMaterials(repository.getAllDrawings()
             .stream().filter(x-> x.getId() == drawing_id).findFirst().get().getOperation_id());

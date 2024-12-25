@@ -2,11 +2,10 @@ package course_project.firm_system.firm;
 
 import course_project.firm_system.firm.models.Order;
 import course_project.firm_system.firm.models.consumables.Material;
-import course_project.firm_system.firm.models.consumables.reports.MaterialsAccounting;
+import course_project.firm_system.firm.models.reports.MaterialsAccounting;
 import course_project.firm_system.firm.repositories.BaseRepository;
 import course_project.firm_system.firm.services.Requests;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import lombok.NoArgsConstructor;

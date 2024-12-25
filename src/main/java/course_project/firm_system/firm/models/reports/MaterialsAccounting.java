@@ -1,4 +1,4 @@
-package course_project.firm_system.firm.models.consumables.reports;
+package course_project.firm_system.firm.models.reports;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -11,16 +11,25 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class ToolReceiptAccounting implements Comparable<ToolReceiptAccounting>{
+public class MaterialsAccounting implements Comparable<MaterialsAccounting> {
 
   private int id;
 
-  private int tool_id;
+  private int material_id;
 
-  private LocalDate receive_date;
+  private int quantity;
+
+  private int product_id;
+
+  private int employer_id;
+
+  private LocalDate date;
+
+  private int order_id;
+
 
   @Override
-  public int compareTo(ToolReceiptAccounting o) {
+  public int compareTo(MaterialsAccounting o) {
     return Integer.compare(this.getId(), o.getId());
   }
 }

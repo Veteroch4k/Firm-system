@@ -4,10 +4,11 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import course_project.firm_system.firm.models.Drawing;
 import course_project.firm_system.firm.models.Order;
-import course_project.firm_system.firm.models.consumables.reports.Employer;
-import course_project.firm_system.firm.models.consumables.reports.FreeTools;
-import course_project.firm_system.firm.models.consumables.reports.MaterialsAccounting;
-import course_project.firm_system.firm.models.consumables.reports.ToolAccounting;
+import course_project.firm_system.firm.models.reports.Employer;
+import course_project.firm_system.firm.models.reports.FreeTools;
+import course_project.firm_system.firm.models.reports.MaterialsAccounting;
+import course_project.firm_system.firm.models.reports.OrdersAccounting;
+import course_project.firm_system.firm.models.reports.ToolAccounting;
 import course_project.firm_system.firm.models.factories.Factory;
 import course_project.firm_system.firm.models.factories.FactoryMaterials;
 import course_project.firm_system.firm.models.factories.FactoryTools;
@@ -51,6 +52,7 @@ public class BaseRepositoryImpl implements BaseRepository{
   private static final File toolAccountingsFilePath = new File( "src/main/resources/db/reports/toolAccountings.json");
   private static final File employersFilePath = new File( "src/main/resources/db/reports/employers.json");
   private static final File ordersFilePath = new File( "src/main/resources/db/reports/orders.json");
+  private static final File ordersAccountingFilePath = new File( "src/main/resources/db/reports/ordersAccounting.json");
 
 
   public BaseRepositoryImpl(ObjectMapper objectMapper) {
@@ -276,6 +278,19 @@ public class BaseRepositoryImpl implements BaseRepository{
   public void saveFreeTools(List<FreeTools> freeTools) throws IOException {
     objectMapper.writerWithDefaultPrettyPrinter().writeValue(freeToolFilePath, freeTools);
 
+  }
+
+  @Override
+  public List<OrdersAccounting> getOrderAccounting() throws IOException {
+    if (ordersAccountingFilePath.exists()) {
+      return objectMapper.readValue(ordersAccountingFilePath, new TypeReference<>(){});
+    }
+    return new ArrayList<>();
+  }
+
+  @Override
+  public void saveOrderAccounting(List<OrdersAccounting> accountings) throws IOException {
+    objectMapper.writerWithDefaultPrettyPrinter().writeValue(ordersAccountingFilePath, accountings);
   }
 
 }

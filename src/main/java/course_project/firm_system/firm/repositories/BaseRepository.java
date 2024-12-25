@@ -2,10 +2,11 @@ package course_project.firm_system.firm.repositories;
 
 import course_project.firm_system.firm.models.Drawing;
 import course_project.firm_system.firm.models.Order;
-import course_project.firm_system.firm.models.consumables.reports.Employer;
-import course_project.firm_system.firm.models.consumables.reports.FreeTools;
-import course_project.firm_system.firm.models.consumables.reports.MaterialsAccounting;
-import course_project.firm_system.firm.models.consumables.reports.ToolAccounting;
+import course_project.firm_system.firm.models.reports.Employer;
+import course_project.firm_system.firm.models.reports.FreeTools;
+import course_project.firm_system.firm.models.reports.MaterialsAccounting;
+import course_project.firm_system.firm.models.reports.OrdersAccounting;
+import course_project.firm_system.firm.models.reports.ToolAccounting;
 import course_project.firm_system.firm.models.factories.Factory;
 import course_project.firm_system.firm.models.factories.FactoryMaterials;
 import course_project.firm_system.firm.models.factories.FactoryTools;
@@ -104,4 +105,11 @@ public interface BaseRepository {
   List<Drawing> getAllDrawings() throws IOException;
 
   void saveFreeTools(List<FreeTools> freeTools) throws IOException;
+
+  /***/
+
+  List<OrdersAccounting> getOrderAccounting() throws IOException;
+
+  void saveOrderAccounting(List<OrdersAccounting> accountings) throws IOException;
+
 }

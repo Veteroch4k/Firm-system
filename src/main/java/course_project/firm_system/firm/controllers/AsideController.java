@@ -23,7 +23,6 @@ public class AsideController {
   @Autowired
   private BaseRepository baseRepository;
 
-
   @Autowired
   private Requests requests;
 

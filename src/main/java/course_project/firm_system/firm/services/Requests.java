@@ -1,18 +1,18 @@
 package course_project.firm_system.firm.services;
 
+import course_project.firm_system.firm.models.Drawing;
 import course_project.firm_system.firm.models.Order;
 import course_project.firm_system.firm.models.Product;
 import course_project.firm_system.firm.models.consumables.Material;
-import course_project.firm_system.firm.models.consumables.reports.Employer;
-import course_project.firm_system.firm.models.consumables.reports.MaterialsAccounting;
+import course_project.firm_system.firm.models.reports.Employer;
 import course_project.firm_system.firm.models.operations.Operation;
 import course_project.firm_system.firm.models.consumables.Tool;
 import course_project.firm_system.firm.models.consumables.ToolType;
+import course_project.firm_system.firm.models.reports.OrdersAccounting;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 public interface Requests {
 
@@ -59,5 +59,11 @@ public interface Requests {
   void checkEnoughFreeTools(ToolType type, int quantity) throws IOException;
 
   void generateRequiredTools(ToolType type, int quantity) throws IOException;
+
+  List<Tool> getUsedTools() throws IOException;
+
+  LocalDate getOrderDeadLine(Order order) throws IOException;
+
+  Drawing getDrawingByProductId(int product_id) throws IOException;
 
 }
