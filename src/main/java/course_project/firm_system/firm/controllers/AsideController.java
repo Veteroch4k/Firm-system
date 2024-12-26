@@ -8,6 +8,7 @@ import course_project.firm_system.firm.models.consumables.Tool;
 import course_project.firm_system.firm.models.consumables.ToolType;
 import course_project.firm_system.firm.models.factories.Factory;
 import course_project.firm_system.firm.models.operations.Operation;
+import course_project.firm_system.firm.models.reports.FreeTools;
 import course_project.firm_system.firm.repositories.BaseRepository;
 import course_project.firm_system.firm.services.Requests;
 import java.io.IOException;
@@ -187,6 +188,41 @@ public class AsideController {
 
     return modelAndView;
 
+  }
+
+  @GetMapping("/newTool")
+  public ModelAndView addTool(ModelAndView modelAndView) throws IOException {
+    modelAndView.addObject("title", "Добавление нового инструмента");
+
+    modelAndView.addObject("toolTypes", baseRepository.getAllToolsTypes());
+
+    modelAndView.setViewName("aside/adding/addNewTool");
+
+    return modelAndView;
+  }
+
+  @PostMapping("create-tool")
+  public ResponseEntity<String> gpuAns(@RequestBody Tool tool) throws IOException {
+
+    tool.setId(baseRepository.getAllTools().size());
+
+    baseRepository.saveTool(tool);
+
+    // Помимо списка всех инструментов, мы должны добавить новый инструмент на склад
+    List<FreeTools> freeTools = baseRepository.getFreeTools();
+
+    FreeTools freeTool = new FreeTools();
+    freeTool.setId(freeTools.size());
+    freeTool.setTool_id(tool.getId());
+    freeTool.setToolType_id(tool.getToolType_id());
+    freeTool.setReceiveDate(LocalDate.now());
+
+
+    freeTools.add(freeTool);
+
+    baseRepository.saveFreeTools(freeTools);
+
+    return ResponseEntity.ok("Ответы успешно обработаны");
   }
 
 

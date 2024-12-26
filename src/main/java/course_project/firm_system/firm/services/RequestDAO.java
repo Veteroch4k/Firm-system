@@ -228,6 +228,9 @@ public class RequestDAO implements Requests {
 
     for(int i = 0; i < quantity; i ++) {
       Tool tool = generateNewTool(type.getId());
+
+      repository.saveTool(tool);
+
       FreeTools freeTools1 = new FreeTools();
       freeTools1.setTool_id(type.getId());
       freeTools1.setId(freeTools.size());
