@@ -16,4 +16,6 @@ public class FactoryMaterials {
 
   private int quantity;
 
+
+
 }

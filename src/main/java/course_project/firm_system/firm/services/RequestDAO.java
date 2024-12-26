@@ -404,7 +404,7 @@ public class RequestDAO implements Requests {
 
     return orders.stream()
         .filter(x-> ((start.isBefore(x.getOrder_date()) || start.isEqual(x.getOrder_date()))
-            && end.isBefore(x.getFinish_date()) || end.isEqual(x.getFinish_date()) ) ).toList();
+            && x.getFinish_date().isBefore(end) || x.getFinish_date().isEqual(end) ) ).toList();
 
   }
 

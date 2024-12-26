@@ -113,16 +113,7 @@
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Наряды</h1>
-
-        <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group me-2">
-          </div>
-          <input type="date" id="startDate" />
-          <input type="date" id="endDate" />
-        </div>
-        <button class="btn btn-success" type="submit" id="sendData">Выбрать</button>
-
+        <h1 class="h2">Наряды по дате</h1>
 
       </div>
 
@@ -155,52 +146,6 @@
   </div>
 </div>
 
-
-<script>
-  const sendDataButton = document.getElementById('sendData');
-  const startDateInput = document.getElementById('startDate');
-  const endDateInput = document.getElementById('endDate');
-
-
-  sendDataButton.addEventListener('click', function() {
-      const startDateValue = startDateInput.value;
-      const endDateValue = endDateInput.value;
-
-      const data = {
-        startDate: startDateValue,
-        endDate: endDateValue
-      };
-
-
-      if(startDateValue && endDateValue){
-        console.log("Start Date:", startDateValue);
-        console.log("End Date:", endDateValue);
-
-        // Отправка данных на сервер
-         fetch('/content/orders/dates', {
-             method: 'POST',
-             headers: {
-                 'Content-Type': 'application/json'
-             },
-             body: JSON.stringify(data)
-         }).then(response => {
-            if (response.ok) {
-                console.log('Данные успешно отправлены!');
-
-                window.location.href = "/content/orders/date";
-
-              } else {
-                  console.error('Ошибка отправки данных:', response.status);
-              }
-          })
-          .catch(error => console.error('Ошибка:', error));
-
-      } else {
-         alert("Выберите даты начала и конца");
-      }
-
-  });
-</script>
 
 
 <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>

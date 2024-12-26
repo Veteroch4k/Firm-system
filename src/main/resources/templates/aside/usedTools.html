@@ -4,6 +4,7 @@
 <head th:replace="~{blocks/head :: head(title = ${title})}"></head>
 
 <body>
+
 <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
   <symbol id="check2" viewBox="0 0 16 16">
     <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
@@ -113,94 +114,39 @@
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Наряды</h1>
-
-        <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group me-2">
-          </div>
-          <input type="date" id="startDate" />
-          <input type="date" id="endDate" />
-        </div>
-        <button class="btn btn-success" type="submit" id="sendData">Выбрать</button>
-
-
+        <h1 class="h2">Используемые инструменты</h1>
       </div>
 
-      <!-- Таблица -->             <!-- th th:each="header : ${data.headers}" scope="col" th:text="${header}"></th> -->
+
+      <!-- Таблица -->
+
 
       <div class="table-responsive small">
         <table class="table table-striped table-sm">
           <thead>
           <tr >
             <th scope="col">id</th>
-            <th scope="col">Название продукта</th>
-            <th scope="col">Количество</th>
-            <th scope="col">Дата заказа</th>
-            <th scope="col">Дата завершения</th>
+            <th scope="col">Название</th>
+            <th scope="col">Описание</th>
           </tr>
           </thead>
           <tbody>
-          <tr th:each="order : ${orders}">
-            <td th:text="${order.getId()}"></td>
-            <td th:text="${order.getProduct_id()}"></td>
-            <td th:text="${order.getProduct_quantity}"></td>
-            <td th:text="${order.getOrder_date()}"></td>
-            <td th:text="${order.getFinish_date()}"></td>
+          <tr th:each="tool : ${usedTools}">
+            <td th:text="${tool.getId()}"></td>
+            <td th:text="${toolTypes.get(tool).getName()}"></td>
+            <td th:text="${toolTypes.get(tool).getDescription()}"></td>
           </tr>
           </tbody>
         </table>
       </div>
 
+
+      <!-- Таблица -->
+
+
     </main>
   </div>
 </div>
-
-
-<script>
-  const sendDataButton = document.getElementById('sendData');
-  const startDateInput = document.getElementById('startDate');
-  const endDateInput = document.getElementById('endDate');
-
-
-  sendDataButton.addEventListener('click', function() {
-      const startDateValue = startDateInput.value;
-      const endDateValue = endDateInput.value;
-
-      const data = {
-        startDate: startDateValue,
-        endDate: endDateValue
-      };
-
-
-      if(startDateValue && endDateValue){
-        console.log("Start Date:", startDateValue);
-        console.log("End Date:", endDateValue);
-
-        // Отправка данных на сервер
-         fetch('/content/orders/dates', {
-             method: 'POST',
-             headers: {
-                 'Content-Type': 'application/json'
-             },
-             body: JSON.stringify(data)
-         }).then(response => {
-            if (response.ok) {
-                console.log('Данные успешно отправлены!');
-
-                window.location.href = "/content/orders/date";
-
-              } else {
-                  console.error('Ошибка отправки данных:', response.status);
-              }
-          })
-          .catch(error => console.error('Ошибка:', error));
-
-      } else {
-         alert("Выберите даты начала и конца");
-      }
-
-  });
-</script>
 
 
 <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
