@@ -252,9 +252,7 @@ public class AsideController {
   public ModelAndView addOperation(ModelAndView modelAndView) throws IOException {
     modelAndView.addObject("title", "Добавление новой операции");
 
-    modelAndView.addObject("toolTypes", baseRepository.getAllToolsTypes());
-
-    modelAndView.setViewName("aside/adding/addNewTool");
+    modelAndView.setViewName("aside/adding/addNewOperation");
 
     return modelAndView;
 
@@ -263,26 +261,10 @@ public class AsideController {
   @PostMapping("create-operation")
   public ResponseEntity<String> toolCreating(@RequestBody Operation op) throws IOException {
 
-    tool.setId(baseRepository.getAllTools().size());
+    op.setId(baseRepository.getAllOperations().size());
 
-    baseRepository.saveTool(tool);
-
-    // Помимо списка всех инструментов, мы должны добавить новый инструмент на склад
-    List<FreeTools> freeTools = baseRepository.getFreeTools();
-
-    FreeTools freeTool = new FreeTools();
-    freeTool.setId(freeTools.size());
-    freeTool.setTool_id(tool.getId());
-    freeTool.setToolType_id(tool.getToolType_id());
-    freeTool.setReceiveDate(LocalDate.now());
-
-
-    freeTools.add(freeTool);
-
-    baseRepository.saveFreeTools(freeTools);
+    baseRepository.saveOperation(op);
 
     return ResponseEntity.ok("Ответы успешно обработаны");
   }
-
-
 }
