@@ -1,14 +1,14 @@
 [
   {
     "id": 1,
-    "product_id": 101,
+    "product_id": 0,
     "product_quantity": 5,
     "order_date": "2024-07-27",
     "finish_date": "2024-07-27"
   },
   {
     "id": 2,
-    "product_id": 102,
+    "product_id": 1,
     "product_quantity": 10,
     "order_date": "2024-07-28",
     "finish_date": "2024-07-30"

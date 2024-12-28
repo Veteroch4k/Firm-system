@@ -133,7 +133,7 @@
           <thead>
           <tr >
             <th scope="col">id</th>
-            <th scope="col">Название продукта</th>
+            <th scope="col">Id продукта</th>
             <th scope="col">Количество</th>
             <th scope="col">Дата заказа</th>
             <th scope="col">Дата завершения</th>
@@ -142,7 +142,9 @@
           <tbody>
           <tr th:each="order : ${orders}">
             <td th:text="${order.getId()}"></td>
-            <td th:text="${order.getProduct_id()}"></td>
+            <td>
+              <a th:href="@{/content/order/{order_id}(order_id=${order.getId()})}" th:text="${order.getProduct_id()}"></a>
+            </td>
             <td th:text="${order.getProduct_quantity}"></td>
             <td th:text="${order.getOrder_date()}"></td>
             <td th:text="${order.getFinish_date()}"></td>

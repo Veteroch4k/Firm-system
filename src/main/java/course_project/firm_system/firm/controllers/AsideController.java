@@ -3,6 +3,7 @@ package course_project.firm_system.firm.controllers;
 import course_project.firm_system.firm.Firm;
 import course_project.firm_system.firm.models.DateRange;
 import course_project.firm_system.firm.models.Order;
+import course_project.firm_system.firm.models.Product;
 import course_project.firm_system.firm.models.consumables.Material;
 import course_project.firm_system.firm.models.consumables.Tool;
 import course_project.firm_system.firm.models.consumables.ToolType;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -49,6 +51,23 @@ public class AsideController {
     modelAndView.addObject("products", baseRepository.getAllProducts());
 
     modelAndView.setViewName("aside/products");
+
+    return modelAndView;
+
+  }
+
+  @GetMapping("/order/{order_id}")
+  public ModelAndView orderMaterials(@PathVariable int order_id, ModelAndView modelAndView) throws IOException {
+
+    modelAndView.addObject("title", "Продукты");
+
+
+    Map<Material, Integer> res = requests.getOrderMaterials(baseRepository.getOrder(order_id));
+
+    modelAndView.addObject("productMaterials", res);
+
+
+    modelAndView.setViewName("aside/ordersMaterials");
 
     return modelAndView;
 
@@ -154,7 +173,6 @@ public class AsideController {
 
     // Фильтруем заказы по диапазону дат
     filteredOrders = requests.getDateOrders(startDate,endDate);
-    System.out.println("");
 
     return ResponseEntity.ok("Ответы успешно обработаны");
   }
@@ -190,6 +208,9 @@ public class AsideController {
 
   }
 
+  /**/
+
+
   @GetMapping("/newTool")
   public ModelAndView addTool(ModelAndView modelAndView) throws IOException {
     modelAndView.addObject("title", "Добавление нового инструмента");
@@ -202,7 +223,45 @@ public class AsideController {
   }
 
   @PostMapping("create-tool")
-  public ResponseEntity<String> gpuAns(@RequestBody Tool tool) throws IOException {
+  public ResponseEntity<String> toolCreating(@RequestBody Tool tool) throws IOException {
+
+    tool.setId(baseRepository.getAllTools().size());
+
+    baseRepository.saveTool(tool);
+
+    // Помимо списка всех инструментов, мы должны добавить новый инструмент на склад
+    List<FreeTools> freeTools = baseRepository.getFreeTools();
+
+    FreeTools freeTool = new FreeTools();
+    freeTool.setId(freeTools.size());
+    freeTool.setTool_id(tool.getId());
+    freeTool.setToolType_id(tool.getToolType_id());
+    freeTool.setReceiveDate(LocalDate.now());
+
+
+    freeTools.add(freeTool);
+
+    baseRepository.saveFreeTools(freeTools);
+
+    return ResponseEntity.ok("Ответы успешно обработаны");
+  }
+
+ /**/
+
+  @GetMapping("/newOperation")
+  public ModelAndView addOperation(ModelAndView modelAndView) throws IOException {
+    modelAndView.addObject("title", "Добавление новой операции");
+
+    modelAndView.addObject("toolTypes", baseRepository.getAllToolsTypes());
+
+    modelAndView.setViewName("aside/adding/addNewTool");
+
+    return modelAndView;
+
+  }
+
+  @PostMapping("create-operation")
+  public ResponseEntity<String> toolCreating(@RequestBody Operation op) throws IOException {
 
     tool.setId(baseRepository.getAllTools().size());
 

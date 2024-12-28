@@ -156,7 +156,7 @@ public class BaseRepositoryImpl implements BaseRepository{
   }
 
   @Override
-  public Order getOrders(int order_id) throws IOException {
+  public Order getOrder(int order_id) throws IOException {
     return getAllOrders().stream().filter(x->x.getId()==order_id).findFirst().get();
   }
 

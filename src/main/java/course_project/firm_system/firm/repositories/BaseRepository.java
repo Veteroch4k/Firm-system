@@ -75,7 +75,7 @@ public interface BaseRepository {
 
   // Работа с нарядами
   List<Order> getAllOrders() throws IOException;
-  Order getOrders(int order_id) throws IOException;
+  Order getOrder(int order_id) throws IOException;
   void saveOrder(Order order) throws IOException;
 
   /***/
