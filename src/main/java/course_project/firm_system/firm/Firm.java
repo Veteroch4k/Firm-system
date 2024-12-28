@@ -49,6 +49,8 @@ public class Firm {
 
     baseRepository.saveOrderAccounting(accountings);
 
+    baseRepository.saveOrder(order);
+
   }
 
 }

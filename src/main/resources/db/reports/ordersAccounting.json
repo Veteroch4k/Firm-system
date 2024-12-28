@@ -5,7 +5,7 @@
   "quantity" : 0
 }, {
   "id" : 1,
-  "factory_id" : 1,
-  "product_id" : 6,
-  "quantity" : 5
+  "factory_id" : 0,
+  "product_id" : 4,
+  "quantity" : 4
 } ]

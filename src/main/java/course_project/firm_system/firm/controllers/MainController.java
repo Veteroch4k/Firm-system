@@ -48,7 +48,6 @@ public class MainController {
     order.setId(Collections.max(baseRepository.getAllOrders()).getId() + 1);
     firm.createOrder(order);
 
-    baseRepository.saveOrder(order);
 
     return ResponseEntity.ok("Ответы успешно обработаны");
   }
