@@ -14,6 +14,7 @@ import course_project.firm_system.firm.repositories.BaseRepository;
 import course_project.firm_system.firm.services.Requests;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -225,7 +226,7 @@ public class AsideController {
   @PostMapping("create-tool")
   public ResponseEntity<String> toolCreating(@RequestBody Tool tool) throws IOException {
 
-    tool.setId(baseRepository.getAllTools().size());
+    tool.setId(Collections.max(baseRepository.getAllTools()).getId() + 1);
 
     baseRepository.saveTool(tool);
 
@@ -233,7 +234,7 @@ public class AsideController {
     List<FreeTools> freeTools = baseRepository.getFreeTools();
 
     FreeTools freeTool = new FreeTools();
-    freeTool.setId(freeTools.size());
+    freeTool.setId(Collections.max(freeTools).getId() + 1);
     freeTool.setTool_id(tool.getId());
     freeTool.setToolType_id(tool.getToolType_id());
     freeTool.setReceiveDate(LocalDate.now());
@@ -261,7 +262,7 @@ public class AsideController {
   @PostMapping("create-operation")
   public ResponseEntity<String> toolCreating(@RequestBody Operation op) throws IOException {
 
-    op.setId(baseRepository.getAllOperations().size());
+    op.setId(Collections.max(baseRepository.getAllOperations()).getId() + 1);
 
     baseRepository.saveOperation(op);
 

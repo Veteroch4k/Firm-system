@@ -18,6 +18,7 @@ import course_project.firm_system.firm.repositories.BaseRepository;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +38,6 @@ public class RequestDAO implements Requests {
   @Override
   public Operation getFactoryOperation(int factory_id) throws IOException {
     Optional<Factory> factory = repository.getAllFactories().stream().filter(x->x.getId() == factory_id).findFirst();
-    List<Operation> operations = repository.getAllOperations();
     int involvedOp = factory.get().getOperation_id();
     return repository.getCertainOp(involvedOp);
   }
@@ -72,7 +72,7 @@ public class RequestDAO implements Requests {
   @Override
   public Map<Material, Integer> checkFactoryRequiredMaterials(int factory_id, int quantity) throws IOException {
 
-    // Получение материалов, хранящихся на складе в данный момент
+    // Получение материалов, хранящихся в цеху данный момент
     Map<Material, Integer> factoryMaterials = getFactoryMaterials(factory_id);
 
     // Получение кол-ва материалов, необходимых для выполнения операции данной фабрикой
@@ -82,13 +82,14 @@ public class RequestDAO implements Requests {
     Map<Material, Integer> missingMaterials = new HashMap<>();
 
     // Для обновления таблицы материалов фабрики
-    List<FactoryMaterials> factoryMaterials1 = repository.getFactoryMaterials().stream().filter(x->x.getFactory_id()==factory_id).toList();
+    List<FactoryMaterials> factoryMaterials1 = repository.getFactoryMaterials();
 
 
     for(Material material : factoryMaterials.keySet()) {
       if(factoryMaterials.get(material) < (requiredMaterials.get(material)*quantity)*2) { // Домножаю на два, т.к. даю материалы с излишком, на 2 продукта
         missingMaterials.put(material, (requiredMaterials.get(material)*quantity)*2 - factoryMaterials.get(material));
         factoryMaterials1.stream()
+            .filter(x -> x.getFactory_id() == factory_id)
             .filter(x -> x.getMaterial_id() == material.getId())
             .findFirst()
             .ifPresent(x -> x.setQuantity((int) Math.ceil((requiredMaterials.get(material)*quantity)*0.75))); // Один из 4 товаров всегда будет бракованный -> отсюда и рассчет
@@ -96,6 +97,7 @@ public class RequestDAO implements Requests {
       }
       else {
         factoryMaterials1.stream()
+            .filter(x -> x.getFactory_id() == factory_id)
             .filter(x -> x.getMaterial_id() == material.getId())
             .findFirst()
             .ifPresent(x -> x.setQuantity(x.getQuantity() - (int) Math.ceil((requiredMaterials.get(material)*quantity)*1.25)));
@@ -141,19 +143,20 @@ public class RequestDAO implements Requests {
 
     Map<ToolType, Integer> factoryTools = getOperationTools(getFactoryOperation(factory_id).getId());
 
-    // Получение кол-ва материалов, необходимых для выполнения операции данной фабрикой
+    // Получение кол-ва инструментов, необходимых для выполнения операции данной фабрикой
     Map<ToolType, Integer> requiredTools = getOperationTools(getFactoryOperation(factory_id).getId());
 
 
     Map<ToolType, Integer> missingToolTypes = new HashMap<>();
 
     // Для обновления таблицы материалов фабрики
-    List<FactoryTools> factoryTools1 = repository.getFactoryTools().stream().filter(x->x.getFactory_id()==factory_id).toList();
+    List<FactoryTools> factoryTools1 = repository.getFactoryTools();
 
     for(ToolType toolType : factoryTools.keySet()) {
       if(factoryTools.get(toolType) < requiredTools.get(toolType)*quantity) {
         missingToolTypes.put(toolType, requiredTools.get(toolType)*quantity - factoryTools.get(toolType));
         factoryTools1.stream()
+            .filter(x -> x.getFactory_id() == factory_id)
             .filter(x -> x.getToolType_id() == toolType.getId())
             .findFirst()
             .ifPresent(x -> x.setQuantity((int) Math.ceil(requiredTools.get(toolType)*quantity)));
@@ -163,6 +166,7 @@ public class RequestDAO implements Requests {
       }
       else {
         factoryTools1.stream()
+            .filter(x -> x.getFactory_id() == factory_id)
             .filter(x -> x.getToolType_id() == toolType.getId())
             .findFirst()
             .ifPresent(x -> x.setQuantity(x.getQuantity() - (int) Math.ceil(requiredTools.get(toolType)*quantity)));
@@ -197,6 +201,7 @@ public class RequestDAO implements Requests {
         .toList();
 
     //Генерируем случайный индекс только если есть свободные инструменты
+
     int index = new Random().nextInt(freeTools.size());
 
 
@@ -232,8 +237,9 @@ public class RequestDAO implements Requests {
       repository.saveTool(tool);
 
       FreeTools freeTools1 = new FreeTools();
-      freeTools1.setTool_id(type.getId());
-      freeTools1.setId(freeTools.size());
+      freeTools1.setToolType_id(type.getId());
+
+      freeTools1.setId(Collections.max(freeTools).getId() + 1);
       freeTools1.setTool_id(tool.getId());
       freeTools1.setReceiveDate(LocalDate.now());
 
@@ -243,6 +249,16 @@ public class RequestDAO implements Requests {
     repository.saveFreeTools(freeTools);
 
   }
+
+  // Генерация нового инструмента
+  @Override
+  public Tool generateNewTool(int toolType_id) throws IOException {
+    Tool tool = new Tool();
+    tool.setToolType_id(toolType_id);
+    tool.setId(Collections.max(repository.getAllTools()).getId() + 1);
+    return tool;
+  }
+
 
   @Override
   public List<Tool> getUsedTools() throws IOException {
@@ -292,16 +308,6 @@ public class RequestDAO implements Requests {
     return repository.getAllDrawings()
             .stream().filter(x->x.getId() == product.getDrawing_id()).findFirst().get();
 
-  }
-
-
-  // Генерация нового инструмента
-  @Override
-  public Tool generateNewTool(int toolType_id) throws IOException {
-    Tool tool = new Tool();
-    tool.setToolType_id(toolType_id);
-    tool.setId(repository.getAllTools().size());
-    return tool;
   }
 
 
@@ -397,7 +403,7 @@ public class RequestDAO implements Requests {
 
     List<Employer> employers = repository.getAllEmployers();
 
-    return employers.get(r.nextInt(employers.size()));
+    return employers.get(r.nextInt(Collections.max(employers).getId() + 1));
 
   }
 

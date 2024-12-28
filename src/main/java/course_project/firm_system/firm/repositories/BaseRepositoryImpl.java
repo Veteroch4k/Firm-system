@@ -31,8 +31,8 @@ public class BaseRepositoryImpl implements BaseRepository{
   private final ObjectMapper objectMapper;
 
   private static final File factoryFilePath = new File("src/main/resources/db/factory/factories.json");
-  private static final File factoryToolsFilePath = new File("src/main/resources/db/factory/fctrMaterials.json");
-  private static final File factoryMaterialsFilePath = new File("src/main/resources/db/factory/fctrTools.json");
+  private static final File factoryMaterialsFilePath = new File("src/main/resources/db/factory/fctrMaterials.json");
+  private static final File factoryToolsFilePath = new File("src/main/resources/db/factory/fctrTools.json");
 
   private static final File operationFilePath = new File( "src/main/resources/db/op/operations.json");
   private static final File opMaterialsFilePath = new File( "src/main/resources/db/op/opMaterials.json");
@@ -117,7 +117,8 @@ public class BaseRepositoryImpl implements BaseRepository{
       return objectMapper.readValue(toolAccountingsFilePath, new TypeReference<>(){});
     }
 
-    return new ArrayList<>();  }
+    return new ArrayList<>();
+  }
 
   @Override
   public List<Employer> getAllEmployers() throws IOException {

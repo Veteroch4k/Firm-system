@@ -7,6 +7,7 @@ import course_project.firm_system.firm.Warehouse;
 import course_project.firm_system.firm.repositories.BaseRepository;
 import course_project.firm_system.firm.services.Requests;
 import java.io.IOException;
+import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,9 @@ public class MainController {
   @Autowired
   private Requests requests;
 
+  @Autowired
+  private Firm firm;
+
 
   @GetMapping("")
   public ModelAndView index(ModelAndView modelAndView) throws IOException {
@@ -39,12 +43,12 @@ public class MainController {
 
   @PostMapping("create-order")
   public ResponseEntity<String> gpuAns(@RequestBody Order order) throws IOException {
-    System.out.println("Получили заказ:" + order);
 
     order.setFinish_date(requests.getOrderDeadLine(order));
-    order.setId(baseRepository.getAllOrders().size());
+    order.setId(Collections.max(baseRepository.getAllOrders()).getId() + 1);
+    firm.createOrder(order);
 
-    Firm.createOrder(order);
+    baseRepository.saveOrder(order);
 
     return ResponseEntity.ok("Ответы успешно обработаны");
   }

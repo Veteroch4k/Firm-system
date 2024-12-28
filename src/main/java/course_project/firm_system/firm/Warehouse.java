@@ -6,11 +6,14 @@ import course_project.firm_system.firm.models.reports.MaterialsAccounting;
 import course_project.firm_system.firm.repositories.BaseRepository;
 import course_project.firm_system.firm.services.Requests;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 @NoArgsConstructor
 public class Warehouse {
 
@@ -31,7 +34,7 @@ public class Warehouse {
     // Заносим выданные материалы в отчетность
     for(Material material : neededMaterials.keySet()) {
       MaterialsAccounting mat = new MaterialsAccounting();
-      mat.setId(accounting.size());
+      mat.setId(Collections.max(accounting).getId() + 1);
       mat.setMaterial_id(material.getId());
       mat.setQuantity(neededMaterials.get(material));
       mat.setProduct_id(order.getProduct_id());

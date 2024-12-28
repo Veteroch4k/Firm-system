@@ -5,24 +5,31 @@ import course_project.firm_system.firm.models.reports.OrdersAccounting;
 import course_project.firm_system.firm.repositories.BaseRepository;
 import course_project.firm_system.firm.services.Requests;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
+@NoArgsConstructor
 public class Firm {
 
-  private static ToolWareHouse toolWareHouse = new ToolWareHouse();
+  @Autowired
+  private ToolWareHouse toolWareHouse;
 
-  private static Warehouse warehouse = new Warehouse();
+  @Autowired
+  private Warehouse warehouse;
 
 
   @Autowired
-  private static BaseRepository baseRepository;
+  private  BaseRepository baseRepository;
 
 
   @Autowired
-  private static Requests requests;
+  private  Requests requests;
 
-  public static void createOrder(Order order) throws IOException {
+  public void createOrder(Order order) throws IOException {
 
     int factory_id = requests.getDrawingByProductId(order.getProduct_id()).getFactory_id();
 
@@ -32,7 +39,7 @@ public class Firm {
 
     OrdersAccounting accounting = new OrdersAccounting();
     accounting.setFactory_id(factory_id);
-    accounting.setId(baseRepository.getOrderAccounting().size());
+    accounting.setId(Collections.max(baseRepository.getOrderAccounting()).getId() + 1);
     accounting.setProduct_id(order.getProduct_id());
     accounting.setQuantity(order.getProduct_quantity());
 
