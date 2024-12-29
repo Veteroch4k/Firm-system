@@ -1,11 +1,11 @@
 [ {
   "factory_id" : 0,
   "material_id" : 0,
-  "quantity" : 0
+  "quantity" : 3
 }, {
   "factory_id" : 0,
   "material_id" : 1,
-  "quantity" : 0
+  "quantity" : 5
 }, {
   "factory_id" : 1,
   "material_id" : 2,

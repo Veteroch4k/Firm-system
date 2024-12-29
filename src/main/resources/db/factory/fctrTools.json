@@ -1,19 +1,19 @@
 [ {
   "factory_id" : 0,
   "toolType_id" : 0,
-  "quantity" : 0
+  "quantity" : 3
 }, {
   "factory_id" : 0,
   "toolType_id" : 4,
-  "quantity" : 0
+  "quantity" : 12
 }, {
   "factory_id" : 0,
   "toolType_id" : 6,
-  "quantity" : 0
+  "quantity" : 12
 }, {
   "factory_id" : 0,
   "toolType_id" : 7,
-  "quantity" : 0
+  "quantity" : 12
 }, {
   "factory_id" : 1,
   "toolType_id" : 1,

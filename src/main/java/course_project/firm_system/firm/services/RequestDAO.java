@@ -32,9 +32,9 @@ public class RequestDAO implements Requests {
 
     hours *= order.getProduct_quantity();
 
-    int days = hours % 24;
+    int days = hours / 24;
 
-    finish.plusDays(days);
+    finish = finish.plusDays(days);
 
     return finish;
 

@@ -8,4 +8,9 @@
   "factory_id" : 2,
   "product_id" : 6,
   "quantity" : 1
+}, {
+  "id" : 2,
+  "factory_id" : 0,
+  "product_id" : 2,
+  "quantity" : 3
 } ]
