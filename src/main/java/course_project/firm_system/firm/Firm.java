@@ -39,7 +39,7 @@ public class Firm {
 
     OrdersAccounting accounting = new OrdersAccounting();
     accounting.setFactory_id(factory_id);
-    accounting.setId(Collections.max(baseRepository.getOrderAccounting()).getId() + 1);
+    accounting.setId(baseRepository.getOrderAccounting().size());
     accounting.setProduct_id(order.getProduct_id());
     accounting.setQuantity(order.getProduct_quantity());
 

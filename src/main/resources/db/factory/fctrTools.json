@@ -1,45 +1,45 @@
 [ {
   "factory_id" : 0,
   "toolType_id" : 0,
-  "quantity" : 4
+  "quantity" : 0
 }, {
   "factory_id" : 0,
   "toolType_id" : 4,
-  "quantity" : 16
+  "quantity" : 0
 }, {
   "factory_id" : 0,
   "toolType_id" : 6,
-  "quantity" : 16
+  "quantity" : 0
 }, {
   "factory_id" : 0,
   "toolType_id" : 7,
-  "quantity" : 16
+  "quantity" : 0
 }, {
   "factory_id" : 1,
   "toolType_id" : 1,
-  "quantity" : 20
+  "quantity" : 5
 }, {
   "factory_id" : 1,
   "toolType_id" : 2,
-  "quantity" : 20
+  "quantity" : 5
 }, {
   "factory_id" : 1,
   "toolType_id" : 5,
-  "quantity" : 32
+  "quantity" : 8
 }, {
   "factory_id" : 1,
   "toolType_id" : 6,
-  "quantity" : 28
+  "quantity" : 7
 }, {
   "factory_id" : 1,
   "toolType_id" : 7,
-  "quantity" : 28
+  "quantity" : 7
 }, {
   "factory_id" : 2,
   "toolType_id" : 3,
-  "quantity" : 1
+  "quantity" : 0
 }, {
   "factory_id" : 2,
   "toolType_id" : 6,
-  "quantity" : 1
+  "quantity" : 0
 } ]

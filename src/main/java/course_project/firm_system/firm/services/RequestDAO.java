@@ -141,7 +141,7 @@ public class RequestDAO implements Requests {
   @Override
   public Map<ToolType, Integer> checkFactoryRequiredTools(int factory_id, int quantity) throws IOException {
 
-    Map<ToolType, Integer> factoryTools = getOperationTools(getFactoryOperation(factory_id).getId());
+    Map<ToolType, Integer> factoryTools = getFactoryTools(getFactoryOperation(factory_id).getId());
 
     // Получение кол-ва инструментов, необходимых для выполнения операции данной фабрикой
     Map<ToolType, Integer> requiredTools = getOperationTools(getFactoryOperation(factory_id).getId());
@@ -255,7 +255,7 @@ public class RequestDAO implements Requests {
   public Tool generateNewTool(int toolType_id) throws IOException {
     Tool tool = new Tool();
     tool.setToolType_id(toolType_id);
-    tool.setId(Collections.max(repository.getAllTools()).getId() + 1);
+    tool.setId(repository.getAllTools().size());
     return tool;
   }
 
@@ -403,7 +403,7 @@ public class RequestDAO implements Requests {
 
     List<Employer> employers = repository.getAllEmployers();
 
-    return employers.get(r.nextInt(Collections.max(employers).getId() + 1));
+    return employers.get(r.nextInt(employers.size()));
 
   }
 

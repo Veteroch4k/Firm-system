@@ -7,11 +7,11 @@
   {
     "id" : 1,
     "operation_id" : 1,
-    "factory_id" : 0
+    "factory_id" : 1
   },
   {
     "id" : 2,
     "operation_id" : 2,
-    "factory_id" : 1
+    "factory_id" : 2
   }
 ]

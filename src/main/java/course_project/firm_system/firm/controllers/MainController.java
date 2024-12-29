@@ -45,12 +45,14 @@ public class MainController {
   public ResponseEntity<String> gpuAns(@RequestBody Order order) throws IOException {
 
     order.setFinish_date(requests.getOrderDeadLine(order));
-    order.setId(Collections.max(baseRepository.getAllOrders()).getId() + 1);
+    order.setId(baseRepository.getAllOrders().size());
     firm.createOrder(order);
 
 
     return ResponseEntity.ok("Ответы успешно обработаны");
   }
 }
+
+
 
 

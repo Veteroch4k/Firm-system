@@ -45,7 +45,7 @@ public class AddingController {
   @PostMapping("create-tool")
   public ResponseEntity<String> toolCreating(@RequestBody Tool tool) throws IOException {
 
-    tool.setId(Collections.max(baseRepository.getAllTools()).getId() + 1);
+    tool.setId(baseRepository.getAllTools().size());
 
     baseRepository.saveTool(tool);
 
@@ -81,7 +81,7 @@ public class AddingController {
   @PostMapping("create-operation")
   public ResponseEntity<String> toolCreating(@RequestBody Operation op) throws IOException {
 
-    op.setId(Collections.max(baseRepository.getAllOperations()).getId() + 1);
+    op.setId(baseRepository.getAllOperations().size());
 
     baseRepository.saveOperation(op);
 

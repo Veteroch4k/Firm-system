@@ -41,7 +41,7 @@ public class ToolWareHouse {
       }
 
       ToolAccounting mat = new ToolAccounting();
-      mat.setId(Collections.max(accounting).getId() + 1);
+      mat.setId(accounting.size());
       mat.setTools_id(toolsList);
       mat.setFactory_id(factory_id);
       mat.setOrder_id(order.getId());

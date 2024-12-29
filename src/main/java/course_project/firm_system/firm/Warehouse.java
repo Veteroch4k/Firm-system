@@ -34,7 +34,7 @@ public class Warehouse {
     // Заносим выданные материалы в отчетность
     for(Material material : neededMaterials.keySet()) {
       MaterialsAccounting mat = new MaterialsAccounting();
-      mat.setId(Collections.max(accounting).getId() + 1);
+      mat.setId(accounting.size());
       mat.setMaterial_id(material.getId());
       mat.setQuantity(neededMaterials.get(material));
       mat.setProduct_id(order.getProduct_id());
