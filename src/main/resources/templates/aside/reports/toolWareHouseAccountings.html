@@ -113,72 +113,46 @@
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Операция</h1>
+        <h1 class="h2">Отчеты</h1>
       </div>
 
-      <!-- Таблица -->
+      <!-- Таблица -->             <!-- th th:each="header : ${data.headers}" scope="col" th:text="${header}"></th> -->
 
       <div class="table-responsive small">
         <table class="table table-striped table-sm">
           <thead>
           <tr >
-            <th scope="col">Название</th>
-            <th scope="col">Описание</th>
+            <th scope="col">id</th>
+            <th scope="col">id инструментов</th>
+            <th scope="col">Тип инструментов</th>
+            <th scope="col">Цех-получатель</th>
+            <th scope="col">номер наряда</th>
           </tr>
           </thead>
-          <tbody id="tableBody">
-          <tr>
+          <tbody>
+          <tr th:each="accounting : ${accountings}">
+            <td th:text="${accounting.getId()}"></td>
             <td>
-              <input type="text" class="form-control" id="nameInput" placeholder="Введите название">
+              <select th:name="'tools_' + ${accounting.getId()}">
+                <option th:each="toolId : ${accounting.getTools_id()}"
+                        th:value="${toolId}"
+                        th:text="${toolId}">
+                </option>
+              </select>
             </td>
-            <td>
-              <input type="text" class="form-control" id="descriptionInput" placeholder="Введите описание">
-            </td>
+            <td th:text="${accounting.getToolType_id()}"></td>
+            <td th:text="${accounting.getFactory_id()}"></td>
+            <td th:text="${accounting.getOrder_id()}"></td>
           </tr>
           </tbody>
         </table>
-        <button class="btn btn-success" type="submit" id="sendData">Создать операцию</button>
-
       </div>
 
       <!-- Таблица -->
 
-
     </main>
   </div>
 </div>
-
-
-<script>
-  document.getElementById('sendData').addEventListener('click', function() {
-
-     var name = document.getElementById('nameInput').value;
-     var description = document.getElementById('descriptionInput').value;
-
-
-    const data = {
-        name : name,
-        description: description
-    };
-
-    fetch('/adding/create-operation', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => {
-        if (response.ok) {
-            alert('Данные успешно отправлены!');
-           location.reload();
-        } else {
-            alert('Ошибка отправки данных.');
-        }
-    })
-    .catch(error => console.error('Ошибка:', error));
-  });
-</script>
 
 
 <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>

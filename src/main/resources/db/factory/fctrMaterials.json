@@ -1,13 +1,13 @@
 [ {
   "factory_id" : 1,
   "material_id" : 2,
-  "quantity" : 15
+  "quantity" : 10
 }, {
   "factory_id" : 1,
   "material_id" : 4,
-  "quantity" : 23
+  "quantity" : 15
 }, {
   "factory_id" : 1,
   "material_id" : 3,
-  "quantity" : 23
+  "quantity" : 15
 } ]

@@ -57,23 +57,6 @@ public class AsideController {
 
   }
 
-  @GetMapping("/order/{order_id}")
-  public ModelAndView orderMaterials(@PathVariable int order_id, ModelAndView modelAndView) throws IOException {
-
-    modelAndView.addObject("title", "Продукты");
-
-
-    Map<Material, Integer> res = requests.getOrderMaterials(baseRepository.getOrder(order_id));
-
-    modelAndView.addObject("productMaterials", res);
-
-
-    modelAndView.setViewName("aside/ordersMaterials");
-
-    return modelAndView;
-
-  }
-
   @GetMapping("/drawing/{id}")
   public ModelAndView drawing(@PathVariable int id, ModelAndView modelAndView) throws IOException {
 
@@ -112,6 +95,8 @@ public class AsideController {
 
   }
 
+  /****/
+
   @GetMapping("/tools")
   public ModelAndView tools(ModelAndView modelAndView) throws IOException {
 
@@ -123,6 +108,22 @@ public class AsideController {
     return modelAndView;
 
   }
+
+  @GetMapping("/usedTools")
+  public ModelAndView usedTools(ModelAndView modelAndView) throws IOException {
+    modelAndView.addObject("title", "Используемые инструменты");
+
+    modelAndView.addObject("usedTools", requests.getUsedTools());
+
+    modelAndView.addObject("toolTypes", requests.getToolsWithTypes());
+
+    modelAndView.setViewName("aside/usedTools");
+
+    return modelAndView;
+
+  }
+
+  /****/
 
   @GetMapping("/operations")
   public ModelAndView operations(ModelAndView modelAndView) throws IOException {
@@ -151,6 +152,8 @@ public class AsideController {
     return modelAndView;
 
   }
+
+  /****/
 
   @GetMapping("/orders")
   public ModelAndView orders(ModelAndView modelAndView) throws IOException {
@@ -194,78 +197,22 @@ public class AsideController {
 
   }
 
+  @GetMapping("/order/{order_id}")
+  public ModelAndView orderMaterials(@PathVariable int order_id, ModelAndView modelAndView) throws IOException {
 
-  @GetMapping("/usedTools")
-  public ModelAndView usedTools(ModelAndView modelAndView) throws IOException {
-    modelAndView.addObject("title", "Используемые инструменты");
-
-    modelAndView.addObject("usedTools", requests.getUsedTools());
-
-    modelAndView.addObject("toolTypes", requests.getToolsWithTypes());
-
-    modelAndView.setViewName("aside/usedTools");
-
-    return modelAndView;
-
-  }
-
-  /**/
+    modelAndView.addObject("title", "Продукты");
 
 
-  @GetMapping("/newTool")
-  public ModelAndView addTool(ModelAndView modelAndView) throws IOException {
-    modelAndView.addObject("title", "Добавление нового инструмента");
+    Map<Material, Integer> res = requests.getOrderMaterials(baseRepository.getOrder(order_id));
 
-    modelAndView.addObject("toolTypes", baseRepository.getAllToolsTypes());
-
-    modelAndView.setViewName("aside/adding/addNewTool");
-
-    return modelAndView;
-  }
-
-  @PostMapping("create-tool")
-  public ResponseEntity<String> toolCreating(@RequestBody Tool tool) throws IOException {
-
-    tool.setId(Collections.max(baseRepository.getAllTools()).getId() + 1);
-
-    baseRepository.saveTool(tool);
-
-    // Помимо списка всех инструментов, мы должны добавить новый инструмент на склад
-    List<FreeTools> freeTools = baseRepository.getFreeTools();
-
-    FreeTools freeTool = new FreeTools();
-    freeTool.setId(Collections.max(freeTools).getId() + 1);
-    freeTool.setTool_id(tool.getId());
-    freeTool.setToolType_id(tool.getToolType_id());
-    freeTool.setReceiveDate(LocalDate.now());
+    modelAndView.addObject("productMaterials", res);
 
 
-    freeTools.add(freeTool);
-
-    baseRepository.saveFreeTools(freeTools);
-
-    return ResponseEntity.ok("Ответы успешно обработаны");
-  }
-
- /**/
-
-  @GetMapping("/newOperation")
-  public ModelAndView addOperation(ModelAndView modelAndView) throws IOException {
-    modelAndView.addObject("title", "Добавление новой операции");
-
-    modelAndView.setViewName("aside/adding/addNewOperation");
+    modelAndView.setViewName("aside/ordersMaterials");
 
     return modelAndView;
 
   }
 
-  @PostMapping("create-operation")
-  public ResponseEntity<String> toolCreating(@RequestBody Operation op) throws IOException {
 
-    op.setId(Collections.max(baseRepository.getAllOperations()).getId() + 1);
-
-    baseRepository.saveOperation(op);
-
-    return ResponseEntity.ok("Ответы успешно обработаны");
-  }
 }
