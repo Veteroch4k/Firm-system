@@ -202,11 +202,6 @@ public class BaseRepositoryImpl implements BaseRepository{
   }
 
   @Override
-  public List<ToolType> getUsedTools() {
-    return List.of();
-  }
-
-  @Override
   public void saveOperation(Operation operation) throws IOException {
 
     List<Operation> operations = getAllOperations();

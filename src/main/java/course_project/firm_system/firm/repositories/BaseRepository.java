@@ -89,8 +89,6 @@ public interface BaseRepository {
   // Список всех существующих экземпляров инструментов
   List<Tool> getAllTools() throws IOException;
 
-  // Список инструментов, которые отсутствуют в инструментальной
-  List<ToolType> getUsedTools();
 
   // Сохранение нового инструмента
   void saveTool(Tool tool) throws IOException;
