@@ -53,7 +53,7 @@ public class AddingController {
     List<FreeTools> freeTools = baseRepository.getFreeTools();
 
     FreeTools freeTool = new FreeTools();
-    freeTool.setId(Collections.max(freeTools).getId() + 1);
+    freeTool.setId(freeTools.isEmpty() ? 0: Collections.max(freeTools).getId() + 1);
     freeTool.setTool_id(tool.getId());
     freeTool.setToolType_id(tool.getToolType_id());
     freeTool.setReceiveDate(LocalDate.now());

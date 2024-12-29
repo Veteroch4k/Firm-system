@@ -1,10 +1,13 @@
 package course_project.firm_system.firm.controllers;
 
+import course_project.firm_system.firm.models.reports.Employer;
 import course_project.firm_system.firm.models.reports.MaterialsAccounting;
 import course_project.firm_system.firm.repositories.BaseRepository;
 import course_project.firm_system.firm.services.Requests;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +31,14 @@ public class AccountingController {
 
     modelAndView.addObject("accountings", repository.getMaterialAccountings());
 
+    Map<Integer, Employer> employerMap = new HashMap<>();
+    List<Employer> employers = repository.getAllEmployers();
+
+    for( int i = 0; i < employers.size(); i ++) {
+      employerMap.put(i, employers.get(i));
+    }
+    modelAndView.addObject("employers", employerMap);
+
 
     modelAndView.setViewName("aside/reports/wareHouseAccountings");
 
@@ -41,6 +52,7 @@ public class AccountingController {
     modelAndView.addObject("title", "Отчётность Ц. И.");
 
     modelAndView.addObject("accountings", repository.getToolAccounting());
+
 
     modelAndView.setViewName("aside/reports/toolWareHouseAccountings");
 

@@ -45,6 +45,7 @@ public class ToolWareHouse {
       mat.setTools_id(toolsList);
       mat.setFactory_id(factory_id);
       mat.setOrder_id(order.getId());
+      mat.setToolType_id(toolType.getId());
 
       accounting.add(mat);
     }

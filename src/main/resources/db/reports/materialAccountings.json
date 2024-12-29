@@ -3,7 +3,7 @@
   "material_id" : 2,
   "quantity" : 8,
   "product_id" : 4,
-  "employer_id" : 0,
+  "employer_id" : 1,
   "date" : "2024-12-29",
   "order_id" : 0
 }, {
@@ -11,7 +11,7 @@
   "material_id" : 3,
   "quantity" : 12,
   "product_id" : 4,
-  "employer_id" : 0,
+  "employer_id" : 2,
   "date" : "2024-12-29",
   "order_id" : 0
 }, {

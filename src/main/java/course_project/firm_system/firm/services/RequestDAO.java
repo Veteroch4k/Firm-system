@@ -239,7 +239,7 @@ public class RequestDAO implements Requests {
       FreeTools freeTools1 = new FreeTools();
       freeTools1.setToolType_id(type.getId());
 
-      freeTools1.setId(Collections.max(freeTools).getId() + 1);
+      freeTools1.setId(freeTools.isEmpty() ? 0 : Collections.max(freeTools).getId() + 1);
       freeTools1.setTool_id(tool.getId());
       freeTools1.setReceiveDate(LocalDate.now());
 

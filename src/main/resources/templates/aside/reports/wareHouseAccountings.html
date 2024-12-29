@@ -137,7 +137,7 @@
             <td th:text="${accounting.getMaterial_id()}"></td>
             <td th:text="${accounting.getQuantity()}"></td>
             <td th:text="${accounting.getProduct_id()}"></td>
-            <td th:text="${accounting.getEmployer_id()}"></td>
+            <td th:text="${employers.get(accounting.getEmployer_id()).getName()}"></td>
             <td th:text="${accounting.getDate()}"></td>
             <td th:text="${accounting.getOrder_id()}"></td>
           </tr>
