@@ -22,4 +22,10 @@
   "description" : "Изготовление лобового стекла",
   "duration" : 0,
   "factory_id" : 0
+}, {
+  "id" : 4,
+  "name" : "Окраска каркаса",
+  "description" : "Покрытие каркаса краской",
+  "duration" : 0,
+  "factory_id" : 0
 } ]

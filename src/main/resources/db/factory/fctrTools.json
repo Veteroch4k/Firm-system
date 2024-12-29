@@ -37,9 +37,9 @@
 }, {
   "factory_id" : 2,
   "toolType_id" : 3,
-  "quantity" : 0
+  "quantity" : 1
 }, {
   "factory_id" : 2,
   "toolType_id" : 6,
-  "quantity" : 0
+  "quantity" : 1
 } ]

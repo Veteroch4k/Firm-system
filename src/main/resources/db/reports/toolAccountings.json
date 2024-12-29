@@ -28,4 +28,16 @@
   "toolType_id" : 7,
   "factory_id" : 1,
   "order_id" : 0
+}, {
+  "id" : 5,
+  "tools_id" : [ 35 ],
+  "toolType_id" : 3,
+  "factory_id" : 2,
+  "order_id" : 1
+}, {
+  "id" : 6,
+  "tools_id" : [ 36 ],
+  "toolType_id" : 6,
+  "factory_id" : 2,
+  "order_id" : 1
 } ]

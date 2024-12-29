@@ -11,7 +11,10 @@ import course_project.firm_system.firm.models.factories.Factory;
 import course_project.firm_system.firm.models.operations.Operation;
 import course_project.firm_system.firm.models.reports.FreeTools;
 import course_project.firm_system.firm.repositories.BaseRepository;
+import course_project.firm_system.firm.repositories.toolsRepo.ToolsRepository;
 import course_project.firm_system.firm.services.Requests;
+import course_project.firm_system.firm.services.materialsService.MaterialsRequests;
+import course_project.firm_system.firm.services.toolsService.ToolsRequests;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Collections;
@@ -38,8 +41,13 @@ public class AsideController {
   private BaseRepository baseRepository;
 
   @Autowired
-  private Requests requests;
+  private ToolsRequests toolsRequests;
 
+  @Autowired
+  private MaterialsRequests materialsRequests;
+
+  @Autowired
+  private Requests requests;
 
   private List<Order> filteredOrders; // Сохраняем отфильтрованные заказы
 
@@ -66,7 +74,7 @@ public class AsideController {
     Operation op = baseRepository.getCertainOp(
         baseRepository.getAllDrawings().stream().filter(x-> x.getId() == id).findFirst().get().getOperation_id());
 
-    Map<ToolType, Integer> res = requests.getOperationTools(op.getId());
+    Map<ToolType, Integer> res = toolsRequests.getOperationTools(op.getId());
 
     modelAndView.addObject("draws", res);
 
@@ -84,7 +92,7 @@ public class AsideController {
 
     Map<Factory, Operation> factr = new HashMap<>();
     for(Factory factory : baseRepository.getAllFactories()) {
-      factr.put(factory, requests.getFactoryOperation(factory.getId()));
+      factr.put(factory, baseRepository.getFactoryOperation(factory.getId()));
     }
 
     modelAndView.addObject("factories", factr);
@@ -102,7 +110,7 @@ public class AsideController {
 
     modelAndView.addObject("title", "Инструменты");
 
-    modelAndView.addObject("toolsTypes", requests.getToolsWithTypes());
+    modelAndView.addObject("toolsTypes", toolsRequests.getToolsWithTypes());
     modelAndView.setViewName("aside/tools");
 
     return modelAndView;
@@ -113,9 +121,9 @@ public class AsideController {
   public ModelAndView usedTools(ModelAndView modelAndView) throws IOException {
     modelAndView.addObject("title", "Используемые инструменты");
 
-    modelAndView.addObject("usedTools", requests.getUsedTools());
+    modelAndView.addObject("usedTools", toolsRequests.getUsedTools());
 
-    modelAndView.addObject("toolTypes", requests.getToolsWithTypes());
+    modelAndView.addObject("toolTypes", toolsRequests.getToolsWithTypes());
 
     modelAndView.setViewName("aside/usedTools");
 
@@ -131,7 +139,7 @@ public class AsideController {
     modelAndView.addObject("title", "Операции");
 
     modelAndView.addObject("ops", baseRepository.getAllOperations());
-    modelAndView.addObject("toolsTypes", requests.getToolsWithTypes());
+    modelAndView.addObject("toolsTypes", toolsRequests.getToolsWithTypes());
     modelAndView.setViewName("aside/operations");
 
     return modelAndView;
@@ -144,7 +152,7 @@ public class AsideController {
     modelAndView.addObject("title", "Операции");
     modelAndView.addObject("op", baseRepository.getCertainOp(id).getName());
 
-    Map<Material, Integer> res = requests.getOperationMaterials(id);
+    Map<Material, Integer> res = materialsRequests.getOperationMaterials(id);
 
     modelAndView.addObject("materials", res);
     modelAndView.setViewName("aside/certainOperation");
@@ -203,7 +211,7 @@ public class AsideController {
     modelAndView.addObject("title", "Продукты");
 
 
-    Map<Material, Integer> res = requests.getOrderMaterials(baseRepository.getOrder(order_id));
+    Map<Material, Integer> res = materialsRequests.getOrderMaterials(baseRepository.getOrder(order_id));
 
     modelAndView.addObject("productMaterials", res);
 

@@ -22,4 +22,20 @@
   "employer_id" : 2,
   "date" : "2024-12-29",
   "order_id" : 0
+}, {
+  "id" : 3,
+  "material_id" : 0,
+  "quantity" : 2,
+  "product_id" : 6,
+  "employer_id" : 0,
+  "date" : "2024-12-29",
+  "order_id" : 1
+}, {
+  "id" : 4,
+  "material_id" : 5,
+  "quantity" : 14,
+  "product_id" : 6,
+  "employer_id" : 2,
+  "date" : "2024-12-29",
+  "order_id" : 1
 } ]

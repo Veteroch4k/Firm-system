@@ -4,7 +4,9 @@ import course_project.firm_system.firm.models.Order;
 import course_project.firm_system.firm.models.consumables.ToolType;
 import course_project.firm_system.firm.models.reports.ToolAccounting;
 import course_project.firm_system.firm.repositories.BaseRepository;
+import course_project.firm_system.firm.repositories.toolsRepo.ToolsRepository;
 import course_project.firm_system.firm.services.Requests;
+import course_project.firm_system.firm.services.toolsService.ToolsRequests;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,26 +20,29 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 public class ToolWareHouse {
 
-  @Autowired
-  private Requests requests;
 
   @Autowired
-  private BaseRepository repository;
+  private ToolsRequests toolsRequests;
+
+  @Autowired
+  private ToolsRepository toolsRepository;
+
+
 
   public void giveSomeTools(int factory_id, Order order) throws IOException {
 
-    Map<ToolType, Integer> neededToolTypes = requests.checkFactoryRequiredTools(factory_id, order.getProduct_quantity()); // Получаем нужные инструменты и их кол-во
+    Map<ToolType, Integer> neededToolTypes = toolsRequests.checkFactoryRequiredTools(factory_id, order.getProduct_quantity()); // Получаем нужные инструменты и их кол-во
 
-    List<ToolAccounting> accounting = repository.getToolAccounting(); // Отчётность инструментов (какой цех какими инструментами располагает)
+    List<ToolAccounting> accounting = toolsRepository.getToolAccounting(); // Отчётность инструментов (какой цех какими инструментами располагает)
 
 
     for(ToolType toolType : neededToolTypes.keySet()) {
 
       List<Integer> toolsList = new ArrayList<>();
-      requests.checkEnoughFreeTools(toolType, neededToolTypes.get(toolType));
+      toolsRequests.checkEnoughFreeTools(toolType, neededToolTypes.get(toolType));
 
       for(int i = 0; i < neededToolTypes.get(toolType); i++) {
-        toolsList.add(requests.getRandomTool(toolType.getId()).getId());
+        toolsList.add(toolsRequests.getRandomTool(toolType.getId()).getId());
       }
 
       ToolAccounting mat = new ToolAccounting();
@@ -50,6 +55,6 @@ public class ToolWareHouse {
       accounting.add(mat);
     }
 
-    repository.saveToolAccounting(accounting);
+    toolsRepository.saveToolAccounting(accounting);
   }
 }

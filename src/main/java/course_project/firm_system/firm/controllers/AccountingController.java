@@ -3,6 +3,8 @@ package course_project.firm_system.firm.controllers;
 import course_project.firm_system.firm.models.reports.Employer;
 import course_project.firm_system.firm.models.reports.MaterialsAccounting;
 import course_project.firm_system.firm.repositories.BaseRepository;
+import course_project.firm_system.firm.repositories.materialsRepo.MaterialsRepository;
+import course_project.firm_system.firm.repositories.toolsRepo.ToolsRepository;
 import course_project.firm_system.firm.services.Requests;
 import java.io.IOException;
 import java.util.HashMap;
@@ -22,6 +24,12 @@ public class AccountingController {
   @Autowired
   private BaseRepository repository;
 
+  @Autowired
+  private MaterialsRepository materialsRepository;
+
+  @Autowired
+  private ToolsRepository toolsRepository;
+
 
   @GetMapping("/wareHouse")
   public ModelAndView wareHouse(ModelAndView modelAndView) throws IOException {
@@ -29,7 +37,7 @@ public class AccountingController {
     modelAndView.addObject("title", "Отчётность склада");
 
 
-    modelAndView.addObject("accountings", repository.getMaterialAccountings());
+    modelAndView.addObject("accountings", materialsRepository.getMaterialAccountings());
 
     Map<Integer, Employer> employerMap = new HashMap<>();
     List<Employer> employers = repository.getAllEmployers();
@@ -51,7 +59,7 @@ public class AccountingController {
 
     modelAndView.addObject("title", "Отчётность Ц. И.");
 
-    modelAndView.addObject("accountings", repository.getToolAccounting());
+    modelAndView.addObject("accountings", toolsRepository.getToolAccounting());
 
 
     modelAndView.setViewName("aside/reports/toolWareHouseAccountings");
@@ -77,7 +85,7 @@ public class AccountingController {
 
     modelAndView.addObject("title", "Материалы");
 
-    modelAndView.addObject("accountings", repository.getAllMaterials());
+    modelAndView.addObject("accountings", materialsRepository.getAllMaterials());
 
     modelAndView.setViewName("aside/reports/materials");
 

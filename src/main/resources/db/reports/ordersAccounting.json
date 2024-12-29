@@ -3,4 +3,9 @@
   "factory_id" : 1,
   "product_id" : 4,
   "quantity" : 1
+}, {
+  "id" : 1,
+  "factory_id" : 2,
+  "product_id" : 6,
+  "quantity" : 1
 } ]

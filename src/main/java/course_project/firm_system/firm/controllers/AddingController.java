@@ -4,7 +4,10 @@ import course_project.firm_system.firm.models.consumables.Tool;
 import course_project.firm_system.firm.models.operations.Operation;
 import course_project.firm_system.firm.models.reports.FreeTools;
 import course_project.firm_system.firm.repositories.BaseRepository;
+import course_project.firm_system.firm.repositories.toolsRepo.ToolsRepository;
 import course_project.firm_system.firm.services.Requests;
+import course_project.firm_system.firm.services.materialsService.MaterialsRequests;
+import course_project.firm_system.firm.services.toolsService.ToolsRequests;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Collections;
@@ -24,18 +27,17 @@ public class AddingController {
 
 
   @Autowired
-  private BaseRepository baseRepository;
+  private ToolsRepository toolsRepository;
 
   @Autowired
-  private Requests requests;
-
+  private BaseRepository baseRepository;
 
 
   @GetMapping("/newTool")
   public ModelAndView addTool(ModelAndView modelAndView) throws IOException {
     modelAndView.addObject("title", "Добавление нового инструмента");
 
-    modelAndView.addObject("toolTypes", baseRepository.getAllToolsTypes());
+    modelAndView.addObject("toolTypes", toolsRepository.getAllToolsTypes());
 
     modelAndView.setViewName("aside/adding/addNewTool");
 
@@ -45,12 +47,12 @@ public class AddingController {
   @PostMapping("create-tool")
   public ResponseEntity<String> toolCreating(@RequestBody Tool tool) throws IOException {
 
-    tool.setId(baseRepository.getAllTools().size());
+    tool.setId(toolsRepository.getAllTools().size());
 
-    baseRepository.saveTool(tool);
+    toolsRepository.saveTool(tool);
 
     // Помимо списка всех инструментов, мы должны добавить новый инструмент на склад
-    List<FreeTools> freeTools = baseRepository.getFreeTools();
+    List<FreeTools> freeTools = toolsRepository.getFreeTools();
 
     FreeTools freeTool = new FreeTools();
     freeTool.setId(freeTools.isEmpty() ? 0: Collections.max(freeTools).getId() + 1);
@@ -61,7 +63,7 @@ public class AddingController {
 
     freeTools.add(freeTool);
 
-    baseRepository.saveFreeTools(freeTools);
+    toolsRepository.saveFreeTools(freeTools);
 
     return ResponseEntity.ok("Ответы успешно обработаны");
   }

@@ -26,12 +26,9 @@ public class Firm {
   private  BaseRepository baseRepository;
 
 
-  @Autowired
-  private  Requests requests;
-
   public void createOrder(Order order) throws IOException {
 
-    int factory_id = requests.getDrawingByProductId(order.getProduct_id()).getFactory_id();
+    int factory_id = baseRepository.getDrawingByProductId(order.getProduct_id()).getFactory_id();
 
     warehouse.giveSomeMaterials(factory_id,order);
 
