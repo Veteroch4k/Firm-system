@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: Veteroch4k
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                  name: id
+                  type: INT
+              - column:
+                  autoIncrement: false
+                  constraints:
+                    nullable: false
+                  name: op_id
+                  type: INT
+              - column:
+                  autoIncrement: false
+                  constraints:
+                    nullable: false
+                  name: fabric_id
+                  type: INT
+            tableName: drawing
+

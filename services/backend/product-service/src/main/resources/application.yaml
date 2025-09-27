@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: product-service
+
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.migrations-master.yaml
+    default-schema: product_service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/firm_prod_db?currentSchema=employer_service
+    username: root
+    password: root
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        format_sql: true
+server:
+  port: 8081

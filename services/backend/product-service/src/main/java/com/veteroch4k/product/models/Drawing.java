@@ -11,15 +11,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "drawings")
+@Table(name = "drawing")
 public class Drawing {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
+
+  private int op_id;
   // Операции
 
+  private int factory_id;
   // Цех
 
 }

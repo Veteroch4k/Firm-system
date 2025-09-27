@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - include:
+      file: v1/create-product-table.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: v1/create-drawing-table.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: v2/renameColumn-drawing-table.yaml
+      relativeToChangelogFile: true
