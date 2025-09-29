@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: Veteroch4k
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  name: id
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: factory_id
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: product_id
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: quantity
+                  type: INT
+            tableName: order_accounting

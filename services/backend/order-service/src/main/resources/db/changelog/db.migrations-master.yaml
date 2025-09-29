@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - include:
+      file: v1/create-order-table.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: v1/create-order_accounting-table.yaml
+      relativeToChangelogFile: true

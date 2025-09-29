@@ -9,7 +9,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
   Order getOrderById(long id);
 
-  List<Order> findAllByOrder_dateBetween(LocalDate start, LocalDate finish);
+  // Шо то не воркает - надо sql запрос ебануть просто List<Order> findAllByOrder_dateBetween(LocalDate start, LocalDate finish);
 
 
 

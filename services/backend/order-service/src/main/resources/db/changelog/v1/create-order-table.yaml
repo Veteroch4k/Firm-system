@@ -1,0 +1,37 @@
+databaseChangeLog:
+  - changeSet:
+      author: Veteroch4k
+      id: 1
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  type: INT
+                  name: id
+              - column:
+                  constraints:
+                    nullable: false
+                  name: product_id
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: product_quantity
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  type: DATE
+                  name: order_date
+              - column:
+                  constraints:
+                    nullable: false
+                  type: DATE
+                  name: finish_date
+            tableName: order
+
+

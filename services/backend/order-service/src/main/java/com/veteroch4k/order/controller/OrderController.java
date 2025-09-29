@@ -6,6 +6,7 @@ import com.veteroch4k.order.model.OrderAccounting;
 import com.veteroch4k.order.repository.OrderAccountingRepository;
 import com.veteroch4k.order.repository.OrderRepository;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -57,7 +58,8 @@ public class OrderController {
       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate start,
       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate end) {
 
-    List<Order> orders = orderRepository.findAllByOrder_dateBetween(start, end);
+      List<Order> orders = new ArrayList<>();
+      //= orderRepository.findAllByOrder_dateBetween(start, end);
     return ResponseEntity.ok(orders);
   }
 
