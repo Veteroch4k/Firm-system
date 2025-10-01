@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0
+      author: Veteroch4k
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  name: id
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(255)
+            tableName: factory

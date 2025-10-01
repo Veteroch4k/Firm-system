@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - include:
+      file: v1/create-factory-table.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: v1/create-operation-table.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: v1.1/addColumn-operation-table.yaml
+      relativeToChangelogFile: true

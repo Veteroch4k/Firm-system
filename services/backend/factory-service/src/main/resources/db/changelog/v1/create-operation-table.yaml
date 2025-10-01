@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Veteroch4k
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                  name: id
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: factory_id
+                  type: INT
+            tableName: operation
+
+        - addForeignKeyConstraint:
+            baseTableName: operation
+            baseColumnNames: factory_id
+            referencedTableName: factory
+            referencedColumnNames: id
+            constraintName: fk_operation_factory

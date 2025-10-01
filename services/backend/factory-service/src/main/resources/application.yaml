@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: Factory-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/firm_prod_db?currentSchema=factory_service
+    username: root
+    password: root
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+
+  liquibase:
+    change-log: classpath:/db/changelog/db.migrations-master.yaml
+    enabled: true
+
+server:
+  port: 8083

@@ -5,6 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +18,7 @@ import org.springframework.data.mapping.IdentifierAccessor;
 @NoArgsConstructor
 @Entity
 @Data
-@Table(name = "operations")
+@Table(name = "operation")
 public class Operation {
 
   @Id
@@ -26,7 +29,9 @@ public class Operation {
 
   private int duration;
 
-  private int factory_id;
+  @ManyToOne
+  @JoinColumn(name = "factory_id")
+  private Factory factory;
 
 
 }

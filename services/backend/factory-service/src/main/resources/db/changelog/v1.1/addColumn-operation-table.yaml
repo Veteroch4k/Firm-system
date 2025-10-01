@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: Veteroch4k
+      changes:
+        - addColumn:
+            tableName: operation
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: duration
+                  type: INT
+                  # в следующий раз afterColumn не забудь !
