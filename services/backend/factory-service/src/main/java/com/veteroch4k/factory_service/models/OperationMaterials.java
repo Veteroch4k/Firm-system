@@ -1,18 +1,14 @@
 package com.veteroch4k.factory_service.models;
 
-
-import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,19 +17,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "factory")
-public class Factory {
+@Table(name = "operation_materials")
+public class OperationMaterials {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
-  private String name;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "operation_id")
+  private Operation operation;
 
-  @OneToMany(mappedBy = "factory")
-  private List<Operation> operations;
+  @Column(name = "material_id", nullable = false)
+  private int materialId;
 
-  @OneToMany(mappedBy = "factory", cascade = CascadeType.ALL)
-  private List<FactoryMaterials> materials = new ArrayList<>();
+  private int quantity;
 
 }

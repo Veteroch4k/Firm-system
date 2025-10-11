@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-operation_materials-table
+      author: Veteroch4k
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                  name: id
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: operation_id
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: material_id
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: quantity
+                  type: INT
+            tableName: operation_materials
+
+        - addForeignKeyConstraint:
+            baseTableName: operation_materials
+            baseColumnNames: operation_id
+            referencedTableName: operation
+            referencedColumnNames: id
+            constraintName: fk_operation_materials_operation
+
+        - addUniqueConstraint:
+            tableName: operation_materials
+            columnNames: operation_id, material_id
+            constraintName: uk_operation_material_unique

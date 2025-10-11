@@ -30,7 +30,7 @@ public class FactoryMaterials {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "factory_id")
-  private Factory factoryId;
+  private Factory factory;
 
   @Column(name = "material_id", nullable = false)
   private int materialId;

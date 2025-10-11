@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      author: Veteroch4k
+      id: add-factory_materials-fk-to-factory
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: factory_materials
+            baseColumnNames: factory_id
+            referencedTableName: factory
+            referencedColumnNames: id
+            constraintName: fk_factory_materials_factory
+            onDelete: CASCADE

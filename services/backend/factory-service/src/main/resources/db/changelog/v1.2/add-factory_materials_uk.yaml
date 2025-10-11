@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-factory_materials_uk.yaml
+      author: Veteroch4k
+      changes:
+        - addUniqueConstraint:
+            tableName: factory_materials
+            columnNames: factory_id, material_id
+            constraintName: uk_factory_material_unique
