@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: rename-materials_accounting-to-material_accounting
+      author: Veteroch4k
+      changes:
+        - renameTable:
+            oldTableName: materials_accounting
+            newTableName: material_accounting

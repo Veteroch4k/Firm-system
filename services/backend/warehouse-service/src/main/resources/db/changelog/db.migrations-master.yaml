@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - include:
+      file: v1/create-material-table.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: v1/create-material_accounting-table.yaml
+      relativeToChangelogFile: true
+
+# Version 1.1
+  - include:
+      file: v1.1/renameTable-materials_accounting.yaml
+      relativeToChangelogFile: true
