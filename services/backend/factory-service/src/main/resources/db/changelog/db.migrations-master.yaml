@@ -10,3 +10,7 @@ databaseChangeLog:
   - include:
       file: v1.1/addColumn-operation-table.yaml
       relativeToChangelogFile: true
+
+  - include:
+      file: v1.1/create-factory_materials-table.yaml
+      relativeToChangelogFile: true

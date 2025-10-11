@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      author: Veteroch4k
+      id: create-factory_materials-table
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                  name: id
+                  type: INT
+
+              - column:
+                  constraints:
+                    nullable: false
+                  name: factory_id
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: material_id
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: quantity
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: createdAt
+                  type: DATE
+            tableName: factory_materials
