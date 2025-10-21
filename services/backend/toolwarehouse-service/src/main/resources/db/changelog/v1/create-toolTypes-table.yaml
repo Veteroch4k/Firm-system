@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-toolTypes-table
+      author: Veteroch4k
+      changes:
+        - createTable:
+            tableName: toolType
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+
+              - column:
+                  name: name
+                  type: VARCHAR(25)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: description
+                  type: TEXT
+

@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-factory_tools-table
+      author: Veteroch4k
+      changes:
+        - createTable:
+            tableName: factory_tools
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                  name: id
+                  type: INT
+
+              - column:
+                  constraints:
+                    nullable: false
+                  name: factory_id
+                  type: INT
+
+              - column:
+                  constraints:
+                    nullable: false
+                  name: toolType_id
+                  type: INT
+              - column:
+                  name: quantity
+                  type: INT
+                  constraints:
+                    nullable: false
+                    checkConstraint: "quantity >= 0"
+
+        - addForeignKeyConstraint:
+            baseTableName: factory_tools
+            baseColumnNames: toolType_id
+            referencedTableName: toolTypes
+            referencedColumnNames: id
+            constraintName: fk_factory_tools_toolTypes
+
+

@@ -1,15 +1,18 @@
 package com.veteroch4k.toolwarehouse.models;
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.web.service.annotation.GetExchange;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,7 +25,12 @@ public class FactoryTools {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
-  private int toolTyper_id;
+  @Column(nullable = false)
+  private int factory_id;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "toolType_id")
+  private ToolType toolType;
 
   private int quantity;
 

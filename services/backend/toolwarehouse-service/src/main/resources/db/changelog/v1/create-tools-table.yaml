@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-tools-table
+      author: Veteroch4l
+      changes:
+        - createTable:
+            tableName: tools
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+
+              - column:
+                  name: toolType_id
+                  type: INT
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: tools
+            baseColumnNames: toolType_id
+            referencedTableName: toolTypes
+            referencedColumnNames: id
+            constraintName: fk_tools_toolTypes
+

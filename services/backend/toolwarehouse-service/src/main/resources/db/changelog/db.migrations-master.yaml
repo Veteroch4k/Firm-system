@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - include:
+      relativeToChangelogFile: true
+      file: v1/create-toolTypes-table.yaml
+
+
+  - include:
+      relativeToChangelogFile: true
+      file: v1/rename-toolType-to-toolTypes.yaml
+
+  - include:
+      relativeToChangelogFile: true
+      file: v1/create-factory_tools-table.yaml
+
+
+  - include:
+      relativeToChangelogFile: true
+      file: v1/create-tools-table.yaml
+
+
+  - include:
+      relativeToChangelogFile: true
+      file: v1/create-free_tools-table.yaml
+
+
+  - include:
+      relativeToChangelogFile: true
+      file: v1/create-tool_accounting-table.yaml

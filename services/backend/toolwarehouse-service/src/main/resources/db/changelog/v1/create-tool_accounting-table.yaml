@@ -1,0 +1,39 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-tools_accounting-table
+      author: Veteroch4k
+      changes:
+        - createTable:
+            tableName: tools_accounting
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+
+              - column:
+                  name: toolType_id
+                  type: INT
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: factory_id
+                  type: INT
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: order_id
+                  type: INT
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: tools_accounting
+            baseColumnNames: toolType_id
+            referencedTableName: toolTypes
+            referencedColumnNames: id
+            constraintName: fk_tools_accounting_toolTypes

@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-free_tools-table
+      author: Veteroch4k
+      changes:
+        - createTable:
+            tableName: free_tools
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+
+              - column:
+                  name: tool_id
+                  type: INT
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: receive_date
+                  type: DATE
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: free_tools
+            baseColumnNames: tool_id
+            referencedTableName: tools
+            referencedColumnNames: id
+            constraintName: fk_free_tools_tools
