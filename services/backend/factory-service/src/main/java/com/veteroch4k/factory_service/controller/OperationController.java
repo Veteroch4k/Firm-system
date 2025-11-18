@@ -38,7 +38,7 @@ public class OperationController {
   }
 
   @GetMapping("/operation/{id}")
-  public ResponseEntity<Operation> operationById(@PathVariable long id) {
+  public ResponseEntity<Operation> operationById(@PathVariable int id) {
 
     return operationRepository.findById(id)
         .map(ResponseEntity::ok)
@@ -55,7 +55,7 @@ public class OperationController {
 
   @PutMapping("/{id}")
   public ResponseEntity<Operation> updateOpearation(
-      @PathVariable long id,
+      @PathVariable int id,
       @RequestBody Operation operation)
   {
     if(!operationRepository.existsById(id)) return ResponseEntity.notFound().build();
@@ -71,7 +71,7 @@ public class OperationController {
 
   @DeleteMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteOperation(@PathVariable long id) {
+  public void deleteOperation(@PathVariable int id) {
     operationRepository.deleteById(id);
   }
 
