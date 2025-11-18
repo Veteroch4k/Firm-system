@@ -2,8 +2,12 @@ spring:
   application:
     name: warehouse-service
 
+  sql:
+    init:
+      mode: never
+
   datasource:
-    url: jdbc:postgresql://localhost:5432/firm_prod_db?currentSchema=warehouse_service
+    url: jdbc:postgresql://localhost:5433/firm_prod_db?currentSchema=warehouse_service
     driver-class-name: org.postgresql.Driver
     username: root
     password: root

@@ -40,7 +40,7 @@ public class MaterialController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Material> getMaterial(@PathVariable long id) {
+  public ResponseEntity<Material> getMaterial(@PathVariable int id) {
 
     return materialRepository.findById(id)
         .map(ResponseEntity::ok)
@@ -56,7 +56,7 @@ public class MaterialController {
 
   @PutMapping("/{id}")
   public ResponseEntity<Material> updateMaterial(
-      @PathVariable long id,
+      @PathVariable int id,
       @RequestBody Material material)
   {
     if(!materialRepository.existsById(id)) return ResponseEntity.notFound().build();
@@ -68,9 +68,9 @@ public class MaterialController {
     return ResponseEntity.ok(updated);
   }
 
-  @DeleteMapping("/id")
+  @DeleteMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteMaterial(@PathVariable long id) {
+  public void deleteMaterial(@PathVariable int id) {
     materialRepository.deleteById(id);
   }
 
