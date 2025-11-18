@@ -10,14 +10,18 @@ public class EmployerSevice {
 
   private EmployerRepository repository;
 
+  public EmployerSevice(EmployerRepository repository) {
+    this.repository = repository;
+  }
+
   public Optional<Employer> getRandomEmployer() {
+    long count = repository.count();
+    if (count == 0) {
+      return Optional.empty();
+    }
 
-    long count =  repository.count();
-
-    long idx = (int)(Math.random() * count);
-
-    return repository.findById(idx); // Обработка отсутствия сущности
-
+    long idx = (long)(Math.random() * count);
+    return repository.findById(idx);
   }
 
 }
