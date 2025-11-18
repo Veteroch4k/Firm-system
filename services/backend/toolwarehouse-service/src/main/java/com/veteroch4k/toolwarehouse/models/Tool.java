@@ -10,7 +10,9 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,10 +23,11 @@ public class Tool {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+  private int id;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "toolType_id")
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "tooltype_id")
   private ToolType toolType;
+
 
 }

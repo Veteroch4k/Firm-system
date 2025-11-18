@@ -26,3 +26,28 @@ databaseChangeLog:
   - include:
       relativeToChangelogFile: true
       file: v1/create-tool_accounting-table.yaml
+
+
+# V1.1
+
+  - include:
+      relativeToChangelogFile: true
+      file: v1.1/renameTable-toolType-to-tool_types.yaml
+
+  - include:
+      relativeToChangelogFile: true
+      file: v1.1/add-tool_type-uk.yaml
+
+  - include:
+      relativeToChangelogFile: true
+      file: v1.1/renameTableColumn-factory_tools-toolType_id-to-tooltype_id.yaml
+
+# V1.2
+
+  - include:
+      relativeToChangelogFile: true
+      file: v1.2/renameTableColumn-tools-toolType_id-to-tooltype_id.yaml
+
+  - include:
+      relativeToChangelogFile: true
+      file: v1.2/renameTableColumn-tools_accounting-toolType_id-to-tooltype_id.yaml

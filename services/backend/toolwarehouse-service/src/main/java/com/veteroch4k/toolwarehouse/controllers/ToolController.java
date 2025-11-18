@@ -1,9 +1,9 @@
 package com.veteroch4k.toolwarehouse.controllers;
 
 import com.veteroch4k.toolwarehouse.models.Tool;
-import com.veteroch4k.toolwarehouse.models.ToolType;
 import com.veteroch4k.toolwarehouse.repositories.ToolRepository;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -69,13 +69,19 @@ public class ToolController {
       @RequestBody Tool tool)
   {
 
-    if(!toolRepository.existsById(id)) return ResponseEntity.notFound().build();
+    Optional<Tool> optionalTool = toolRepository.findById(id);
 
-    tool.setId(id);
+    if (optionalTool.isEmpty()) {
+      return ResponseEntity.notFound().build();
+    }
 
-    Tool updated = toolRepository.save(tool);
+    Tool updatedTool = optionalTool.get();
 
-    return ResponseEntity.ok(updated);
+    // Явно копируем только нужные поля
+    updatedTool.setToolType(tool.getToolType());
+
+
+    return ResponseEntity.ok(toolRepository.save(updatedTool));
 
   }
 

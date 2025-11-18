@@ -9,6 +9,10 @@ spring:
     password: root
     driver-class-name: org.postgresql.Driver
 
+  sql:
+    init:
+      mode: never
+
   jpa:
     hibernate:
       ddl-auto: validate

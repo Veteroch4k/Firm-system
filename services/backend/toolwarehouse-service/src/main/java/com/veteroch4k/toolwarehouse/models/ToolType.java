@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "\"toolTypes\"")
+@Table(name = "tool_types")
 public class ToolType {
 
   @Id

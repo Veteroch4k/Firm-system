@@ -27,7 +27,7 @@ public class ToolAccounting {
   //private ArrayList<Long> tools_id = new ArrayList<>();
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "toolType_id")
+  @JoinColumn(name = "tooltype_id")
   private ToolType toolType;
 
   @Column(nullable = false)

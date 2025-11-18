@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: renameTableColumn-tools_accounting-toolType_id-to-tooltype_id.yaml
+      author: Veteroch4k
+      changes:
+        - renameColumn:
+            oldColumnName: toolType_id
+            newColumnName: tooltype_id
+            tableName: tools_accounting

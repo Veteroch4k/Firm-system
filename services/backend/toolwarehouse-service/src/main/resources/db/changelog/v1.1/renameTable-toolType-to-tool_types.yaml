@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: renameTable-toolType-to-tool_types
+      author: Veteroch4k
+      changes:
+        - renameTable:
+            oldTableName: toolTypes
+            newTableName: tool_types

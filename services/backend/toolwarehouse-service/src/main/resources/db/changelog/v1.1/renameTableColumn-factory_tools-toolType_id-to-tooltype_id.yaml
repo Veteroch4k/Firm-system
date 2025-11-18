@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: renameTableColumn-factory_tools-toolType_id-to-tooltype_id
+      author: Veteroch4k
+      changes:
+        - renameColumn:
+            oldColumnName: toolType_id
+            newColumnName: tooltype_id
+            tableName: factory_tools

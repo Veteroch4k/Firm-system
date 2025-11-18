@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-tool_type-uk
+      author: Veteroch4k
+      changes:
+        - addUniqueConstraint:
+            tableName: tool_types
+            columnNames: name
+            constraintName: uk_name_unique

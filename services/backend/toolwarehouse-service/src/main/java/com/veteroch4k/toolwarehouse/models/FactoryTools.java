@@ -29,7 +29,7 @@ public class FactoryTools {
   private int factory_id;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "toolType_id")
+  @JoinColumn(name = "tooltype_id")
   private ToolType toolType;
 
   private int quantity;
