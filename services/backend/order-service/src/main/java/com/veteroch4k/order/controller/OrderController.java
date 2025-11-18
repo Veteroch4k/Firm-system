@@ -69,7 +69,7 @@ public class OrderController {
   public ResponseEntity<List<Order>> getOrdersByDate(
       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date)
   {
-    return ResponseEntity.ok(orderRepository.findByOrder_date(date));
+    return ResponseEntity.ok(orderRepository.findByOrderDate(date));
   }
 
   @GetMapping("/between-dates")
@@ -77,7 +77,7 @@ public class OrderController {
       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate start,
       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate end) {
 
-      List<Order> orders = orderRepository.findByOrder_dateBetween(start, end);
+      List<Order> orders = orderRepository.findByOrderDateBetween(start, end);
     return ResponseEntity.ok(orders);
   }
 

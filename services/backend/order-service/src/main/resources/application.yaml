@@ -3,10 +3,14 @@ spring:
     name: Order-service
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/firm_prod_db?currentScheme=order_service
+    url: jdbc:postgresql://localhost:5433/firm_prod_db?currentScheme=order_service
     username: root
     password: root
     driver-class-name: org.postgresql.Driver
+
+  sql:
+    init:
+      mode: always
 
   liquibase:
     enabled: true

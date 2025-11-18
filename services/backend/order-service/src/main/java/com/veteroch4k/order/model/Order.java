@@ -1,5 +1,6 @@
 package com.veteroch4k.order.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,12 +22,16 @@ public class Order {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
-  private int product_id;
+  @Column(name = "product_id")
+  private int productId;
 
-  private int product_quantity;
+  @Column(name = "product_quantity")
+  private int productQuantity;
 
-  private LocalDate order_date;
+  @Column(name = "order_date")
+  private LocalDate orderDate;
 
-  private LocalDate finish_date;
+  @Column(name = "finish_date")
+  private LocalDate finishDate;
 
 }
