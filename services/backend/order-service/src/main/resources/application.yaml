@@ -1,32 +1,9 @@
 spring:
   application:
-    name: Order-service
+    name: order-service
 
-  datasource:
-    url: jdbc:postgresql://localhost:5433/firm_prod_db?currentScheme=order_service
-    username: root
-    password: root
-    driver-class-name: org.postgresql.Driver
+  profiles:
+    active: default
 
-  sql:
-    init:
-      mode: always
-
-  liquibase:
-    enabled: true
-    change-log: classpath:/db/changelog/db.migrations-master.yaml
-    default-schema: order_service
-
-  jpa:
-    hibernate:
-      ddl-auto: validate
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-
-
-server:
-  port: 8082
+  config:
+    import: optional:configserver:http://localhost:8071
