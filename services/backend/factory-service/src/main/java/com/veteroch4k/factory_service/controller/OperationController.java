@@ -1,9 +1,7 @@
 package com.veteroch4k.factory_service.controller;
 
-import com.veteroch4k.factory_service.models.Factory;
 import com.veteroch4k.factory_service.models.Operation;
 import com.veteroch4k.factory_service.repository.OperationRepository;
-import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
