@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: warehouse-service
+
+  sql:
+    init:
+      mode: never
+
+  datasource:
+    url: jdbc:postgresql://localhost:5433/firm_prod_db?currentSchema=warehouse_service
+    driver-class-name: org.postgresql.Driver
+    username: root
+    password: root
+
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.migrations-master.yaml
+
+  jpa:
+    show-sql: true
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: validate
+
+server:
+  port: 8084
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

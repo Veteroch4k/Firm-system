@@ -1,0 +1,38 @@
+spring:
+
+  datasource:
+    url: jdbc:postgresql://localhost:5433/firm_prod_db?currentSchema=toolwarehouse_service
+    username: root
+    password: root
+    driver-class-name: org.postgresql.Driver
+
+  sql:
+    init:
+      mode: never
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.migrations-master.yaml
+
+
+server:
+  port: 8085
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
+
+
+
+

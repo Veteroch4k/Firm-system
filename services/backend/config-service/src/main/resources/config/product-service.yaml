@@ -1,9 +1,8 @@
 spring:
-
   liquibase:
     enabled: true
-    change-log: classpath:/db.changelog/db.migrations-master.yaml
-    default-schema: employer_service
+    change-log: classpath:/db/changelog/db.migrations-master.yaml
+    default-schema: product_service
 
   sql:
     init:
@@ -25,13 +24,8 @@ spring:
     properties:
       hibernate:
         format_sql: true
-
-
-
-
 server:
-  port: 8080
-
+  port: 8081
 
 management:
   endpoints:
