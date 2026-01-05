@@ -4,6 +4,7 @@ import com.veteroch4k.employers.models.Employer;
 import com.veteroch4k.employers.repositories.EmployerRepository;
 import com.veteroch4k.employers.services.EmployerSevice;
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
@@ -46,5 +47,10 @@ public class EmployerController {
     return service.getRandomEmployer()
         .map(ResponseEntity::ok)
         .orElse(ResponseEntity.noContent().build());
+  }
+
+  @GetMapping("/test")
+  public ResponseEntity<String> test() throws TimeoutException {
+    return service.immitateSomeWork();
   }
 }

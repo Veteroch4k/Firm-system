@@ -7,3 +7,44 @@ spring:
     import: optional:configserver:http://localhost:8071
 
 
+
+resilience4j.circuitbreaker:
+  instances:
+    test:
+      registerHealthIndicator: true  # Для актуатора /health
+      slidingWindowType: COUNT_BASED  # Тип окна (COUNT_BASED или TIME_BASED)
+      slidingWindowSize: 10  # Размер окна для анализа ошибок
+      minimumNumberOfCalls: 5  # Мин. вызовов перед проверкой
+      failureRateThreshold: 5  # % ошибок для размыкания
+      waitDurationInOpenState: 10s  # Время в OPEN перед переходом в HALF-OPEN
+      permittedNumberOfCallsInHalfOpenState: 3  # Вызовов в HALF-OPEN
+      automaticTransitionFromOpenToHalfOpenEnabled: true  # Автопереход
+      recordExceptions:  # Какие исключения считать ошибками
+        - org.springframework.web.client.HttpServerErrorException
+        - java.io.IOException
+        - java.util.concurrent.TimeoutException
+        - org.springframework.web.client.ResourceAccessException
+      ignoreExceptions:  # Какие исключения игнорировать
+        - org.springframework.web.client.HttpClientErrorException
+
+resilience4j:
+  bulkhead:
+    instances:
+      bulkheadLicenseService:
+        max-wait-duration: 100ms
+        max-concurrent-calls: 20
+
+resilience4j.thread-pool-bulkhead:
+  instances:
+    bulkheadLicenseService:
+      maxThreadPoolSize: 10
+      coreThreadPoolSize: 5
+      queueCapacity: 20
+
+resilience4j.retry:
+  instances:
+    retryLicenseService:
+      max-attempts: 5
+      wait-duration: 100ms
+      retry-exceptions:
+        - java.util.concurrent.TimeoutException
