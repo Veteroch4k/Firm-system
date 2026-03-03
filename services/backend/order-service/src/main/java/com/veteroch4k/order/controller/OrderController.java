@@ -1,17 +1,14 @@
 package com.veteroch4k.order.controller;
 
-import com.veteroch4k.order.dto.DateRange;
 import com.veteroch4k.order.model.Order;
 import com.veteroch4k.order.model.OrderAccounting;
 import com.veteroch4k.order.repository.OrderAccountingRepository;
 import com.veteroch4k.order.repository.OrderRepository;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -86,6 +83,11 @@ public class OrderController {
     return orderRepository.findById(id)
         .map(ResponseEntity::ok)
         .orElse(ResponseEntity.notFound().build());
+  }
+
+  @GetMapping("/operation/{orderId}")
+  public Integer getProductId(@PathVariable Long orderId) {
+    return 1488;
   }
 
 
