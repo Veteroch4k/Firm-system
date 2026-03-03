@@ -1,17 +1,17 @@
 package com.veteroch4k.order.repository;
 
-import com.veteroch4k.order.model.Order;
+import com.veteroch4k.order.model.Orders;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface OrderRepository extends JpaRepository<Order, Long> {
+public interface OrderRepository extends JpaRepository<Orders, Long> {
 
-  List<Order> findByOrderDate(LocalDate date);
+  List<Orders> findByOrderDate(LocalDate date);
 
-  List<Order> findByOrderDateBetween(LocalDate start, LocalDate finish);
+  List<Orders> findByOrderDateBetween(LocalDate start, LocalDate finish);
 
-  Optional<Order> findById(Long id);
+  Optional<Orders> findById(Long id);
 
 }

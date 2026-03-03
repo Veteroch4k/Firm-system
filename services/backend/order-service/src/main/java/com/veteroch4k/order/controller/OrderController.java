@@ -1,6 +1,6 @@
 package com.veteroch4k.order.controller;
 
-import com.veteroch4k.order.model.Order;
+import com.veteroch4k.order.model.Orders;
 import com.veteroch4k.order.model.OrderAccounting;
 import com.veteroch4k.order.repository.OrderAccountingRepository;
 import com.veteroch4k.order.repository.OrderRepository;
@@ -34,7 +34,7 @@ public class OrderController {
   }
 
   @GetMapping("/all")
-  public Page<Order> orders(
+  public Page<Orders> orders(
       @RequestParam(defaultValue = "0") int page,
       @RequestParam(defaultValue = "20") int size)
   {
@@ -55,7 +55,7 @@ public class OrderController {
 
   @PostMapping("/create-order")
   @ResponseStatus(HttpStatus.CREATED)
-  public Order createOrder(@RequestBody Order order) {
+  public Orders createOrder(@RequestBody Orders order) {
 
     return orderRepository.save(order);
 
@@ -63,23 +63,23 @@ public class OrderController {
   }
 
   @GetMapping("/by-date")
-  public ResponseEntity<List<Order>> getOrdersByDate(
+  public ResponseEntity<List<Orders>> getOrdersByDate(
       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date)
   {
     return ResponseEntity.ok(orderRepository.findByOrderDate(date));
   }
 
   @GetMapping("/between-dates")
-  public ResponseEntity<List<Order>> getOrdersByDateRange(
+  public ResponseEntity<List<Orders>> getOrdersByDateRange(
       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate start,
       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate end) {
 
-      List<Order> orders = orderRepository.findByOrderDateBetween(start, end);
+      List<Orders> orders = orderRepository.findByOrderDateBetween(start, end);
     return ResponseEntity.ok(orders);
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Order> getOrderById(@PathVariable Long id) {
+  public ResponseEntity<Orders> getOrderById(@PathVariable Long id) {
     return orderRepository.findById(id)
         .map(ResponseEntity::ok)
         .orElse(ResponseEntity.notFound().build());
@@ -87,7 +87,9 @@ public class OrderController {
 
   @GetMapping("/operation/{orderId}")
   public Integer getProductId(@PathVariable Long orderId) {
-    return 1488;
+    return orderRepository.findById(orderId)
+        .map(Orders::getProductId)
+        .orElse(-1);
   }
 
 

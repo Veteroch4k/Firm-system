@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: Veteroch4k
+      changes:
+        - renameTable:
+            oldTableName: order
+            newTableName: orders
