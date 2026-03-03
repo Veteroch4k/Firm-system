@@ -2,8 +2,10 @@ package com.veteroch4k.factory_service.controller;
 
 import com.veteroch4k.factory_service.models.Factory;
 import com.veteroch4k.factory_service.repository.FactoryRepository;
+import com.veteroch4k.factory_service.services.MaterialsService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,9 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class FactoryController {
 
   private final FactoryRepository factoryRepository;
+  private final MaterialsService service;
 
-  public FactoryController(FactoryRepository factoryRepository) {
+  public FactoryController(FactoryRepository factoryRepository, MaterialsService service) {
     this.factoryRepository = factoryRepository;
+    this.service = service;
   }
 
   @GetMapping
@@ -36,5 +40,10 @@ public class FactoryController {
         .findById(id)
         .map(ResponseEntity::ok)
         .orElse(ResponseEntity.notFound().build());
+  }
+
+  @GetMapping("/test")
+  public ResponseEntity<String> testFeign() {
+    return ResponseEntity.ok("Ответ ожидается 1488: " + service.getOrderMaterials(10L));
   }
 }
