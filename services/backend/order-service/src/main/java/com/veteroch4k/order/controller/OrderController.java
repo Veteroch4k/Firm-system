@@ -1,11 +1,13 @@
 package com.veteroch4k.order.controller;
 
-import com.veteroch4k.order.model.Orders;
+import com.veteroch4k.order.model.Order;
 import com.veteroch4k.order.model.OrderAccounting;
 import com.veteroch4k.order.repository.OrderAccountingRepository;
 import com.veteroch4k.order.repository.OrderRepository;
+import com.veteroch4k.order.service.OrderService;
 import java.time.LocalDate;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -22,19 +24,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/order")
+@RequiredArgsConstructor
 public class OrderController {
 
   private final OrderRepository orderRepository;
   private final OrderAccountingRepository accountingRepository;
+  private final OrderService service;
 
-  public OrderController(OrderRepository orderRepository,
-      OrderAccountingRepository accountingRepository) {
-    this.orderRepository = orderRepository;
-    this.accountingRepository = accountingRepository;
-  }
+
 
   @GetMapping("/all")
-  public Page<Orders> orders(
+  public Page<Order> orders(
       @RequestParam(defaultValue = "0") int page,
       @RequestParam(defaultValue = "20") int size)
   {
@@ -55,31 +55,35 @@ public class OrderController {
 
   @PostMapping("/create-order")
   @ResponseStatus(HttpStatus.CREATED)
-  public Orders createOrder(@RequestBody Orders order) {
+  public Order createOrder(@RequestBody Order order) {
 
-    return orderRepository.save(order);
+    service.createOrder();
+
+    //return orderRepository.save(order);
+
+    return new Order();
 
 
   }
 
   @GetMapping("/by-date")
-  public ResponseEntity<List<Orders>> getOrdersByDate(
+  public ResponseEntity<List<Order>> getOrdersByDate(
       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date)
   {
     return ResponseEntity.ok(orderRepository.findByOrderDate(date));
   }
 
   @GetMapping("/between-dates")
-  public ResponseEntity<List<Orders>> getOrdersByDateRange(
+  public ResponseEntity<List<Order>> getOrdersByDateRange(
       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate start,
       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate end) {
 
-      List<Orders> orders = orderRepository.findByOrderDateBetween(start, end);
+      List<Order> orders = orderRepository.findByOrderDateBetween(start, end);
     return ResponseEntity.ok(orders);
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Orders> getOrderById(@PathVariable Long id) {
+  public ResponseEntity<Order> getOrderById(@PathVariable Long id) {
     return orderRepository.findById(id)
         .map(ResponseEntity::ok)
         .orElse(ResponseEntity.notFound().build());
@@ -88,7 +92,7 @@ public class OrderController {
   @GetMapping("/operation/{orderId}")
   public Integer getProductId(@PathVariable Long orderId) {
     return orderRepository.findById(orderId)
-        .map(Orders::getProductId)
+        .map(Order::getProductId)
         .orElse(-1);
   }
 
