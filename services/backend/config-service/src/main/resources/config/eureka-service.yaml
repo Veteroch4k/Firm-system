@@ -11,7 +11,6 @@ eureka:
   server:
     wait-time-in-ms-when-sync-empty: 5
 
-
 server:
   port: 8070
 
@@ -20,3 +19,4 @@ management:
     web:
       exposure:
         include: "*"
+    enabled-by-default: true

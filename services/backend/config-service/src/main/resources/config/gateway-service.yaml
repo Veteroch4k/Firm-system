@@ -1,0 +1,39 @@
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: true
+              lower-case-service-id: true
+          default-filters:
+            - Retry=3
+          routes:
+            - id: employers-service
+              uri: lb://employers-service
+
+              predicates:
+                - Path=/employers/**
+
+              filters:
+                - RewritePath=/employers/(?<path>.*), /$\{path}
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8070/eureka/
+
+server:
+  port: 8072
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    enabled-by-default: true

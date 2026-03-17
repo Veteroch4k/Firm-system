@@ -23,6 +23,17 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       ddl-auto: validate
 
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8070/eureka/
+
+
+
 server:
   port: 8084
 
@@ -31,3 +42,4 @@ management:
     web:
       exposure:
         include: "*"
+    enabled-by-default: true
