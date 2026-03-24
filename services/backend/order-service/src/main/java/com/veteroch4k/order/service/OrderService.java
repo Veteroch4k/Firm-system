@@ -1,26 +1,24 @@
 package com.veteroch4k.order.service;
 
 import com.veteroch4k.order.model.OrderCreatedEvent;
+import java.util.Random;
 import lombok.RequiredArgsConstructor;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class OrderService {
 
-  private final KafkaTemplate<String, String> kafkaTemplate;
-
-  // Название топика
-  private static final String TOPIC = "order-events";
+  private final KafkaProducerService kafkaProducerService;
 
   public void createOrder() {
 
     // пока как заглушка для теста кафки
+    Random r = new Random();
 
-    OrderCreatedEvent event = new OrderCreatedEvent(1488L, 1488L, 10);
+    OrderCreatedEvent event = new OrderCreatedEvent(r.nextLong(), r.nextLong(), r.nextInt());
 
-    kafkaTemplate.send(TOPIC, String.valueOf(event.orderId()), "Хуй");
+    kafkaProducerService.sendOrderCreatedEvent(event);
 
 
   }
