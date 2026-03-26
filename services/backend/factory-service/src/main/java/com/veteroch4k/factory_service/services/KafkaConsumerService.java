@@ -19,7 +19,7 @@ public class KafkaConsumerService {
 
     FactoryOrder factoryOrder = new FactoryOrder(
         event.orderId(),
-        event.operationId(),
+        event.productId(),
         event.productQuantity()
     );
 

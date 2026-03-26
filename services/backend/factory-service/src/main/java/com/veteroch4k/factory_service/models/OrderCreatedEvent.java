@@ -1,7 +1,8 @@
 package com.veteroch4k.factory_service.models;
 
+
 public record OrderCreatedEvent(
     Long orderId,
-    Long operationId,
+    Long productId,
     Integer productQuantity
 ) {}

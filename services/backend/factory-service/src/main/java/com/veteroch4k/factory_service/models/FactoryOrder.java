@@ -15,7 +15,7 @@ public class FactoryOrder {
   @Id
   private Long orderId;
 
-  private Long operationId;
+  private Long productId;
 
   private Integer productQuantity;
 
