@@ -2,6 +2,7 @@ package com.veteroch4k.factory_service.services;
 
 import com.veteroch4k.factory_service.models.FactoryOrder;
 import com.veteroch4k.factory_service.models.OrderCreatedEvent;
+import com.veteroch4k.factory_service.models.ProductDto;
 import com.veteroch4k.factory_service.repository.FactoryOrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -29,9 +30,9 @@ public class KafkaConsumerService {
     System.out.println("Заказ " + event.orderId() + " успешно сохранен в Redis и готов к работе на фабрике!");
 
     // Берем продукт, пока заглушка
-    Long product = productRepository.getStubTest();
+    ProductDto product = productRepository.getProductById(1L);
 
-    System.out.println("Получен заказ на производство продукта! ID чертежа: " );
+    System.out.println("Получен заказ на производство продукта!: "+ product.description());
 
     // Здесь будет вызов складов для материалов
   }
