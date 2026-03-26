@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: 4
+      author: Veteroch4k
+      changes:
+        - addColumn:
+            tableName: product
+            columns:
+              - column:
+                  name: drawing_id
+                  type: INT
+                  constraints:
+                    nullable: true
+

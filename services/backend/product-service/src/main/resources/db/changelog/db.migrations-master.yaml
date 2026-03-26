@@ -10,3 +10,7 @@ databaseChangeLog:
   - include:
       file: v2/renameColumn-drawing-table.yaml
       relativeToChangelogFile: true
+
+  - include:
+      file: v2/addColumn-product-table.yaml
+      relativeToChangelogFile: true
