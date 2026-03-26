@@ -2,6 +2,6 @@ package com.veteroch4k.order.model;
 
 public record OrderCreatedEvent(
     Long orderId,
-    Long operationId,
+    Long productId,
     Integer productQuantity
 ) {}
