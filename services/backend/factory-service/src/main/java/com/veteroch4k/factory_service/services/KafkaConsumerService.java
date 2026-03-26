@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 public class KafkaConsumerService {
 
   private final FactoryOrderRepository redisRepository;
+  private final ProductServiceClient productRepository;
 
   @KafkaListener(topics = "order-events", groupId = "factory-group")
   public void listenOrderEvents(OrderCreatedEvent event) {
@@ -27,6 +28,12 @@ public class KafkaConsumerService {
 
     System.out.println("Заказ " + event.orderId() + " успешно сохранен в Redis и готов к работе на фабрике!");
 
+    // Берем продукт, пока заглушка
+    Long product = productRepository.getStubTest();
+
+    System.out.println("Получен заказ на производство продукта! ID чертежа: " );
+
+    // Здесь будет вызов складов для материалов
   }
 
 }
