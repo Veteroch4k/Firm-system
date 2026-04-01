@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-operation_tools-table
+      author: Veteroch4k
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  name: operation_id
+                  type: INT
+              - column:
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  name: toolType_id
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: true
+                    checkConstraint: "quantity >= 0"
+                  name: quantity
+                  type: INT
+            tableName: operation_tools
+
+        - addForeignKeyConstraint:
+            baseTableName: operation_tools
+            baseColumnNames: operation_id
+            constraintName: fk_operation_tools_operation
+            referencedTableName: operation
+            referencedColumnNames: id
+            onDelete: CASCADE

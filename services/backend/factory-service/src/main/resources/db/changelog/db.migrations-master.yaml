@@ -30,3 +30,9 @@ databaseChangeLog:
   - include:
       file: v1.2/add-factory_materials_uk.yaml
       relativeToChangelogFile: true
+
+# Версия 2
+
+  - include:
+      file: v2/create-operation_tools-table.yaml
+      relativeToChangelogFile: true

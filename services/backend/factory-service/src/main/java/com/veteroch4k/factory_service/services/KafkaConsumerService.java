@@ -1,6 +1,7 @@
 package com.veteroch4k.factory_service.services;
 
 import com.veteroch4k.factory_service.models.FactoryOrder;
+import com.veteroch4k.factory_service.models.OperationMaterials;
 import com.veteroch4k.factory_service.models.OrderCreatedEvent;
 import com.veteroch4k.factory_service.models.ProductDto;
 import com.veteroch4k.factory_service.repository.FactoryOrderRepository;
@@ -35,6 +36,9 @@ public class KafkaConsumerService {
     System.out.println("Получен заказ на производство продукта!: "+ product.description());
 
     // Здесь будет вызов складов для материалов
+
+
+
   }
 
 }
