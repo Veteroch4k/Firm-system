@@ -32,7 +32,7 @@ public class DrawingController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Drawing> getDrawing(@PathVariable long id) {
+  public ResponseEntity<Drawing> getDrawing(@PathVariable int id) {
 
     return drawingRepository
         .findById(id)

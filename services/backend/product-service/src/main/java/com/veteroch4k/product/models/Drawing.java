@@ -7,11 +7,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Data
 @Table(name = "drawing")
 public class Drawing {
 
@@ -23,7 +25,7 @@ public class Drawing {
   private int operationId;
   // Операции
 
-  @Column(name = "fabric_id")
+  @Column(name = "factory_id")
   private int factoryId;
   // Цех
 
