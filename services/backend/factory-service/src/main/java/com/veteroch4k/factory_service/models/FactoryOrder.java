@@ -13,10 +13,10 @@ import org.springframework.data.redis.core.RedisHash;
 public class FactoryOrder {
 
   @Id
-  private Long orderId;
+  private int orderId;
 
-  private Long productId;
+  private int productId;
 
-  private Integer productQuantity;
+  private int productQuantity;
 
 }

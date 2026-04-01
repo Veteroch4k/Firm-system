@@ -4,7 +4,10 @@ import com.veteroch4k.factory_service.models.FactoryOrder;
 import com.veteroch4k.factory_service.models.OperationMaterials;
 import com.veteroch4k.factory_service.models.OrderCreatedEvent;
 import com.veteroch4k.factory_service.models.ProductDto;
+import com.veteroch4k.factory_service.models.ProductManufacturingInfo;
 import com.veteroch4k.factory_service.repository.FactoryOrderRepository;
+import com.veteroch4k.factory_service.repository.OpMaterialsRepository;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
@@ -14,7 +17,8 @@ import org.springframework.stereotype.Service;
 public class KafkaConsumerService {
 
   private final FactoryOrderRepository redisRepository;
-  private final ProductServiceClient productRepository;
+  private final ProductServiceClient productServiceClient;
+  private final OpMaterialsRepository opMaterialsRepository;
 
   @KafkaListener(topics = "order-events", groupId = "factory-group")
   public void listenOrderEvents(OrderCreatedEvent event) {
@@ -30,12 +34,12 @@ public class KafkaConsumerService {
 
     System.out.println("Заказ " + event.orderId() + " успешно сохранен в Redis и готов к работе на фабрике!");
 
-    // Берем продукт, пока заглушка
-    ProductDto product = productRepository.getProductById(1L);
+    ProductManufacturingInfo product = productServiceClient.getManufacturingInfo(event.productId());
 
     System.out.println("Получен заказ на производство продукта!: "+ product.description());
 
     // Здесь будет вызов складов для материалов
+    List<OperationMaterials> opMaterials = opMaterialsRepository.getOperationMaterialsByOperation(product.)
 
 
 
