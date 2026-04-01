@@ -1,5 +1,6 @@
 package com.veteroch4k.product.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,11 +19,12 @@ public class Drawing {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
-
-  private int op_id;
+  @Column(name = "op_id")
+  private int operationId;
   // Операции
 
-  private int factory_id;
+  @Column(name = "fabric_id")
+  private int factoryId;
   // Цех
 
 }

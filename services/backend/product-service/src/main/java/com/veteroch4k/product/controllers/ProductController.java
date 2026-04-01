@@ -1,6 +1,7 @@
 package com.veteroch4k.product.controllers;
 
 import com.veteroch4k.product.models.Product;
+import com.veteroch4k.product.models.ProductManufacturingInfo;
 import com.veteroch4k.product.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -31,6 +32,13 @@ public class ProductController {
     return productRepository
         .findById(id).orElse(new Product());
 
+  }
+
+  @GetMapping("/{id}/manufacturing-info")
+  public ProductManufacturingInfo getManufacturingInfo(@PathVariable int id) {
+
+
+    re
   }
 
 
