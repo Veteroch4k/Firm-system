@@ -25,8 +25,8 @@ public class FactoryTools {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
-  @Column(nullable = false)
-  private int factory_id;
+  @Column(name = "factory_id",nullable = false)
+  private int factoryId;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "tooltype_id")

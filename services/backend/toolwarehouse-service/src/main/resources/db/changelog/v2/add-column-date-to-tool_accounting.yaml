@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-column-date-to-tool_accounting
+      author: Veteroch4k
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  type: DATE
+                  name: date
+            tableName: tools_accounting

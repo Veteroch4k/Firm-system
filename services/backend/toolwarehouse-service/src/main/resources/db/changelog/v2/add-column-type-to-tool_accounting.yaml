@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-column-type-to-tool_accounting
+      author: Veteroch4k
+      changes:
+        - sql:
+            sql: "CREATE TYPE act_status AS ENUM('INCOME', 'OUTCOME', 'TRANSFER')"
+            dbms: postgresql
+        - addColumn:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  type: act_status
+                  name: type
+            tableName: tools_accounting

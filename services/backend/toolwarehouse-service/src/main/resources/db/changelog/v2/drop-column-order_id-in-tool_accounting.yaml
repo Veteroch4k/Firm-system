@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: drop-column-order_id-in-tool_accounting
+      author: Veteroch4k
+      changes:
+        - dropColumn:
+            columns:
+              - column:
+                  name: order_id
+                  type: INT
+            tableName: tools_accounting

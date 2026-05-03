@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-column-type-to-tool_accounting
+      author: Veteroch4k
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  type: INT
+                  name: employee_id
+            tableName: tools_accounting

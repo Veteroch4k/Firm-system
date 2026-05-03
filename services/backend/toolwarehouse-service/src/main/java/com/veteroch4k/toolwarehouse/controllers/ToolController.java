@@ -39,7 +39,7 @@ public class ToolController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Tool> getToolById(@PathVariable long id) {
+  public ResponseEntity<Tool> getToolById(@PathVariable int id) {
 
     return toolRepository.findById(id)
         .map(ResponseEntity::ok)
@@ -65,7 +65,7 @@ public class ToolController {
 
   @PutMapping("/{id}")
   public ResponseEntity<Tool> updateTool(
-      @PathVariable long id,
+      @PathVariable int id,
       @RequestBody Tool tool)
   {
 
@@ -86,7 +86,7 @@ public class ToolController {
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<Void> deleteTool(@PathVariable long id) {
+  public ResponseEntity<Void> deleteTool(@PathVariable int id) {
     if (toolRepository.existsById(id)) {
       toolRepository.deleteById(id);
       return ResponseEntity.noContent().build(); // 204

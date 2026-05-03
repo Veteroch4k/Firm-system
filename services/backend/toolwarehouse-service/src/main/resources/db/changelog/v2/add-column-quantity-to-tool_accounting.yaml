@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-column-quantity-to-tool_accounting
+      author: Veteroch4k
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    checkConstraint: "quantity >= 0"
+                  type: INT
+                  name: quantity
+            tableName: tools_accounting

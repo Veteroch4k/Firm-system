@@ -51,3 +51,28 @@ databaseChangeLog:
   - include:
       relativeToChangelogFile: true
       file: v1.2/renameTableColumn-tools_accounting-toolType_id-to-tooltype_id.yaml
+
+# V2
+
+  - include:
+      relativeToChangelogFile: true
+      file: v2/add-column-date-to-tool_accounting.yaml
+
+
+  - include:
+      relativeToChangelogFile: true
+      file: v2/add-column-employee_id-to-tool_accounting.yaml
+
+  - include:
+      relativeToChangelogFile: true
+      file: v2/add-column-quantity-to-tool_accounting.yaml
+
+
+  - include:
+      relativeToChangelogFile: true
+      file: v2/add-column-type-to-tool_accounting.yaml
+
+
+  - include:
+      relativeToChangelogFile: true
+      file: v2/drop-column-order_id-in-tool_accounting.yaml
