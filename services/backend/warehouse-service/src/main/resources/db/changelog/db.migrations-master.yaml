@@ -15,3 +15,7 @@ databaseChangeLog:
   - include:
       file: v1.1/create-factory_materials-table.yaml
       relativeToChangelogFile: true
+
+  - include:
+      file: v1.1/rename_column-createdAt-factory_materials-table.yaml
+      relativeToChangelogFile: true

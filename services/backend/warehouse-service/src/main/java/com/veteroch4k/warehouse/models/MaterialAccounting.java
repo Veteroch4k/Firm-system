@@ -16,6 +16,8 @@ import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import org.springframework.util.Assert;
 
 @AllArgsConstructor
@@ -36,6 +38,7 @@ public class MaterialAccounting {
   private int quantity;
 
   @Enumerated(EnumType.STRING)
+  @JdbcTypeCode(SqlTypes.NAMED_ENUM)
   private MovementType type;
 
   @Column(name = "factory_id", nullable = false)
@@ -50,8 +53,4 @@ public class MaterialAccounting {
 
 }
 
-enum MovementType {
-  INCOME,    // Приход на склад
-  OUTCOME,   // Расход со склада
-  TRANSFER   // Перемещение между складами
-}
+

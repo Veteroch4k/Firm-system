@@ -25,15 +25,16 @@ public class FactoryMaterials {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
+  @Column(name = "factory_id")
+  private int factoryId;
 
-  private int factory_id;
-
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "material_id")
   private Material material;
 
   private int quantity;
 
+  @Column(name = "created_at")
   private LocalDate createdAt;
 
 

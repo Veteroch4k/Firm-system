@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MaterialAccountingRepository extends JpaRepository<MaterialAccounting, Integer> {
 
+
 }

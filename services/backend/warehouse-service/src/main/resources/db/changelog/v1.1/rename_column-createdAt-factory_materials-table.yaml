@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: rename_column-createdAt-factory_materials-table.yaml
+      author: Veteroch4k
+      changes:
+        - renameColumn:
+            tableName: factory_materials
+            oldColumnName: createdAt
+            newColumnName: created_at
