@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface OrderRepository extends JpaRepository<Order, Long> {
+public interface OrderRepository extends JpaRepository<Order, Integer> {
 
   List<Order> findByOrderDate(LocalDate date);
 
   List<Order> findByOrderDateBetween(LocalDate start, LocalDate finish);
 
-  Optional<Order> findById(Long id);
+  Optional<Order> findById(Integer id);
 
 }

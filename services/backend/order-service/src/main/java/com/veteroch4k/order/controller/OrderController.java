@@ -31,8 +31,6 @@ public class OrderController {
   private final OrderAccountingRepository accountingRepository;
   private final OrderService service;
 
-
-
   @GetMapping("/all")
   public Page<Order> orders(
       @RequestParam(defaultValue = "0") int page,
@@ -57,11 +55,9 @@ public class OrderController {
   @ResponseStatus(HttpStatus.CREATED)
   public Order createOrder(@RequestBody Order order) {
 
-    service.createOrder();
+    service.createOrder(order);
 
-    //return orderRepository.save(order);
-
-    return new Order();
+    return order;
 
 
   }
@@ -83,20 +79,18 @@ public class OrderController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Order> getOrderById(@PathVariable Long id) {
+  public ResponseEntity<Order> getOrderById(@PathVariable Integer id) {
     return orderRepository.findById(id)
         .map(ResponseEntity::ok)
         .orElse(ResponseEntity.notFound().build());
   }
 
   @GetMapping("/operation/{orderId}")
-  public Integer getProductId(@PathVariable Long orderId) {
+  public Integer getProductId(@PathVariable Integer orderId) {
     return orderRepository.findById(orderId)
         .map(Order::getProductId)
         .orElse(-1);
   }
-
-
 
 }
 

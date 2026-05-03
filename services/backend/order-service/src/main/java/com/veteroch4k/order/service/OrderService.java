@@ -1,6 +1,9 @@
 package com.veteroch4k.order.service;
 
+import com.veteroch4k.order.model.Order;
 import com.veteroch4k.order.model.OrderCreatedEvent;
+import com.veteroch4k.order.repository.OrderRepository;
+import java.time.LocalDate;
 import java.util.Random;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,13 +13,15 @@ import org.springframework.stereotype.Service;
 public class OrderService {
 
   private final KafkaProducerService kafkaProducerService;
+  private final OrderRepository repository;
 
-  public void createOrder() {
+  public void createOrder(Order order) {
 
-    // пока как заглушка для теста кафки
-    Random r = new Random();
+    order.setOrderDate(LocalDate.now());
+    order.setFinishDate(LocalDate.now().plusDays(10));
+    repository.save(order);
 
-    OrderCreatedEvent event = new OrderCreatedEvent(r.nextLong(), r.nextLong(), r.nextInt());
+    OrderCreatedEvent event = new OrderCreatedEvent(order.getId(), order.getProductId(), order.getProductQuantity());
 
     kafkaProducerService.sendOrderCreatedEvent(event);
 
