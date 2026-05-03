@@ -12,10 +12,8 @@ spring:
           routes:
             - id: employers-service
               uri: lb://employers-service
-
               predicates:
                 - Path=/employers/**
-
               filters:
                 - RewritePath=/employers/(?<path>.*), /$\{path}
 
@@ -26,7 +24,7 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://localhost:8070/eureka/
+      defaultZone: http://${EUREKA_HOST:localhost}:${EUREKA_PORT:8070}/eureka/
 
 server:
   port: 8072

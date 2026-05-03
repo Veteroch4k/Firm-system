@@ -2,25 +2,22 @@ spring:
 
   data:
     redis:
-      host: localhost
-      port: 6379
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
 
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: ${KAFKA_HOST:localhost}:${KAFKA_PORT:9092}
     consumer:
       group-id: "factory-group"
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-
       value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
-
       properties:
         spring.json.trusted.packages: "*"
         spring.json.type.mapping: >
           OrderCreatedEvent:com.veteroch4k.factory_service.models.events.OrderCreatedEvent,
           MaterialReservedEvent:com.veteroch4k.factory_service.models.events.MaterialReservedEvent,
           ToolReservedEvent:com.veteroch4k.factory_service.models.events.ToolReservedEvent
-
         spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
@@ -31,9 +28,9 @@ spring:
           ToolReservationCommand:com.veteroch4k.factory_service.models.commands.ToolReservationCommand
 
   datasource:
-    url: jdbc:postgresql://localhost:5433/firm_prod_db?currentSchema=factory_service
-    username: root
-    password: root
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5433}/firm_prod_db?currentSchema=factory_service
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:root}
     driver-class-name: org.postgresql.Driver
 
   sql:
@@ -58,8 +55,7 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://localhost:8070/eureka/
-
+      defaultZone: http://${EUREKA_HOST:localhost}:${EUREKA_PORT:8070}/eureka/
 
 server:
   port: 8083
