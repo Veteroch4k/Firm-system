@@ -13,9 +13,9 @@ import org.springframework.data.redis.core.RedisHash;
 public class FactoryOrder {
 
   @Id
-  private long orderId;
+  private int orderId;
 
-  private long productId;
+  private int productId;
 
   private int productQuantity;
 

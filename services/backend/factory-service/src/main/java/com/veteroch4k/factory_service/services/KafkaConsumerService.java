@@ -3,7 +3,10 @@ package com.veteroch4k.factory_service.services;
 import com.veteroch4k.factory_service.models.FactoryOrder;
 import com.veteroch4k.factory_service.models.OperationMaterials;
 import com.veteroch4k.factory_service.models.OperationTools;
+import com.veteroch4k.factory_service.models.commands.MaterialReservationCommand;
 import com.veteroch4k.factory_service.models.commands.RequiredMaterial;
+import com.veteroch4k.factory_service.models.commands.RequiredTools;
+import com.veteroch4k.factory_service.models.commands.ToolReservationCommand;
 import com.veteroch4k.factory_service.models.events.MaterialReservedEvent;
 import com.veteroch4k.factory_service.models.events.OrderCreatedEvent;
 import com.veteroch4k.factory_service.models.ProductManufacturingInfo;
@@ -11,6 +14,7 @@ import com.veteroch4k.factory_service.models.events.ToolReservedEvent;
 import com.veteroch4k.factory_service.repository.FactoryOrderRepository;
 import com.veteroch4k.factory_service.repository.OpMaterialsRepository;
 import com.veteroch4k.factory_service.repository.OperationToolsRepository;
+import jakarta.transaction.Transactional;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -38,12 +42,15 @@ public class KafkaConsumerService {
     System.out.println("Получен заказ на производство продукта!: " + product.description());
 
     // 2 - получаем необходимые ресурсы
-    List<OperationMaterials> opMaterials = opMaterialsRepository.getOperationMaterialsByOperation(product.operationId());
+    List<OperationMaterials> opMaterials = opMaterialsRepository.getOperationMaterialsByOperationId(product.operationId());
     List<RequiredMaterial> requiredMaterials = opMaterials.stream()
         .map(opMat -> new RequiredMaterial(opMat.getMaterialId(), opMat.getQuantity()))
         .toList();
 
-    //List<OperationTools> opTools = opToolsRepository.getOperationToolsByOperationToolsId(product.operationId());
+    List<OperationTools> opTools = opToolsRepository.getOperationToolsByOperationToolsIdOperationId(product.operationId());
+    List<RequiredTools> requiredTools = opTools.stream()
+        .map(opTool -> new RequiredTools(opTool.getOperationToolsId().getToolTypeId(), opTool.getQuantity()))
+        .toList();
 
 
     // 3. Сохраняем начальное состояние в Redis
@@ -57,8 +64,10 @@ public class KafkaConsumerService {
     );
     redisRepository.save(order);
 
-    // kafkaTemplate.send("warehouse-commands", new MaterialReservationCommand(event.orderId(), requiredMaterials));
-    // kafkaTemplate.send("toolwarehouse-commands", new ToolReservationCommand(event.orderId(), opTools));
+    kafkaTemplate.send("warehouse-commands", new MaterialReservationCommand(event.orderId(), requiredMaterials,
+        product.factoryId()));
+    kafkaTemplate.send("toolwarehouse-commands", new ToolReservationCommand(event.orderId(), requiredTools,
+        product.factoryId()));
 
 
     /**
@@ -78,6 +87,7 @@ public class KafkaConsumerService {
   public void handleWarehouseResponse(MaterialReservedEvent okEvent) {
     FactoryOrder order = redisRepository.findById(okEvent.orderId()).orElseThrow();
     order.setMaterialsReserved(true);
+    System.out.println("Получено сообщение kafka: Укомплектовали материалы!");
     checkIfReady(order);
   }
 
@@ -86,6 +96,7 @@ public class KafkaConsumerService {
   public void handleToolResponse(ToolReservedEvent okEvent) {
     FactoryOrder order = redisRepository.findById(okEvent.orderId()).orElseThrow();
     order.setToolsReserved(true);
+    System.out.println("Получено сообщение kafka: Укомплектовали инструменты!");
     checkIfReady(order);
   }
 

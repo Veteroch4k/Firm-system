@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: rename-column-tooltype_id-in-operation_tools-table
+      author: Veteroch4k
+      changes:
+        - renameColumn:
+            oldColumnName: toolType_id
+            newColumnName: tooltype_id
+            tableName: operation_tools

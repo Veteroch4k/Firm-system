@@ -33,7 +33,7 @@ public class FactoryController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Factory> getFactory(@PathVariable long id) {
+  public ResponseEntity<Factory> getFactory(@PathVariable int id) {
     //log.debug("Getting factory with id: {}", id);
 
     return factoryRepository
@@ -44,6 +44,6 @@ public class FactoryController {
 
   @GetMapping("/test")
   public ResponseEntity<String> testFeign() {
-    return ResponseEntity.ok("Ответ ожидается 1488: " + service.getOrderMaterials(10L));
+    return ResponseEntity.ok("Ответ ожидается 1488: " + service.getOrderMaterials(10));
   }
 }

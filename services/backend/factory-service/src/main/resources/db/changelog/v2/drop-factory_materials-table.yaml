@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: drop-factory_materials-table.yaml
+      author: Veteroch4k
+      changes:
+        - dropTable:
+            tableName: factory_materials

@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OperationToolsRepository extends JpaRepository<OperationTools, Long> {
+public interface OperationToolsRepository extends JpaRepository<OperationTools, Integer> {
 
-  List<OperationTools> getOperationToolsByOperationToolsId(long id);
+  List<OperationTools> getOperationToolsByOperationToolsIdOperationId(int id);
 
 }

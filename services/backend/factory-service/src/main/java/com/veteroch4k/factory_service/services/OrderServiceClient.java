@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface OrderServiceClient {
 
   @GetMapping("/api/order/operation/{orderId}")
-  Long getOrderOperationId(@PathVariable("orderId") Long orderId);
+  Long getOrderOperationId(@PathVariable("orderId") Integer orderId);
 
 
 

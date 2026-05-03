@@ -12,7 +12,7 @@ public class MaterialsService {
     this.client = client;
   }
 
-  public Long getOrderMaterials(long orderId) {
+  public Long getOrderMaterials(int orderId) {
 
     return client.getOrderOperationId(orderId);
 

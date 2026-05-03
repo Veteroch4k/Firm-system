@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface OpMaterialsRepository extends JpaRepository<OperationMaterials, Integer> {
 
-  List<OperationMaterials> getOperationMaterialsByOperation(int id);
+  List<OperationMaterials> getOperationMaterialsByOperationId(int opId);
 
 }

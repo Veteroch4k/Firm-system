@@ -15,7 +15,7 @@ public class OperationToolsId {
   @JoinColumn(name = "operation_id")
   private Operation operation;
 
-  @Column(name = "toolType_id")
-  private int toolType_id;
+  @Column(name = "tooltype_id")
+  private int toolTypeId;
 
 }

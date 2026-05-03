@@ -33,7 +33,5 @@ public class Factory {
   @OneToMany(mappedBy = "factory")
   private List<Operation> operations;
 
-  @OneToMany(mappedBy = "factory", cascade = CascadeType.ALL)
-  private List<FactoryMaterials> materials = new ArrayList<>();
 
 }

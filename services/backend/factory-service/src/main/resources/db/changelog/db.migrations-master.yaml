@@ -36,3 +36,12 @@ databaseChangeLog:
   - include:
       file: v2/create-operation_tools-table.yaml
       relativeToChangelogFile: true
+
+  - include:
+      file: v2/drop-factory_materials-table.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: v2/rename-column-tooltype_id-in-operation_tools-table.yaml
+      relativeToChangelogFile: true
+

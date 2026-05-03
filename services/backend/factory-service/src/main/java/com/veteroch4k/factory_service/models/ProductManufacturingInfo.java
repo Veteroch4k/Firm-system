@@ -4,5 +4,6 @@ public record ProductManufacturingInfo(
     Integer productId,
     String description,
     Integer drawingId,
+    Integer factoryId,
     Integer operationId
 ) {}
