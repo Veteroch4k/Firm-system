@@ -41,7 +41,7 @@ public class WarehouseService {
 
   }
 
-  public void spendMaterialForOrder(int materialId, int quantity, int factoryId, int orderId) {
+  public void spendMaterialForOrder(int materialId, int quantity, int factoryId) {
     MaterialAccounting accounting = new MaterialAccounting();
     accounting.setMaterial(materialRepository.getReferenceById(materialId));
     accounting.setQuantity(quantity);

@@ -41,7 +41,7 @@ public class KafkaConsumerService {
         service.supplyMaterial(requiredMaterial.materialId(), requiredMaterial.quantity() - currentAmount, command.factoryId());
       }
 
-      service.spendMaterialForOrder(requiredMaterial.materialId(), requiredMaterial.quantity(), command.factoryId(), command.orderId());
+      service.spendMaterialForOrder(requiredMaterial.materialId(), requiredMaterial.quantity(), command.factoryId());
     }
 
     kafkaTemplate.send("warehouse-events", new MaterialReservedEvent(command.orderId()));
