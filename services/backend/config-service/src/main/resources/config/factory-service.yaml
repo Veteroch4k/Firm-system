@@ -11,13 +11,17 @@ spring:
       group-id: "factory-group"
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+
       properties:
         spring.json.trusted.packages: "*"
         spring.json.type.mapping: >
-          orderCreated:com.veteroch4k.factory_service.models.events.OrderCreatedEvent,
-          materialReserved:com.veteroch4k.factory_service.models.events.MaterialReservedEvent,
-          toolReserved:com.veteroch4k.factory_service.models.events.ToolReservedEvent
+          OrderCreatedEvent:com.veteroch4k.factory_service.models.events.OrderCreatedEvent,
+          MaterialReservedEvent:com.veteroch4k.factory_service.models.events.MaterialReservedEvent,
+          ToolReservedEvent:com.veteroch4k.factory_service.models.events.ToolReservedEvent
+
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
