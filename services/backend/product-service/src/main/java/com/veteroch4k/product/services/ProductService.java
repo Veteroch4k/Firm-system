@@ -18,12 +18,13 @@ public class ProductService {
 
     Product product = productRepository.findById(id).orElseGet(Product::new);
 
-    Drawing drawing = Optional.ofNullable(product.getDrawing()).orElse(new Drawing(-14, -14, -14));
+    Drawing drawing = Optional.ofNullable(product.getDrawing()).orElse(new Drawing(-14, 1, 1));
 
     return new ProductManufacturingInfo(
         product.getId(),
         product.getDescription(),
         drawing.getId(),
+        drawing.getFactoryId(),
         drawing.getOperationId());
   }
 
