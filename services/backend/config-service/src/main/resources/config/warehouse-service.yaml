@@ -12,6 +12,24 @@ spring:
     username: root
     password: root
 
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: "warehouse-group"
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+        spring.json.type.mapping: >
+          MaterialReservationCommand:com.veteroch4k.warehouse.models.commands.MaterialReservationCommand
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.type.mapping: >
+          MaterialReservedEvent:com.veteroch4k.warehouse.models.MaterialReservedEvent
+
   liquibase:
     enabled: true
     change-log: classpath:/db/changelog/db.migrations-master.yaml

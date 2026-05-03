@@ -14,8 +14,17 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: "*"
-        spring.json.use.type.headers: false
-        spring.json.value.default.type: com.veteroch4k.factory_service.models.OrderCreatedEvent
+        spring.json.type.mapping: >
+          orderCreated:com.veteroch4k.factory_service.models.events.OrderCreatedEvent,
+          materialReserved:com.veteroch4k.factory_service.models.events.MaterialReservedEvent,
+          toolReserved:com.veteroch4k.factory_service.models.events.ToolReservedEvent
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.type.mapping: >
+          MaterialReservationCommand:com.veteroch4k.factory_service.models.commands.MaterialReservationCommand,
+          ToolReservationCommand:com.veteroch4k.factory_service.models.commands.ToolReservationCommand
 
   datasource:
     url: jdbc:postgresql://localhost:5433/firm_prod_db?currentSchema=factory_service

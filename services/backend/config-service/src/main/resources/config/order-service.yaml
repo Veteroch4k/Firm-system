@@ -5,6 +5,9 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.type.mapping: >
+          OrderCreatedEvent:com.veteroch4k.order.model.OrderCreatedEvent
 
   datasource:
     url: jdbc:postgresql://localhost:5433/firm_prod_db?currentScheme=order_service
