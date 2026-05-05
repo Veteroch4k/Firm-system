@@ -77,6 +77,7 @@ Firm System — это RESTful API, разработанное на базе Spr
 
 ## Сервисная архитектура
 ![Architecture.png](Architecture.png)
+> Factory-service был продублирован для удобства, чтобы показать все топики, с которыми он взаимодействует
 
 ## Компоненты
 <div align="center">
