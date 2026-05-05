@@ -2,7 +2,9 @@ package com.veteroch4k.employers.services;
 
 import com.veteroch4k.employers.models.Employer;
 import com.veteroch4k.employers.repositories.EmployerRepository;
+import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.TimeoutException;
@@ -34,6 +36,8 @@ public class EmployerSevice {
   }
 
   @CircuitBreaker(name = "test", fallbackMethod = "testBackup")
+  @Retry(name = "retryTest", fallbackMethod = "testRetry")
+  @Bulkhead(name = "bulkheadTest", fallbackMethod = "testBulk")
   public ResponseEntity<String> immitateSomeWork() throws TimeoutException {
 
     Random r = new Random();
@@ -56,7 +60,15 @@ public class EmployerSevice {
 
   public ResponseEntity<String> testBackup(Throwable t) {
     logger.error("Employer service недоступен: {}", t.getMessage());
-    return new ResponseEntity<>("Неизвестный сотрудник (Сервис временно недоступен)", HttpStatus.ACCEPTED);
+    return new ResponseEntity<>("разрыватель цепи", HttpStatus.ACCEPTED);
+  }
+
+  public ResponseEntity<String> testRetry(Throwable t) {
+    return new ResponseEntity<>("Повторная попытка отправки", HttpStatus.ACCEPTED);
+  }
+
+  public ResponseEntity<String> testBulk(Throwable t) {
+    return new ResponseEntity<>("Герметичный сука отсек", HttpStatus.ACCEPTED);
   }
 
 }

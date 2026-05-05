@@ -3,9 +3,17 @@ spring:
     name: employers-service
   profiles:
     active: default
-  config:
-    import: optional:configserver:http://localhost:8071
 
+  cloud:
+    config:
+      fail-fast: true
+      retry:
+        max-attempts: 6
+        initial-interval: 2000
+        multiplier: 1.5
+        max-interval: 10000
+  config:
+    import: configserver:${CONFIG_SERVER_URL:http://localhost:8071}
 
 
 resilience4j.circuitbreaker:
@@ -30,20 +38,20 @@ resilience4j.circuitbreaker:
 resilience4j:
   bulkhead:
     instances:
-      bulkheadLicenseService:
+      bulkheadTest:
         max-wait-duration: 100ms
         max-concurrent-calls: 20
 
 resilience4j.thread-pool-bulkhead:
   instances:
-    bulkheadLicenseService:
+    bulkheadPoolTest:
       maxThreadPoolSize: 10
       coreThreadPoolSize: 5
       queueCapacity: 20
 
 resilience4j.retry:
   instances:
-    retryLicenseService:
+    retryTest:
       max-attempts: 5
       wait-duration: 100ms
       retry-exceptions:

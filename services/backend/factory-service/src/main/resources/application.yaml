@@ -3,5 +3,16 @@ spring:
     name: factory-service
   profiles:
     active: default
+
+  cloud:
+    config:
+      fail-fast: true
+      retry:
+        max-attempts: 6
+        initial-interval: 2000
+        multiplier: 1.5
+        max-interval: 10000
+
+
   config:
-    import: optional:configserver:http://localhost:8071
+    import: configserver:${CONFIG_SERVER_URL:http://localhost:8071}

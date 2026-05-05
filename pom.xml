@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.firm</groupId>
+  <artifactId>firm-system-root</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <packaging>pom</packaging>
+  <name>Firm System Root</name>
+  <description>Root aggregator for Firm System Microservices</description>
+
+  <modules>
+    <module>services/backend/config-service</module>
+    <module>services/backend/employers-service</module>
+    <module>services/backend/eureka-service</module>
+    <module>services/backend/factory-service</module>
+    <module>services/backend/gateway-service</module>
+    <module>services/backend/order-service</module>
+    <module>services/backend/product-service</module>
+    <module>services/backend/toolwarehouse-service</module>
+    <module>services/backend/warehouse-service</module>
+  </modules>
+
+</project>
