@@ -1,22 +1,64 @@
 spring:
   cloud:
     gateway:
-      server:
-        webflux:
-          discovery:
-            locator:
-              enabled: true
-              lower-case-service-id: true
-          default-filters:
-            - Retry=3
-          routes:
-            - id: employers-service
-              uri: lb://employers-service
-              predicates:
-                - Path=/employers/**
-              filters:
-                - RewritePath=/employers/(?<path>.*), /$\{path}
+      discovery:
+        locator:
+          enabled: false
+      default-filters:
+        - TokenRelay=
+      routes:
+        - id: employers-service
+          uri: lb://employers-service
+          predicates:
+            - Path=/employees/**
 
+        - id: eureka-server
+          uri: lb://eureka-server
+          predicates:
+            - Path-/eureka/**
+            - Method=GET
+          filters:
+            - RewritePath=/eureka/(?<path>.*), /$\{path}
+
+        - id: factory-service
+          uri: lb://factory-service
+          predicates:
+            - Path-/factory/**
+
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path-/order/**
+
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            - Path-/product/**
+
+        - id: warehouse-service
+          uri: lb://warehouse-service
+          predicates:
+            - Path-/warehouse/**
+
+        - id: toolwarehouse-service
+          uri: lb://toolwarehouse-service
+          predicates:
+            - Path-/toolwarehouse/**
+
+
+
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8181/realms/firm-realm
+        registration:
+          keycloak:
+            client-id: gateway-client
+            client-secret: j0IeIEnM0OewCCll2T9uMwbk9Rwihvlk
+            scope: openid, profile, email, roles
+            authorization-grant-type: authorization_code
 eureka:
   instance:
     prefer-ip-address: true

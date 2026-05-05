@@ -34,6 +34,12 @@ spring:
       hibernate:
         format_sql: true
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://${KEYCLOAK_HOST:localhost}:${KEYCLOAK_PORT:8181}/realms/firm-realm
+
 eureka:
   instance:
     prefer-ip-address: true
