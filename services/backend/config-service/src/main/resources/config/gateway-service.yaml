@@ -10,55 +10,65 @@ spring:
         - id: employers-service
           uri: lb://employers-service
           predicates:
-            - Path=/employees/**
+            - Path=/employers/**
+            - StripPrefix=1
 
         - id: eureka-server
           uri: lb://eureka-server
           predicates:
-            - Path-/eureka/**
+            - Path=/eureka/**
             - Method=GET
+            - StripPrefix=1
           filters:
             - RewritePath=/eureka/(?<path>.*), /$\{path}
 
         - id: factory-service
           uri: lb://factory-service
           predicates:
-            - Path-/factory/**
+            - Path=/factory/**
+            - StripPrefix=1
 
         - id: order-service
           uri: lb://order-service
           predicates:
-            - Path-/order/**
+            - Path=/order/**
+            - StripPrefix=1
 
         - id: product-service
           uri: lb://product-service
           predicates:
-            - Path-/product/**
+            - Path=/product/**
+            - StripPrefix=1
 
         - id: warehouse-service
           uri: lb://warehouse-service
           predicates:
-            - Path-/warehouse/**
+            - Path=/warehouse/**
+            - StripPrefix=1
 
         - id: toolwarehouse-service
           uri: lb://toolwarehouse-service
           predicates:
-            - Path-/toolwarehouse/**
-
-
+            - Path=/toolwarehouse/**
+            - StripPrefix=1
 
   security:
     oauth2:
       client:
         provider:
           keycloak:
-            issuer-uri: http://localhost:8181/realms/firm-realm
+            authorization-uri: http://localhost:8181/realms/firm-realm/protocol/openid-connect/auth
+            token-uri: http://keycloak:8080/realms/firm-realm/protocol/openid-connect/token
+            jwk-set-uri: http://keycloak:8080/realms/firm-realm/protocol/openid-connect/certs
+            user-info-uri: http://keycloak:8080/realms/firm-realm/protocol/openid-connect/userinfo
+            user-name-attribute: preferred_username
         registration:
           keycloak:
             client-id: gateway-client
             client-secret: j0IeIEnM0OewCCll2T9uMwbk9Rwihvlk
             scope: openid, profile, email, roles
             authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
 eureka:
   instance:
     prefer-ip-address: true
