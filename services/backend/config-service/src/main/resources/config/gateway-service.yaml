@@ -1,56 +1,65 @@
 spring:
   cloud:
     gateway:
-      discovery:
-        locator:
-          enabled: false
-      default-filters:
-        - TokenRelay=
-      routes:
-        - id: employers-service
-          uri: lb://employers-service
-          predicates:
-            - Path=/employers/**
-            - StripPrefix=1
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: false
+          default-filters:
+            - TokenRelay=
+          routes:
+            - id: employers-service
+              uri: lb://EMPLOYERS-SERVICE
+              predicates:
+                - Path=/employers/**
+              filters:
+                - StripPrefix=1
 
-        - id: eureka-server
-          uri: lb://eureka-server
-          predicates:
-            - Path=/eureka/**
-            - Method=GET
-            - StripPrefix=1
-          filters:
-            - RewritePath=/eureka/(?<path>.*), /$\{path}
+            - id: eureka-server
+              uri: lb://EUREKA-SERVER
+              predicates:
+                - Path=/eureka/**
+                - Method=GET
+              filters:
+                - RewritePath=/eureka/(?<path>.*), /$\{path}
+                - StripPrefix=1
 
-        - id: factory-service
-          uri: lb://factory-service
-          predicates:
-            - Path=/factory/**
-            - StripPrefix=1
+            - id: factory-service
+              uri: lb://FACTORY-SERVICE
+              predicates:
+                - Path=/factory/**
+              filters:
+                - StripPrefix=1
 
-        - id: order-service
-          uri: lb://order-service
-          predicates:
-            - Path=/order/**
-            - StripPrefix=1
+            - id: order-service
+              uri: lb://ORDER-SERVICE
+              predicates:
+                - Path=/order/**
+              filters:
+                - StripPrefix=1
 
-        - id: product-service
-          uri: lb://product-service
-          predicates:
-            - Path=/product/**
-            - StripPrefix=1
+            - id: product-service
+              uri: lb://PRODUCT-SERVICE
+              predicates:
+                - Path=/product/**
+              filters:
+                - StripPrefix=1
 
-        - id: warehouse-service
-          uri: lb://warehouse-service
-          predicates:
-            - Path=/warehouse/**
-            - StripPrefix=1
+            - id: warehouse-service
+              uri: lb://WAREHOUSE-SERVICE
+              predicates:
+                - Path=/warehouse/**
+              filters:
+                - StripPrefix=1
 
-        - id: toolwarehouse-service
-          uri: lb://toolwarehouse-service
-          predicates:
-            - Path=/toolwarehouse/**
-            - StripPrefix=1
+            - id: toolwarehouse-service
+              uri: lb://TOOLWAREHOUSE-SERVICE
+              predicates:
+                - Path=/toolwarehouse/**
+              filters:
+                - StripPrefix=1
+
 
   security:
     oauth2:
@@ -59,6 +68,7 @@ spring:
           keycloak:
             authorization-uri: http://localhost:8181/realms/firm-realm/protocol/openid-connect/auth
             token-uri: http://keycloak:8080/realms/firm-realm/protocol/openid-connect/token
+            issuer-uri: http://localhost:8181/realms/firm-realm
             jwk-set-uri: http://keycloak:8080/realms/firm-realm/protocol/openid-connect/certs
             user-info-uri: http://keycloak:8080/realms/firm-realm/protocol/openid-connect/userinfo
             user-name-attribute: preferred_username

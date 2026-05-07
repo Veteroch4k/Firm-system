@@ -43,8 +43,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
+          issuer-uri: http://localhost:8181/realms/firm-realm
           jwk-set-uri: http://${KEYCLOAK_HOST:localhost}:${KEYCLOAK_PORT:8181}/realms/firm-realm/protocol/openid-connect/certs
-
 eureka:
   instance:
     prefer-ip-address: true
