@@ -7,7 +7,7 @@ services:
       POSTGRES_PASSWORD: root
       POSTGRES_DB: firm_prod_db
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./init-scripts:/docker-entrypoint-initdb.d
@@ -57,6 +57,22 @@ services:
     networks:
       - backend
 
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0.1
+    container_name: keycloak
+    command: start-dev
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+      # Фикс проблемы с редиректами
+      - KC_HOSTNAME_URL=http://localhost:8181
+
+    volumes:
+      - keycloak_data:/opt/keycloak/data
+    ports:
+      - "8181:8080"
+    networks:
+      - backend
   
   # Сервисы
 
@@ -103,11 +119,15 @@ services:
       - EUREKA_HOST=eureka-server
       - EUREKA_PORT=8070
       - CONFIG_SERVER_URL=http://config-server:8071
+      - KEYCLOAK_HOST=keycloak
+      - KEYCLOAK_PORT=8080
     depends_on:
       config-server:
         condition: service_healthy
       eureka-server:
         condition: service_healthy
+      keycloak:
+        condition: service_started
     networks:
       - backend
 
@@ -122,12 +142,16 @@ services:
       - EUREKA_HOST=eureka-server
       - EUREKA_PORT=8070
       - CONFIG_SERVER_URL=http://config-server:8071
+      - KEYCLOAK_HOST=keycloak
+      - KEYCLOAK_PORT=8080
     depends_on:
       config-server:
         condition: service_healthy
       eureka-server:
         condition: service_healthy
       postgres:
+        condition: service_started
+      keycloak:
         condition: service_started
     networks:
       - backend
@@ -143,12 +167,16 @@ services:
       - EUREKA_HOST=eureka-server
       - EUREKA_PORT=8070
       - CONFIG_SERVER_URL=http://config-server:8071
+      - KEYCLOAK_HOST=keycloak
+      - KEYCLOAK_PORT=8080
     depends_on:
       config-server:
         condition: service_healthy
       eureka-server:
         condition: service_healthy
       postgres:
+        condition: service_started
+      keycloak:
         condition: service_started
     networks:
       - backend
@@ -166,6 +194,8 @@ services:
       - EUREKA_HOST=eureka-server
       - EUREKA_PORT=8070
       - CONFIG_SERVER_URL=http://config-server:8071
+      - KEYCLOAK_HOST=keycloak
+      - KEYCLOAK_PORT=8080
     depends_on:
       config-server:
         condition: service_healthy
@@ -174,6 +204,8 @@ services:
       postgres:
         condition: service_started
       kafka:
+        condition: service_started
+      keycloak:
         condition: service_started
     networks:
       - backend
@@ -193,6 +225,8 @@ services:
       - EUREKA_HOST=eureka-server
       - EUREKA_PORT=8070
       - CONFIG_SERVER_URL=http://config-server:8071
+      - KEYCLOAK_HOST=keycloak
+      - KEYCLOAK_PORT=8080
     depends_on:
       config-server:
         condition: service_healthy
@@ -203,6 +237,8 @@ services:
       kafka:
         condition: service_started
       redis:
+        condition: service_started
+      keycloak:
         condition: service_started
     networks:
       - backend
@@ -220,6 +256,8 @@ services:
       - EUREKA_HOST=eureka-server
       - EUREKA_PORT=8070
       - CONFIG_SERVER_URL=http://config-server:8071
+      - KEYCLOAK_HOST=keycloak
+      - KEYCLOAK_PORT=8080
     depends_on:
       config-server:
         condition: service_healthy
@@ -228,6 +266,8 @@ services:
       postgres:
         condition: service_started
       kafka:
+        condition: service_started
+      keycloak:
         condition: service_started
     networks:
       - backend
@@ -245,6 +285,8 @@ services:
       - EUREKA_HOST=eureka-server
       - EUREKA_PORT=8070
       - CONFIG_SERVER_URL=http://config-server:8071
+      - KEYCLOAK_HOST=keycloak
+      - KEYCLOAK_PORT=8080
     depends_on:
       config-server:
         condition: service_healthy
@@ -253,6 +295,8 @@ services:
       postgres:
         condition: service_started
       kafka:
+        condition: service_started
+      keycloak:
         condition: service_started
     networks:
       - backend
@@ -264,3 +308,4 @@ networks:
 
 volumes:
   postgres_data:
+  keycloak_data:
