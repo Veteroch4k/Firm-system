@@ -16,15 +16,6 @@ spring:
               filters:
                 - StripPrefix=1
 
-            - id: eureka-server
-              uri: lb://EUREKA-SERVER
-              predicates:
-                - Path=/eureka/**
-                - Method=GET
-              filters:
-                - RewritePath=/eureka/(?<path>.*), /$\{path}
-                - StripPrefix=1
-
             - id: factory-service
               uri: lb://FACTORY-SERVICE
               predicates:
@@ -63,14 +54,18 @@ spring:
 
   security:
     oauth2:
+      # Шлюз также выступае в роли ресурс-сервера (чтоб проверять токены, если делаем через Postman запрос, например)
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8181/realms/firm-realm
+          jwk-set-uri: http://${KEYCLOAK_HOST:localhost}:${KEYCLOAK_PORT:8181}/realms/firm-realm/protocol/openid-connect/certs
       client:
         provider:
           keycloak:
             authorization-uri: http://localhost:8181/realms/firm-realm/protocol/openid-connect/auth
-            token-uri: http://keycloak:8080/realms/firm-realm/protocol/openid-connect/token
-            issuer-uri: http://localhost:8181/realms/firm-realm
-            jwk-set-uri: http://keycloak:8080/realms/firm-realm/protocol/openid-connect/certs
-            user-info-uri: http://keycloak:8080/realms/firm-realm/protocol/openid-connect/userinfo
+            token-uri:  http://${KEYCLOAK_HOST:localhost}:${KEYCLOAK_PORT:8181}/realms/firm-realm/protocol/openid-connect/token
+            jwk-set-uri:  http://${KEYCLOAK_HOST:localhost}:${KEYCLOAK_PORT:8181}/realms/firm-realm/protocol/openid-connect/certs
+            user-info-uri:  http://${KEYCLOAK_HOST:localhost}:${KEYCLOAK_PORT:8181}/realms/firm-realm/protocol/openid-connect/userinfo
             user-name-attribute: preferred_username
         registration:
           keycloak:
