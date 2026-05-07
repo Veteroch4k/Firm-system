@@ -55,6 +55,16 @@ spring:
         jwt:
           issuer-uri: http://localhost:8181/realms/firm-realm
           jwk-set-uri: http://${KEYCLOAK_HOST:localhost}:${KEYCLOAK_PORT:8181}/realms/firm-realm/protocol/openid-connect/certs
+      client:
+        provider:
+          keycloak:
+            token-uri: http://${KEYCLOAK_HOST:localhost}:${KEYCLOAK_PORT:8181}/realms/firm-realm/protocol/openid-connect/token
+        registration:
+          keycloak:
+            client-id: factory-service
+            client-secret: ZgdY6UAmTiwpYgmvXOANddIe9jeJEiO8
+            scope: openid
+            authorization-grant-type: client_credentials
 
 eureka:
   instance:
