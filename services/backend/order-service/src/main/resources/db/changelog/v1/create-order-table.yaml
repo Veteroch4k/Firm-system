@@ -10,18 +10,18 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                  type: INT
+                  type: BIGINT
                   name: id
               - column:
                   constraints:
                     nullable: false
                   name: product_id
-                  type: INT
+                  type: BIGINT
               - column:
                   constraints:
                     nullable: false
                   name: product_quantity
-                  type: INT
+                  type: BIGINT
               - column:
                   constraints:
                     nullable: false
@@ -32,6 +32,9 @@ databaseChangeLog:
                     nullable: false
                   type: DATE
                   name: finish_date
-            tableName: order
+            tableName: orders
+
+        - sql:
+            sql: "ALTER TABLE orders ADD CONSTRAINT chk_quantity_positive CHECK (product_quantity > 0);"
 
 

@@ -20,13 +20,13 @@ public class Order {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private Long id;
 
   @Column(name = "product_id")
-  private int productId;
+  private Long productId;
 
   @Column(name = "product_quantity")
-  private int productQuantity;
+  private Long productQuantity;
 
   @Column(name = "order_date")
   private LocalDate orderDate;
