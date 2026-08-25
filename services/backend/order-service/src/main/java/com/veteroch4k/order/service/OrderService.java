@@ -37,13 +37,17 @@ public class OrderService {
 
   public Page<OrderResponseDTO> findByOrdersByDateBetween(LocalDate start, LocalDate end, PageRequest of) {
 
+    if(start.isAfter(end)) {
+      throw new IllegalArgumentException("Дата начала не может быть позже даты окончания");
+    }
+
     Page<Order> orders = orderRepository.findByOrderDateBetween(start, end, of);
 
     return orders.map(OrderResponseDTO::new);
 
   }
 
-  public OrderResponseDTO findOrderById(Integer id) {
+  public OrderResponseDTO findOrderById(Long id) {
 
     Order order = orderRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Заказ с ID " + id + " не найден"));
@@ -72,5 +76,9 @@ public class OrderService {
     log.debug("Событие OrderCreatedEvent отправлено в Kafka: {}", event);
 
 
+  }
+
+  public void deleteAllOrders() {
+    orderRepository.deleteAll();
   }
 }

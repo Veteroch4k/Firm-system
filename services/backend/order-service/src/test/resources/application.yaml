@@ -1,0 +1,39 @@
+spring:
+  cloud:
+    config:
+      enabled: false
+  config:
+    import: ""
+
+  kafka:
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.type.mapping: >
+          OrderCreatedEvent:com.veteroch4k.order.model.OrderCreatedEvent
+
+  sql:
+    init:
+      mode: never
+
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.migrations-master.yaml
+    default-schema: order_service
+    liquibase-schema: order_service
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        default_schema: order_service
+
+eureka:
+  client:
+    enabled: false
