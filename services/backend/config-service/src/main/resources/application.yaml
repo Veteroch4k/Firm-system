@@ -1,22 +1,42 @@
 spring:
+  main:
+    allow-bean-definition-overriding: true
   application:
     name: Config service
 
   profiles:
-    active:
-      - native
+    active: git
 
   cloud:
+    vault:
+      host: ${VAULT_HOST:localhost}
+      port: ${VAULT_PORT:8200}
+      scheme: http
+      token: ${VAULT_TOKEN}
+      kv:
+        enabled: true
+        backend: secret
+        default-context: config-server
+
     config:
       server:
-        native:
-          search-locations: classpath:/config
+        git:
+          uri: https://github.com/Veteroch4k/Firm-system-configs.git
+          default-label: master
+          clone-on-start: true
+          username: ${git.username}
+          password: ${git.password}
+  config:
+    import: vault://
 
 server:
   port: 8071
 
 
 management:
+  health:
+    vault:
+      enabled: false
   endpoints:
     web:
       exposure:
