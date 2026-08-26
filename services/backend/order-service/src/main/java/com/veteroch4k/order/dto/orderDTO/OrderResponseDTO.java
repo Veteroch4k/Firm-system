@@ -25,6 +25,8 @@ public record OrderResponseDTO(
         LocalDate finishDate
 )
 {
+    // Думаю, что избыточно добавлять MapStruct для этого случая, мол, чтобы не было зависимости между DTO и БД
+    // что мы тут ничего не должны знать про саму сущность, но, в рамках этого проекта, по моему мнению, это избыточно
     public OrderResponseDTO(Order order) {
         this(order.getId(),  order.getProductId(), order.getProductQuantity(),
                 order.getOrderDate(), order.getFinishDate());
