@@ -1,8 +1,12 @@
 package com.veteroch4k.product.controllers;
 
+import com.veteroch4k.product.dto.drawing.DrawingResponse;
 import com.veteroch4k.product.models.Drawing;
 import com.veteroch4k.product.repositories.DrawingRepository;
 import java.util.List;
+
+import com.veteroch4k.product.services.DrawingService;
+import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,31 +17,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/drawing")
 public class DrawingController {
 
-  private final DrawingRepository drawingRepository;
-
-  public DrawingController(DrawingRepository drawingRepository) {
-    this.drawingRepository = drawingRepository;
-  }
+  private final DrawingService drawingService;
 
   @GetMapping("/all")
-  public Page<Drawing> getDrawings(
+  public Page<DrawingResponse> getDrawings(
       @RequestParam(defaultValue = "0") int page,
       @RequestParam(defaultValue = "20") int size
   ) {
-    return drawingRepository.findAll(PageRequest.of(page, size));
+    return drawingService.findAllDrawings(PageRequest.of(page, size));
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Drawing> getDrawing(@PathVariable int id) {
+  public DrawingResponse getDrawing(@PathVariable Long id) {
 
-    return drawingRepository
-        .findById(id)
-        .map(ResponseEntity::ok)
-        .orElse(ResponseEntity.notFound().build());
+    return drawingService
+        .findDrawingById(id);
   }
 
 }

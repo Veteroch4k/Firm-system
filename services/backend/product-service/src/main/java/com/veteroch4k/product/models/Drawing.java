@@ -6,27 +6,25 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Data
+@Getter @Setter
 @Table(name = "drawing")
 public class Drawing {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private Long id;
 
   @Column(name = "op_id")
-  private int operationId;
+  private Long operationId;
   // Операции
 
   @Column(name = "factory_id")
-  private int factoryId;
+  private Long factoryId;
   // Цех
 
 }

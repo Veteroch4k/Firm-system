@@ -1,9 +1,9 @@
 package com.veteroch4k.product.models;
 
 public record ProductManufacturingInfo(
-    Integer productId,
+    Long productId,
     String description,
-    Integer drawingId,
-    Integer factoryId,
-    Integer operationId
+    Long drawingId,
+    Long factoryId,
+    Long operationId
 ) {}
