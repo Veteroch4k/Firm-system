@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 1
+      id: 2
       author: Veteroch4k
       changes:
         - createTable:
@@ -11,8 +11,17 @@ databaseChangeLog:
                     nullable: false
                     primaryKey: true
                   name: id
-                  type: INT
+                  type: BIGINT
               - column:
                   name: description
                   type: VARCHAR(255)
-            tableName: product
+              - column:
+                  name: drawing_id
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_products_drawing
+                    references: drawings(id)
+                    deleteCascade: true
+
+            tableName: products
