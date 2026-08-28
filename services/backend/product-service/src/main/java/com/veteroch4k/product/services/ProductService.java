@@ -8,11 +8,13 @@ import com.veteroch4k.product.models.ProductManufacturingInfo;
 import com.veteroch4k.product.repositories.ProductRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -22,7 +24,13 @@ public class ProductService {
 
     public ProductManufacturingInfo getProductInfo(Long id) {
 
-        Product product = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Продукта по заданному id: " + id + " не найдено."));
+        log.debug("Получение производственной информации о продукте по его id: {}", id);
+
+        Product product = productRepository.findById(id).
+                orElseThrow(() -> {
+                    log.warn("Продукт с ID: {} не найден во время получения производственной инфы о продукте.", id);
+                    return new ResourceNotFoundException("Продукта по заданному id: " + id + " не найдено.");
+                });
 
         return new ProductManufacturingInfo(
                 product.getId(),
@@ -42,7 +50,10 @@ public class ProductService {
 
     public ProductResponse findProductById(Long id) {
 
-        Product product = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Продукта по заданному id: " + id + " не найдено."));
+        Product product = productRepository.findById(id).orElseThrow(() -> {
+            log.warn("Продукт с ID: {} не найден при запросе по ID", id);
+            return new ResourceNotFoundException("Продукта по заданному id: " + id + " не найдено.");
+        });
 
         return getProductResponse(product);
 

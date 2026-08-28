@@ -13,6 +13,6 @@ spring:
         multiplier: 1.5
         max-interval: 10000
 
-
   config:
     import: configserver:${CONFIG_SERVER_URL:http://localhost:8071}
+

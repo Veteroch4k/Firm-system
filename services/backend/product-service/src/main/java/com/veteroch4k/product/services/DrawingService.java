@@ -5,11 +5,12 @@ import com.veteroch4k.product.exceptions.ResourceNotFoundException;
 import com.veteroch4k.product.models.Drawing;
 import com.veteroch4k.product.repositories.DrawingRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class DrawingService {
@@ -26,7 +27,12 @@ public class DrawingService {
 
     public DrawingResponse findDrawingById(Long id) {
 
-        Drawing drawing = drawingRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Чертеж с заданным id: " + id + " не найден."));
+        Drawing drawing = drawingRepository.findById(id).orElseGet(() -> {
+
+            log.warn("Чертёж с ID: {} не найжен при запросе по ID", id);
+
+            throw new ResourceNotFoundException("Чертеж с заданным id: " + id + " не найден.");
+        });
 
         return getDrawingResponse(drawing);
     }
