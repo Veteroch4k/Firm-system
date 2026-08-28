@@ -1,4 +1,9 @@
 databaseChangeLog:
+
+  - include:
+      file: v1/create-schema.yaml
+      relativeToChangelogFile: true
+
   - include:
       file: v1/create-drawing-table.yaml
       relativeToChangelogFile: true

@@ -1,6 +1,6 @@
-package com.veteroch4k.product.models;
+package com.veteroch4k.product.dto;
 
-public record ProductManufacturingInfo(
+public record ProductManufacturingInfoResponse(
     Long productId,
     String description,
     Long drawingId,

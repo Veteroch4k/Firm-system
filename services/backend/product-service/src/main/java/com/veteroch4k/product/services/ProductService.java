@@ -1,12 +1,11 @@
 package com.veteroch4k.product.services;
 
+import com.veteroch4k.product.dto.ProductManufacturingInfoResponse;
 import com.veteroch4k.product.dto.drawing.DrawingResponse;
 import com.veteroch4k.product.dto.product.ProductResponse;
 import com.veteroch4k.product.exceptions.ResourceNotFoundException;
 import com.veteroch4k.product.models.Product;
-import com.veteroch4k.product.models.ProductManufacturingInfo;
 import com.veteroch4k.product.repositories.ProductRepository;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -22,7 +21,7 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    public ProductManufacturingInfo getProductInfo(Long id) {
+    public ProductManufacturingInfoResponse getProductInfo(Long id) {
 
         log.debug("Получение производственной информации о продукте по его id: {}", id);
 
@@ -32,7 +31,7 @@ public class ProductService {
                     return new ResourceNotFoundException("Продукта по заданному id: " + id + " не найдено.");
                 });
 
-        return new ProductManufacturingInfo(
+        return new ProductManufacturingInfoResponse(
                 product.getId(),
                 product.getDescription(),
                 product.getDrawing().getId(),

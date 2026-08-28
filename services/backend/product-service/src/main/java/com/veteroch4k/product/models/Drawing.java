@@ -12,7 +12,7 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 @Getter @Setter
-@Table(name = "drawing")
+@Table(name = "drawings")
 public class Drawing {
 
   @Id

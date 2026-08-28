@@ -1,8 +1,8 @@
 package com.veteroch4k.product.controllers;
 
+import com.veteroch4k.product.dto.ProductManufacturingInfoResponse;
 import com.veteroch4k.product.dto.product.ProductResponse;
 import com.veteroch4k.product.exceptions.ErrorResponse;
-import com.veteroch4k.product.models.ProductManufacturingInfo;
 import com.veteroch4k.product.services.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -15,7 +15,6 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.validation.annotation.Validated;
@@ -76,7 +75,7 @@ public class ProductController {
             @ApiResponse(responseCode = "404", description = "Заданного товара не существует")
     })
     @GetMapping("/{id}/manufacturing-info")
-    public ProductManufacturingInfo getManufacturingInfo(
+    public ProductManufacturingInfoResponse getManufacturingInfo(
             @Parameter(description = "ID товара")
             @PathVariable @Positive Long id) {
 
