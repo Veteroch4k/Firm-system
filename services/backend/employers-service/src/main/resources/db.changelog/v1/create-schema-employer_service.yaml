@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-employer-table
+      author: Veteroch4k
+      changes:
+        - sql:
+            sql: "CREATE SCHEMA IF NOT EXISTS employer_service"

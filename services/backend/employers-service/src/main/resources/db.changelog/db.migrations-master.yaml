@@ -1,4 +1,9 @@
 databaseChangeLog:
   - include:
+      file: v1/create-schema-employer_service.yaml
+      relativeToChangelogFile: true
+
+  - include:
       file: v1/create-employer-table.yaml
       relativeToChangelogFile: true
+

@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 1
+      id: create-employer-table
       author: Veteroch4k
       changes:
         - createTable:
@@ -15,4 +15,4 @@ databaseChangeLog:
               - column:
                   name: name
                   type: VARCHAR(255)
-            tableName: employer
+            tableName: employers

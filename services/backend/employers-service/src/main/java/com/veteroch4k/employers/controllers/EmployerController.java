@@ -1,10 +1,13 @@
 package com.veteroch4k.employers.controllers;
 
+import com.veteroch4k.employers.dto.EmployerResponse;
 import com.veteroch4k.employers.models.Employer;
 import com.veteroch4k.employers.repositories.EmployerRepository;
 import com.veteroch4k.employers.services.EmployerSevice;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
@@ -14,39 +17,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/employers")
 public class EmployerController {
 
   private final EmployerSevice service;
-  private final EmployerRepository repository;
-
-  public EmployerController(EmployerSevice service, EmployerRepository repository) {
-    this.service = service;
-    this.repository = repository;
-  }
 
 
   @GetMapping("/all")
-  public Page<Employer> getAllEmployers(
+  public Page<EmployerResponse> getAllEmployers(
       @RequestParam(defaultValue = "0") int page,
       @RequestParam(defaultValue = "20") int size
   ) {
-    return repository.findAll(PageRequest.of(page, size));
+    return service.findAllEmployers(PageRequest.of(page, size));
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Employer> getEmployerById(@PathVariable Long id) {
-    return repository.findById(id)
-        .map(ResponseEntity::ok)
-        .orElse(ResponseEntity.notFound().build());
+  public EmployerResponse getEmployerById(@PathVariable Long id) {
+    return service.findEmployerById(id);
   }
 
   @GetMapping("/random")
-  public ResponseEntity<Employer> getRandomEmployer() {
-    return service.getRandomEmployer()
-        .map(ResponseEntity::ok)
-        .orElse(ResponseEntity.noContent().build());
+  public EmployerResponse getRandomEmployer() {
+    return service.getRandomEmployer();
   }
 
   @GetMapping("/test")
