@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -60,7 +61,7 @@ public class DrawingController {
     @GetMapping("/{id}")
     public DrawingResponse getDrawing(
             @Parameter(description = "Внутренний ID чертежа")
-            @PathVariable @Positive Long id) {
+            @PathVariable @PositiveOrZero Long id) {
 
         return drawingService
                 .findDrawingById(id);

@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -61,7 +62,7 @@ public class ProductController {
     @GetMapping("/{id}")
     public ProductResponse getProduct(
             @Parameter(description = "ID товара")
-            @PathVariable @Positive Long id) {
+            @PathVariable @PositiveOrZero Long id) {
         return productService
                 .findProductById(id);
 
@@ -77,7 +78,7 @@ public class ProductController {
     @GetMapping("/{id}/manufacturing-info")
     public ProductManufacturingInfoResponse getManufacturingInfo(
             @Parameter(description = "ID товара")
-            @PathVariable @Positive Long id) {
+            @PathVariable @PositiveOrZero Long id) {
 
         return productService.getProductInfo(id);
     }
