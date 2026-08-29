@@ -18,6 +18,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -135,7 +136,7 @@ public class OrderController {
     @GetMapping("/{id}")
     public OrderResponseDTO getOrderById(
             @Parameter(description = "Внутренний ID заказа")
-            @PathVariable @Positive Long id) {
+            @PathVariable @PositiveOrZero Long id) {
         return service.findOrderById(id);
     }
 }

@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
@@ -21,6 +22,7 @@ public class OrderService {
   private final KafkaProducerService kafkaProducerService;
   private final OrderRepository orderRepository;
 
+  @Transactional(readOnly = true)
   public Page<OrderResponseDTO> findPageOrders(PageRequest of) {
 
     Page<Order> orders = orderRepository.findAll(of);
@@ -38,6 +40,7 @@ public class OrderService {
   public Page<OrderResponseDTO> findByOrdersByDateBetween(LocalDate start, LocalDate end, PageRequest of) {
 
     if(start.isAfter(end)) {
+      log.warn("Попытка поиска заказов с некорректным диапазоном дат: start={}, end={}", start, end);
       throw new IllegalArgumentException("Дата начала не может быть позже даты окончания");
     }
 
@@ -50,11 +53,15 @@ public class OrderService {
   public OrderResponseDTO findOrderById(Long id) {
 
     Order order = orderRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Заказ с ID " + id + " не найден"));
+            .orElseThrow(() -> {
+              log.warn("Заказ с ID {} не найден при запросе по ID", id);
+                return new ResourceNotFoundException("Заказ с ID " + id + " не найден");
+            });
 
     return new OrderResponseDTO(order);
   }
 
+  @Transactional
   public void createOrder(OrderRequestDTO orderRequest) {
 
     log.info("Начало создания заказа для продукта ID: {}", orderRequest.productId());
@@ -78,7 +85,9 @@ public class OrderService {
 
   }
 
+  @Transactional
   public void deleteAllOrders() {
+    log.warn("Инициировано полное удаление всех заказов из БД!");
     orderRepository.deleteAll();
   }
 }
