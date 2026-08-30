@@ -82,7 +82,7 @@ public class EmployerController {
     return service.getRandomEmployer();
   }
 
-  @Operation(summary = "Получить случайного сотрудника")
+  @Operation(summary = "Имитация работы шаблонов устойчивости")
   @ApiResponses(value = {
           @ApiResponse(responseCode = "200", description = "Тестовая работа успешно проделана :)"),
           @ApiResponse(responseCode = "500", description = "Внутренняя ошибка сервера",
