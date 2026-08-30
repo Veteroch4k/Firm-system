@@ -6,11 +6,9 @@ import com.veteroch4k.employers.repositories.EmployerRepository;
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
-
-import java.util.Optional;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeoutException;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.errors.ResourceNotFoundException;
@@ -58,7 +56,7 @@ public class EmployerSevice {
             throw new ResourceNotFoundException("Таблица сотрудников пуста!");
         }
 
-        long idx = (long) (Math.random() * count);
+        long idx = ThreadLocalRandom.current().nextLong(1, count + 1);
         Employer employer = repository.findById(idx).orElseThrow(() -> {
             log.warn("При получении случайного сотрудника произошла пока непонятно какая могла бы пройзоти ошибка!");
             return new ResourceNotFoundException("Непредвиденная на данном этапе ошибка )");

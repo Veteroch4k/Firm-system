@@ -11,7 +11,7 @@ databaseChangeLog:
                     nullable: false
                     primaryKey: true
                   name: id
-                  type: INT
+                  type: BIGINT
               - column:
                   name: name
                   type: VARCHAR(255)

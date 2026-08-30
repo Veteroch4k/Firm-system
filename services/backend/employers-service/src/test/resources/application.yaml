@@ -1,0 +1,33 @@
+spring:
+  config:
+    import: ""
+
+
+  cloud:
+    config:
+      enabled: false
+
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.migrations-master.yaml
+    default-schema: employer_service
+    liquibase-schema: employer_service
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategySnakeCaseImpl
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        default_schema: employer_service
+
+  sql:
+    init:
+      mode: never
+
+eureka:
+  client:
+    enabled: false
