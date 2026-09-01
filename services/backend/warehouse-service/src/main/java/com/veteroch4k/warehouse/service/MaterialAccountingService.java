@@ -5,11 +5,13 @@ import com.veteroch4k.warehouse.models.MovementType;
 import com.veteroch4k.warehouse.repositories.MaterialAccountingRepository;
 import com.veteroch4k.warehouse.repositories.MaterialRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class MaterialAccountingService {
@@ -25,6 +27,8 @@ public class MaterialAccountingService {
     @Transactional
     public void supplyMaterial(Long materialId, Long quantity, Long factoryId) {
 
+        log.debug("Начало создания записи о поставке материалов в фабрику ID: {}.", factoryId);
+
         MaterialAccounting accounting = new MaterialAccounting();
         accounting.setMaterial(materialRepository.getReferenceById(materialId));
         accounting.setQuantity(quantity);
@@ -35,10 +39,17 @@ public class MaterialAccountingService {
 
         materialAccountingRepository.save(accounting);
 
+        log.debug("записи о поставке материалов в фабрику ID: {} успешно создана", factoryId);
+
+
     }
 
     @Transactional
     public void spendMaterialForOrder(Long materialId, Long quantity, Long factoryId) {
+
+        log.debug("Резервация материалов фабрики ID: {} для заказа", factoryId);
+
+
         MaterialAccounting accounting = new MaterialAccounting();
         accounting.setMaterial(materialRepository.getReferenceById(materialId));
         accounting.setQuantity(quantity);
@@ -48,6 +59,9 @@ public class MaterialAccountingService {
         accounting.setDate(LocalDate.now());
 
         materialAccountingRepository.save(accounting);
+
+        log.debug("Резервация материалов фабрики ID: {} для заказа прошла успешно", factoryId);
+
     }
 
 

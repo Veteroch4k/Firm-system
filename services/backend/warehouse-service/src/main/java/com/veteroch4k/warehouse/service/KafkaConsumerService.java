@@ -10,11 +10,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class KafkaConsumerService {
@@ -25,10 +27,11 @@ public class KafkaConsumerService {
 
   @KafkaListener(topics = "warehouse-commands", groupId = "warehouse-group")
   public void handleMaterialRequest(MaterialReservationCommand command) {
-    System.out.println("Получено сообщение kafka: Заказ ID: " + command.orderId());
-
+    log.info("Получено сообщение kafka: Заказ ID: {}",command.orderId());
 
     reservationService.processReservation(command);
+
+    log.info("Отправка сообщения об успешной резервации материалов.");
 
     kafkaTemplate.send("warehouse-events", new MaterialReservedEvent(command.orderId()));
 
