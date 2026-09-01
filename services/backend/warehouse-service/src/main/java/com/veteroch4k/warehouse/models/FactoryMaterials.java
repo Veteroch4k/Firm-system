@@ -23,16 +23,16 @@ public class FactoryMaterials {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private Long id;
 
   @Column(name = "factory_id")
-  private int factoryId;
+  private Long factoryId;
 
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "material_id")
   private Material material;
 
-  private int quantity;
+  private Long quantity;
 
   @Column(name = "created_at")
   private LocalDate createdAt;

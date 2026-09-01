@@ -1,4 +1,4 @@
 package com.veteroch4k.warehouse.models;
 
-public record MaterialReservedEvent(int orderId) {}
+public record MaterialReservedEvent(Long orderId) {}
 

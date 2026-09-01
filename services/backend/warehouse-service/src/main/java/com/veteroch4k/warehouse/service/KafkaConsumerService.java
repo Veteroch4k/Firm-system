@@ -20,29 +20,15 @@ import org.springframework.transaction.annotation.Transactional;
 public class KafkaConsumerService {
 
   private final KafkaTemplate<String, Object> kafkaTemplate;
-  private final WarehouseService service;
+  private final ReservationService reservationService;
+
 
   @KafkaListener(topics = "warehouse-commands", groupId = "warehouse-group")
-  @Transactional
   public void handleMaterialRequest(MaterialReservationCommand command) {
     System.out.println("Получено сообщение kafka: Заказ ID: " + command.orderId());
 
-    List<FactoryMaterials> materials = service.getFactoryMaterials(command.factoryId());
 
-    Map<Integer, Integer> currentBalances = new HashMap<>();
-
-    for(FactoryMaterials material : materials) {
-      currentBalances.put(material.getMaterial().getId(), material.getQuantity());
-    }
-
-    for(RequiredMaterial requiredMaterial : command.materials()) {
-      int currentAmount = currentBalances.getOrDefault(requiredMaterial.materialId(), 0);
-      if(currentAmount < requiredMaterial.quantity()) {
-        service.supplyMaterial(requiredMaterial.materialId(), requiredMaterial.quantity() - currentAmount, command.factoryId());
-      }
-
-      service.spendMaterialForOrder(requiredMaterial.materialId(), requiredMaterial.quantity(), command.factoryId());
-    }
+    reservationService.processReservation(command);
 
     kafkaTemplate.send("warehouse-events", new MaterialReservedEvent(command.orderId()));
 

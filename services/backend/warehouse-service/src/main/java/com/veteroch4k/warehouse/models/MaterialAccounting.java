@@ -29,24 +29,24 @@ public class MaterialAccounting {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private Long id;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "material_id")
   private Material material;
 
-  private int quantity;
+  private Long quantity;
 
   @Enumerated(EnumType.STRING)
   @JdbcTypeCode(SqlTypes.NAMED_ENUM)
   private MovementType type;
 
   @Column(name = "factory_id", nullable = false)
-  private Integer factoryId;
+  private Long factoryId;
 
 
   @Column(name = "employer_id", nullable = false)
-  private Integer employerId;
+  private Long employerId;
 
 
   private LocalDate date;

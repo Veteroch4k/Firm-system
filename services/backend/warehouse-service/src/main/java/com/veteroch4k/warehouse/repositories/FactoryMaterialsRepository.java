@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FactoryMaterialsRepository extends JpaRepository<FactoryMaterials, Integer> {
+public interface FactoryMaterialsRepository extends JpaRepository<FactoryMaterials, Long> {
 
-  List<FactoryMaterials> findAllByFactoryId(int id);
+  List<FactoryMaterials> findAllByFactoryId(Long id);
 
 }

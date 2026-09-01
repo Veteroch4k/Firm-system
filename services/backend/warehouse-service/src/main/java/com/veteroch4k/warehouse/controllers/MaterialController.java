@@ -1,11 +1,12 @@
 package com.veteroch4k.warehouse.controllers;
 
-import com.veteroch4k.warehouse.models.Material;
-import com.veteroch4k.warehouse.repositories.MaterialRepository;
+import com.veteroch4k.warehouse.dto.MaterialRequest;
+import com.veteroch4k.warehouse.dto.MaterialResponse;
+import com.veteroch4k.warehouse.service.MaterialService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,62 +17,47 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.HandlerMapping;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/material")
 public class MaterialController {
 
-  private final MaterialRepository materialRepository;
-  private final HandlerMapping resourceHandlerMapping;
+    private final MaterialService materialService;
 
-  public MaterialController(MaterialRepository materialRepository,
-      HandlerMapping resourceHandlerMapping) {
-    this.materialRepository = materialRepository;
-    this.resourceHandlerMapping = resourceHandlerMapping;
-  }
+    @GetMapping("/all")
+    public Page<MaterialResponse> getMaterials(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size) {
+        return materialService.findAllMaterials(PageRequest.of(page, size));
+    }
 
-  @GetMapping("/all")
-  public Page<Material> getMaterials(
-      @RequestParam(defaultValue = "0") int page,
-      @RequestParam(defaultValue = "20") int size )
-  {
-    return materialRepository.findAll(PageRequest.of(page, size));
-  }
+    @GetMapping("/{id}")
+    public MaterialResponse getMaterial(@PathVariable Long id) {
 
-  @GetMapping("/{id}")
-  public ResponseEntity<Material> getMaterial(@PathVariable int id) {
+        return materialService.findMaterialById(id);
 
-    return materialRepository.findById(id)
-        .map(ResponseEntity::ok)
-        .orElse(ResponseEntity.notFound().build());
+    }
 
-  }
+    @PostMapping("/create-material")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createMaterial(@RequestBody MaterialRequest materialRequest) {
+        materialService.saveMaterial(materialRequest);
+    }
 
-  @PostMapping("/create-material")
-  @ResponseStatus(HttpStatus.CREATED)
-  public Material createMaterial(@RequestBody Material material) {
-    return materialRepository.save(material);
-  }
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void updateMaterial(
+            @PathVariable Long id,
+            @RequestBody MaterialRequest materialRequest) {
+        materialService.updateMaterialById(id, materialRequest);
 
-  @PutMapping("/{id}")
-  public ResponseEntity<Material> updateMaterial(
-      @PathVariable int id,
-      @RequestBody Material material)
-  {
-    if(!materialRepository.existsById(id)) return ResponseEntity.notFound().build();
+    }
 
-    material.setId(id);
-
-    Material updated = materialRepository.save(material);
-
-    return ResponseEntity.ok(updated);
-  }
-
-  @DeleteMapping("/{id}")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteMaterial(@PathVariable int id) {
-    materialRepository.deleteById(id);
-  }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteMaterial(@PathVariable Long id) {
+        materialService.deleteMaterialById(id);
+    }
 
 }
