@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-schema-warehouse_service.yaml
+      author: Veteroch4k
+      changes:
+        - sql:
+            sql: "CREATE SCHEMA IF NOT EXISTS warehouse_service;"

@@ -13,16 +13,15 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 import org.springframework.util.Assert;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter @Setter
 @Entity
 @Table(name = "material_accounting")
 public class MaterialAccounting {
@@ -39,6 +38,7 @@ public class MaterialAccounting {
 
   @Enumerated(EnumType.STRING)
   @JdbcTypeCode(SqlTypes.NAMED_ENUM)
+  @Column(columnDefinition = "movement_type")
   private MovementType type;
 
   @Column(name = "factory_id", nullable = false)

@@ -11,10 +11,10 @@ databaseChangeLog:
                     nullable: false
                     primaryKey: true
                   name: id
-                  type: INT
+                  type: BIGINT
               - column:
                   constraints:
                     nullable: false
                   name: name
                   type: VARCHAR(25)
-            tableName: material
+            tableName: materials

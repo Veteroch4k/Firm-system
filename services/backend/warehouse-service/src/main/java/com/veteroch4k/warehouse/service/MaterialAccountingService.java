@@ -18,6 +18,10 @@ public class MaterialAccountingService {
     private final MaterialRepository materialRepository;
 
 
+    /*
+        По факту тут пока можно беез аннотации @Transactional, но оставлю на будущее, чтоб потом форс-мажоров не было
+     */
+
     @Transactional
     public void supplyMaterial(Long materialId, Long quantity, Long factoryId) {
 
@@ -45,5 +49,7 @@ public class MaterialAccountingService {
 
         materialAccountingRepository.save(accounting);
     }
+
+
 
 }

@@ -10,13 +10,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter @Setter
 @Entity
 @Table(name = "factory_materials")
 public class FactoryMaterials {
@@ -28,7 +27,7 @@ public class FactoryMaterials {
   @Column(name = "factory_id")
   private Long factoryId;
 
-  @ManyToOne(fetch = FetchType.EAGER)
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "material_id")
   private Material material;
 
