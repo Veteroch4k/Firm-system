@@ -49,7 +49,6 @@ public class MaterialAccountingService {
 
         log.debug("Резервация материалов фабрики ID: {} для заказа", factoryId);
 
-
         MaterialAccounting accounting = new MaterialAccounting();
         accounting.setMaterial(materialRepository.getReferenceById(materialId));
         accounting.setQuantity(quantity);
