@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: create-material-table
+      id: create-materials-table
       author: Veteroch4k
       changes:
         - createTable:

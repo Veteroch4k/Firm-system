@@ -59,12 +59,12 @@ public class MaterialService {
 
     }
 
-    public void saveMaterial(MaterialRequest materialRequest) {
+    public MaterialResponse saveMaterial(MaterialRequest materialRequest) {
 
         Material material = new Material();
         material.setName(materialRequest.name());
 
-        materialRepository.save(material);
+        return materialToResponse(materialRepository.save(material));
 
     }
 

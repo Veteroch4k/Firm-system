@@ -80,13 +80,13 @@ public class MaterialController {
             @ApiResponse(responseCode = "400", description = "Невалидные входные данные",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
     })
-    @PostMapping("/create-material")
+    @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createMaterial(
+    public MaterialResponse createMaterial(
             @Parameter(description = "Данные для создания материала")
             @RequestBody @Valid MaterialRequest materialRequest)
     {
-        materialService.saveMaterial(materialRequest);
+        return materialService.saveMaterial(materialRequest);
     }
 
     @Operation(summary = "Обновление данных о материала")

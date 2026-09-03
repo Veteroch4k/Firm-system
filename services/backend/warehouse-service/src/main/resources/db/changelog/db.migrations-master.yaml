@@ -4,11 +4,11 @@ databaseChangeLog:
       relativeToChangelogFile: true
 
   - include:
-      file: v1/create-factory_materials-table.yaml
+      file: v1/create-materials-table.yaml
       relativeToChangelogFile: true
 
   - include:
-      file: v1/create-material-table.yaml
+      file: v1/create-factory_materials-table.yaml
       relativeToChangelogFile: true
 
   - include:
