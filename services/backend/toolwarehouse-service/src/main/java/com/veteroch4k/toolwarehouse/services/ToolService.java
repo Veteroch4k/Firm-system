@@ -4,12 +4,14 @@ import com.veteroch4k.toolwarehouse.dto.ToolRequest;
 import com.veteroch4k.toolwarehouse.dto.ToolResponse;
 import com.veteroch4k.toolwarehouse.dto.ToolTypeResponse;
 import com.veteroch4k.toolwarehouse.exceptions.ResourceNotFoundException;
+import com.veteroch4k.toolwarehouse.mappers.ToolMapper;
 import com.veteroch4k.toolwarehouse.models.Tool;
 import com.veteroch4k.toolwarehouse.models.ToolType;
 import com.veteroch4k.toolwarehouse.repositories.ToolRepository;
 import com.veteroch4k.toolwarehouse.repositories.ToolTypeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.mapstruct.Mapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,13 +25,14 @@ public class ToolService {
 
     private final ToolRepository toolRepository;
     private final ToolTypeRepository toolTypeRepository;
+    private final ToolMapper toolMapper;
 
 
     public Page<ToolResponse> findAllTools(PageRequest of) {
 
         Page<Tool> tools = toolRepository.findAll(of);
 
-        return tools.map(this::toolToToolResponse);
+        return tools.map(toolMapper::toToolResponse);
 
     }
 
@@ -40,14 +43,14 @@ public class ToolService {
                     return new ResourceNotFoundException("Инструмент с ID: " + id + " не найден.");
         });
 
-        return toolToToolResponse(tool);
+        return toolMapper.toToolResponse(tool);
     }
 
     public Page<ToolResponse> findToolsByToolTypeName(String name, Pageable of) {
 
         Page<Tool> tools = toolRepository.findAllByToolType_Name(name, of);
 
-        return tools.map(this::toolToToolResponse);
+        return tools.map(toolMapper::toToolResponse);
     }
 
     @Transactional
@@ -63,7 +66,7 @@ public class ToolService {
         Tool tool = new Tool();
         tool.setToolType(toolType);
 
-        return toolToToolResponse(toolRepository.save(tool));
+        return toolMapper.toToolResponse(toolRepository.save(tool));
 
     }
 
@@ -102,16 +105,4 @@ public class ToolService {
 
     }
 
-    private ToolResponse toolToToolResponse(Tool tool) {
-
-        return new ToolResponse(
-                tool.getId(),
-                new ToolTypeResponse(
-                        tool.getToolType().getId(),
-                        tool.getToolType().getName(),
-                        tool.getToolType().getDescription()
-                )
-        );
-
-    }
 }
