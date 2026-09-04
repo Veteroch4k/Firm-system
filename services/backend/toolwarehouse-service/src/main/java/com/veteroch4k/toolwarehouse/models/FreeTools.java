@@ -22,10 +22,9 @@ import lombok.NoArgsConstructor;
 @Table(name = "free_tools")
 public class FreeTools {
 
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private Long id;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "tool_id")

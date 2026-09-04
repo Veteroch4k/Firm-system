@@ -23,15 +23,15 @@ public class FactoryTools {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private Long id;
 
   @Column(name = "factory_id",nullable = false)
-  private int factoryId;
+  private Long factoryId;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "tooltype_id")
   private ToolType toolType;
 
-  private int quantity;
+  private Long quantity;
 
 }

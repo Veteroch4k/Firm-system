@@ -27,23 +27,23 @@ public class ToolAccounting {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private Long id;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "tooltype_id")
   private ToolType toolType;
 
-  private int quantity;
+  private Long quantity;
 
   @Column(name = "factory_id",nullable = false)
-  private int factoryId;
+  private Long factoryId;
 
   @Enumerated(EnumType.STRING)
   @JdbcTypeCode(SqlTypes.NAMED_ENUM)
   private MovementType type;
 
   @Column(name = "employee_id", nullable = false)
-  private Integer employeeId;
+  private Long employeeId;
 
   private LocalDate date;
 

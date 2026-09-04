@@ -4,8 +4,8 @@ import com.veteroch4k.toolwarehouse.models.FactoryTools;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface FactoryToolsRepository extends JpaRepository<FactoryTools, Integer> {
+public interface FactoryToolsRepository extends JpaRepository<FactoryTools, Long> {
 
-  List<FactoryTools> findAllByFactoryId(int factoryId);
+  List<FactoryTools> findAllByFactoryId(Long factoryId);
 
 }

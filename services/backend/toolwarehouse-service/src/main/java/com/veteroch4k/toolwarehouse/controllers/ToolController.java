@@ -1,13 +1,12 @@
 package com.veteroch4k.toolwarehouse.controllers;
 
-import com.veteroch4k.toolwarehouse.models.Tool;
-import com.veteroch4k.toolwarehouse.repositories.ToolRepository;
-import java.util.List;
-import java.util.Optional;
+import com.veteroch4k.toolwarehouse.dto.ToolRequest;
+import com.veteroch4k.toolwarehouse.dto.ToolResponse;
+import com.veteroch4k.toolwarehouse.services.ToolService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,79 +19,57 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/tool")
 public class ToolController {
 
-  private final ToolRepository toolRepository;
+    private final ToolService toolService;
 
-  public ToolController(ToolRepository toolRepository) {
-    this.toolRepository = toolRepository;
-  }
-
-  @GetMapping("/all")
-  public Page<Tool> getTools(
-      @RequestParam(defaultValue = "0") int page,
-      @RequestParam(defaultValue = "20") int size
-  )
-  {
-    return toolRepository.findAll(PageRequest.of(page, size));
-  }
-
-  @GetMapping("/{id}")
-  public ResponseEntity<Tool> getToolById(@PathVariable int id) {
-
-    return toolRepository.findById(id)
-        .map(ResponseEntity::ok)
-        .orElse(ResponseEntity.notFound().build());
-
-  }
-
-  @GetMapping("/by-type")
-  public ResponseEntity<List<Tool>> getToolsByType(
-      @RequestParam String typeName
-  )
-  {
-    return ResponseEntity.ok(toolRepository.findToolsByToolType_Name(typeName.trim()));
-  }
-
-  @PostMapping("/create-tool")
-  @ResponseStatus(HttpStatus.CREATED)
-  public Tool createTool(@RequestBody Tool tool) {
-
-    return toolRepository.save(tool);
-
-  }
-
-  @PutMapping("/{id}")
-  public ResponseEntity<Tool> updateTool(
-      @PathVariable int id,
-      @RequestBody Tool tool)
-  {
-
-    Optional<Tool> optionalTool = toolRepository.findById(id);
-
-    if (optionalTool.isEmpty()) {
-      return ResponseEntity.notFound().build();
+    @GetMapping("/all")
+    public Page<ToolResponse> getTools(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size
+    ) {
+        return toolService.findAllTools(PageRequest.of(page, size));
     }
 
-    Tool updatedTool = optionalTool.get();
+    @GetMapping("/{id}")
+    public ToolResponse getToolById(@PathVariable Long id) {
 
-    // Явно копируем только нужные поля
-    updatedTool.setToolType(tool.getToolType());
+        return toolService.findToolById(id);
 
-
-    return ResponseEntity.ok(toolRepository.save(updatedTool));
-
-  }
-
-  @DeleteMapping("/{id}")
-  public ResponseEntity<Void> deleteTool(@PathVariable int id) {
-    if (toolRepository.existsById(id)) {
-      toolRepository.deleteById(id);
-      return ResponseEntity.noContent().build(); // 204
     }
-    return ResponseEntity.notFound().build(); // 404
 
-  }
+    @GetMapping("/by-type")
+    public Page<ToolResponse> getToolsByType(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size,
+            @RequestParam String typeName
+    ) {
+        return toolService.findToolsByToolTypeName(typeName.trim(), PageRequest.of(page, size));
+    }
+
+    @PostMapping("/create-tool")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ToolResponse createTool(@RequestBody ToolRequest toolRequest) {
+
+        return toolService.saveTool(toolRequest);
+
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateTool(
+            @PathVariable Long id,
+            @RequestBody ToolRequest toolRequest) {
+        toolService.updateTool(id, toolRequest);
+
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteTool(@PathVariable Long id) {
+        toolService.deleteTool(id);
+
+    }
 
 }
