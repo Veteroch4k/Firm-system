@@ -3,33 +3,54 @@ databaseChangeLog:
       id: create-tools_accounting-table
       author: Veteroch4k
       changes:
+        - sql:
+            sql: "CREATE TYPE movement_type AS ENUM('INCOME', 'OUTCOME', 'TRANSFER')"
         - createTable:
             tableName: tools_accounting
             columns:
               - column:
                   name: id
-                  type: INT
+                  type: BIGINT
                   autoIncrement: true
                   constraints:
                     primaryKey: true
 
               - column:
-                  name: toolType_id
-                  type: INT
+                  name: tooltype_id
+                  type: BIGINT
                   constraints:
                     nullable: false
+
+              - column:
+                  constraints:
+                    nullable: false
+                    checkConstraint: "quantity >= 0"
+                  type: BIGINT
+                  name: quantity
 
               - column:
                   name: factory_id
-                  type: INT
+                  type: BIGINT
                   constraints:
                     nullable: false
 
               - column:
-                  name: order_id
-                  type: INT
                   constraints:
                     nullable: false
+                  type: BIGINT
+                  name: employee_id
+
+              - column:
+                  constraints:
+                    nullable: false
+                  type: movement_type
+                  name: type
+
+              - column:
+                  constraints:
+                    nullable: false
+                  type: DATE
+                  name: date
 
         - addForeignKeyConstraint:
             baseTableName: tools_accounting

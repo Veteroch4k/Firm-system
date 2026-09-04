@@ -8,39 +8,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class KafkaConsumerService {
 
   private final KafkaTemplate<String, Object> kafkaTemplate;
-  private final ToolwarehouseService service;
+
+  private final ReservationService reservationService;
 
   @KafkaListener(topics = "toolwarehouse-commands", groupId = "toolwarehouse-group")
   @Transactional
   public void handleToolsRequest(ToolReservationCommand command) {
-    System.out.println("Получено сообщение kafka: Заказ ID: " + command.orderId());
+    log.info("Получено сообщение kafka: Заказ ID: {}",command.orderId());
 
-    List<FactoryTools> tools = service.getFactoryTools(command.factoryId());
+    reservationService.processReservation(command);
 
-    Map<Integer, Integer> currentBalances = new HashMap<>();
-
-    for(FactoryTools tool : tools) {
-      currentBalances.put(tool.getToolType().getId(), tool.getQuantity());
-    }
-
-    for(RequiredTools requiredTool : command.tools()) {
-      int currentAmount = currentBalances.getOrDefault(requiredTool.toolType(), 0);
-      if(currentAmount < requiredTool.quantity()) {
-        service.supplyTool(requiredTool.toolType(), requiredTool.quantity() - currentAmount, command.factoryId());
-      }
-
-      service.spendToolsForOrder(requiredTool.toolType(), requiredTool.quantity(), command.factoryId());
-    }
+    log.info("Отправка сообщения об успешной резервации материалов.");
 
     kafkaTemplate.send("toolwarehouse-events", new ToolReservedEvent(command.orderId()));
 

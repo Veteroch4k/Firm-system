@@ -1,14 +1,14 @@
 databaseChangeLog:
   - changeSet:
-      id: create-toolTypes-table
+      id: create-tool_types-table
       author: Veteroch4k
       changes:
         - createTable:
-            tableName: toolType
+            tableName: tool_types
             columns:
               - column:
                   name: id
-                  type: INT
+                  type: BIGINT
                   autoIncrement: true
                   constraints:
                     primaryKey: true
@@ -23,3 +23,7 @@ databaseChangeLog:
                   name: description
                   type: TEXT
 
+        - addUniqueConstraint:
+            tableName: tool_types
+            columnNames: name
+            constraintName: uk_name_unique
