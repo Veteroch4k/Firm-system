@@ -1,7 +1,7 @@
 databaseChangeLog:
   - changeSet:
       id: create-tools-table
-      author: Veteroch4l
+      author: Veteroch4k
       changes:
         - createTable:
             tableName: tools
@@ -21,8 +21,8 @@ databaseChangeLog:
 
         - addForeignKeyConstraint:
             baseTableName: tools
-            baseColumnNames: toolType_id
-            referencedTableName: toolTypes
+            baseColumnNames: tooltype_id
+            referencedTableName: tool_types
             referencedColumnNames: id
-            constraintName: fk_tools_toolTypes
+            constraintName: fk_tools_tool_types
 

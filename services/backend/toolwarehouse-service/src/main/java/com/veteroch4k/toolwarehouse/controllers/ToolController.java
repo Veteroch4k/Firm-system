@@ -78,8 +78,8 @@ public class ToolController {
             @ApiResponse(responseCode = "400", description = "Переданы невалидные параметры",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
-    @GetMapping("/by-type")
-    public Page<ToolResponse> getToolsByType(
+    @GetMapping("/by-type-name")
+    public Page<ToolResponse> getToolsByTypeName(
             @Parameter(description = "Номер страницы")
             @RequestParam(defaultValue = "0") @Min(0) int page,
 
@@ -100,7 +100,7 @@ public class ToolController {
             @ApiResponse(responseCode = "404", description = "Передан несуществующий Тип Инструмента (fk constraint)",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
-    @PostMapping("/create-tool")
+    @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public ToolResponse createTool(
             @Parameter(description = "Данные для создания инструмента")

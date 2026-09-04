@@ -8,6 +8,6 @@ public record ToolResponse(
         @Schema(description = "Уникальный идентификатор инструмента", example = "11")
         Long id,
 
-        ToolTypeResponse toolTypeResponse
+        ToolTypeResponse toolType
 ) {
 }

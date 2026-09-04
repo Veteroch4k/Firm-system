@@ -34,9 +34,9 @@ databaseChangeLog:
 
         - addForeignKeyConstraint:
             baseTableName: factory_tools
-            baseColumnNames: toolType_id
-            referencedTableName: toolTypes
+            baseColumnNames: tooltype_id
+            referencedTableName: tool_types
             referencedColumnNames: id
-            constraintName: fk_factory_tools_toolTypes
+            constraintName: fk_factory_tools_tool_types
 
 

@@ -54,7 +54,7 @@ databaseChangeLog:
 
         - addForeignKeyConstraint:
             baseTableName: tools_accounting
-            baseColumnNames: toolType_id
-            referencedTableName: toolTypes
+            baseColumnNames: tooltype_id
+            referencedTableName: tool_types
             referencedColumnNames: id
-            constraintName: fk_tools_accounting_toolTypes
+            constraintName: fk_tools_accounting_tool_types
