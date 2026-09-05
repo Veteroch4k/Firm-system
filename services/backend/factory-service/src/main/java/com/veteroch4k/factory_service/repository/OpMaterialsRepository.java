@@ -4,8 +4,8 @@ import com.veteroch4k.factory_service.models.OperationMaterials;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface OpMaterialsRepository extends JpaRepository<OperationMaterials, Integer> {
+public interface OpMaterialsRepository extends JpaRepository<OperationMaterials, Long> {
 
-  List<OperationMaterials> getOperationMaterialsByOperationId(int opId);
+  List<OperationMaterials> getOperationMaterialsByOperationId(Long opId);
 
 }

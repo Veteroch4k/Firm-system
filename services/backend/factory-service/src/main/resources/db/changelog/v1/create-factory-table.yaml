@@ -11,7 +11,7 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
                   name: id
-                  type: INT
+                  type: BIGINT
               - column:
                   constraints:
                     nullable: false

@@ -1,0 +1,48 @@
+spring:
+  config:
+    import: ""
+
+  cloud:
+    config:
+      enabled: false
+
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.migrations-master.yaml
+    default-schema: factory_service
+    liquibase-schema: factory_service
+    contexts: test
+
+  kafka:
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.trusted.packages:  "com.veteroch4k.factory_service.models"
+    consumer:
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+        spring.json.trusted.packages: |
+          com.veteroch4k.factory_service.models,
+          com.veteroch4k.factory_service.models.commands
+      auto-offset-reset: earliest
+
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategySnakeCaseImpl
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        default_schema: factory_service
+
+  sql:
+    init:
+      mode: never
+
+eureka:
+  client:
+    enabled: false

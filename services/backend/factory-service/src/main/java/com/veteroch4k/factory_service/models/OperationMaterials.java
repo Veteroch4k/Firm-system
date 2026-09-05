@@ -9,28 +9,26 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter @Setter
 @Entity
 @Table(name = "operation_materials")
 public class OperationMaterials {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private Long id;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "operation_id")
   private Operation operation;
 
   @Column(name = "material_id", nullable = false)
-  private int materialId;
+  private Long materialId;
 
-  private int quantity;
+  private Long quantity;
 
 }

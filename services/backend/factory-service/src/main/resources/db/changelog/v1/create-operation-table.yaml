@@ -11,7 +11,7 @@ databaseChangeLog:
                     nullable: false
                     primaryKey: true
                   name: id
-                  type: INT
+                  type: BIGINT
               - column:
                   constraints:
                     nullable: false
@@ -20,8 +20,13 @@ databaseChangeLog:
               - column:
                   constraints:
                     nullable: false
+                  name: duration
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
                   name: factory_id
-                  type: INT
+                  type: BIGINT
             tableName: operation
 
         - addForeignKeyConstraint:

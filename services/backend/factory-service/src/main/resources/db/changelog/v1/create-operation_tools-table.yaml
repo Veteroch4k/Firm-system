@@ -10,19 +10,19 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
                   name: operation_id
-                  type: INT
+                  type: BIGINT
               - column:
                   constraints:
                     primaryKey: true
                     nullable: false
-                  name: toolType_id
-                  type: INT
+                  name: tooltype_id
+                  type: BIGINT
               - column:
                   constraints:
                     nullable: true
                     checkConstraint: "quantity >= 0"
                   name: quantity
-                  type: INT
+                  type: BIGINT
             tableName: operation_tools
 
         - addForeignKeyConstraint:

@@ -5,9 +5,10 @@ import jakarta.persistence.Embeddable;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter @Setter
 @Embeddable
 public class OperationToolsId {
 
@@ -16,6 +17,6 @@ public class OperationToolsId {
   private Operation operation;
 
   @Column(name = "tooltype_id")
-  private int toolTypeId;
+  private Long toolTypeId;
 
 }

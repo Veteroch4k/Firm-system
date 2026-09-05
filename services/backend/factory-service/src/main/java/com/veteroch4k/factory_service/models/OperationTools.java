@@ -4,11 +4,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -19,6 +17,6 @@ public class OperationTools {
   private OperationToolsId operationToolsId;
 
   @Column(name = "quantity")
-  private int quantity;
+  private Long quantity;
 
 }

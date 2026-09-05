@@ -1,25 +1,23 @@
 package com.veteroch4k.factory_service.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 
-@Data
+@Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @RedisHash("OrderCache")
 public class FactoryOrder {
 
   @Id
-  private int orderId;
+  private Long orderId;
 
-  private int productId;
+  private Long productId;
 
-  private int productQuantity;
+  private Long productQuantity;
 
-  private String status;
+  private OrderStatus status;
 
   private boolean materialsReserved = false;
   private boolean toolsReserved = false;
