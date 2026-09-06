@@ -2,10 +2,7 @@ package com.veteroch4k.factory_service.services;
 
 import com.veteroch4k.factory_service.exceptions.ResourceNotFoundException;
 import com.veteroch4k.factory_service.models.*;
-import com.veteroch4k.factory_service.models.commands.MaterialReservationCommand;
-import com.veteroch4k.factory_service.models.commands.RequiredMaterial;
-import com.veteroch4k.factory_service.models.commands.RequiredTools;
-import com.veteroch4k.factory_service.models.commands.ToolReservationCommand;
+import com.veteroch4k.factory_service.models.commands.*;
 import com.veteroch4k.factory_service.models.events.MaterialReservedEvent;
 import com.veteroch4k.factory_service.models.events.OrderCreatedEvent;
 import com.veteroch4k.factory_service.models.events.ToolReservedEvent;
@@ -136,7 +133,9 @@ public class KafkaConsumerService {
             redisRepository.save(order);
             log.info("Заказ {} укомплектован и готов к работе!", order.getOrderId());
 
-            //kafkaTemplate.send("notification-events", new NotifyWorkerCommand(order.getOrderId()));
+            kafkaTemplate.send("employer-events", new SignOrderCommand(order.getOrderId()));
+
+
         } else {
             redisRepository.save(order);
         }

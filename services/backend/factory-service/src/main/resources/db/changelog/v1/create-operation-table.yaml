@@ -27,11 +27,11 @@ databaseChangeLog:
                     nullable: false
                   name: factory_id
                   type: BIGINT
-            tableName: operation
+            tableName: operations
 
         - addForeignKeyConstraint:
-            baseTableName: operation
+            baseTableName: operations
             baseColumnNames: factory_id
-            referencedTableName: factory
+            referencedTableName: factories
             referencedColumnNames: id
             constraintName: fk_operation_factory

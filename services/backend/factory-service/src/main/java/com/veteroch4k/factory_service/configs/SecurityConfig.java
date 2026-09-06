@@ -2,6 +2,7 @@ package com.veteroch4k.factory_service.configs;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -49,6 +50,7 @@ public class SecurityConfig {
    */
 
   @Bean
+  @ConditionalOnProperty(prefix = "spring.security.oauth2.client.registration.keycloak", name = "client-id")
   public RequestInterceptor oauth2FeignRequestInterceptor(
       ClientRegistrationRepository clientRegistrationRepository,
       OAuth2AuthorizedClientService authorizedClientService) {

@@ -32,7 +32,7 @@ databaseChangeLog:
         - addForeignKeyConstraint:
             baseTableName: operation_materials
             baseColumnNames: operation_id
-            referencedTableName: operation
+            referencedTableName: operations
             referencedColumnNames: id
             constraintName: fk_operation_materials_operation
 

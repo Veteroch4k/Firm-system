@@ -24,7 +24,8 @@ spring:
         spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
         spring.json.trusted.packages: |
           com.veteroch4k.factory_service.models,
-          com.veteroch4k.factory_service.models.commands
+          com.veteroch4k.factory_service.models.commands,
+          com.veteroch4k.factory_service.models.events
       auto-offset-reset: earliest
 
 

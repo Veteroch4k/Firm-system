@@ -17,4 +17,4 @@ databaseChangeLog:
                     nullable: false
                   name: name
                   type: VARCHAR(255)
-            tableName: factory
+            tableName: factories

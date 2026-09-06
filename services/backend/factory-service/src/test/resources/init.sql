@@ -1,1 +1,1 @@
-CREATE SCHEMA IF NOT EXISTS toolwarehouse_service;
+CREATE SCHEMA IF NOT EXISTS factory_service;

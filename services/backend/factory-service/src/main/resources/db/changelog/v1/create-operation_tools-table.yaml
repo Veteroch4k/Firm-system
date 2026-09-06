@@ -29,6 +29,5 @@ databaseChangeLog:
             baseTableName: operation_tools
             baseColumnNames: operation_id
             constraintName: fk_operation_tools_operation
-            referencedTableName: operation
+            referencedTableName: operations
             referencedColumnNames: id
-            onDelete: CASCADE
