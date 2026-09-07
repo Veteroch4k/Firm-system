@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-autoincrement-id
+      author: Veteroch4k
+      changes:
+        - addAutoIncrement:
+            tableName: employers_signs
+            columnName: id
+            columnDataType: BIGINT

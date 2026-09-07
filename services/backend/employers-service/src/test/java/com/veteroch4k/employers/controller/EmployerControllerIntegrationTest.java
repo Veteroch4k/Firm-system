@@ -1,5 +1,6 @@
 package com.veteroch4k.employers.controller;
 
+import com.veteroch4k.employers.BaseIntegrationTest;
 import com.veteroch4k.employers.models.Employer;
 import com.veteroch4k.employers.repositories.EmployerRepository;
 import org.junit.jupiter.api.AfterEach;

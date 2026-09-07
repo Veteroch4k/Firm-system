@@ -7,3 +7,12 @@ databaseChangeLog:
       file: v1/create-employer-table.yaml
       relativeToChangelogFile: true
 
+  - include:
+      file: v1/create-employers-signs-table.yaml
+      relativeToChangelogFile: true
+
+
+  - include:
+      file: v1.1/add-autoincrement-id.yaml
+      relativeToChangelogFile: true
+

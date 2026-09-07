@@ -20,3 +20,7 @@ databaseChangeLog:
   - include:
       relativeToChangelogFile: true
       file: v1/create-tool_accounting-table.yaml
+
+  - include:
+      relativeToChangelogFile: true
+      file: insert-data.yaml

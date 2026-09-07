@@ -106,7 +106,7 @@ public class ToolController {
             @Parameter(description = "Данные для создания инструмента")
             @RequestBody @Valid ToolRequest toolRequest) {
 
-        return toolService.saveTool(toolRequest);
+        return toolService.createTool(toolRequest);
 
     }
 

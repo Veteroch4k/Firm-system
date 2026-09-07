@@ -4,7 +4,8 @@ import com.veteroch4k.order.dto.orderDTO.OrderRequestDTO;
 import com.veteroch4k.order.dto.orderDTO.OrderResponseDTO;
 import com.veteroch4k.order.exceptions.ResourceNotFoundException;
 import com.veteroch4k.order.model.Order;
-import com.veteroch4k.order.model.OrderCreatedEvent;
+import com.veteroch4k.order.model.OrderStatus;
+import com.veteroch4k.order.model.event.OrderCreatedEvent;
 import com.veteroch4k.order.repository.OrderRepository;
 import java.time.LocalDate;
 import lombok.RequiredArgsConstructor;
@@ -72,6 +73,7 @@ public class OrderService {
 
     order.setOrderDate(LocalDate.now());
     order.setFinishDate(LocalDate.now().plusDays(10));
+    order.setOrderStatus(OrderStatus.PENDING);
     orderRepository.save(order);
 
     log.info("Заказ успешно сохранен в БД. ID: {}", order.getId());

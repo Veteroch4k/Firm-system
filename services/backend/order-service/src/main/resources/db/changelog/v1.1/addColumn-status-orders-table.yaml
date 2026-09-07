@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: addColumn-status-orders-table
+      author: Veteroch4k
+      changes:
+        - addColumn:
+            tableName: orders
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  type: order_status
+                  name: status
+                  defaultValue: "PENDING"

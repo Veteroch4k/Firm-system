@@ -17,15 +17,26 @@ spring:
     producer:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
-        spring.json.trusted.packages:  "com.veteroch4k.factory_service.models"
+        spring.json.type.mapping: >
+          MaterialReservationCommand:com.veteroch4k.factory_service.models.commands.MaterialReservationCommand,
+          SignOrderCommand:com.veteroch4k.factory_service.models.commands.SignOrderCommand,
+          ToolReservationCommand:com.veteroch4k.factory_service.models.commands.ToolReservationCommand,
+          MaterialReservedEvent:com.veteroch4k.factory_service.models.events.MaterialReservedEvent,
+          OrderCreatedEvent:com.veteroch4k.factory_service.models.events.OrderCreatedEvent,
+          ToolReservedEvent:com.veteroch4k.factory_service.models.events.ToolReservedEvent
+        spring.json.trusted.packages: "com.veteroch4k.factory_service.models.*"
     consumer:
       value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
       properties:
         spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
-        spring.json.trusted.packages: |
-          com.veteroch4k.factory_service.models,
-          com.veteroch4k.factory_service.models.commands,
-          com.veteroch4k.factory_service.models.events
+        spring.json.type.mapping: >
+          MaterialReservedEvent:com.veteroch4k.factory_service.models.events.MaterialReservedEvent,
+          OrderCreatedEvent:com.veteroch4k.factory_service.models.events.OrderCreatedEvent,
+          ToolReservedEvent:com.veteroch4k.factory_service.models.events.ToolReservedEvent,
+          MaterialReservationCommand:com.veteroch4k.factory_service.models.commands.MaterialReservationCommand,
+          SignOrderCommand:com.veteroch4k.factory_service.models.commands.SignOrderCommand,
+          ToolReservationCommand:com.veteroch4k.factory_service.models.commands.ToolReservationCommand
+        spring.json.trusted.packages: "com.veteroch4k.factory_service.models.*"
       auto-offset-reset: earliest
 
 

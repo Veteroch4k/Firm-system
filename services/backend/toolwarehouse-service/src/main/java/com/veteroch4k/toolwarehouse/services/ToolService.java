@@ -2,7 +2,6 @@ package com.veteroch4k.toolwarehouse.services;
 
 import com.veteroch4k.toolwarehouse.dto.ToolRequest;
 import com.veteroch4k.toolwarehouse.dto.ToolResponse;
-import com.veteroch4k.toolwarehouse.dto.ToolTypeResponse;
 import com.veteroch4k.toolwarehouse.exceptions.ResourceNotFoundException;
 import com.veteroch4k.toolwarehouse.mappers.ToolMapper;
 import com.veteroch4k.toolwarehouse.models.Tool;
@@ -11,7 +10,6 @@ import com.veteroch4k.toolwarehouse.repositories.ToolRepository;
 import com.veteroch4k.toolwarehouse.repositories.ToolTypeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.mapstruct.Mapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -30,7 +28,7 @@ public class ToolService {
 
     public Page<ToolResponse> findAllTools(PageRequest of) {
 
-        Page<Tool> tools = toolRepository.findAll(of);
+        Page<Tool> tools = toolRepository.findAllWithTypes(of);
 
         return tools.map(toolMapper::toToolResponse);
 
@@ -38,7 +36,7 @@ public class ToolService {
 
     public ToolResponse findToolById(Long id) {
 
-        Tool tool = toolRepository.findById(id).orElseThrow(() -> {
+        Tool tool = toolRepository.findToolById(id).orElseThrow(() -> {
                     log.warn("Инструмент с ID: {} не найден при запросе по ID", id);
                     return new ResourceNotFoundException("Инструмент с ID: " + id + " не найден.");
         });
@@ -54,7 +52,7 @@ public class ToolService {
     }
 
     @Transactional
-    public ToolResponse saveTool(ToolRequest toolRequest) {
+    public ToolResponse createTool(ToolRequest toolRequest) {
 
         ToolType toolType = toolTypeRepository.findById(toolRequest.toolTypeId())
                 .orElseThrow(() -> {

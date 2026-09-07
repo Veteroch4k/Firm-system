@@ -18,7 +18,7 @@ public interface FactoryRepository extends JpaRepository<Factory, Long> {
     @EntityGraph(attributePaths = {"operations"})
     List<Factory> findFactoryByIdIn(List<Long> ids);
 
-    @EntityGraph(attributePaths = {"operation"})
+    @EntityGraph(attributePaths = {"operations"})
     Optional<Factory> findFactoryById(Long id);
 
 }

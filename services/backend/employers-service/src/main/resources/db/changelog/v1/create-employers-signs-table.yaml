@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-employers-signs-table
+      author: Veteroch4k
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: order_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: employer_id
+                  type: BIGINT
+            tableName: employers_signs
+
+        - addForeignKeyConstraint:
+            baseTableName: employers_signs
+            baseColumnNames: employer_id
+            referencedTableName: employers
+            referencedColumnNames: id
+            constraintName: fk_employers_signs_employers

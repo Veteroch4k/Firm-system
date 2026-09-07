@@ -1,6 +1,6 @@
 package com.veteroch4k.order.service;
 
-import com.veteroch4k.order.model.OrderCreatedEvent;
+import com.veteroch4k.order.model.event.OrderCreatedEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;

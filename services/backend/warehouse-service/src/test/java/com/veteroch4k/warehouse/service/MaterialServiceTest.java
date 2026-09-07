@@ -57,7 +57,7 @@ public class MaterialServiceTest {
 
         Long id = 1L;
 
-        when(materialRepository.existsById(id)).thenReturn(false);
+        when(materialRepository.findById(id)).thenReturn(Optional.empty());
 
         assertThrows(
                 ResourceNotFoundException.class,

@@ -107,7 +107,7 @@ public class ToolControllerWebTest {
 
         ToolRequest toolRequest = new ToolRequest(10L);
 
-        when(toolService.saveTool(toolRequest)).thenThrow(new ResourceNotFoundException(""));
+        when(toolService.createTool(toolRequest)).thenThrow(new ResourceNotFoundException(""));
 
         mockMvc.perform(
                 post("/api/tool")

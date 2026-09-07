@@ -1,7 +1,7 @@
 package com.veteroch4k.warehouse.service;
 
 import com.veteroch4k.warehouse.BaseIntegrationTest;
-import com.veteroch4k.warehouse.models.MaterialReservedEvent;
+import com.veteroch4k.warehouse.models.events.MaterialReservedEvent;
 import com.veteroch4k.warehouse.models.commands.MaterialReservationCommand;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

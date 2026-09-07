@@ -1,4 +1,4 @@
-package com.veteroch4k.order.model;
+package com.veteroch4k.order.model.event;
 
 public record OrderCreatedEvent(
     Long orderId,

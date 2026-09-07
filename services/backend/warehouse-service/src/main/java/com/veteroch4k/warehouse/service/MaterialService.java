@@ -68,14 +68,16 @@ public class MaterialService {
 
     }
 
+    @Transactional
     public void deleteMaterialById(Long id) {
 
-        if (!materialRepository.existsById(id)) {
-            log.warn("Материал с ID: {} не найден при запросе на удаление", id);
-            throw new ResourceNotFoundException("Материал с ID: " + id + " не найден.");
-        }
+        Material material = materialRepository.findById(id)
+                .orElseThrow(() -> {
+                    log.warn("Материал с ID: {} не найден при запросе на удаление", id);
+                    return new ResourceNotFoundException("Материал с ID: " + id + " не найден.");
+                });
 
-        materialRepository.deleteById(id);
+        materialRepository.delete(material);
 
     }
 

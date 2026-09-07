@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import javax.swing.text.html.Option;
 import java.util.Optional;
@@ -15,7 +16,8 @@ public interface ToolRepository extends JpaRepository<Tool, Long> {
   Page<Tool> findAllByToolType_Name(String toolTypeName, Pageable pageable);
 
   @EntityGraph(attributePaths = {"toolType"})
-  Page<Tool> findAll(Pageable pageable);
+  @Query("SELECT t FROM Tool t")
+  Page<Tool> findAllWithTypes(Pageable pageable);
 
   @EntityGraph(attributePaths = {"toolType"})
   Optional<Tool> findToolById(Long id);

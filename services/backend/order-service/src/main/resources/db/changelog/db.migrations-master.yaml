@@ -6,3 +6,11 @@ databaseChangeLog:
   - include:
       file: v1/create-order-table.yaml
       relativeToChangelogFile: true
+
+  - include:
+      file: v1.1/create-order_status-type.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: v1.1/addColumn-status-orders-table.yaml
+      relativeToChangelogFile: true

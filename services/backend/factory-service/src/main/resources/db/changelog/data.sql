@@ -1,6 +1,6 @@
 -- 1. factories.sql
 -- База сама выдаст им ID: 1, 2, 3
-INSERT INTO factory_service.factory (name) VALUES
+INSERT INTO factory_service.factories (name) VALUES
                                                ('Каркасный цех'),
                                                ('Цех интерьера/салона'),
                                                ('Цех запчастей');
@@ -8,34 +8,23 @@ INSERT INTO factory_service.factory (name) VALUES
 -- 2. operations.sql
 -- База выдаст им ID: 1, 2, 3, 4, 5
 -- factory_id смещены (+1), чтобы указывать на правильные цеха
-INSERT INTO factory_service.operation (name, factory_id, duration) VALUES
+INSERT INTO factory_service.operations (name, factory_id, duration) VALUES
                                                                        ('изготовление каркаса', 1, 15),
                                                                        ('изготовление элементов салона', 2, 20),
                                                                        ('точение', 3, 4),
                                                                        ('Закалка стекла', 1, 0),
                                                                        ('Окраска каркаса', 1, 0);
 
--- 3. fctrMaterials.sql
--- factory_id смещены (+1)
-INSERT INTO factory_service.factory_materials (factory_id, material_id, quantity, "createdAt") VALUES
-                                                                                                   (1, 0, 1, CURRENT_DATE),
-                                                                                                   (1, 1, 2, CURRENT_DATE),
-                                                                                                   (2, 2, 3, CURRENT_DATE),
-                                                                                                   (2, 4, 5, CURRENT_DATE),
-                                                                                                   (2, 3, 5, CURRENT_DATE),
-                                                                                                   (3, 0, 1, CURRENT_DATE),
-                                                                                                   (3, 5, 6, CURRENT_DATE);
-
 -- 4. opMaterials.sql
 -- operation_id смещены (+1)
 INSERT INTO factory_service.operation_materials (operation_id, material_id, quantity) VALUES
-                                                                                          (1, 0, 1),
-                                                                                          (1, 1, 2),
-                                                                                          (2, 2, 4),
-                                                                                          (2, 3, 6),
+                                                                                          (1, 1, 1),
+                                                                                          (1, 2, 2),
+                                                                                          (2, 3, 4),
                                                                                           (2, 4, 6),
-                                                                                          (3, 0, 1),
-                                                                                          (3, 5, 7);
+                                                                                          (2, 5, 6),
+                                                                                          (3, 6, 1),
+                                                                                          (3, 7, 7);
 
 -- 5. opTools.sql (НОВАЯ ТАБЛИЦА)
 -- Я придумал тестовые данные: привязал разные типы инструментов к твоим операциям

@@ -1,12 +1,7 @@
 package com.veteroch4k.toolwarehouse.services;
 
-import com.veteroch4k.toolwarehouse.models.FactoryTools;
-import com.veteroch4k.toolwarehouse.models.ToolReservedEvent;
-import com.veteroch4k.toolwarehouse.models.commands.RequiredTools;
+import com.veteroch4k.toolwarehouse.models.events.ToolReservedEvent;
 import com.veteroch4k.toolwarehouse.models.commands.ToolReservationCommand;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;

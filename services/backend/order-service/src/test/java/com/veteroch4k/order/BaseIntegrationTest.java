@@ -1,6 +1,6 @@
-package com.veteroch4k.employers.controller;
+package com.veteroch4k.order;
 
-import com.veteroch4k.employers.TestContainerCfg;
+import com.veteroch4k.order.TestcontainersConfiguration;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,7 +8,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Import;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Import(TestContainerCfg.class)
+@Import(TestcontainersConfiguration.class)
 public class BaseIntegrationTest {
 
     @LocalServerPort

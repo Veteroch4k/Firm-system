@@ -1,5 +1,6 @@
 package com.veteroch4k.order.controllers;
 
+import com.veteroch4k.order.BaseIntegrationTest;
 import com.veteroch4k.order.dto.orderDTO.OrderRequestDTO;
 import com.veteroch4k.order.model.Order;
 import com.veteroch4k.order.repository.OrderRepository;

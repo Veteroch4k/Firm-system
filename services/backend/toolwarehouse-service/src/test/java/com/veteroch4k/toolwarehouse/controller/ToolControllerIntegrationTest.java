@@ -86,7 +86,7 @@ public class ToolControllerIntegrationTest extends BaseIntegrationTest {
                 .contentType(ContentType.JSON)
                 .body(createRequest)
                 .when()
-                .post("/api/tool/create-tool")
+                .post("/api/tool")
                 .then()
                 .statusCode(201)
                 .extract().path("id");

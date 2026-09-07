@@ -16,14 +16,20 @@ spring:
     producer:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
-        spring.json.trusted.packages:  "com.veteroch4k.warehouse.models"
+        spring.json.type.mapping: >
+          MaterialReservationCommand:com.veteroch4k.warehouse.models.commands.MaterialReservationCommand,
+          RequiredMaterial:com.veteroch4k.warehouse.models.commands.RequiredMaterial,
+          MaterialReservedEvent:com.veteroch4k.warehouse.models.events.MaterialReservedEvent
+        spring.json.trusted.packages: "com.veteroch4k.warehouse.models.*"
     consumer:
       value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
       properties:
         spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
-        spring.json.trusted.packages: |
-          com.veteroch4k.warehouse.models,
-          com.veteroch4k.warehouse.models.commands
+        spring.json.type.mapping: >
+          MaterialReservedEvent:com.veteroch4k.warehouse.models.events.MaterialReservedEvent,
+          MaterialReservationCommand:com.veteroch4k.warehouse.models.commands.MaterialReservationCommand,
+          RequiredMaterial:com.veteroch4k.warehouse.models.commands.RequiredMaterial
+        spring.json.trusted.packages: "com.veteroch4k.warehouse.models.*"
       auto-offset-reset: earliest
 
 
@@ -45,3 +51,4 @@ spring:
 eureka:
   client:
     enabled: false
+

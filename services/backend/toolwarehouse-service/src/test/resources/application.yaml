@@ -11,19 +11,26 @@ spring:
     change-log: classpath:/db/changelog/db.migrations-master.yaml
     default-schema: toolwarehouse_service
     liquibase-schema: toolwarehouse_service
+    contexts: test
 
   kafka:
     producer:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
-        spring.json.trusted.packages:  "com.veteroch4k.toolwarehouse.models"
+        spring.json.type.mapping: >
+          RequiredTools:com.veteroch4k.toolwarehouse.models.commands.RequiredTools,
+          ToolReservationCommand:com.veteroch4k.toolwarehouse.models.commands.ToolReservationCommand,
+          ToolReservedEvent:com.veteroch4k.toolwarehouse.models.events.ToolReservedEvent
+        spring.json.trusted.packages: "com.veteroch4k.factory_service.models.*"
     consumer:
       value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
       properties:
         spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
-        spring.json.trusted.packages: |
-          com.veteroch4k.toolwarehouse.models,
-          com.veteroch4k.toolwarehouse.models.commands
+        spring.json.type.mapping: >
+          ToolReservedEvent:com.veteroch4k.toolwarehouse.models.events.ToolReservedEvent,
+          RequiredTools:com.veteroch4k.toolwarehouse.models.commands.RequiredTools,
+          ToolReservationCommand:com.veteroch4k.toolwarehouse.models.commands.ToolReservationCommand
+        spring.json.trusted.packages: "com.veteroch4k.toolwarehouse.models.*"
       auto-offset-reset: earliest
 
 

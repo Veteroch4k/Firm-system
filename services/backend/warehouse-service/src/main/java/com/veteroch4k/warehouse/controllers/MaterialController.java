@@ -98,7 +98,7 @@ public class MaterialController {
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateMaterial(
             @Parameter(description = "ID обновляемого материала")
             @PathVariable @PositiveOrZero Long id,

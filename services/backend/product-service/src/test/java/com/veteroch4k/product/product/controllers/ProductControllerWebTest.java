@@ -1,7 +1,6 @@
 package com.veteroch4k.product.product.controllers;
 
 import com.veteroch4k.product.controllers.ProductController;
-import com.veteroch4k.product.dto.product.ProductResponse;
 import com.veteroch4k.product.exceptions.ResourceNotFoundException;
 import com.veteroch4k.product.services.ProductService;
 import org.junit.jupiter.api.Test;

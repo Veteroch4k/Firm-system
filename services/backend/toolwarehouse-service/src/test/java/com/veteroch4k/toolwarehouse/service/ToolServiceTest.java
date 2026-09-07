@@ -39,7 +39,7 @@ public class ToolServiceTest {
 
         Long id = 1L;
 
-        when(toolRepository.findById(id)).thenReturn(Optional.empty());
+        when(toolRepository.findToolById(id)).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class, ()->  toolService.findToolById(id));
 
@@ -53,7 +53,7 @@ public class ToolServiceTest {
 
         when(typeRepository.findById(request.toolTypeId())).thenReturn(Optional.empty());
 
-        assertThrows(ResourceNotFoundException.class, ()->  toolService.saveTool(request));
+        assertThrows(ResourceNotFoundException.class, ()->  toolService.createTool(request));
 
 
     }
