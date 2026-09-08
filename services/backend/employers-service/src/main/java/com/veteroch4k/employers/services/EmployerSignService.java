@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 public class EmployerSignService {
 
-    private final EmployerSevice employerService;
+    private final EmployerService employerService;
     private final EmployerSignRepository employerSignRepository;
     private final EmployerRepository employerRepository;
 

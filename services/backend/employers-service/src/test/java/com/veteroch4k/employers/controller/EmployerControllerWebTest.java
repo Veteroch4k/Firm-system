@@ -1,7 +1,7 @@
 package com.veteroch4k.employers.controller;
 
 import com.veteroch4k.employers.controllers.EmployerController;
-import com.veteroch4k.employers.services.EmployerSevice;
+import com.veteroch4k.employers.services.EmployerService;
 import org.apache.kafka.common.errors.ResourceNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,8 @@ public class EmployerControllerWebTest {
     MockMvc mockMvc;
 
     @MockitoBean
-    EmployerSevice employerSevice;
+    EmployerService employerService;
+
 
     @Test
     void shouldReturn400WhenBadParamGetAllEmployers() throws Exception {
@@ -58,7 +59,7 @@ public class EmployerControllerWebTest {
 
         Long id = 1L;
 
-        when(employerSevice.findEmployerById(id)).thenThrow(new ResourceNotFoundException(""));
+        when(employerService.findEmployerById(id)).thenThrow(new ResourceNotFoundException(""));
 
         mockMvc.perform(
                 get("/api/employers/{id}", id)
@@ -72,7 +73,7 @@ public class EmployerControllerWebTest {
     @Test
     void shouldReturn404WhenEmptyTableGetRandomEmployer() throws Exception {
 
-        when(employerSevice.getRandomEmployer()).thenThrow(new ResourceNotFoundException(""));
+        when(employerService.getRandomEmployer()).thenThrow(new ResourceNotFoundException(""));
 
         mockMvc.perform(
                 get("/api/employers/random")
