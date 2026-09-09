@@ -25,6 +25,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,9 +51,11 @@ public class OrderController {
             @ApiResponse(responseCode = "200", description = "Заказы получены"),
             @ApiResponse(responseCode = "400", description = "Переданы некорректные параметры запроса",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "401", description = "Требуется авторизация")
     })
     @GetMapping("/all")
-    public Page<OrderResponseDTO> orders(
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    public Page<OrderResponseDTO> getOrders(
             @Parameter(description = "Номер страницы")
             @RequestParam(defaultValue = "0") @Min(0) int page,
 
@@ -66,10 +69,12 @@ public class OrderController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Заказ успешно создан"),
             @ApiResponse(responseCode = "400", description = "Ошибка валидации входных данных",
-                    content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "401", description = "Требуется авторизация")
     })
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public void createOrder(
             @Parameter(description = "Данные для создания заказа")
             @Valid @RequestBody OrderRequestDTO orderReqest) {
@@ -87,6 +92,7 @@ public class OrderController {
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
     })
     @GetMapping("/by-date")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public Page<OrderResponseDTO> getOrdersByDate(
             @Parameter(description = "Дата заказа в формате YYYY-MM-DD")
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
@@ -107,6 +113,7 @@ public class OrderController {
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
     })
     @GetMapping("/between-dates")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public Page<OrderResponseDTO> getOrdersByDateRange(
             @Parameter(description = "Начальная дата (YYYY-MM-DD)")
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate start,
@@ -134,6 +141,7 @@ public class OrderController {
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public OrderResponseDTO getOrderById(
             @Parameter(description = "Внутренний ID заказа")
             @PathVariable @PositiveOrZero Long id) {

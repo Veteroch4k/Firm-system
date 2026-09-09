@@ -34,6 +34,7 @@ public class OrderControllerIntegrationTest extends BaseIntegrationTest {
         OrderRequestDTO requestDTO = new OrderRequestDTO(productId, productQuantity);
 
         given()
+                .header("Authorization", "Bearer dummy-token")
                 .contentType(ContentType.JSON)
                 .body(requestDTO)
         .when()
@@ -80,6 +81,7 @@ public class OrderControllerIntegrationTest extends BaseIntegrationTest {
 
 
         given()
+                .header("Authorization", "Bearer dummy-token")
                 .contentType(ContentType.JSON)
                 .queryParam("start", startDate)
                 .queryParam("end", endDate)
