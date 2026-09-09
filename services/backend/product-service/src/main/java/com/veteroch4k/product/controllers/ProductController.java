@@ -13,11 +13,11 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,8 +39,10 @@ public class ProductController {
             @ApiResponse(responseCode = "200", description = "Товары успешно получены"),
             @ApiResponse(responseCode = "400", description = "Переданы некорректные данные",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "401", description = "Требуется авторизация")
     })
     @GetMapping("/all")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public Page<ProductResponse> getProducts(
             @Parameter(description = "Номер страницы")
             @RequestParam(defaultValue = "0") @Min(0) int page,
@@ -56,10 +58,12 @@ public class ProductController {
             @ApiResponse(responseCode = "200", description = "Товар успешно получен"),
             @ApiResponse(responseCode = "400", description = "Передан некорректный ID",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "401", description = "Требуется авторизация"),
             @ApiResponse(responseCode = "404", description = "Заданного товара не существует",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
     })
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ProductResponse getProduct(
             @Parameter(description = "ID товара")
             @PathVariable @PositiveOrZero Long id) {
@@ -73,9 +77,12 @@ public class ProductController {
             @ApiResponse(responseCode = "200", description = "Данные успешно получены"),
             @ApiResponse(responseCode = "400", description = "Передан некорректный ID",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "401", description = "Требуется авторизация"),
+            @ApiResponse(responseCode = "403", description = "Доступ запрещен (нужна роль ADMIN)"),
             @ApiResponse(responseCode = "404", description = "Заданного товара не существует")
     })
     @GetMapping("/{id}/manufacturing-info")
+    @PreAuthorize("hasRole('ADMIN')")
     public ProductManufacturingInfoResponse getManufacturingInfo(
             @Parameter(description = "ID товара")
             @PathVariable @PositiveOrZero Long id) {

@@ -1,4 +1,4 @@
-package com.veteroch4k.product.product.controllers;
+package com.veteroch4k.product.product.controllers.product;
 
 import com.veteroch4k.product.BaseIntegrationTest;
 import com.veteroch4k.product.models.Drawing;
@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
+import static org.springframework.web.servlet.function.RequestPredicates.contentType;
 
 public class ProductControllerIntegrationTest extends BaseIntegrationTest {
 
@@ -42,6 +43,7 @@ public class ProductControllerIntegrationTest extends BaseIntegrationTest {
 
 
         given()
+                .header("Authorization", "Bearer dummy-token")
                 .contentType("application/json")
         .when()
                 .get("/api/product/{id}/manufacturing-info", product.getId())

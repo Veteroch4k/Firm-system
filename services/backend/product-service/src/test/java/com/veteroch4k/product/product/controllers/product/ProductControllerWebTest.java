@@ -1,4 +1,4 @@
-package com.veteroch4k.product.product.controllers;
+package com.veteroch4k.product.product.controllers.product;
 
 import com.veteroch4k.product.controllers.ProductController;
 import com.veteroch4k.product.exceptions.ResourceNotFoundException;

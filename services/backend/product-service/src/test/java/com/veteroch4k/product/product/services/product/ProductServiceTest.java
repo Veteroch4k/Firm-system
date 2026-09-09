@@ -1,4 +1,4 @@
-package com.veteroch4k.product.product.services;
+package com.veteroch4k.product.product.services.product;
 
 import com.veteroch4k.product.exceptions.ResourceNotFoundException;
 import com.veteroch4k.product.repositories.ProductRepository;

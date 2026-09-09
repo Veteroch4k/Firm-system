@@ -12,11 +12,11 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,8 +38,10 @@ public class DrawingController {
             @ApiResponse(responseCode = "200", description = "Чертежи получены"),
             @ApiResponse(responseCode = "400", description = "Переданы некорректные данные",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "401", description = "Требуется авторизация")
     })
     @GetMapping("/all")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public Page<DrawingResponse> getDrawings(
             @Parameter(description = "Номер страницы")
             @RequestParam(defaultValue = "0") @Min(0) int page,
@@ -55,10 +57,12 @@ public class DrawingController {
             @ApiResponse(responseCode = "200", description = "Чертеж найжен"),
             @ApiResponse(responseCode = "400", description = "Некорректный ID",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "401", description = "Требуется авторизация"),
             @ApiResponse(responseCode = "404", description = "Заказ с таким ID не существует",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
     })
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public DrawingResponse getDrawing(
             @Parameter(description = "Внутренний ID чертежа")
             @PathVariable @PositiveOrZero Long id) {
