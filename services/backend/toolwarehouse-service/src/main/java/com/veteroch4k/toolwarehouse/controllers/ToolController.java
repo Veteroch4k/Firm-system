@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -43,8 +44,10 @@ public class ToolController {
             @ApiResponse(responseCode = "200", description = "Инструменты успешно получены"),
             @ApiResponse(responseCode = "400", description = "Переданы некорректные входные данные",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "401", description = "Требуется авторизация")
     })
     @GetMapping("/all")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public Page<ToolResponse> getTools(
             @Parameter(description = "Номер страницы")
             @RequestParam(defaultValue = "0") @Min(0) int page,
@@ -60,10 +63,12 @@ public class ToolController {
             @ApiResponse(responseCode = "200", description = "Данные успешно получены"),
             @ApiResponse(responseCode = "400", description = "Передан невалидный ID",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "401", description = "Требуется авторизация"),
             @ApiResponse(responseCode = "404", description = "Инструмента с переданным ID не существует",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ToolResponse getToolById(
             @Parameter(description = "Уникальный идентификатор инструмента")
             @PathVariable @PositiveOrZero Long id) {
@@ -76,9 +81,11 @@ public class ToolController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Данные успешно получены"),
             @ApiResponse(responseCode = "400", description = "Переданы невалидные параметры",
-                    content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "401", description = "Требуется авторизация")
     })
     @GetMapping("/by-type-name")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public Page<ToolResponse> getToolsByTypeName(
             @Parameter(description = "Номер страницы")
             @RequestParam(defaultValue = "0") @Min(0) int page,
@@ -97,10 +104,14 @@ public class ToolController {
             @ApiResponse(responseCode = "201", description = "Успешно создан"),
             @ApiResponse(responseCode = "400", description = "Переданы невалидные данные",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "401", description = "Требуется авторизация"),
+            @ApiResponse(responseCode = "403", description = "Недостаточно прав для выполнения операции",
+                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
             @ApiResponse(responseCode = "404", description = "Передан несуществующий Тип Инструмента (fk constraint)",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
     @PostMapping("")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     public ToolResponse createTool(
             @Parameter(description = "Данные для создания инструмента")
@@ -115,10 +126,14 @@ public class ToolController {
             @ApiResponse(responseCode = "204", description = "Данные успешно изменены"),
             @ApiResponse(responseCode = "400", description = "Переданы невалидные данные",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "401", description = "Требуется авторизация"),
+            @ApiResponse(responseCode = "403", description = "Недостаточно прав для выполнения операции",
+                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
             @ApiResponse(responseCode = "404", description = "Передан несуществующий Тип Инструмента (fk constraint) или передан ID несуществующего инструмента",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateTool(
             @Parameter(description = "ID обновляемого инструмента")
@@ -134,10 +149,14 @@ public class ToolController {
             @ApiResponse(responseCode = "204", description = "Запись успешно удалена"),
             @ApiResponse(responseCode = "400", description = "Передан невалидный ID",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "401", description = "Требуется авторизация"),
+            @ApiResponse(responseCode = "403", description = "Недостаточно прав для выполнения операции",
+                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
             @ApiResponse(responseCode = "404", description = "Передан ID несуществующего инструмента",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteTool(
             @Parameter(description = "ID удаляемого инструмента")

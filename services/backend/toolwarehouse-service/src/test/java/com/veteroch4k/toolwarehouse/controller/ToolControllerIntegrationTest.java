@@ -56,6 +56,7 @@ public class ToolControllerIntegrationTest extends BaseIntegrationTest {
         toolRepository.save(tool3);
 
         given()
+                .header("Authorization", "Bearer dummy-token")
                 .contentType(ContentType.JSON)
                 .param("typeName", expectedName)
         .when()
@@ -83,6 +84,7 @@ public class ToolControllerIntegrationTest extends BaseIntegrationTest {
         ToolRequest createRequest = new ToolRequest(hammerType.getId());
 
         Integer createdToolId = given()
+                .header("Authorization", "Bearer dummy-token")
                 .contentType(ContentType.JSON)
                 .body(createRequest)
                 .when()
@@ -92,6 +94,8 @@ public class ToolControllerIntegrationTest extends BaseIntegrationTest {
                 .extract().path("id");
 
         given()
+                .header("Authorization", "Bearer dummy-token")
+
                 .when()
                 .get("/api/tool/" + createdToolId)
                 .then()
@@ -101,6 +105,7 @@ public class ToolControllerIntegrationTest extends BaseIntegrationTest {
         ToolRequest updateRequest = new ToolRequest(drillType.getId());
 
         given()
+                .header("Authorization", "Bearer dummy-token")
                 .contentType(ContentType.JSON)
                 .body(updateRequest)
                 .when()
@@ -109,6 +114,7 @@ public class ToolControllerIntegrationTest extends BaseIntegrationTest {
                 .statusCode(204);
 
         given()
+                .header("Authorization", "Bearer dummy-token")
                 .when()
                 .get("/api/tool/" + createdToolId)
                 .then()
@@ -116,12 +122,14 @@ public class ToolControllerIntegrationTest extends BaseIntegrationTest {
                 .body("toolType.name", equalTo(name2));
 
         given()
+                .header("Authorization", "Bearer dummy-token")
                 .when()
                 .delete("/api/tool/" + createdToolId)
                 .then()
                 .statusCode(204);
 
         given()
+                .header("Authorization", "Bearer dummy-token")
                 .when()
                 .get("/api/tool/" + createdToolId)
                 .then()
