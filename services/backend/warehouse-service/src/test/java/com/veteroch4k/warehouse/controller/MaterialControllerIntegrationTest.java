@@ -33,8 +33,9 @@ public class MaterialControllerIntegrationTest extends BaseIntegrationTest {
 
         MaterialRequest request = new MaterialRequest("Test");
 
-        given().
-                contentType(ContentType.JSON)
+        given()
+                .header("Authorization", "Bearer dummy-token")
+                .contentType(ContentType.JSON)
                 .body(request)
         .when()
                 .post("/api/material")
