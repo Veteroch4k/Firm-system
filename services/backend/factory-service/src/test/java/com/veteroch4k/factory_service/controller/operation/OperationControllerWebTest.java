@@ -1,5 +1,6 @@
-package com.veteroch4k.factory_service.controller;
+package com.veteroch4k.factory_service.controller.operation;
 
+import com.veteroch4k.factory_service.controller.OperationController;
 import com.veteroch4k.factory_service.dto.operation.OperationRequest;
 import com.veteroch4k.factory_service.exceptions.ResourceNotFoundException;
 import com.veteroch4k.factory_service.services.OperationService;

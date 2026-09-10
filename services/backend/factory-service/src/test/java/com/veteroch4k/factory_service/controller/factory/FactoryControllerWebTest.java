@@ -1,5 +1,6 @@
-package com.veteroch4k.factory_service.controller;
+package com.veteroch4k.factory_service.controller.factory;
 
+import com.veteroch4k.factory_service.controller.FactoryController;
 import com.veteroch4k.factory_service.exceptions.ResourceNotFoundException;
 import com.veteroch4k.factory_service.services.FactoryService;
 import org.junit.jupiter.api.Test;

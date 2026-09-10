@@ -1,4 +1,4 @@
-package com.veteroch4k.factory_service.controller;
+package com.veteroch4k.factory_service.controller.operation;
 
 import com.veteroch4k.factory_service.BaseIntegrationTest;
 import com.veteroch4k.factory_service.dto.operation.OperationRequest;
@@ -45,6 +45,7 @@ public class OperationControllerIntegrationTest extends BaseIntegrationTest {
         );
 
         given()
+                .header("Authorization", "Bearer dummy-token")
                 .contentType("application/json")
                 .body(op)
         .when()

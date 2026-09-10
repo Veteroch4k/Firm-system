@@ -1,4 +1,4 @@
-package com.veteroch4k.factory_service.controller;
+package com.veteroch4k.factory_service.controller.factory;
 
 import com.veteroch4k.factory_service.BaseIntegrationTest;
 import com.veteroch4k.factory_service.models.Factory;
@@ -47,6 +47,7 @@ public class FactoryControllerIntegrationTest extends BaseIntegrationTest {
         String page = "0";
         String size = "3";
         given()
+                .header("Authorization", "Bearer dummy-token")
                 .contentType("application/json")
                 .param("page", page)
                 .param("size", size)

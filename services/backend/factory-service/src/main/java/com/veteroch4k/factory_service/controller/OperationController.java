@@ -20,6 +20,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,9 +47,11 @@ public class OperationController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Данные успешно получены"),
             @ApiResponse(responseCode = "400", description = "Невалидные переданные параметры запроса",
-                    content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "401", description = "Требуется авторизация")
     })
     @GetMapping("/all")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public Page<OperationResponse> operations(
             @Parameter(description = "Номер страницы")
             @RequestParam(defaultValue = "0") @Min(0) int page,
@@ -64,9 +67,12 @@ public class OperationController {
             @ApiResponse(responseCode = "400", description = "Передан невалидный ID",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
             @ApiResponse(responseCode = "404", description = "Операции с переданным ID не существует",
-                    content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "401", description = "Требуется авторизация")
+
     })
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public OperationResponse operationById(
             @Parameter(description = "ID искомой операции")
             @PathVariable @PositiveOrZero Long id) {
@@ -80,10 +86,14 @@ public class OperationController {
             @ApiResponse(responseCode = "201", description = "Запись успешно создана"),
             @ApiResponse(responseCode = "400", description = "Переданы невалидные данные",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "401", description = "Требуется авторизация"),
+            @ApiResponse(responseCode = "403", description = "Недостаточно прав для выполнения операции",
+                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
             @ApiResponse(responseCode = "404", description = "Ошибка внешнего ключа",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
     @PostMapping("")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     public OperationResponse createOperation(
             @Parameter(description = "Данные для создания операции")
@@ -97,10 +107,14 @@ public class OperationController {
             @ApiResponse(responseCode = "204", description = "Данные успешно обновлены"),
             @ApiResponse(responseCode = "400", description = "Переданы невалидные данные",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "401", description = "Требуется авторизация"),
+            @ApiResponse(responseCode = "403", description = "Недостаточно прав для выполнения операции",
+                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
             @ApiResponse(responseCode = "404", description = "Ошибка внешнего ключа или ишли передан ID несуществующий операции",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateOperation(
             @Parameter(description = "ID обновляемой операции")
@@ -120,10 +134,14 @@ public class OperationController {
             @ApiResponse(responseCode = "204", description = "Операция успешно удалена"),
             @ApiResponse(responseCode = "400", description = "Передан невалидный ID",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "401", description = "Требуется авторизация"),
+            @ApiResponse(responseCode = "403", description = "Недостаточно прав для выполнения операции",
+                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
             @ApiResponse(responseCode = "404", description = "Передан ID несуществующий операции",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteOperation(
             @Parameter(description = "ID удаляемой операции")

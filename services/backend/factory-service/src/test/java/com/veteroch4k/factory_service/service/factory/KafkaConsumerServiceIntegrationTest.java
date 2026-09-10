@@ -1,4 +1,4 @@
-package com.veteroch4k.factory_service.service;
+package com.veteroch4k.factory_service.service.factory;
 
 import com.veteroch4k.factory_service.BaseIntegrationTest;
 import com.veteroch4k.factory_service.models.*;

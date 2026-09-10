@@ -16,6 +16,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,9 +38,11 @@ public class FactoryController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Данные успешно получены"),
             @ApiResponse(responseCode = "400", description = "Невалидные переданные параметры запроса",
-                    content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "401", description = "Требуется авторизация")
     })
     @GetMapping("/all")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public Page<FactoryResponse> getFactories(
             @Parameter(description = "Номер страницы")
             @RequestParam(defaultValue = "0") @Min(0) int page,
@@ -54,10 +57,12 @@ public class FactoryController {
             @ApiResponse(responseCode = "200", description = "Данные успешно получены"),
             @ApiResponse(responseCode = "400", description = "Передан невалидный ID",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "401", description = "Требуется авторизация"),
             @ApiResponse(responseCode = "404", description = "Фабрики с переданным ID не существует",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public FactoryResponse getFactory(
             @Parameter(description = "ID искомой фабрики")
             @PathVariable @PositiveOrZero Long id) {

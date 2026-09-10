@@ -1,4 +1,4 @@
-package com.veteroch4k.factory_service.service;
+package com.veteroch4k.factory_service.service.operation;
 
 import com.veteroch4k.factory_service.dto.operation.OperationRequest;
 import com.veteroch4k.factory_service.exceptions.ResourceNotFoundException;
