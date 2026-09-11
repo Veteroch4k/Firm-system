@@ -30,6 +30,7 @@ public class EmployerControllerIntegrationTest extends BaseIntegrationTest {
         employerRepository.save(employer);
 
         given().
+                header("Authorization", "Bearer dummy-token").
                 contentType("application/json")
         .when()
                 .get("/api/employers/random")
