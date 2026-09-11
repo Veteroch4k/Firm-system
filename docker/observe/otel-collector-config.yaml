@@ -1,0 +1,44 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+processors:
+  batch:
+    timeout: 1s
+  filter/drop_kafka_noise:
+    metrics:
+      exclude:
+        match_type: regexp
+        metric_names:
+          - "kafka_consumer_fetch_manager_.*"
+
+exporters:
+  prometheus:
+    endpoint: 0.0.0.0:8889
+
+  otlp/tempo:
+    endpoint: "tempo:4317"
+    tls:
+      insecure: true
+
+  otlphttp/loki:
+    endpoint: "http://loki:3100/otlp"
+
+service:
+  pipelines:
+    metrics:
+      receivers: [otlp]
+      processors: [filter/drop_kafka_noise, batch]
+      exporters: [prometheus]
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlp/tempo]
+    logs:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlphttp/loki]

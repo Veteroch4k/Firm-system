@@ -5,7 +5,7 @@ spring:
     name: Config service
 
   profiles:
-    active: git
+    active: git, vault
 
   cloud:
     vault:
@@ -26,6 +26,12 @@ spring:
           clone-on-start: true
           username: ${git.username}
           password: ${git.password}
+        vault:
+          host: ${VAULT_HOST:localhost}
+          port: ${VAULT_PORT:8200}
+          scheme: http
+          token: ${VAULT_TOKEN}
+          kv-version: 2
   config:
     import: vault://
 
