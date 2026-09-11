@@ -82,7 +82,7 @@ public class ProductController {
             @ApiResponse(responseCode = "404", description = "Заданного товара не существует")
     })
     @GetMapping("/{id}/manufacturing-info")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'SERVICE')")
     public ProductManufacturingInfoResponse getManufacturingInfo(
             @Parameter(description = "ID товара")
             @PathVariable @PositiveOrZero Long id) {
