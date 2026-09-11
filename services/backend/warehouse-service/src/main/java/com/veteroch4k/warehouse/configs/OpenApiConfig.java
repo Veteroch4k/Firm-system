@@ -3,6 +3,12 @@ package com.veteroch4k.warehouse.configs;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.models.servers.Server;
+import org.springdoc.core.customizers.OpenApiCustomizer;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @OpenAPIDefinition(
         info = @Info(
@@ -16,5 +22,13 @@ import io.swagger.v3.oas.annotations.info.Info;
                 )
         )
 )
+@Component
 public class OpenApiConfig {
+
+    @Bean
+    public OpenApiCustomizer serverUrlCustomizer() {
+        return openApi -> openApi.setServers(
+                List.of(new Server().url("/warehouse").description("via gateway"))
+        );
+    }
 }
