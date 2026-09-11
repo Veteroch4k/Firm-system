@@ -37,6 +37,9 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 	implementation 'org.springframework.boot:spring-boot-starter-security-oauth2-client'
 	implementation 'org.redisson:redisson-spring-boot-starter:4.7.0'
+	implementation 'io.opentelemetry.instrumentation:opentelemetry-logback-appender-1.0:2.18.0-alpha'
+	implementation 'org.springframework.boot:spring-boot-starter-opentelemetry'
+
 
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.postgresql:postgresql'
