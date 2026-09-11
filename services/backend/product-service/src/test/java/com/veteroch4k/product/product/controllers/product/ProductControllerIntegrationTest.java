@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
-import static org.springframework.web.servlet.function.RequestPredicates.contentType;
 
 public class ProductControllerIntegrationTest extends BaseIntegrationTest {
 
