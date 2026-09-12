@@ -16,3 +16,6 @@ databaseChangeLog:
       file: v1.1/add-autoincrement-id.yaml
       relativeToChangelogFile: true
 
+  - include:
+      file: insert-data.yaml
+      relativeToChangelogFile: true

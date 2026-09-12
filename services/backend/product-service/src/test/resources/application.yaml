@@ -12,6 +12,8 @@ spring:
     change-log: classpath:/db/changelog/db.migrations-master.yaml
     default-schema: product_service
     liquibase-schema: product_service
+    contexts: test
+
 
   jpa:
     hibernate:

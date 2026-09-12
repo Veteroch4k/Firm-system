@@ -15,3 +15,6 @@ databaseChangeLog:
       file: v1/create-material_accounting-table.yaml
       relativeToChangelogFile: true
 
+  - include:
+      file: insert-data.yaml
+      relativeToChangelogFile: true

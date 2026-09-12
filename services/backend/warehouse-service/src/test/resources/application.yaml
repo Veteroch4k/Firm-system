@@ -11,6 +11,8 @@ spring:
     change-log: classpath:/db/changelog/db.migrations-master.yaml
     default-schema: warehouse_service
     liquibase-schema: warehouse_service
+    contexts: test
+
 
   kafka:
     producer:

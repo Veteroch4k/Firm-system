@@ -14,3 +14,7 @@ databaseChangeLog:
   - include:
       file: v1.1/addColumn-status-orders-table.yaml
       relativeToChangelogFile: true
+
+  - include:
+      file: insert-data.yaml
+      relativeToChangelogFile: true

@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-data
+      author: Veteroch4k
+      contextFilter: "!test"
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: SELECT COUNT(*) FROM employers
+      changes:
+        - sqlFile:
+            path: data.sql
+            relativeToChangelogFile: true

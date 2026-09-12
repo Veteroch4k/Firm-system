@@ -31,6 +31,7 @@ spring:
     change-log: classpath:/db/changelog/db.migrations-master.yaml
     default-schema: employer_service
     liquibase-schema: employer_service
+    contexts: test
 
   jpa:
     hibernate:
