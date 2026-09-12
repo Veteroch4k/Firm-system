@@ -3,6 +3,7 @@
 ![Java](https://img.shields.io/badge/Java-21-blue) ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.x-brightgreen) ![Spring Cloud](https://img.shields.io/badge/Spring_Cloud-2025-green) 
 ![Spring Security](https://img.shields.io/badge/Spring_Security-JWT-red)
 ![Kafka](https://img.shields.io/badge/Kafka--yellow)
+[![Deploy Firm-system](https://github.com/Veteroch4k/Firm-system/actions/workflows/deploy.yml/badge.svg)](https://github.com/Veteroch4k/Firm-system/actions/workflows/deploy.yml)
 ## О проекте
 Firm System — это RESTful API, разработанное на базе Spring Boot. Приложение представляет собой фрагмент информационной системы производственной фирмы, который будет обеспечивать
 *  Управление производственным циклом инструментов
