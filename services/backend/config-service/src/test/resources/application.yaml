@@ -1,0 +1,30 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: Config service
+
+  profiles:
+    active: git, vault
+
+  cloud:
+    vault:
+      enabled: false
+
+    config:
+      server:
+        enabled: false
+
+
+server:
+  port: 8071
+
+
+management:
+  health:
+    vault:
+      enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"

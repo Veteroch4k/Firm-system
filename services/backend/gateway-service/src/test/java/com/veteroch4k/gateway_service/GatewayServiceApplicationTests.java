@@ -15,6 +15,7 @@ class GatewayServiceApplicationTests {
 	@MockitoBean
 	private ReactiveJwtDecoder reactiveJwtDecoder;
 
+
 	@Test
 	void contextLoads() {
 	}

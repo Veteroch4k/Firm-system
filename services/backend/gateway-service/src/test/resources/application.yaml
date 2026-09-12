@@ -1,12 +1,14 @@
 spring:
-  config:
-    import: ""
+  application:
+    name: gateway-service
+
+  profiles:
+    active: default
 
   cloud:
     config:
       enabled: false
 
-eureka:
-  client:
+management:
+  opentelemetry:
     enabled: false
-
