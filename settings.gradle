@@ -1,0 +1,17 @@
+rootProject.name = 'firm-system-root'
+
+include 'admin-service'
+include 'employers-service'
+include 'factory-service'
+include 'order-service'
+include 'product-service'
+include 'toolwarehouse-service'
+include 'warehouse-service'
+
+project(':admin-service').projectDir = file('services/backend/admin-service')
+project(':employers-service').projectDir = file('services/backend/employers-service')
+project(':factory-service').projectDir = file('services/backend/factory-service')
+project(':order-service').projectDir = file('services/backend/order-service')
+project(':product-service').projectDir = file('services/backend/product-service')
+project(':toolwarehouse-service').projectDir = file('services/backend/toolwarehouse-service')
+project(':warehouse-service').projectDir = file('services/backend/warehouse-service')

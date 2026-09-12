@@ -14,14 +14,8 @@
 
   <modules>
     <module>services/backend/config-service</module>
-    <module>services/backend/employers-service</module>
     <module>services/backend/eureka-service</module>
-    <module>services/backend/factory-service</module>
     <module>services/backend/gateway-service</module>
-    <module>services/backend/order-service</module>
-    <module>services/backend/product-service</module>
-    <module>services/backend/toolwarehouse-service</module>
-    <module>services/backend/warehouse-service</module>
   </modules>
 
 </project>
