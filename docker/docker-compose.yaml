@@ -68,8 +68,7 @@ services:
     environment:
       - KEYCLOAK_ADMIN=admin
       - KEYCLOAK_ADMIN_PASSWORD=admin
-      # Фикс проблемы с редиректами
-      - KC_HOSTNAME_URL=http://localhost:8181
+      - KC_HOSTNAME_STRICT=false
 
     volumes:
       - keycloak_data:/opt/keycloak/data
@@ -230,6 +229,8 @@ services:
       - TRACING_SAMPLING=1.0
       - OTEL_HOST=otel-collector
       - OTEL_PORT=4318
+      - AUTH_SERVER_URL=http://${SERVER_IP:-localhost}:8181
+
     depends_on:
       config-server:
         condition: service_healthy

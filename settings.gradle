@@ -8,6 +8,10 @@ include 'product-service'
 include 'toolwarehouse-service'
 include 'warehouse-service'
 
+include 'config-service'
+include 'eureka-service'
+include 'gateway-service'
+
 project(':admin-service').projectDir = file('services/backend/admin-service')
 project(':employers-service').projectDir = file('services/backend/employers-service')
 project(':factory-service').projectDir = file('services/backend/factory-service')
@@ -15,3 +19,7 @@ project(':order-service').projectDir = file('services/backend/order-service')
 project(':product-service').projectDir = file('services/backend/product-service')
 project(':toolwarehouse-service').projectDir = file('services/backend/toolwarehouse-service')
 project(':warehouse-service').projectDir = file('services/backend/warehouse-service')
+
+project(':config-service').projectDir = file('services/backend/config-service')
+project(':eureka-service').projectDir = file('services/backend/eureka-service')
+project(':gateway-service').projectDir = file('services/backend/gateway-service')
