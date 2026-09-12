@@ -140,6 +140,8 @@ services:
     depends_on:
       vault:
         condition: service_started
+      vault-unsealer:
+        condition: service_completed_successfully
     healthcheck:
       test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:8071/actuator/health || exit 1"]
       interval: 5s
