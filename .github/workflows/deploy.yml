@@ -3,6 +3,11 @@ name: Deploy Firm-system
 on:
   push:
     branches: [ master ]
+    paths:
+      - 'services/**'
+      - 'docker/**'
+      - 'pom.xml'
+      - 'build.gradle'
 
 jobs:
   test:
