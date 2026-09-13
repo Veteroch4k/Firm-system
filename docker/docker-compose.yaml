@@ -112,6 +112,8 @@ services:
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana_data:/var/lib/grafana
     networks:
       - backend
 
@@ -256,13 +258,16 @@ services:
       - EUREKA_HOST=eureka-server
       - EUREKA_PORT=8070
       - CONFIG_SERVER_URL=http://config-server:8071
-      - KEYCLOAK_HOST=keycloak
-      - KEYCLOAK_PORT=8080
       - KAFKA_HOST=kafka
       - KAFKA_PORT=29092
       - TRACING_SAMPLING=1.0
       - OTEL_HOST=otel-collector
       - OTEL_PORT=4318
+      - KEYCLOAK_ISSUER_HOST=${SERVER_IP:-localhost}
+      - KEYCLOAK_ISSUER_PORT=8181
+      - KEYCLOAK_JWK_HOST=keycloak
+      - KEYCLOAK_JWK_PORT=8080
+
     depends_on:
       config-server:
         condition: service_healthy
@@ -286,11 +291,13 @@ services:
       - EUREKA_HOST=eureka-server
       - EUREKA_PORT=8070
       - CONFIG_SERVER_URL=http://config-server:8071
-      - KEYCLOAK_HOST=keycloak
-      - KEYCLOAK_PORT=8080
       - TRACING_SAMPLING=1.0
       - OTEL_HOST=otel-collector
       - OTEL_PORT=4318
+      - KEYCLOAK_ISSUER_HOST=${SERVER_IP:-localhost}
+      - KEYCLOAK_ISSUER_PORT=8181
+      - KEYCLOAK_JWK_HOST=keycloak
+      - KEYCLOAK_JWK_PORT=8080
     depends_on:
       config-server:
         condition: service_healthy
@@ -316,11 +323,13 @@ services:
       - EUREKA_HOST=eureka-server
       - EUREKA_PORT=8070
       - CONFIG_SERVER_URL=http://config-server:8071
-      - KEYCLOAK_HOST=keycloak
-      - KEYCLOAK_PORT=8080
       - TRACING_SAMPLING=1.0
       - OTEL_HOST=otel-collector
       - OTEL_PORT=4318
+      - KEYCLOAK_ISSUER_HOST=${SERVER_IP:-localhost}
+      - KEYCLOAK_ISSUER_PORT=8181
+      - KEYCLOAK_JWK_HOST=keycloak
+      - KEYCLOAK_JWK_PORT=8080
     depends_on:
       config-server:
         condition: service_healthy
@@ -350,11 +359,13 @@ services:
       - EUREKA_HOST=eureka-server
       - EUREKA_PORT=8070
       - CONFIG_SERVER_URL=http://config-server:8071
-      - KEYCLOAK_HOST=keycloak
-      - KEYCLOAK_PORT=8080
       - TRACING_SAMPLING=1.0
       - OTEL_HOST=otel-collector
       - OTEL_PORT=4318
+      - KEYCLOAK_ISSUER_HOST=${SERVER_IP:-localhost}
+      - KEYCLOAK_ISSUER_PORT=8181
+      - KEYCLOAK_JWK_HOST=keycloak
+      - KEYCLOAK_JWK_PORT=8080
     depends_on:
       config-server:
         condition: service_healthy
@@ -384,11 +395,13 @@ services:
       - EUREKA_HOST=eureka-server
       - EUREKA_PORT=8070
       - CONFIG_SERVER_URL=http://config-server:8071
-      - KEYCLOAK_HOST=keycloak
-      - KEYCLOAK_PORT=8080
       - TRACING_SAMPLING=1.0
       - OTEL_HOST=otel-collector
       - OTEL_PORT=4318
+      - KEYCLOAK_ISSUER_HOST=${SERVER_IP:-localhost}
+      - KEYCLOAK_ISSUER_PORT=8181
+      - KEYCLOAK_JWK_HOST=keycloak
+      - KEYCLOAK_JWK_PORT=8080
     depends_on:
       config-server:
         condition: service_healthy
@@ -416,11 +429,13 @@ services:
       - EUREKA_HOST=eureka-server
       - EUREKA_PORT=8070
       - CONFIG_SERVER_URL=http://config-server:8071
-      - KEYCLOAK_HOST=keycloak
-      - KEYCLOAK_PORT=8080
       - TRACING_SAMPLING=1.0
       - OTEL_HOST=otel-collector
       - OTEL_PORT=4318
+      - KEYCLOAK_ISSUER_HOST=${SERVER_IP:-localhost}
+      - KEYCLOAK_ISSUER_PORT=8181
+      - KEYCLOAK_JWK_HOST=keycloak
+      - KEYCLOAK_JWK_PORT=8080
     depends_on:
       config-server:
         condition: service_healthy
@@ -457,3 +472,4 @@ volumes:
   postgres_data:
   keycloak_data:
   vault_data:
+  grafana_data:
