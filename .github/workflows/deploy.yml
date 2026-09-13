@@ -12,27 +12,65 @@ on:
     branches: [ master ]
 
 jobs:
+  changes:
+    runs-on: self-hosted
+    outputs:
+      admin: ${{ steps.filter.outputs.admin }}
+      config: ${{ steps.filter.outputs.config }}
+      employers: ${{ steps.filter.outputs.employers }}
+      eureka: ${{ steps.filter.outputs.eureka }}
+      factory: ${{ steps.filter.outputs.factory }}
+      gateway: ${{ steps.filter.outputs.gateway }}
+      order: ${{ steps.filter.outputs.order }}
+      product: ${{ steps.filter.outputs.product }}
+      toolwarehouse: ${{ steps.filter.outputs.toolwarehouse }}
+      warehouse: ${{ steps.filter.outputs.warehouse }}
+      docker: ${{ steps.filter.outputs.docker }}
+      global: ${{ steps.filter.outputs.global }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v5
+      - uses: dorny/paths-filter@v4
+        id: filter
+        with:
+          filters: |
+            admin: 'services/backend/admin-service/**'
+            config: 'services/backend/config-service/**'
+            employers: 'services/backend/employers-service/**'
+            eureka: 'services/backend/eureka-service/**'
+            factory: 'services/backend/factory-service/**'
+            gateway: 'services/backend/gateway-service/**'
+            order: 'services/backend/order-service/**'
+            product: 'services/backend/product-service/**'
+            toolwarehouse: 'services/backend/toolwarehouse-service/**'
+            warehouse: 'services/backend/warehouse-service/**'
+            docker: 'docker/**'
+            global:
+              - 'build.gradle'
+              - 'settings.gradle'
   test:
+    needs: changes
     runs-on: self-hosted
     timeout-minutes: 10
     steps:
       - name: Checkout Code
         uses: actions/checkout@v5
-
       - name: Set up JDK 21
         uses: actions/setup-java@v5
         with:
           java-version: '21'
           distribution: 'temurin'
           cache: gradle
-
       - name: Run Gradle tests
         run: ./gradlew test --no-daemon
 
   deploy:
-    needs: test
+    needs: [ test, changes ]
     runs-on: self-hosted
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    concurrency:
+      group: deploy-master
+      cancel-in-progress: false
     steps:
       - name: Checkout Code
         uses: actions/checkout@v5
@@ -64,7 +102,49 @@ jobs:
           } > docker/.env
 
       - name: Deploy
-        run: docker compose -f docker/docker-compose.yaml up -d --build
+        env:
+          GLOBAL: ${{ needs.changes.outputs.global }}
+          DOCKER: ${{ needs.changes.outputs.docker }}
+          ADMIN: ${{ needs.changes.outputs.admin }}
+          CONFIG: ${{ needs.changes.outputs.config }}
+          EMPLOYERS: ${{ needs.changes.outputs.employers }}
+          EUREKA: ${{ needs.changes.outputs.eureka }}
+          FACTORY: ${{ needs.changes.outputs.factory }}
+          GATEWAY: ${{ needs.changes.outputs.gateway }}
+          ORDER: ${{ needs.changes.outputs.order }}
+          PRODUCT: ${{ needs.changes.outputs.product }}
+          TOOL: ${{ needs.changes.outputs.toolwarehouse }}
+          WAREHOUSE: ${{ needs.changes.outputs.warehouse }}
+        run: |
+          set -euo pipefail
+          COMPOSE="docker compose -f docker/docker-compose.yaml"
+          
+          if [ "$GLOBAL" = "true" ]; then
+            $COMPOSE up -d --build
+            exit 0
+          fi
+          
+          svcs=()
+          [ "$CONFIG"    = "true" ] && svcs+=("config-server")
+          [ "$EUREKA"    = "true" ] && svcs+=("eureka-server")
+          [ "$ADMIN"     = "true" ] && svcs+=("admin-service")
+          [ "$EMPLOYERS" = "true" ] && svcs+=("employer-service")
+          [ "$FACTORY"   = "true" ] && svcs+=("factory-service")
+          [ "$GATEWAY"   = "true" ] && svcs+=("api-gateway")
+          [ "$ORDER"     = "true" ] && svcs+=("order-service")
+          [ "$PRODUCT"    = "true" ] && svcs+=("product-service")
+          [ "$TOOL"      = "true" ] && svcs+=("toolwarehouse-service")
+          [ "$WAREHOUSE" = "true" ] && svcs+=("warehouse-service")
+
+          if [ ${#svcs[@]} -gt 0 ]; then
+            echo "Rebuilding: ${svcs[*]}"
+            $COMPOSE up -d --build "${svcs[@]}"
+          fi
+
+          if [ "$DOCKER" = "true" ]; then
+            echo "Applying docker/ changes (recreate, no service rebuild)"
+            $COMPOSE up -d
+          fi
 
       - name: Check containers
         run: docker compose -f docker/docker-compose.yaml ps
