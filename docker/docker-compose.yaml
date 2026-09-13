@@ -230,7 +230,8 @@ services:
       - TRACING_SAMPLING=1.0
       - OTEL_HOST=otel-collector
       - OTEL_PORT=4318
-      - AUTH_SERVER_URL=http://${SERVER_IP:-localhost}:8181
+      - OAUTH_FRONTEND_URL=http://${SERVER_IP:-localhost}:8181
+      - OAUTH_BACKEND_URL=http://keycloak:8080
 
     depends_on:
       config-server:
