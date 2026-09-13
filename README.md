@@ -1,6 +1,6 @@
 # Firm System — API фрагмента информационной системы производственной фирмы
 
-![Java](https://img.shields.io/badge/Java-21-blue) ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.x-brightgreen) ![Spring Cloud](https://img.shields.io/badge/Spring_Cloud-2025-green) 
+![Java](https://img.shields.io/badge/Java-21-blue) ![Spring Boot](https://img.shields.io/badge/Spring_Boot-4.x-brightgreen) ![Spring Cloud](https://img.shields.io/badge/Spring_Cloud-2025-green) 
 ![Spring Security](https://img.shields.io/badge/Spring_Security-JWT-red)
 ![Kafka](https://img.shields.io/badge/Kafka--yellow)
 [![Deploy Firm-system](https://github.com/Veteroch4k/Firm-system/actions/workflows/deploy.yml/badge.svg)](https://github.com/Veteroch4k/Firm-system/actions/workflows/deploy.yml)
@@ -10,18 +10,18 @@
 > Factory-service был продублирован для удобства, чтобы показать все топики, с которыми он взаимодействует
  
 ## 📖 Содержание
-- [🎯 О проекте](#-о-проекте)
-- [✨ Ключевые особенности](#-ключевые-особенности)
-- [🏗️ Стек технологий](#️-стек-технологий)
-- [📦 Компоненты](#-компоненты)
-- [🔗 Установка и запуск](#-установка-и-запуск)
-- [💡 Доступ к API](#️-доступ-к-api)
-- [🔐 Keycloak Security Конфигурация](#️-keycloak-security-конфигурация)
-- [🔐 Хранение секретов Vault](#️-хранение-секретов-vault)
-- [📊 Мониторинг](#️-мониторинг)
-- [🗃️ База данных](#️-база-данных)
-- [🪟 Конфигурации сервисов](#️-конфигурации-сервисов)
-- [🧪 Тестирование](#️-тестирование)
+- [🎯 О проекте](#🎯-о-проекте)
+- [✨ Ключевые особенности](#✨-ключевые-особенности)
+- [🏗️ Стек технологий](#🏗-стек-технологий)
+- [📦 Компоненты](#📦-компоненты)
+- [🔗 Установка и запуск](#🔗-установка-и-запуск)
+- [🎛️ Доступ к API](#🎛-доступ-к-api)
+- [🔐 Keycloak Security Конфигурация](#🔐-keycloak-security-конфигурация)
+- [🔐 Хранение секретов Vault](#🔐-хранение-секретов-vault)
+- [📊 Мониторинг](#📊-мониторинг)
+- [🗃️ База данных](#🗃-база-данных)
+- [🪟 Конфигурации сервисов](#🪟-конфигурации-сервисов)
+- [🧪 Тестирование](#🧪-тестирование)
 ## 🎯 О проекте
 Firm System — это RESTful API, разработанное на базе Spring Boot. Приложение представляет собой фрагмент информационной системы производственной фирмы, который будет обеспечивать
 *  Управление производственным циклом инструментов
