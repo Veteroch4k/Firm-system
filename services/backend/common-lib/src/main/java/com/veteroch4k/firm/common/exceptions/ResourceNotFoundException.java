@@ -1,4 +1,4 @@
-package com.veteroch4k.warehouse.exceptions;
+package com.veteroch4k.firm.common.exceptions;
 
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(String message) {

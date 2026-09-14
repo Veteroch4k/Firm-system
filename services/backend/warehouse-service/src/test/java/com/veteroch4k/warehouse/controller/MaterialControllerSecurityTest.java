@@ -1,6 +1,6 @@
 package com.veteroch4k.warehouse.controller;
 
-import com.veteroch4k.warehouse.configs.SecurityConfig;
+import com.veteroch4k.firm.common.configs.SecurityConfig;
 import com.veteroch4k.warehouse.controllers.MaterialController;
 import com.veteroch4k.warehouse.dto.MaterialRequest;
 import com.veteroch4k.warehouse.service.MaterialService;

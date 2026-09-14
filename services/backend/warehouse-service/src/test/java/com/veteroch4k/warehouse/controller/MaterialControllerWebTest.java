@@ -2,7 +2,7 @@ package com.veteroch4k.warehouse.controller;
 
 import com.veteroch4k.warehouse.controllers.MaterialController;
 import com.veteroch4k.warehouse.dto.MaterialRequest;
-import com.veteroch4k.warehouse.exceptions.ResourceNotFoundException;
+import com.veteroch4k.firm.common.exceptions.ResourceNotFoundException;
 import com.veteroch4k.warehouse.service.MaterialService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.veteroch4k.employers.controller;
 
-import com.veteroch4k.employers.configs.SecurityConfig;
+import com.veteroch4k.firm.common.configs.SecurityConfig;
 import com.veteroch4k.employers.controllers.EmployerController;
 import com.veteroch4k.employers.services.EmployerService;
 import org.junit.jupiter.api.Test;

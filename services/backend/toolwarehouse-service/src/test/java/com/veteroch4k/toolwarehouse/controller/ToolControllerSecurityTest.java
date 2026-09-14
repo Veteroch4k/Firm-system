@@ -1,6 +1,6 @@
 package com.veteroch4k.toolwarehouse.controller;
 
-import com.veteroch4k.toolwarehouse.configs.SecurityConfig;
+import com.veteroch4k.firm.common.configs.SecurityConfig;
 import com.veteroch4k.toolwarehouse.controllers.ToolController;
 import com.veteroch4k.toolwarehouse.dto.ToolRequest;
 import com.veteroch4k.toolwarehouse.services.ToolService;

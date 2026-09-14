@@ -1,30 +1,28 @@
-package com.veteroch4k.warehouse.exceptions;
+package com.veteroch4k.firm.common.exceptions;
 
 import jakarta.validation.ConstraintViolationException;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.HandlerMethodValidationException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.time.LocalDateTime;
 
-@Slf4j
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
     // 400
     @ExceptionHandler({
-            IllegalAccessException.class,
+            IllegalArgumentException.class,
             HandlerMethodValidationException.class,
             MethodArgumentNotValidException.class,
             ConstraintViolationException.class,
-            MethodArgumentTypeMismatchException.class,
+            MethodArgumentTypeMismatchException.class
     })
     public ResponseEntity<ErrorResponse> handleBadRequest(Exception e) {
 
@@ -39,6 +37,7 @@ public class GlobalExceptionHandler {
         }
 
         return buildResponse(HttpStatus.BAD_REQUEST, errorMessage);
+
 
     }
 
@@ -56,25 +55,25 @@ public class GlobalExceptionHandler {
 
     // 404
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleResourceNotFound(ResourceNotFoundException e) {
+    public ResponseEntity<ErrorResponse> handleResourceNotFoundException(ResourceNotFoundException e) {
 
-
-        return  buildResponse(HttpStatus.NOT_FOUND, e.getMessage());
+        return buildResponse(HttpStatus.NOT_FOUND, e.getMessage());
 
     }
 
-
-    // 500
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleException(Exception e) {
+    public ResponseEntity<ErrorResponse> exception(Exception e) {
 
-        log.error("Произошла внутренняя ошибка сервера: {}", e.getMessage(), e);
-        return buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Произошла внутренняя ошибка сервера");
+
+        return buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Произошла внутренняя ошибка сервера.");
+
 
     }
 
     private ResponseEntity<ErrorResponse> buildResponse(HttpStatus status, String message) {
+
         ErrorResponse response = new ErrorResponse(
+
                 LocalDateTime.now(),
                 status.value(),
                 status.getReasonPhrase(),
@@ -82,7 +81,6 @@ public class GlobalExceptionHandler {
         );
 
         return ResponseEntity.status(status).body(response);
+
     }
-
-
 }

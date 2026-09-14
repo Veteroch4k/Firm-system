@@ -1,7 +1,7 @@
 package com.veteroch4k.warehouse.service;
 
 import com.veteroch4k.warehouse.dto.MaterialRequest;
-import com.veteroch4k.warehouse.exceptions.ResourceNotFoundException;
+import com.veteroch4k.firm.common.exceptions.ResourceNotFoundException;
 import com.veteroch4k.warehouse.repositories.MaterialRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

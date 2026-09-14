@@ -1,7 +1,7 @@
 package com.veteroch4k.product.product.controllers.product;
 
+import com.veteroch4k.firm.common.exceptions.ResourceNotFoundException;
 import com.veteroch4k.product.controllers.ProductController;
-import com.veteroch4k.product.exceptions.ResourceNotFoundException;
 import com.veteroch4k.product.services.ProductService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

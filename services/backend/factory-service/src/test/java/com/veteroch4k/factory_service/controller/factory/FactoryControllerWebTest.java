@@ -1,8 +1,8 @@
 package com.veteroch4k.factory_service.controller.factory;
 
 import com.veteroch4k.factory_service.controller.FactoryController;
-import com.veteroch4k.factory_service.exceptions.ResourceNotFoundException;
 import com.veteroch4k.factory_service.services.FactoryService;
+import com.veteroch4k.firm.common.exceptions.ResourceNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;

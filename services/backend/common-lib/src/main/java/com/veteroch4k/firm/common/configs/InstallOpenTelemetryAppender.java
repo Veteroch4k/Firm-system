@@ -1,4 +1,4 @@
-package com.veteroch4k.order.configs;
+package com.veteroch4k.firm.common.configs;
 
 import io.opentelemetry.api.OpenTelemetry;
 import io.opentelemetry.instrumentation.logback.appender.v1_0.OpenTelemetryAppender;

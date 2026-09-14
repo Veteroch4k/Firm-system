@@ -1,6 +1,6 @@
 package com.veteroch4k.product.product.controllers.drawing;
 
-import com.veteroch4k.product.configs.SecurityConfig;
+import com.veteroch4k.firm.common.configs.SecurityConfig;
 import com.veteroch4k.product.controllers.DrawingController;
 import com.veteroch4k.product.services.DrawingService;
 import org.junit.jupiter.api.Test;

@@ -1,8 +1,8 @@
 package com.veteroch4k.toolwarehouse.services;
 
+import com.veteroch4k.firm.common.exceptions.ResourceNotFoundException;
 import com.veteroch4k.toolwarehouse.dto.ToolRequest;
 import com.veteroch4k.toolwarehouse.dto.ToolResponse;
-import com.veteroch4k.toolwarehouse.exceptions.ResourceNotFoundException;
 import com.veteroch4k.toolwarehouse.mappers.ToolMapper;
 import com.veteroch4k.toolwarehouse.models.Tool;
 import com.veteroch4k.toolwarehouse.models.ToolType;
