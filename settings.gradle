@@ -30,3 +30,5 @@ project(':warehouse-service').projectDir = file('services/backend/warehouse-serv
 project(':config-service').projectDir = file('services/backend/config-service')
 project(':eureka-service').projectDir = file('services/backend/eureka-service')
 project(':gateway-service').projectDir = file('services/backend/gateway-service')
+
+// байт CI
