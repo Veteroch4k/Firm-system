@@ -8,6 +8,7 @@ on:
       - 'docker/**'
       - 'build.gradle'
       - 'settings.gradle'
+      - '.github'
   pull_request:
     branches: [ master ]
 
