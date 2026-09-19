@@ -5,7 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {
+		"com.veteroch4k.factory_service",
+		"com.veteroch4k.firm.common"
+})
 @EnableFeignClients
 @RefreshScope
 public class FactoryServiceApplication {

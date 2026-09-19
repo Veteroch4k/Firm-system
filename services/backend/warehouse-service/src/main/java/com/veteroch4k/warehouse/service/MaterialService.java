@@ -2,7 +2,7 @@ package com.veteroch4k.warehouse.service;
 
 import com.veteroch4k.warehouse.dto.MaterialRequest;
 import com.veteroch4k.warehouse.dto.MaterialResponse;
-import com.veteroch4k.warehouse.exceptions.ResourceNotFoundException;
+import com.veteroch4k.firm.common.exceptions.ResourceNotFoundException;
 import com.veteroch4k.warehouse.models.Material;
 import com.veteroch4k.warehouse.repositories.MaterialRepository;
 import lombok.RequiredArgsConstructor;

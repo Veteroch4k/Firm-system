@@ -1,7 +1,7 @@
 package com.veteroch4k.product.drawing.controllers;
 
+import com.veteroch4k.firm.common.exceptions.ResourceNotFoundException;
 import com.veteroch4k.product.controllers.DrawingController;
-import com.veteroch4k.product.exceptions.ResourceNotFoundException;
 import com.veteroch4k.product.services.DrawingService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

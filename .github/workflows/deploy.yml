@@ -8,6 +8,7 @@ on:
       - 'docker/**'
       - 'build.gradle'
       - 'settings.gradle'
+      - '.github/**'
   pull_request:
     branches: [ master ]
 
@@ -30,6 +31,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
       - uses: dorny/paths-filter@v4
         id: filter
         with:

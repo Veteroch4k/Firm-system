@@ -2,8 +2,8 @@ package com.veteroch4k.factory_service.controller;
 
 import com.veteroch4k.factory_service.dto.operation.OperationRequest;
 import com.veteroch4k.factory_service.dto.operation.OperationResponse;
-import com.veteroch4k.factory_service.exceptions.ErrorResponse;
 import com.veteroch4k.factory_service.services.OperationService;
+import com.veteroch4k.firm.common.exceptions.ErrorResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -19,7 +19,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;

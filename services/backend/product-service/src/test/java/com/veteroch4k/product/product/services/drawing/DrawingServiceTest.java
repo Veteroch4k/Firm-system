@@ -1,6 +1,6 @@
 package com.veteroch4k.product.product.services.drawing;
 
-import com.veteroch4k.product.exceptions.ResourceNotFoundException;
+import com.veteroch4k.firm.common.exceptions.ResourceNotFoundException;
 import com.veteroch4k.product.repositories.DrawingRepository;
 import com.veteroch4k.product.services.DrawingService;
 import org.junit.jupiter.api.Test;

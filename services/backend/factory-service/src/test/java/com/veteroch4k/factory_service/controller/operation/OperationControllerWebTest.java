@@ -2,8 +2,8 @@ package com.veteroch4k.factory_service.controller.operation;
 
 import com.veteroch4k.factory_service.controller.OperationController;
 import com.veteroch4k.factory_service.dto.operation.OperationRequest;
-import com.veteroch4k.factory_service.exceptions.ResourceNotFoundException;
 import com.veteroch4k.factory_service.services.OperationService;
+import com.veteroch4k.firm.common.exceptions.ResourceNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;

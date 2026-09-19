@@ -12,6 +12,12 @@ include 'config-service'
 include 'eureka-service'
 include 'gateway-service'
 
+includeBuild('services/backend/common-lib') {
+    dependencySubstitution {
+        substitute module('com.veteroch4k.firm.common:common-lib') using project(':')
+    }
+}
+
 
 project(':admin-service').projectDir = file('services/backend/admin-service')
 project(':employers-service').projectDir = file('services/backend/employers-service')
@@ -24,3 +30,5 @@ project(':warehouse-service').projectDir = file('services/backend/warehouse-serv
 project(':config-service').projectDir = file('services/backend/config-service')
 project(':eureka-service').projectDir = file('services/backend/eureka-service')
 project(':gateway-service').projectDir = file('services/backend/gateway-service')
+
+// байт CI

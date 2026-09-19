@@ -1,1 +1,7 @@
 rootProject.name = 'factory-service'
+
+includeBuild ('../common-lib') {
+    dependencySubstitution {
+        substitute module('com.veteroch4k.firm.common:common-lib') using project(':')
+    }
+}

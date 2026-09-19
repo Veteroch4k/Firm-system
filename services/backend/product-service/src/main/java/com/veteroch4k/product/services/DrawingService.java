@@ -1,7 +1,7 @@
 package com.veteroch4k.product.services;
 
+import com.veteroch4k.firm.common.exceptions.ResourceNotFoundException;
 import com.veteroch4k.product.dto.drawing.DrawingResponse;
-import com.veteroch4k.product.exceptions.ResourceNotFoundException;
 import com.veteroch4k.product.models.Drawing;
 import com.veteroch4k.product.repositories.DrawingRepository;
 import lombok.RequiredArgsConstructor;

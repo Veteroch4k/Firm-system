@@ -1,12 +1,10 @@
 package com.veteroch4k.order.controller;
 
+import com.veteroch4k.firm.common.exceptions.ErrorResponse;
 import com.veteroch4k.order.dto.orderDTO.OrderRequestDTO;
 import com.veteroch4k.order.dto.orderDTO.OrderResponseDTO;
-import com.veteroch4k.order.exceptions.ErrorResponse;
 import com.veteroch4k.order.service.OrderService;
-
 import java.time.LocalDate;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -17,7 +15,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
 
 @Slf4j
 @RestController

@@ -1,8 +1,8 @@
 package com.veteroch4k.order.service;
 
+import com.veteroch4k.firm.common.exceptions.ResourceNotFoundException;
 import com.veteroch4k.order.dto.orderDTO.OrderRequestDTO;
 import com.veteroch4k.order.dto.orderDTO.OrderResponseDTO;
-import com.veteroch4k.order.exceptions.ResourceNotFoundException;
 import com.veteroch4k.order.model.Order;
 import com.veteroch4k.order.model.OrderStatus;
 import com.veteroch4k.order.model.event.OrderCreatedEvent;
