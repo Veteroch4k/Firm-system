@@ -61,8 +61,7 @@ dependencies {
 
 	testImplementation 'io.rest-assured:rest-assured:6.0.1'
 
-	implementation 'com.veteroch4k.firm.common:common-lib'
-
+	implementation 'com.veteroch4k.firm.common:common-lib:0.0.1-SNAPSHOT'
 
 }
 
