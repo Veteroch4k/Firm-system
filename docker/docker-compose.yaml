@@ -68,11 +68,15 @@ services:
     environment:
       - KEYCLOAK_ADMIN=admin
       - KEYCLOAK_ADMIN_PASSWORD=admin
+
       - KC_HOSTNAME_STRICT=false
       - KC_HOSTNAME_STRICT_HTTPS=false
-      - KC_HOSTNAME=${SERVER_IP:-localhost}
-      - KC_HOSTNAME_PORT=8181
       - KC_HOSTNAME_BACKCHANNEL_DYNAMIC=true
+
+      - KC_PROXY_HEADERS=xforwarded
+      - KC_HOSTNAME=${SERVER_IP:-localhost}
+      - KC_HOSTNAME_PORT=${SERVER_PORT:-8181}
+
     volumes:
       - keycloak_data:/opt/keycloak/data
       - ./realm.json:/opt/keycloak/data/import/realm.json:ro
@@ -234,7 +238,7 @@ services:
       - TRACING_SAMPLING=1.0
       - OTEL_HOST=otel-collector
       - OTEL_PORT=4318
-      - OAUTH_FRONTEND_URL=http://${SERVER_IP:-localhost}:8181
+      - OAUTH_FRONTEND_URL=${SERVER_SCHEME:-http}://${SERVER_IP:-localhost}:${SERVER_PORT:-8181}
       - OAUTH_BACKEND_URL=http://keycloak:8080
 
     depends_on:
@@ -264,7 +268,8 @@ services:
       - OTEL_HOST=otel-collector
       - OTEL_PORT=4318
       - KEYCLOAK_ISSUER_HOST=${SERVER_IP:-localhost}
-      - KEYCLOAK_ISSUER_PORT=8181
+      - KEYCLOAK_ISSUER_PORT=${SERVER_PORT:-8181}
+      - KEYCLOAK_ISSUER_SCHEME=${SERVER_SCHEME:-http}
       - KEYCLOAK_JWK_HOST=keycloak
       - KEYCLOAK_JWK_PORT=8080
 
@@ -295,7 +300,8 @@ services:
       - OTEL_HOST=otel-collector
       - OTEL_PORT=4318
       - KEYCLOAK_ISSUER_HOST=${SERVER_IP:-localhost}
-      - KEYCLOAK_ISSUER_PORT=8181
+      - KEYCLOAK_ISSUER_PORT=${SERVER_PORT:-8181}
+      - KEYCLOAK_ISSUER_SCHEME=${SERVER_SCHEME:-http}
       - KEYCLOAK_JWK_HOST=keycloak
       - KEYCLOAK_JWK_PORT=8080
     depends_on:
@@ -327,7 +333,8 @@ services:
       - OTEL_HOST=otel-collector
       - OTEL_PORT=4318
       - KEYCLOAK_ISSUER_HOST=${SERVER_IP:-localhost}
-      - KEYCLOAK_ISSUER_PORT=8181
+      - KEYCLOAK_ISSUER_PORT=${SERVER_PORT:-8181}
+      - KEYCLOAK_ISSUER_SCHEME=${SERVER_SCHEME:-http}
       - KEYCLOAK_JWK_HOST=keycloak
       - KEYCLOAK_JWK_PORT=8080
     depends_on:
@@ -363,7 +370,8 @@ services:
       - OTEL_HOST=otel-collector
       - OTEL_PORT=4318
       - KEYCLOAK_ISSUER_HOST=${SERVER_IP:-localhost}
-      - KEYCLOAK_ISSUER_PORT=8181
+      - KEYCLOAK_ISSUER_PORT=${SERVER_PORT:-8181}
+      - KEYCLOAK_ISSUER_SCHEME=${SERVER_SCHEME:-http}
       - KEYCLOAK_JWK_HOST=keycloak
       - KEYCLOAK_JWK_PORT=8080
     depends_on:
@@ -399,7 +407,8 @@ services:
       - OTEL_HOST=otel-collector
       - OTEL_PORT=4318
       - KEYCLOAK_ISSUER_HOST=${SERVER_IP:-localhost}
-      - KEYCLOAK_ISSUER_PORT=8181
+      - KEYCLOAK_ISSUER_PORT=${SERVER_PORT:-8181}
+      - KEYCLOAK_ISSUER_SCHEME=${SERVER_SCHEME:-http}
       - KEYCLOAK_JWK_HOST=keycloak
       - KEYCLOAK_JWK_PORT=8080
     depends_on:
@@ -433,7 +442,8 @@ services:
       - OTEL_HOST=otel-collector
       - OTEL_PORT=4318
       - KEYCLOAK_ISSUER_HOST=${SERVER_IP:-localhost}
-      - KEYCLOAK_ISSUER_PORT=8181
+      - KEYCLOAK_ISSUER_PORT=${SERVER_PORT:-8181}
+      - KEYCLOAK_ISSUER_SCHEME=${SERVER_SCHEME:-http}
       - KEYCLOAK_JWK_HOST=keycloak
       - KEYCLOAK_JWK_PORT=8080
     depends_on:

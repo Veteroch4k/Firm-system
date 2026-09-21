@@ -95,6 +95,8 @@ jobs:
           UNSEAL_2: ${{ secrets.VAULT_UNSEAL_KEY_2 }}
           UNSEAL_3: ${{ secrets.VAULT_UNSEAL_KEY_3 }}
           SERVERIP: ${{ secrets.SERVER_IP }}
+          SERVERPORT: ${{ secrets.SERVER_PORT }}
+          SERVERSCHEME: ${{ secrets.SERVER_SCHEME }}
           CLOUDTOKEN: ${{ secrets.CLOUD_TOKEN }}
         run: |
           {
@@ -103,6 +105,8 @@ jobs:
             echo "VAULT_UNSEAL_KEY_2=$UNSEAL_2"
             echo "VAULT_UNSEAL_KEY_3=$UNSEAL_3"
             echo "SERVER_IP=$SERVERIP"
+            echo "SERVER_PORT=$SERVERPORT"
+            echo "SERVER_SCHEME=$SERVERSCHEME"
             echo "CLOUD_TOKEN=$CLOUDTOKEN"
           } > docker/.env
 
