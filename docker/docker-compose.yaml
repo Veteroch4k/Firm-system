@@ -464,6 +464,16 @@ services:
     networks:
       - backend
 
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    command: tunnel --no-autoupdate run
+    environment:
+      - TUNNEL_TOKEN=${CLOUD_TOKEN}
+    restart: unless-stopped
+    networks:
+      - backend
+
 networks:
   backend:
     driver: bridge
