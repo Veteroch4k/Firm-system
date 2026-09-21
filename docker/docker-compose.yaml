@@ -68,14 +68,12 @@ services:
     environment:
       - KEYCLOAK_ADMIN=admin
       - KEYCLOAK_ADMIN_PASSWORD=admin
-
       - KC_HOSTNAME_STRICT=false
       - KC_HOSTNAME_STRICT_HTTPS=false
       - KC_HOSTNAME_BACKCHANNEL_DYNAMIC=true
-
       - KC_PROXY_HEADERS=xforwarded
-      - KC_HOSTNAME_URL=${SERVER_SCHEME:-http}://${SERVER_IP:-localhost}:${SERVER_PORT:-8181}
-      - KC_HOSTNAME_ADMIN_URL=${SERVER_SCHEME:-http}://${SERVER_IP:-localhost}:${SERVER_PORT:-8181}
+      - KC_HOSTNAME_URL=${KEYCLOAK_URL:-http://localhost:8181}
+      - KC_HOSTNAME_ADMIN_URL=${KEYCLOAK_URL:-http://localhost:8181}
 
     volumes:
       - keycloak_data:/opt/keycloak/data

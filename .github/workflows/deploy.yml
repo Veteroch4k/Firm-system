@@ -108,6 +108,7 @@ jobs:
             echo "SERVER_PORT=$SERVERPORT"
             echo "SERVER_SCHEME=$SERVERSCHEME"
             echo "CLOUD_TOKEN=$CLOUDTOKEN"
+            echo "KEYCLOAK_URL=$SERVERSCHEME://$SERVERIP"
           } > docker/.env
 
       - name: Deploy
