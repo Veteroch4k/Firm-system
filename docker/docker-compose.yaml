@@ -74,8 +74,8 @@ services:
       - KC_HOSTNAME_BACKCHANNEL_DYNAMIC=true
 
       - KC_PROXY_HEADERS=xforwarded
-      - KC_HOSTNAME=${SERVER_IP:-localhost}
-      - KC_HOSTNAME_PORT=${SERVER_PORT:-8181}
+      - KC_HOSTNAME_URL=${SERVER_SCHEME:-http}://${SERVER_IP:-localhost}:${SERVER_PORT:-8181}
+      - KC_HOSTNAME_ADMIN_URL=${SERVER_SCHEME:-http}://${SERVER_IP:-localhost}:${SERVER_PORT:-8181}
 
     volumes:
       - keycloak_data:/opt/keycloak/data
