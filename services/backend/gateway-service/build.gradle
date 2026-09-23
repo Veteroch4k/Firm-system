@@ -39,6 +39,9 @@ dependencies {
 	testImplementation 'org.testcontainers:testcontainers-junit-jupiter'
 	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
 
+	compileOnly 'io.opentelemetry.instrumentation:opentelemetry-logback-appender-1.0:2.18.0-alpha'
+
+
 }
 
 dependencyManagement {
