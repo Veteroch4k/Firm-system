@@ -1,14 +1,27 @@
 spring:
-  application:
-    name: gateway-service
-
-  profiles:
-    active: default
+  config:
+    import: ""
 
   cloud:
     config:
       enabled: false
-
+    gateway:
+      server:
+        webflux:
+          default-filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+                key-resolver: "#{@userKeyResolver}"
+          routes:
+            - id: test_route
+              uri: no://op
+              predicates:
+                - Path=/**
 management:
   opentelemetry:
+    enabled: false
+eureka:
+  client:
     enabled: false
