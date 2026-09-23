@@ -236,7 +236,8 @@ services:
       - OTEL_PORT=4318
       - OAUTH_FRONTEND_URL=${SERVER_SCHEME:-http}://${SERVER_IP:-localhost}:${SERVER_PORT:-8181}
       - OAUTH_BACKEND_URL=http://keycloak:8080
-
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
     depends_on:
       config-server:
         condition: service_healthy
