@@ -38,14 +38,14 @@ public class RateLimiterIntegrationTest {
     @Test
     void shouldReturn429_whenRateLimitExceeded() {
         int burstCapacity = 20;
-        String testUrl = "product/api/product/all";
+        String testUrl = "/product/api/product/all";
 
         IntStream.range(0, burstCapacity).parallel().forEach(i ->
                 webClient.get()
                         .uri(testUrl)
                         .header("X-Forwarded-For", "192.168.1.100")
                         .exchange()
-                        .expectStatus().isNotFound()
+                        .expectStatus().isOk()
         );
 
         webClient.get()
@@ -58,7 +58,7 @@ public class RateLimiterIntegrationTest {
                 .uri(testUrl)
                 .header("X-Forwarded-For", "10.0.0.5")
                 .exchange()
-                .expectStatus().isNotFound();
+                .expectStatus().isOk();
     }
 
 }
