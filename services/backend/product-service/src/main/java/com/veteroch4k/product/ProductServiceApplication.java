@@ -4,10 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
-@SpringBootApplication(scanBasePackages = {
-		"com.veteroch4k.product",
-		"com.veteroch4k.firm.common"
-})
+@SpringBootApplication
 @RefreshScope
 public class ProductServiceApplication {
 

@@ -1,5 +1,6 @@
 package com.veteroch4k.product.controllers;
 
+import com.veteroch4k.firm.starter.exceptions.ErrorResponse;
 import com.veteroch4k.product.dto.ProductManufacturingInfoResponse;
 import com.veteroch4k.product.dto.product.ProductResponse;
 import com.veteroch4k.product.services.ProductService;
@@ -23,7 +24,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.veteroch4k.firm.common.exceptions.ErrorResponse;
 
 @RestController
 @RequestMapping("/api/product")

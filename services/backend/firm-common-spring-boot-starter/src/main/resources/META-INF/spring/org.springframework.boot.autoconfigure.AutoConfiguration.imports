@@ -1,0 +1,3 @@
+com.veteroch4k.firm.starter.configs.FirmSecurityAutoConfiguration
+com.veteroch4k.firm.starter.configs.FirmWebAutoConfiguration
+com.veteroch4k.firm.starter.configs.FirmTracingAutoConfiguration

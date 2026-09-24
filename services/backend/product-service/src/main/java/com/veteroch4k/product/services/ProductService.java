@@ -1,6 +1,6 @@
 package com.veteroch4k.product.services;
 
-import com.veteroch4k.firm.common.exceptions.ResourceNotFoundException;
+import com.veteroch4k.firm.starter.exceptions.ResourceNotFoundException;
 import com.veteroch4k.product.dto.ProductManufacturingInfoResponse;
 import com.veteroch4k.product.dto.drawing.DrawingResponse;
 import com.veteroch4k.product.dto.product.ProductResponse;

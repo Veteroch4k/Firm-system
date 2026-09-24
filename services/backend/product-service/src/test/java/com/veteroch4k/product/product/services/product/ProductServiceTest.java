@@ -1,6 +1,6 @@
 package com.veteroch4k.product.product.services.product;
 
-import com.veteroch4k.firm.common.exceptions.ResourceNotFoundException;
+import com.veteroch4k.firm.starter.exceptions.ResourceNotFoundException;
 import com.veteroch4k.product.repositories.ProductRepository;
 import com.veteroch4k.product.services.ProductService;
 import org.junit.jupiter.api.Test;

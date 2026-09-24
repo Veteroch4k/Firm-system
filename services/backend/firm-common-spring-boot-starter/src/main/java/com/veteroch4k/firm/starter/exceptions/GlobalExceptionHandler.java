@@ -1,4 +1,4 @@
-package com.veteroch4k.firm.common.exceptions;
+package com.veteroch4k.firm.starter.exceptions;
 
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;

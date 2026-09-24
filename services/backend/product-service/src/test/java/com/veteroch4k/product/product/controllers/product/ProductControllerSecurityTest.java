@@ -1,12 +1,10 @@
 package com.veteroch4k.product.product.controllers.product;
 
-import com.veteroch4k.firm.common.configs.SecurityConfig;
 import com.veteroch4k.product.controllers.ProductController;
 import com.veteroch4k.product.services.ProductService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
@@ -17,7 +15,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = ProductController.class)
-@Import({SecurityConfig.class})
 public class ProductControllerSecurityTest {
 
     @Autowired

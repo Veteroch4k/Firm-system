@@ -12,9 +12,9 @@ include 'config-service'
 include 'eureka-service'
 include 'gateway-service'
 
-includeBuild('services/backend/common-lib') {
+includeBuild('services/backend/firm-common-spring-boot-starter') {
     dependencySubstitution {
-        substitute module('com.veteroch4k.firm.common:common-lib') using project(':')
+        substitute module('com.veteroch4k.firm.starter:firm-common-spring-boot-starter') using project(':')
     }
 }
 
