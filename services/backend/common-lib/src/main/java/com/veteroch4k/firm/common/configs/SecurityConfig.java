@@ -20,6 +20,13 @@ import java.util.stream.Collectors;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    @Configuration
+    @Profile("!dev")
+    @EnableMethodSecurity
+    public static class MethodSecurityConfig {
+    }
+
+
     @Bean
     @Profile("!dev")
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
