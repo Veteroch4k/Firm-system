@@ -1,7 +1,2 @@
 rootProject.name = 'warehouse-service'
 
-includeBuild ('../common-lib') {
-    dependencySubstitution {
-        substitute module('com.veteroch4k.firm.common:common-lib') using project(':')
-    }
-}

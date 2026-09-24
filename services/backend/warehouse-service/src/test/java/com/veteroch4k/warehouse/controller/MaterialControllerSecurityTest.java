@@ -1,13 +1,11 @@
 package com.veteroch4k.warehouse.controller;
 
-import com.veteroch4k.firm.common.configs.SecurityConfig;
 import com.veteroch4k.warehouse.controllers.MaterialController;
 import com.veteroch4k.warehouse.dto.MaterialRequest;
 import com.veteroch4k.warehouse.service.MaterialService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
@@ -20,7 +18,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = {MaterialController.class})
-@Import(SecurityConfig.class)
 public class MaterialControllerSecurityTest {
 
     @MockitoBean

@@ -14,6 +14,7 @@ java {
 }
 
 repositories {
+	mavenLocal()
 	mavenCentral()
 }
 
@@ -40,6 +41,9 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
 
 	compileOnly 'io.opentelemetry.instrumentation:opentelemetry-logback-appender-1.0:2.18.0-alpha'
+
+	implementation 'com.veteroch4k.firm.starter:firm-common-spring-boot-starter:0.0.1-SNAPSHOT'
+
 
 
 }

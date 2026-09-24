@@ -3,7 +3,7 @@ package com.veteroch4k.factory_service.controller;
 import com.veteroch4k.factory_service.dto.operation.OperationRequest;
 import com.veteroch4k.factory_service.dto.operation.OperationResponse;
 import com.veteroch4k.factory_service.services.OperationService;
-import com.veteroch4k.firm.common.exceptions.ErrorResponse;
+import com.veteroch4k.firm.starter.exceptions.ErrorResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;

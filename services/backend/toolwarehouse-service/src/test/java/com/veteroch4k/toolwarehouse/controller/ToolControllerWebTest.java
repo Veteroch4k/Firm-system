@@ -1,7 +1,7 @@
 package com.veteroch4k.toolwarehouse.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.veteroch4k.firm.common.exceptions.ResourceNotFoundException;
+import com.veteroch4k.firm.starter.exceptions.ResourceNotFoundException;
 import com.veteroch4k.toolwarehouse.controllers.ToolController;
 import com.veteroch4k.toolwarehouse.dto.ToolRequest;
 import com.veteroch4k.toolwarehouse.services.ToolService;

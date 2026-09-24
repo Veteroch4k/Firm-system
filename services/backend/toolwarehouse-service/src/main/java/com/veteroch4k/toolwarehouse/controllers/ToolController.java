@@ -1,6 +1,6 @@
 package com.veteroch4k.toolwarehouse.controllers;
 
-import com.veteroch4k.firm.common.exceptions.ErrorResponse;
+import com.veteroch4k.firm.starter.exceptions.ErrorResponse;
 import com.veteroch4k.toolwarehouse.dto.ToolRequest;
 import com.veteroch4k.toolwarehouse.dto.ToolResponse;
 import com.veteroch4k.toolwarehouse.services.ToolService;

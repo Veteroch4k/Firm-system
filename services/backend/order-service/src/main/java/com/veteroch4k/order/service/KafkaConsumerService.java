@@ -1,6 +1,6 @@
 package com.veteroch4k.order.service;
 
-import com.veteroch4k.firm.common.exceptions.ResourceNotFoundException;
+import com.veteroch4k.firm.starter.exceptions.ResourceNotFoundException;
 import com.veteroch4k.order.model.Order;
 import com.veteroch4k.order.model.OrderStatus;
 import com.veteroch4k.order.model.event.OrderReadyEvent;

@@ -1,6 +1,6 @@
 package com.veteroch4k.order.controllers;
 
-import com.veteroch4k.firm.common.exceptions.ResourceNotFoundException;
+import com.veteroch4k.firm.starter.exceptions.ResourceNotFoundException;
 import com.veteroch4k.order.controller.OrderController;
 import com.veteroch4k.order.service.OrderService;
 import org.junit.jupiter.api.Test;

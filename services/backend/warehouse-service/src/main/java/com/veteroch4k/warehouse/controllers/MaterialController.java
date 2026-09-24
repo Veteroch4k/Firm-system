@@ -1,5 +1,6 @@
 package com.veteroch4k.warehouse.controllers;
 
+import com.veteroch4k.firm.starter.exceptions.ErrorResponse;
 import com.veteroch4k.warehouse.dto.MaterialRequest;
 import com.veteroch4k.warehouse.dto.MaterialResponse;
 import com.veteroch4k.warehouse.service.MaterialService;
@@ -30,7 +31,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import com.veteroch4k.firm.common.exceptions.ErrorResponse;
 
 @RestController
 @RequiredArgsConstructor

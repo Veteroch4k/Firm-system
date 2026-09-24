@@ -1,6 +1,6 @@
 package com.veteroch4k.order.services;
 
-import com.veteroch4k.firm.common.exceptions.ResourceNotFoundException;
+import com.veteroch4k.firm.starter.exceptions.ResourceNotFoundException;
 import com.veteroch4k.order.repository.OrderRepository;
 import com.veteroch4k.order.service.KafkaProducerService;
 import com.veteroch4k.order.service.OrderService;
