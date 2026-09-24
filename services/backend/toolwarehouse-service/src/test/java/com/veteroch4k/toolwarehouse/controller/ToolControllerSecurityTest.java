@@ -1,6 +1,6 @@
 package com.veteroch4k.toolwarehouse.controller;
 
-import com.veteroch4k.firm.common.configs.SecurityConfig;
+import com.veteroch4k.firm.starter.configs.FirmSecurityAutoConfiguration;
 import com.veteroch4k.toolwarehouse.controllers.ToolController;
 import com.veteroch4k.toolwarehouse.dto.ToolRequest;
 import com.veteroch4k.toolwarehouse.services.ToolService;
@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = ToolController.class)
-@Import({SecurityConfig.class})
+@Import({FirmSecurityAutoConfiguration.class})
 public class ToolControllerSecurityTest {
 
     @MockitoBean

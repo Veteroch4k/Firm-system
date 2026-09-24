@@ -1,8 +1,9 @@
 package com.veteroch4k.employers.controller;
 
-import com.veteroch4k.firm.common.configs.SecurityConfig;
 import com.veteroch4k.employers.controllers.EmployerController;
 import com.veteroch4k.employers.services.EmployerService;
+import com.veteroch4k.firm.starter.configs.FirmSecurityAutoConfiguration;
+import com.veteroch4k.firm.starter.configs.FirmWebAutoConfiguration;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
@@ -17,7 +18,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = EmployerController.class)
-@Import(SecurityConfig.class)
+@Import({FirmSecurityAutoConfiguration.class})
 public class EmployerControllerSecurityTest {
 
     @MockitoBean

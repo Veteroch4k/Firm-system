@@ -10,7 +10,7 @@ import com.veteroch4k.factory_service.repository.OpMaterialsRepository;
 import com.veteroch4k.factory_service.repository.OperationToolsRepository;
 import java.util.List;
 
-import com.veteroch4k.firm.common.exceptions.ResourceNotFoundException;
+import com.veteroch4k.firm.starter.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;

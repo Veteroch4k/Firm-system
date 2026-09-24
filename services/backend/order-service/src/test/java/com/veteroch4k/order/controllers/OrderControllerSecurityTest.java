@@ -1,6 +1,6 @@
 package com.veteroch4k.order.controllers;
 
-import com.veteroch4k.firm.common.configs.SecurityConfig;
+import com.veteroch4k.firm.starter.configs.FirmSecurityAutoConfiguration;
 import com.veteroch4k.order.controller.OrderController;
 import com.veteroch4k.order.dto.orderDTO.OrderRequestDTO;
 import com.veteroch4k.order.service.OrderService;
@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = OrderController.class)
-@Import(SecurityConfig.class)
+@Import({FirmSecurityAutoConfiguration.class})
 public class OrderControllerSecurityTest {
 
     @MockitoBean

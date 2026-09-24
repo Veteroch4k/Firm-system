@@ -3,7 +3,7 @@ package com.veteroch4k.factory_service.service.factory;
 import com.veteroch4k.factory_service.mappers.FactoryMapper;
 import com.veteroch4k.factory_service.repository.FactoryRepository;
 import com.veteroch4k.factory_service.services.FactoryService;
-import com.veteroch4k.firm.common.exceptions.ResourceNotFoundException;
+import com.veteroch4k.firm.starter.exceptions.ResourceNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

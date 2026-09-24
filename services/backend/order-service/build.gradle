@@ -14,6 +14,7 @@ java {
 }
 
 repositories {
+	mavenLocal()
 	mavenCentral()
 }
 
@@ -56,7 +57,7 @@ dependencies {
 
 	testImplementation 'io.rest-assured:rest-assured:6.0.1'
 
-	implementation 'com.veteroch4k.firm.common:common-lib:0.0.1-SNAPSHOT'
+	implementation 'com.veteroch4k.firm.starter:firm-common-spring-boot-starter:0.0.1-SNAPSHOT'
 
 }
 

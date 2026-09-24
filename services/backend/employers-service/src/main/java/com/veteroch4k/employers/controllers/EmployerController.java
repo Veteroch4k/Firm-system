@@ -3,6 +3,8 @@ package com.veteroch4k.employers.controllers;
 import com.veteroch4k.employers.dto.EmployerResponse;
 import com.veteroch4k.employers.services.EmployerService;
 import java.util.concurrent.TimeoutException;
+
+import com.veteroch4k.firm.starter.exceptions.ErrorResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -24,7 +26,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.veteroch4k.firm.common.exceptions.ErrorResponse;
 
 @RequiredArgsConstructor
 @RestController

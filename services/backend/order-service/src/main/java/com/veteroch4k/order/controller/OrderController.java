@@ -1,6 +1,6 @@
 package com.veteroch4k.order.controller;
 
-import com.veteroch4k.firm.common.exceptions.ErrorResponse;
+import com.veteroch4k.firm.starter.exceptions.ErrorResponse;
 import com.veteroch4k.order.dto.orderDTO.OrderRequestDTO;
 import com.veteroch4k.order.dto.orderDTO.OrderResponseDTO;
 import com.veteroch4k.order.service.OrderService;

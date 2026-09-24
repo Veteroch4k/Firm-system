@@ -2,7 +2,7 @@ package com.veteroch4k.factory_service.controller.factory;
 
 import com.veteroch4k.factory_service.controller.FactoryController;
 import com.veteroch4k.factory_service.services.FactoryService;
-import com.veteroch4k.firm.common.configs.SecurityConfig;
+import com.veteroch4k.firm.starter.configs.FirmSecurityAutoConfiguration;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = FactoryController.class)
-@Import({SecurityConfig.class})
+@Import({FirmSecurityAutoConfiguration.class})
 public class FactoryControllerSecurityTest {
 
     @MockitoBean

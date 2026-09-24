@@ -1,13 +1,15 @@
 package com.veteroch4k.warehouse.controller;
 
+import com.veteroch4k.firm.starter.exceptions.GlobalExceptionHandler;
+import com.veteroch4k.firm.starter.exceptions.ResourceNotFoundException;
 import com.veteroch4k.warehouse.controllers.MaterialController;
 import com.veteroch4k.warehouse.dto.MaterialRequest;
-import com.veteroch4k.firm.common.exceptions.ResourceNotFoundException;
 import com.veteroch4k.warehouse.service.MaterialService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -20,6 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(controllers = MaterialController.class)
 @AutoConfigureMockMvc(addFilters = false)
+@Import(GlobalExceptionHandler.class)
 public class MaterialControllerWebTest {
 
     @Autowired
