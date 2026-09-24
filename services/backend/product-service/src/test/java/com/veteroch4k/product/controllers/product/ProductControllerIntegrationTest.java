@@ -1,4 +1,4 @@
-package com.veteroch4k.product.product.controllers.product;
+package com.veteroch4k.product.controllers.product;
 
 import com.veteroch4k.product.BaseIntegrationTest;
 import com.veteroch4k.product.models.Drawing;

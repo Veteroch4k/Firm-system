@@ -1,5 +1,6 @@
-package com.veteroch4k.product.drawing.controllers;
+package com.veteroch4k.product.controllers.drawing;
 
+import com.veteroch4k.firm.starter.exceptions.GlobalExceptionHandler;
 import com.veteroch4k.firm.starter.exceptions.ResourceNotFoundException;
 import com.veteroch4k.product.controllers.DrawingController;
 import com.veteroch4k.product.services.DrawingService;
@@ -7,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -16,13 +18,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(controllers = DrawingController.class)
 @AutoConfigureMockMvc(addFilters = false)
+@Import(GlobalExceptionHandler.class)
 public class DrawingControllerWebTest {
-
-    @MockitoBean
-    private DrawingService drawingService;
 
     @Autowired
     private MockMvc mockMvc;
+
+    @MockitoBean
+    private DrawingService drawingService;
 
     @Test
     void shouldReturn400WhenBadParamGetDrawings() throws Exception {
@@ -35,12 +38,12 @@ public class DrawingControllerWebTest {
         ).andExpect(
                 status().isBadRequest()
         );
-
     }
 
     @Test
-    void shouldReturn400WhenBadParamGetDrawing() throws Exception {
-        String invalidId = "-1";
+    void shouldReturn400WhenInvalidIdGetDrawing() throws Exception {
+
+        Long invalidId = -1L;
 
         mockMvc.perform(
                 get("/api/drawing/{id}", invalidId)
@@ -51,6 +54,7 @@ public class DrawingControllerWebTest {
 
     @Test
     void shouldReturn404WhenNotFoundGetDrawing() throws Exception {
+
         Long id = 1L;
 
         when(drawingService.findDrawingById(id)).thenThrow(new ResourceNotFoundException(""));
@@ -61,4 +65,5 @@ public class DrawingControllerWebTest {
                 status().isNotFound()
         );
     }
+
 }

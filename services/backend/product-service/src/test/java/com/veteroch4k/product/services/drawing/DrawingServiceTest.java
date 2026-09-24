@@ -1,4 +1,4 @@
-package com.veteroch4k.product.product.services.drawing;
+package com.veteroch4k.product.services.drawing;
 
 import com.veteroch4k.firm.starter.exceptions.ResourceNotFoundException;
 import com.veteroch4k.product.repositories.DrawingRepository;

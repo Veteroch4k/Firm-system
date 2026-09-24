@@ -1,5 +1,6 @@
-package com.veteroch4k.product.product.controllers.drawing;
+package com.veteroch4k.product.controllers.drawing;
 
+import com.veteroch4k.firm.starter.configs.FirmSecurityAutoConfiguration;
 import com.veteroch4k.product.controllers.DrawingController;
 import com.veteroch4k.product.services.DrawingService;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = DrawingController.class)
+@Import({FirmSecurityAutoConfiguration.class})
 public class DrawingControllerSecurityTest {
 
     @MockitoBean

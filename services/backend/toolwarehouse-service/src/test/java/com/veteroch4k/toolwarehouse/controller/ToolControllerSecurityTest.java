@@ -1,11 +1,13 @@
 package com.veteroch4k.toolwarehouse.controller;
 
+import com.veteroch4k.firm.starter.configs.FirmSecurityAutoConfiguration;
 import com.veteroch4k.toolwarehouse.controllers.ToolController;
 import com.veteroch4k.toolwarehouse.dto.ToolRequest;
 import com.veteroch4k.toolwarehouse.services.ToolService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
@@ -21,6 +23,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = ToolController.class)
+@Import({FirmSecurityAutoConfiguration.class})
 public class ToolControllerSecurityTest {
 
     @MockitoBean

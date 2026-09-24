@@ -13,7 +13,6 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 public class SecurityConfig {
 
     @Bean
-    @Profile("!dev")
     public SecurityWebFilterChain filterChain(ServerHttpSecurity http) {
         http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
@@ -27,16 +26,4 @@ public class SecurityConfig {
 
         return http.build();
     }
-
-    @Bean
-    @Profile("dev")
-    public SecurityWebFilterChain devSecurityWebFilterChain(ServerHttpSecurity http) {
-        http
-                .csrf(ServerHttpSecurity.CsrfSpec::disable)
-                .authorizeExchange(exchanges -> exchanges
-                        .anyExchange().permitAll()
-                );
-        return http.build();
-    }
-
 }
