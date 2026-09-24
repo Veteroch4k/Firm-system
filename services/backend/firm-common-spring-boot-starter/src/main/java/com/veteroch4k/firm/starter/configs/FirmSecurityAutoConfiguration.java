@@ -21,17 +21,10 @@ import java.util.stream.Collectors;
 @AutoConfiguration
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 @EnableWebSecurity
+@EnableMethodSecurity
 public class FirmSecurityAutoConfiguration {
 
-    @Configuration
-    @Profile("!dev")
-    @EnableMethodSecurity
-    public static class MethodSecurityConfig {
-    }
-
-
     @Bean
-    @Profile("!dev")
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
@@ -61,19 +54,5 @@ public class FirmSecurityAutoConfiguration {
         });
         return converter;
     }
-
-    @Bean
-    @Profile("dev")
-    public SecurityFilterChain devSecurityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll()
-                );
-        return http.build();
-    }
-
-
-
 
 }
