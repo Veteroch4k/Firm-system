@@ -1,9 +1,0 @@
-package com.veteroch4k.factory_service.models.commands;
-
-import com.veteroch4k.factory_service.models.RequiredTools;
-
-import java.util.List;
-
-public record ToolReservationCommand(Long orderId, List<RequiredTools> tools, Long factoryId) {
-
-}

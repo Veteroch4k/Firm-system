@@ -1,6 +1,6 @@
 package com.veteroch4k.factory_service.repository;
 
-import com.veteroch4k.factory_service.models.OperationMaterials;
+import com.veteroch4k.factory_service.model.OperationMaterials;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 

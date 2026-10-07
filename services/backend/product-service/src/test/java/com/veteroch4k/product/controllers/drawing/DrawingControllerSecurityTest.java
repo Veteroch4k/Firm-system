@@ -1,8 +1,8 @@
 package com.veteroch4k.product.controllers.drawing;
 
 import com.veteroch4k.firm.starter.configs.FirmSecurityAutoConfiguration;
-import com.veteroch4k.product.controllers.DrawingController;
-import com.veteroch4k.product.services.DrawingService;
+import com.veteroch4k.product.controller.DrawingController;
+import com.veteroch4k.product.service.DrawingService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;

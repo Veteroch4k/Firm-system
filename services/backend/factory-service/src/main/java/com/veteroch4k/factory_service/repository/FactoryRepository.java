@@ -1,6 +1,6 @@
 package com.veteroch4k.factory_service.repository;
 
-import com.veteroch4k.factory_service.models.Factory;
+import com.veteroch4k.factory_service.model.Factory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;

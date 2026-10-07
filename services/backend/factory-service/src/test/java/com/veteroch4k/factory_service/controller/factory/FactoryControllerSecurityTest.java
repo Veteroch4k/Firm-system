@@ -1,7 +1,7 @@
 package com.veteroch4k.factory_service.controller.factory;
 
 import com.veteroch4k.factory_service.controller.FactoryController;
-import com.veteroch4k.factory_service.services.FactoryService;
+import com.veteroch4k.factory_service.service.FactoryService;
 import com.veteroch4k.firm.starter.configs.FirmSecurityAutoConfiguration;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

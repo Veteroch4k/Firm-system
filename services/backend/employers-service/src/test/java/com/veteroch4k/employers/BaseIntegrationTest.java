@@ -1,6 +1,5 @@
 package com.veteroch4k.employers;
 
-import com.veteroch4k.employers.TestContainerCfg;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.boot.test.context.SpringBootTest;

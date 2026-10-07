@@ -1,9 +1,8 @@
 package com.veteroch4k.toolwarehouse.service;
 
 import com.veteroch4k.toolwarehouse.BaseIntegrationTest;
-import com.veteroch4k.toolwarehouse.models.events.ToolReservedEvent;
-import com.veteroch4k.toolwarehouse.models.commands.ToolReservationCommand;
-import com.veteroch4k.toolwarehouse.services.ReservationService;
+import com.veteroch4k.toolwarehouse.model.events.ToolReservedEvent;
+import com.veteroch4k.toolwarehouse.model.commands.ToolReservationCommand;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;

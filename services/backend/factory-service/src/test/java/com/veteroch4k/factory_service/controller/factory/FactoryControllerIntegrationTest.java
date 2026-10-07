@@ -1,7 +1,7 @@
 package com.veteroch4k.factory_service.controller.factory;
 
 import com.veteroch4k.factory_service.BaseIntegrationTest;
-import com.veteroch4k.factory_service.models.Factory;
+import com.veteroch4k.factory_service.model.Factory;
 import com.veteroch4k.factory_service.repository.FactoryRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;

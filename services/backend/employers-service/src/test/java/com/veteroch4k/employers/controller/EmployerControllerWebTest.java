@@ -1,7 +1,6 @@
 package com.veteroch4k.employers.controller;
 
-import com.veteroch4k.employers.controllers.EmployerController;
-import com.veteroch4k.employers.services.EmployerService;
+import com.veteroch4k.employers.service.EmployerService;
 import com.veteroch4k.firm.starter.exceptions.GlobalExceptionHandler;
 import com.veteroch4k.firm.starter.exceptions.ResourceNotFoundException;
 import org.junit.jupiter.api.BeforeEach;

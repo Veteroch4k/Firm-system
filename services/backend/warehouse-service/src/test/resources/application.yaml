@@ -19,19 +19,19 @@ spring:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
         spring.json.type.mapping: >
-          MaterialReservationCommand:com.veteroch4k.warehouse.models.commands.MaterialReservationCommand,
-          RequiredMaterial:com.veteroch4k.warehouse.models.commands.RequiredMaterial,
-          MaterialReservedEvent:com.veteroch4k.warehouse.models.events.MaterialReservedEvent
-        spring.json.trusted.packages: "com.veteroch4k.warehouse.models.*"
+          MaterialReservationCommand:com.veteroch4k.warehouse.model.commands.MaterialReservationCommand,
+          RequiredMaterial:com.veteroch4k.warehouse.model.commands.RequiredMaterial,
+          MaterialReservedEvent:com.veteroch4k.warehouse.model.events.MaterialReservedEvent
+        spring.json.trusted.packages: "com.veteroch4k.warehouse.model.*"
     consumer:
       value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
       properties:
         spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
         spring.json.type.mapping: >
-          MaterialReservedEvent:com.veteroch4k.warehouse.models.events.MaterialReservedEvent,
-          MaterialReservationCommand:com.veteroch4k.warehouse.models.commands.MaterialReservationCommand,
-          RequiredMaterial:com.veteroch4k.warehouse.models.commands.RequiredMaterial
-        spring.json.trusted.packages: "com.veteroch4k.warehouse.models.*"
+          MaterialReservedEvent:com.veteroch4k.warehouse.model.events.MaterialReservedEvent,
+          MaterialReservationCommand:com.veteroch4k.warehouse.model.commands.MaterialReservationCommand,
+          RequiredMaterial:com.veteroch4k.warehouse.model.commands.RequiredMaterial
+        spring.json.trusted.packages: "com.veteroch4k.warehouse.model.*"
       auto-offset-reset: earliest
 
 

@@ -1,8 +1,8 @@
 package com.veteroch4k.factory_service.service.factory;
 
 import com.veteroch4k.factory_service.TestContainerCfg;
-import com.veteroch4k.factory_service.models.ProductManufacturingInfo;
-import com.veteroch4k.factory_service.services.ProductServiceClient;
+import com.veteroch4k.factory_service.model.ProductManufacturingInfo;
+import com.veteroch4k.factory_service.service.ProductServiceClient;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

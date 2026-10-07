@@ -1,0 +1,24 @@
+package com.veteroch4k.toolwarehouse.repository;
+
+import com.veteroch4k.toolwarehouse.model.Tool;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.Optional;
+
+public interface ToolRepository extends JpaRepository<Tool, Long> {
+
+  @EntityGraph(attributePaths = {"toolType"})
+  Page<Tool> findAllByToolType_Name(String toolTypeName, Pageable pageable);
+
+  @EntityGraph(attributePaths = {"toolType"})
+  @Query("SELECT t FROM Tool t")
+  Page<Tool> findAllWithTypes(Pageable pageable);
+
+  @EntityGraph(attributePaths = {"toolType"})
+  Optional<Tool> findToolById(Long id);
+
+}

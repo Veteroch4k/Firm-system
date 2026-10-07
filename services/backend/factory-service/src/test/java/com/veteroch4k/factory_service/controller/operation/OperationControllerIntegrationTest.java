@@ -2,7 +2,7 @@ package com.veteroch4k.factory_service.controller.operation;
 
 import com.veteroch4k.factory_service.BaseIntegrationTest;
 import com.veteroch4k.factory_service.dto.operation.OperationRequest;
-import com.veteroch4k.factory_service.models.Factory;
+import com.veteroch4k.factory_service.model.Factory;
 import com.veteroch4k.factory_service.repository.FactoryRepository;
 import com.veteroch4k.factory_service.repository.OperationRepository;
 import org.junit.jupiter.api.AfterEach;

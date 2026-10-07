@@ -1,8 +1,8 @@
 package com.veteroch4k.product.services.product;
 
 import com.veteroch4k.firm.starter.exceptions.ResourceNotFoundException;
-import com.veteroch4k.product.repositories.ProductRepository;
-import com.veteroch4k.product.services.ProductService;
+import com.veteroch4k.product.repository.ProductRepository;
+import com.veteroch4k.product.service.ProductService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

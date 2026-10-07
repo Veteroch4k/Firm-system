@@ -2,10 +2,10 @@ package com.veteroch4k.toolwarehouse.controller;
 
 import com.veteroch4k.toolwarehouse.BaseIntegrationTest;
 import com.veteroch4k.toolwarehouse.dto.ToolRequest;
-import com.veteroch4k.toolwarehouse.models.Tool;
-import com.veteroch4k.toolwarehouse.models.ToolType;
-import com.veteroch4k.toolwarehouse.repositories.ToolRepository;
-import com.veteroch4k.toolwarehouse.repositories.ToolTypeRepository;
+import com.veteroch4k.toolwarehouse.model.Tool;
+import com.veteroch4k.toolwarehouse.model.ToolType;
+import com.veteroch4k.toolwarehouse.repository.ToolRepository;
+import com.veteroch4k.toolwarehouse.repository.ToolTypeRepository;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;

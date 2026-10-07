@@ -2,7 +2,7 @@ package com.veteroch4k.warehouse.service;
 
 import com.veteroch4k.firm.starter.exceptions.ResourceNotFoundException;
 import com.veteroch4k.warehouse.dto.MaterialRequest;
-import com.veteroch4k.warehouse.repositories.MaterialRepository;
+import com.veteroch4k.warehouse.repository.MaterialRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

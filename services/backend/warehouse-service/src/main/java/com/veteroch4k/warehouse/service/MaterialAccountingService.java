@@ -1,9 +1,9 @@
 package com.veteroch4k.warehouse.service;
 
-import com.veteroch4k.warehouse.models.MaterialAccounting;
-import com.veteroch4k.warehouse.models.MovementType;
-import com.veteroch4k.warehouse.repositories.MaterialAccountingRepository;
-import com.veteroch4k.warehouse.repositories.MaterialRepository;
+import com.veteroch4k.warehouse.model.MaterialAccounting;
+import com.veteroch4k.warehouse.model.MovementType;
+import com.veteroch4k.warehouse.repository.MaterialAccountingRepository;
+import com.veteroch4k.warehouse.repository.MaterialRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
