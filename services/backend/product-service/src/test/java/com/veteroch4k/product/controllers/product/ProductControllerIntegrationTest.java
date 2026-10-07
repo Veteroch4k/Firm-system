@@ -1,10 +1,10 @@
 package com.veteroch4k.product.controllers.product;
 
 import com.veteroch4k.product.BaseIntegrationTest;
-import com.veteroch4k.product.models.Drawing;
-import com.veteroch4k.product.models.Product;
-import com.veteroch4k.product.repositories.DrawingRepository;
-import com.veteroch4k.product.repositories.ProductRepository;
+import com.veteroch4k.product.model.Drawing;
+import com.veteroch4k.product.model.Product;
+import com.veteroch4k.product.repository.DrawingRepository;
+import com.veteroch4k.product.repository.ProductRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

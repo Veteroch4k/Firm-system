@@ -1,10 +1,8 @@
 package com.veteroch4k.warehouse.service;
 
-import com.veteroch4k.warehouse.models.FactoryMaterials;
-import com.veteroch4k.warehouse.models.commands.MaterialReservationCommand;
-import com.veteroch4k.warehouse.models.commands.RequiredMaterial;
-import com.veteroch4k.warehouse.repositories.FactoryMaterialsRepository;
-import com.veteroch4k.warehouse.repositories.MaterialRepository;
+import com.veteroch4k.warehouse.model.FactoryMaterials;
+import com.veteroch4k.warehouse.model.commands.MaterialReservationCommand;
+import com.veteroch4k.warehouse.model.commands.RequiredMaterial;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

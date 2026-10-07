@@ -1,8 +1,8 @@
 package com.veteroch4k.warehouse.service;
 
 import com.veteroch4k.warehouse.BaseIntegrationTest;
-import com.veteroch4k.warehouse.models.events.MaterialReservedEvent;
-import com.veteroch4k.warehouse.models.commands.MaterialReservationCommand;
+import com.veteroch4k.warehouse.model.events.MaterialReservedEvent;
+import com.veteroch4k.warehouse.model.commands.MaterialReservationCommand;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;

@@ -1,8 +1,8 @@
 package com.veteroch4k.product.services.drawing;
 
 import com.veteroch4k.firm.starter.exceptions.ResourceNotFoundException;
-import com.veteroch4k.product.repositories.DrawingRepository;
-import com.veteroch4k.product.services.DrawingService;
+import com.veteroch4k.product.repository.DrawingRepository;
+import com.veteroch4k.product.service.DrawingService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

@@ -1,12 +1,9 @@
 package com.veteroch4k.toolwarehouse.service;
 
-import com.veteroch4k.toolwarehouse.models.FactoryTools;
-import com.veteroch4k.toolwarehouse.models.ToolType;
-import com.veteroch4k.toolwarehouse.models.commands.RequiredTools;
-import com.veteroch4k.toolwarehouse.models.commands.ToolReservationCommand;
-import com.veteroch4k.toolwarehouse.services.FactoryToolsService;
-import com.veteroch4k.toolwarehouse.services.ReservationService;
-import com.veteroch4k.toolwarehouse.services.ToolAccountingService;
+import com.veteroch4k.toolwarehouse.model.FactoryTools;
+import com.veteroch4k.toolwarehouse.model.ToolType;
+import com.veteroch4k.toolwarehouse.model.commands.RequiredTools;
+import com.veteroch4k.toolwarehouse.model.commands.ToolReservationCommand;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;

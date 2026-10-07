@@ -1,7 +1,7 @@
 package com.veteroch4k.factory_service.controller;
 
 import com.veteroch4k.factory_service.dto.factory.FactoryResponse;
-import com.veteroch4k.factory_service.services.FactoryService;
+import com.veteroch4k.factory_service.service.FactoryService;
 import com.veteroch4k.firm.starter.exceptions.ErrorResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

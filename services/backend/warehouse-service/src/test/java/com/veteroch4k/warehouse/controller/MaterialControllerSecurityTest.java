@@ -1,7 +1,6 @@
 package com.veteroch4k.warehouse.controller;
 
 import com.veteroch4k.firm.starter.configs.FirmSecurityAutoConfiguration;
-import com.veteroch4k.warehouse.controllers.MaterialController;
 import com.veteroch4k.warehouse.dto.MaterialRequest;
 import com.veteroch4k.warehouse.service.MaterialService;
 import org.junit.jupiter.api.Test;

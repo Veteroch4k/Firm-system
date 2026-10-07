@@ -1,17 +1,17 @@
 package com.veteroch4k.factory_service.service.factory;
 
 import com.veteroch4k.factory_service.BaseIntegrationTest;
-import com.veteroch4k.factory_service.models.*;
-import com.veteroch4k.factory_service.models.commands.MaterialReservationCommand;
-import com.veteroch4k.factory_service.models.commands.SignOrderCommand;
-import com.veteroch4k.factory_service.models.commands.ToolReservationCommand;
-import com.veteroch4k.factory_service.models.events.MaterialReservedEvent;
-import com.veteroch4k.factory_service.models.events.OrderCreatedEvent;
-import com.veteroch4k.factory_service.models.events.ToolReservedEvent;
+import com.veteroch4k.factory_service.model.*;
+import com.veteroch4k.factory_service.model.commands.MaterialReservationCommand;
+import com.veteroch4k.factory_service.model.commands.SignOrderCommand;
+import com.veteroch4k.factory_service.model.commands.ToolReservationCommand;
+import com.veteroch4k.factory_service.model.events.MaterialReservedEvent;
+import com.veteroch4k.factory_service.model.events.OrderCreatedEvent;
+import com.veteroch4k.factory_service.model.events.ToolReservedEvent;
 import com.veteroch4k.factory_service.repository.FactoryOrderRepository;
 import com.veteroch4k.factory_service.repository.OpMaterialsRepository;
 import com.veteroch4k.factory_service.repository.OperationToolsRepository;
-import com.veteroch4k.factory_service.services.ProductServiceClient;
+import com.veteroch4k.factory_service.service.ProductServiceClient;
 import org.junit.jupiter.api.Test;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;

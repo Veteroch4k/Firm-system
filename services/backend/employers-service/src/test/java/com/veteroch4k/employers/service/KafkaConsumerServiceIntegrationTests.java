@@ -1,8 +1,7 @@
 package com.veteroch4k.employers.service;
 
 import com.veteroch4k.employers.BaseIntegrationTest;
-import com.veteroch4k.employers.models.commands.SignOrderCommand;
-import com.veteroch4k.employers.services.EmployerSignService;
+import com.veteroch4k.employers.model.commands.SignOrderCommand;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;

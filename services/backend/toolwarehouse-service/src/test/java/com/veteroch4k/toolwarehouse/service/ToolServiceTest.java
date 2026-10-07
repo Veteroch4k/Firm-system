@@ -2,11 +2,10 @@ package com.veteroch4k.toolwarehouse.service;
 
 import com.veteroch4k.firm.starter.exceptions.ResourceNotFoundException;
 import com.veteroch4k.toolwarehouse.dto.ToolRequest;
-import com.veteroch4k.toolwarehouse.mappers.ToolMapper;
-import com.veteroch4k.toolwarehouse.models.Tool;
-import com.veteroch4k.toolwarehouse.repositories.ToolRepository;
-import com.veteroch4k.toolwarehouse.repositories.ToolTypeRepository;
-import com.veteroch4k.toolwarehouse.services.ToolService;
+import com.veteroch4k.toolwarehouse.mapper.ToolMapper;
+import com.veteroch4k.toolwarehouse.model.Tool;
+import com.veteroch4k.toolwarehouse.repository.ToolRepository;
+import com.veteroch4k.toolwarehouse.repository.ToolTypeRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

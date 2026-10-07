@@ -1,9 +1,7 @@
 package com.veteroch4k.employers.controller;
 
-import com.veteroch4k.employers.controllers.EmployerController;
-import com.veteroch4k.employers.services.EmployerService;
+import com.veteroch4k.employers.service.EmployerService;
 import com.veteroch4k.firm.starter.configs.FirmSecurityAutoConfiguration;
-import com.veteroch4k.firm.starter.configs.FirmWebAutoConfiguration;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;

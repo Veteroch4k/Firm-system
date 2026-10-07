@@ -1,9 +1,9 @@
 package com.veteroch4k.warehouse.service;
 
-import com.veteroch4k.warehouse.models.FactoryMaterials;
-import com.veteroch4k.warehouse.models.Material;
-import com.veteroch4k.warehouse.models.commands.MaterialReservationCommand;
-import com.veteroch4k.warehouse.models.commands.RequiredMaterial;
+import com.veteroch4k.warehouse.model.FactoryMaterials;
+import com.veteroch4k.warehouse.model.Material;
+import com.veteroch4k.warehouse.model.commands.MaterialReservationCommand;
+import com.veteroch4k.warehouse.model.commands.RequiredMaterial;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;

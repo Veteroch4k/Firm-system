@@ -2,7 +2,7 @@ package com.veteroch4k.warehouse.controller;
 
 import com.veteroch4k.warehouse.BaseIntegrationTest;
 import com.veteroch4k.warehouse.dto.MaterialRequest;
-import com.veteroch4k.warehouse.repositories.MaterialRepository;
+import com.veteroch4k.warehouse.repository.MaterialRepository;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;

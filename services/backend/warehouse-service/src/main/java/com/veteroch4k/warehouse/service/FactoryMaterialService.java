@@ -1,7 +1,7 @@
 package com.veteroch4k.warehouse.service;
 
-import com.veteroch4k.warehouse.models.FactoryMaterials;
-import com.veteroch4k.warehouse.repositories.FactoryMaterialsRepository;
+import com.veteroch4k.warehouse.model.FactoryMaterials;
+import com.veteroch4k.warehouse.repository.FactoryMaterialsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

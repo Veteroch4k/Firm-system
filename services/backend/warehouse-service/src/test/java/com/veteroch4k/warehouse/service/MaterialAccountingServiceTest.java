@@ -1,10 +1,10 @@
 package com.veteroch4k.warehouse.service;
 
-import com.veteroch4k.warehouse.models.Material;
-import com.veteroch4k.warehouse.models.MaterialAccounting;
-import com.veteroch4k.warehouse.models.MovementType;
-import com.veteroch4k.warehouse.repositories.MaterialAccountingRepository;
-import com.veteroch4k.warehouse.repositories.MaterialRepository;
+import com.veteroch4k.warehouse.model.Material;
+import com.veteroch4k.warehouse.model.MaterialAccounting;
+import com.veteroch4k.warehouse.model.MovementType;
+import com.veteroch4k.warehouse.repository.MaterialAccountingRepository;
+import com.veteroch4k.warehouse.repository.MaterialRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;

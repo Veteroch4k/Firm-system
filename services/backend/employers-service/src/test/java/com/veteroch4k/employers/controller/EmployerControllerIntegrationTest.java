@@ -1,8 +1,8 @@
 package com.veteroch4k.employers.controller;
 
 import com.veteroch4k.employers.BaseIntegrationTest;
-import com.veteroch4k.employers.models.Employer;
-import com.veteroch4k.employers.repositories.EmployerRepository;
+import com.veteroch4k.employers.model.Employer;
+import com.veteroch4k.employers.repository.EmployerRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

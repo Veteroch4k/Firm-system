@@ -12,9 +12,14 @@ include 'config-service'
 include 'eureka-service'
 include 'gateway-service'
 
-includeBuild('services/backend/firm-common-spring-boot-starter') {
+includeBuild('services/backend/firm-common/firm-common-spring-boot-starter') {
     dependencySubstitution {
         substitute module('com.veteroch4k.firm.starter:firm-common-spring-boot-starter') using project(':')
+    }
+}
+includeBuild('services/backend/firm-common/firm-archunit-rules') {
+    dependencySubstitution {
+        substitute module('com.veteroch4k.firm.arch:firm-archunit-rules') using project(':')
     }
 }
 

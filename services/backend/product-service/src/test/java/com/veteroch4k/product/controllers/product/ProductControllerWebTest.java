@@ -2,8 +2,8 @@ package com.veteroch4k.product.controllers.product;
 
 import com.veteroch4k.firm.starter.exceptions.GlobalExceptionHandler;
 import com.veteroch4k.firm.starter.exceptions.ResourceNotFoundException;
-import com.veteroch4k.product.controllers.ProductController;
-import com.veteroch4k.product.services.ProductService;
+import com.veteroch4k.product.controller.ProductController;
+import com.veteroch4k.product.service.ProductService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;

@@ -1,7 +1,7 @@
 package com.veteroch4k.warehouse.service;
 
-import com.veteroch4k.warehouse.models.events.MaterialReservedEvent;
-import com.veteroch4k.warehouse.models.commands.MaterialReservationCommand;
+import com.veteroch4k.warehouse.model.events.MaterialReservedEvent;
+import com.veteroch4k.warehouse.model.commands.MaterialReservationCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;

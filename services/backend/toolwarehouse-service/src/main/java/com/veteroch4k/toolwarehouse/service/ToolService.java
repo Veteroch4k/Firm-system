@@ -1,0 +1,106 @@
+package com.veteroch4k.toolwarehouse.service;
+
+import com.veteroch4k.firm.starter.exceptions.ResourceNotFoundException;
+import com.veteroch4k.toolwarehouse.dto.ToolRequest;
+import com.veteroch4k.toolwarehouse.dto.ToolResponse;
+import com.veteroch4k.toolwarehouse.mapper.ToolMapper;
+import com.veteroch4k.toolwarehouse.model.Tool;
+import com.veteroch4k.toolwarehouse.model.ToolType;
+import com.veteroch4k.toolwarehouse.repository.ToolRepository;
+import com.veteroch4k.toolwarehouse.repository.ToolTypeRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Slf4j
+@Service
+@RequiredArgsConstructor
+public class ToolService {
+
+    private final ToolRepository toolRepository;
+    private final ToolTypeRepository toolTypeRepository;
+    private final ToolMapper toolMapper;
+
+
+    public Page<ToolResponse> findAllTools(PageRequest of) {
+
+        Page<Tool> tools = toolRepository.findAllWithTypes(of);
+
+        return tools.map(toolMapper::toToolResponse);
+
+    }
+
+    public ToolResponse findToolById(Long id) {
+
+        Tool tool = toolRepository.findToolById(id).orElseThrow(() -> {
+                    log.warn("Инструмент с ID: {} не найден при запросе по ID", id);
+                    return new ResourceNotFoundException("Инструмент с ID: " + id + " не найден.");
+        });
+
+        return toolMapper.toToolResponse(tool);
+    }
+
+    public Page<ToolResponse> findToolsByToolTypeName(String name, Pageable of) {
+
+        Page<Tool> tools = toolRepository.findAllByToolType_Name(name, of);
+
+        return tools.map(toolMapper::toToolResponse);
+    }
+
+    @Transactional
+    public ToolResponse createTool(ToolRequest toolRequest) {
+
+        ToolType toolType = toolTypeRepository.findById(toolRequest.toolTypeId())
+                .orElseThrow(() -> {
+                    log.warn("Тип_Инструмента с ID: {} не найден при запросе на создание инструмента", toolRequest.toolTypeId());
+                    return new ResourceNotFoundException("Тип инструмента не найден c ID: " + toolRequest.toolTypeId());
+
+                });
+
+        Tool tool = new Tool();
+        tool.setToolType(toolType);
+
+        return toolMapper.toToolResponse(toolRepository.save(tool));
+
+    }
+
+    @Transactional
+    public void updateTool(Long id, ToolRequest toolRequest) {
+
+        Tool tool = toolRepository.findById(id).orElseThrow(() -> {
+            log.warn("Инструмент с ID: {} не найден при запросе на обновление", id);
+            return new ResourceNotFoundException("Инструмент с ID: " + id + " не найден.");
+        });
+
+        if (!toolTypeRepository.existsById(toolRequest.toolTypeId())) {
+            log.warn("Тип_Инструмента с ID: {} не найден при запросе на обновление инструмента", toolRequest.toolTypeId());
+            throw new ResourceNotFoundException("Тип инструмента не найден c ID: " + toolRequest.toolTypeId());
+        }
+
+        tool.setToolType(toolTypeRepository.getReferenceById(toolRequest.toolTypeId()));
+
+    }
+
+    @Transactional
+    public void deleteTool(Long id) {
+
+        log.info("Запрос на удаление инструмента с ID: {}", id);
+
+        Tool tool = toolRepository.findById(id).orElseThrow(() -> {
+            log.warn("Инструмент с ID: {} не найден при запросе на удаление", id);
+            return new ResourceNotFoundException("Инструмент с ID: " + id + " не найден.");
+
+        });
+
+        toolRepository.delete(tool);
+
+        log.info("Инструмент с ID: {} успешно удалён", id);
+
+
+    }
+
+}

@@ -1,11 +1,11 @@
 package com.veteroch4k.factory_service.service.operation;
 
 import com.veteroch4k.factory_service.dto.operation.OperationRequest;
-import com.veteroch4k.factory_service.mappers.OperationMapper;
-import com.veteroch4k.factory_service.models.Operation;
+import com.veteroch4k.factory_service.mapper.OperationMapper;
+import com.veteroch4k.factory_service.model.Operation;
 import com.veteroch4k.factory_service.repository.FactoryRepository;
 import com.veteroch4k.factory_service.repository.OperationRepository;
-import com.veteroch4k.factory_service.services.OperationService;
+import com.veteroch4k.factory_service.service.OperationService;
 import com.veteroch4k.firm.starter.exceptions.ResourceNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
